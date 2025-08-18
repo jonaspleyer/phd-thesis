@@ -274,6 +274,54 @@ This can be directly ascribed to the implementation and the fundamental assumpti
 their borders.
 
 \subsubsection{Scaling with Problem Size}
+For interactions with infinite range the computational complexity~\cite{Knuth1976} of calculating
+all interactions between every agent growths quadratic with the number of agents $\mathcal{O}(N^2)$.
+This can be seen when writing down the most simplistic implementation of calculating interaction
+forces.
+
+\begin{minipage}{\linewidth}\begin{lstlisting}[
+    language=Rust,
+    basicstyle=\ttfamily\footnotesize,
+    label=listing:benchmarks-cli,
+    caption={
+        [Naive calculation of interactions between agents.]
+        A naive calculation of interactions between agents.
+        The double for-loop iterates over all agents inside the simulation and thus results in
+        $N(N-1)/2=(N^2-N)/2$ total iterations.
+    }
+]
+for i in 0..n_agents {
+    for j in 0..i {
+        // Calculate interactions between agents
+        let f1 = agents[i].calculate_interaction_between(agents[j]);
+        let f2 = agents[j].calculate_interaction_between(agents[i]);
+
+        // ...
+    }
+}
+\end{lstlisting}\end{minipage}
+
+\texttt{cellular\_raza} was designed bottom-up with the assumption that all interactions between
+cellular agents are local.
+This means we can assume that a single cell interacts only with others which are within a certain
+proximity defined by the type of interaction.
+This behaviour allows us to decompose the Domain into multiple voxels which contain cells.
+The size of the voxels is determined by the length of the interaction between the cells.
+This means, we only need to calculate interactions between every cell in one voxel and all
+neighbouring voxels.
+We assume that every voxel contains an average of $n_c$ cells per voxel with $N_v$ number
+of voxels and $N_n$ of neighbouring voxels.
+The total complexity is then $\mathcal{O}(N_vn_c^2N_n)$ where we can substitute the
+total number of cells $N=N_vn_c$ to obtain a scaling of
+
+\begin{equation}
+    \mathcal{O}(NN_nn_c)
+\end{equation}
+
+The parameters $N_n,N_c$ can be assumed to be constant when fixing overall cell-density or at least
+capped from above and thus, we expect a linear scaling $O(N)$ in the properly decomposed approach.
+This graph illustrates how interactions between cells are calculated when assuming a rectangular decomposition scheme.
+
 \subsubsection{Accuracy Testing of Contact Reactions}
 \subsubsection{Testing Stochastic Motion via the Fluctuation-Dissipation Theorem}
 Stochastic motion on a particle level is often well described by Brownian3D or Langevin3D
