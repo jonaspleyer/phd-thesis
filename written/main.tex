@@ -30,27 +30,48 @@
 
 \addbibresource{references.bib}
 
-\title{Agent-Based Models in Cellular Systems}
+\makeatletter
+\title{Agent-Based Models in Cellular Systems}\let\Title\@title
+\author{Jonas Pleyer}\let\Author\@author
+\date{11.11.2025}\let\Date\@date
+\makeatother
 
 \begin{document}
 % TITLEPAGE
 
-\maketitle
-
-\pagebreak
-\tableofcontents
+\input{titlepage}
 
 %###################################################################################################
 \begin{abstract}
 \end{abstract}
 
+\newpage
+\tableofcontents
+\pagenumbering{Roman}
+\newpage
+
+\listoffigures
+\listoftables
+\lstlistoflistings
+
+\section*{Acronyms}
+\begin{acronym}
+    \acro{abm}[ABM]{Agent-Based Model}
+    \acro{ib}[IB]{Individual-Based}
+    \acro{msd}[MSD]{Mean Squared Displacement}
+\end{acronym}
+
+
 %###################################################################################################
+\newpage
+\pagenumbering{arabic}
 \section{Introduction}
 \subsection{Individual-Based Nature of Biology}
 \subsection{Mathematical and Numerical Treatment}
 \subsection{Questions that can be answered with this approach}
 
 %###################################################################################################
+\pagebreak
 \section{ABM Theory}
 \subsection{Theoretical Framework}
 \subsection{Parameter Estimation \& Sensitivity Analysis}
@@ -331,6 +352,7 @@ This is a practical challenge since the initial steps of the solver are less acc
 overall uncertainty of the numerically obtained results.
 
 %###################################################################################################
+\pagebreak
 \section{Applications}
 \subsection{Cell-Sorting}
 \subsection{Bacterial Rods}
@@ -356,18 +378,6 @@ overall uncertainty of the numerically obtained results.
 \newpage
 \printbibliography
 
-\pagebreak
-\section*{Acronyms}
-\begin{acronym}
-    \acro{abm}[ABM]{Agent-Based Model}
-    \acro{ib}[IB]{Individual-Based}
-    \acro{msd}[MSD]{Mean Squared Displacement}
-\end{acronym}
-
-\listoffigures
-\listoftables
-\lstlistoflistings
-
 %###################################################################################################
 \newpage
 \section*{Supplementary Material}
@@ -377,5 +387,9 @@ overall uncertainty of the numerically obtained results.
 
 %###################################################################################################
 \section{My Supplement}
+
+\newpage
+\thispagestyle{empty}
+\input{declaration}
 
 \end{document}
