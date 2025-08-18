@@ -6,6 +6,7 @@
 \usepackage[USenglish]{babel}
 \usepackage[style=ieee]{biblatex}
 \usepackage{color}
+\usepackage{float}
 \usepackage[a4paper]{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -129,7 +130,7 @@ Its arguments are displayed in Listing~\ref{listing:benchmarks-cli}.
     language=Bash,
     basicstyle=\ttfamily\footnotesize,
     label=listing:benchmarks-cli,
-    caption={
+    caption={[Usage of the benchmark CLI tool]
         Usage of the benchmark CLI tool.
         We provide two benchmarks, one for increasing the number of agents and another for
         increasing the number of threads.
@@ -199,10 +200,11 @@ relative performance scaling.
 
 \paragraph{Results}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{cellular_raza-homepage/static/benchmarks/thread_scaling.png}
-    \caption{Performance of the throughput $T(n)$ for increasing number of utilized threads $n$.}
+    \caption[Throughput performance of the cell-sorting example]
+    {Performance of the throughput $T(n)$ for increasing number of utilized threads $n$.}
     \label{fig:amdahls-law-fit}
 \end{figure}
 
@@ -315,7 +317,7 @@ tested.
 
 \paragraph{Results}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.49\textwidth]
         {cellular_raza-homepage/static/benchmarks/2024-08-testing-stochastic-motion/brownian_2d_3/mean-squared-displacement.png}
@@ -329,7 +331,8 @@ tested.
     %     {cellular_raza-homepage/static/benchmarks/2024-08-testing-stochastic-motion/brownian_2d_3/heatmap.png}
     % \includegraphics[width=0.49\textwidth]
     %     {cellular_raza-homepage/static/benchmarks/2024-08-testing-stochastic-motion/langevin_2d_4/heatmap.png}
-    \caption{
+    \caption[Stochastic motion simulation results]
+    {
         Note that the displayed errorbars are not identical to the ones used for automated testing.
         We plot the standard error $\sigma / \sqrt{N}$ while the standard deviation $\sigma$ is used
         to compare numerical results.
