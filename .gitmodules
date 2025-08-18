@@ -4,3 +4,6 @@
 [submodule "written/cellular_raza-homepage"]
 	path = written/cellular_raza-homepage
 	url = git@github.com:jonaspleyer/cellular_raza-homepage
+[submodule "written/listings-rust"]
+	path = written/listings-rust
+	url = https://github.com/denki/listings-rust
