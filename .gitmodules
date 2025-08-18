@@ -1,0 +1,6 @@
+[submodule "written/cellular_raza"]
+	path = written/cellular_raza
+	url = git@github.com:jonaspleyer/cellular_raza
+[submodule "written/cellular_raza-homepage"]
+	path = written/cellular_raza-homepage
+	url = git@github.com:jonaspleyer/cellular_raza-homepage
