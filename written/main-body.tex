@@ -64,36 +64,49 @@
 \pagenumbering{arabic}
 \section{Introduction}
 %---------------------------------------------------------------------------------------------------
-\subsection{Individual-Based Nature of Biology}
-%---------------------------------------------------------------------------------------------------
-\subsection{Mathematical and Numerical Treatment}
-%---------------------------------------------------------------------------------------------------
-\subsection{Questions that can be answered with this approach}
+\subsection{Cellular Building Blocks}
+\begin{itemize}
+    \item complex organisms from collection of cells
+    \item self-organization/pattern formation
+    \item single-cell vs bulk
+\end{itemize}
 
-%###################################################################################################
-\pagebreak
-\section{ABM Theory}
 %---------------------------------------------------------------------------------------------------
-\subsection{Theoretical Framework}
+\subsection{Comparison of Simulation Frameworks}
+\begin{itemize}
+    \item use mainly mini-review for this subsection \cite{Pleyer2023}
+    \item many frameworks
+    \item some similar approaches
+    \item purpose-built solutions
+    \item missing flexibility in model design or ability to apply to various systems
+    \item large number of parameters which need to be supplied
+\end{itemize}
+
 %---------------------------------------------------------------------------------------------------
-\subsection{Parameter Estimation \& Sensitivity Analysis}
-%---------------------------------------------------------------------------------------------------
-\subsection{Coarse-Graining}
-%---------------------------------------------------------------------------------------------------
-\subsection{Pattern Formation}
+\subsection{Mathematical Treatment}
+\begin{itemize}
+    \item no "unfiying theory"
+    \item without theoretical framework, we cannot discuss any of the following:
+    \begin{itemize}
+        \item coarse-graining
+        \item uncertainty analysis
+        \item dimensionality reduction
+    \end{itemize}
+\end{itemize}
 
 %###################################################################################################
 \pagebreak
 \section{cellular\_raza: A novel Agent-Based Framework}
 \cite{Pleyer2025}
 %---------------------------------------------------------------------------------------------------
-\subsection{Goals}
+\subsection{Goals/Justification}
 %---------------------------------------------------------------------------------------------------
 \subsection{Structure \& Development}
 \begin{itemize}
     \item simulation aspects: cell, cell-cell, domain-cell, other
     \item flexibility
     \item automated testing, good documentation
+    \item Rust as proramming language
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
@@ -417,6 +430,27 @@ overall uncertainty of the numerically obtained results.
 
 %###################################################################################################
 \pagebreak
+\section{ABM Theory}
+
+%---------------------------------------------------------------------------------------------------
+\subsection{Theoretical Framework}
+\begin{itemize}
+    \item use to-be-released paper
+\end{itemize}
+
+%---------------------------------------------------------------------------------------------------
+\subsection{Parameter Estimation \& Sensitivity Analysis}
+%---------------------------------------------------------------------------------------------------
+\subsection{Coarse-Graining}
+\begin{itemize}
+    \item bacterial branching
+\end{itemize}
+
+%---------------------------------------------------------------------------------------------------
+\subsection{Pattern Formation}
+
+%###################################################################################################
+\pagebreak
 \section{Applications}
 %---------------------------------------------------------------------------------------------------
 \subsection{Cell-Sorting}
@@ -432,6 +466,9 @@ overall uncertainty of the numerically obtained results.
     \item Discuss Coarse-Graining
     \item Pattern Formation
 \end{itemize}
+
+%---------------------------------------------------------------------------------------------------
+\subsection{Puzzle Cells}
 
 %###################################################################################################
 \section{Discussion}
