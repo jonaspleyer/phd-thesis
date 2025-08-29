@@ -1,3 +1,6 @@
+![](https://img.shields.io/github/actions/workflow/status/jonaspleyer/phd-thesis/tex-fmt.yml?style=flat-square&label=tex-fmt)
+![](https://img.shields.io/github/actions/workflow/status/jonaspleyer/phd-thesis/compile-thesis.yml?style=flat-square&label=Build)
+
 # PhD Thesis
 This repository contains all files required to build my PhD Thesis.
 
