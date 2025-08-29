@@ -16,7 +16,7 @@ jobs:
     - name: Run tex-fmt
       uses: grayespinoza/tex-fmt-action@main
       with:
-        inputs: "written/*.tex --config written/tex-fmt.toml"
+        inputs: "written/*.tex written/*.bib --config written/tex-fmt.toml"
     - name: Push
       uses: stefanzweifel/git-auto-commit-action@master
       with:
