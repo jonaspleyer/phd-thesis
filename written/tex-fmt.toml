@@ -1,0 +1,5 @@
+wraplen = 100
+wrapmin = 80
+tabsize = 4
+tabchar = "space"
+verbosity = "warn"
