@@ -92,11 +92,11 @@ werden. Diese habe ich erstmal als eigene Subsections gelistet.
 \begin{itemize}
     \item no "unfiying theory"
     \item without theoretical framework, we cannot discuss any of the following:
-    \begin{itemize}
-        \item coarse-graining
-        \item uncertainty analysis
-        \item dimensionality reduction
-    \end{itemize}
+        \begin{itemize}
+            \item coarse-graining
+            \item uncertainty analysis
+            \item dimensionality reduction
+        \end{itemize}
 \end{itemize}
 
 %###################################################################################################
@@ -151,7 +151,7 @@ variable $p$ is the relative proportion of execution time which benefits from pa
 The total latency of a program can be determined via the inverse of the throughput.
 
 \paragraph{Simulation Setup}
-Measuring the performance of any simulation will be highly dependent on the specific cellular 
+Measuring the performance of any simulation will be highly dependent on the specific cellular
 properties and complexity.
 For this comparison, we chose the previously explained cell-sorting example which contains minimal
 complexity compared to other examples (see
@@ -225,12 +225,12 @@ relative performance scaling.
         CPU & Fixed Clockspeed & Memory Frequency & TDP\\
         \hline
         AMD Ryzen 3700X~\cite{AMDProductSpecifications} & $\SI{2200}{\mega\hertz}$
-            & $\SI{3200}{\mega T\per\second}$ & $\SI{65}{\watt}$\\
+        & $\SI{3200}{\mega T\per\second}$ & $\SI{65}{\watt}$\\
         AMD Ryzen Threadripper 3960X~\cite{AMDProductSpecifications} & $\SI{2000}{\mega\hertz}$
-            & $\SI{3200}{\mega T\per\second}$ & $\SI{280}{\watt}$\\
+        & $\SI{3200}{\mega T\per\second}$ & $\SI{280}{\watt}$\\
         Intel Core i7-12700H~\cite{Inteli712700H} & $\SI{2000}{\mega\hertz}$
-            & $\SI{4800}{\mega T\per\second}$
-            & $\SI{45}{\watt}$\\
+        & $\SI{4800}{\mega T\per\second}$
+        & $\SI{45}{\watt}$\\
     \end{tabular}
     \caption{List of tested hardware configurations.}
     \label{tab:hardware-configurations}
@@ -340,7 +340,8 @@ total number of cells $N=N_vn_c$ to obtain a scaling of
 
 The parameters $N_n,N_c$ can be assumed to be constant when fixing overall cell-density or at least
 capped from above and thus, we expect a linear scaling $O(N)$ in the properly decomposed approach.
-This graph illustrates how interactions between cells are calculated when assuming a rectangular decomposition scheme.
+This graph illustrates how interactions between cells are calculated when assuming a
+rectangular decomposition scheme.
 
 \subsubsection{Accuracy Testing of Contact Reactions}
 \subsubsection{Testing Stochastic Motion via the Fluctuation-Dissipation Theorem}
@@ -386,11 +387,11 @@ The estimate of the \ac{msd} for Langevin~\cite{Lemons1997}
 is given by~\cite{VANKAMPEN2007}
 \begin{equation}
     \left<(x(t)-x_0)^2\right> =
-        v^2(0) \frac{\text{e}^{-\lambda t}}{\lambda^2}
-        - \frac{d k_B T}{m\lambda^2}
-            \left(1-\text{e}^{-\lambda t}\right)
-            \left(3 - \text{e}^{-\lambda t}\right)
-        + \frac{2 d k_B T}{m\lambda}t.
+    v^2(0) \frac{\text{e}^{-\lambda t}}{\lambda^2}
+    - \frac{d k_B T}{m\lambda^2}
+    \left(1-\text{e}^{-\lambda t}\right)
+    \left(3 - \text{e}^{-\lambda t}\right)
+    + \frac{2 d k_B T}{m\lambda}t.
 \end{equation}
 It is now a matter of writing code such that the described system can be solved, analyzed and
 tested.
@@ -406,13 +407,13 @@ tested.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.49\textwidth]
-        {cellular_raza-homepage/static/benchmarks/2024-08-testing-stochastic-motion/brownian_2d_3/mean-squared-displacement.png}
+    {cellular_raza-homepage/static/benchmarks/2024-08-testing-stochastic-motion/brownian_2d_3/mean-squared-displacement.png}
     \includegraphics[width=0.49\textwidth]
-        {cellular_raza-homepage/static/benchmarks/2024-08-testing-stochastic-motion/langevin_2d_4/mean-squared-displacement.png}
+    {cellular_raza-homepage/static/benchmarks/2024-08-testing-stochastic-motion/langevin_2d_4/mean-squared-displacement.png}
     \includegraphics[width=0.49\textwidth]
-        {cellular_raza-homepage/static/benchmarks/2024-08-testing-stochastic-motion/brownian_2d_3/trajectories.png}
+    {cellular_raza-homepage/static/benchmarks/2024-08-testing-stochastic-motion/brownian_2d_3/trajectories.png}
     \includegraphics[width=0.49\textwidth]
-        {cellular_raza-homepage/static/benchmarks/2024-08-testing-stochastic-motion/langevin_2d_4/trajectories.png}
+    {cellular_raza-homepage/static/benchmarks/2024-08-testing-stochastic-motion/langevin_2d_4/trajectories.png}
     % \includegraphics[width=0.49\textwidth]
     %     {cellular_raza-homepage/static/benchmarks/2024-08-testing-stochastic-motion/brownian_2d_3/heatmap.png}
     % \includegraphics[width=0.49\textwidth]
