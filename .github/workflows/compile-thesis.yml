@@ -7,15 +7,11 @@ jobs:
   build_latex:
     name: Build
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/moderncv/debian-texlive-docker:main
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
-
-      - name: Update the system
-        run: sudo apt-get update
-
-      - name: Install latexmk
-        run: sudo apt-get install texlive-full
 
       - name: Compile
         run: make -C written && make -C written book
