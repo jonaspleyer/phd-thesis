@@ -2,7 +2,8 @@ name: Build LaTeX document
 on: push
 
 env:
-  dir: paper
+  dir: written
+
 jobs:
   build_latex:
     name: Build
@@ -16,10 +17,10 @@ jobs:
           submodules: 'true'
 
       - name: Compile
-        run: make -C written && make -C written book
+        run: make -C ${{ env.dir }} && make -C ${{ env.dir }} book
 
       - name: Zip pdf
-        run: zip archive.zip written/main.pdf written/book.pdf
+        run: zip archive.zip ${{ env.dir }}/main.pdf ${{ env.dir }}/book.pdf
 
       - name: Upload pdf as artifact
         uses: actions/upload-artifact@v4
