@@ -19,14 +19,11 @@ jobs:
       - name: Compile
         run: make -C ${{ env.dir }} && make -C ${{ env.dir }} book
 
-      - name: Zip pdf
-        run: zip archive.zip ${{ env.dir }}/main.pdf ${{ env.dir }}/book.pdf
-
       - name: Upload pdf as artifact
         uses: actions/upload-artifact@v4
         with:
           name: archive.zip
-          path: ${{ env.dir}}/archive.zip
+          path: ${{ env.dir }}/archive.zip
 
   release_pdf:
     name: Release PDF
