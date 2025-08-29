@@ -1,0 +1,23 @@
+name: tex-fmt
+on:
+  push:
+    branches: main
+
+jobs:
+  tex-fmt:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@main
+      with:
+        ref: ${{ github.head_ref }}
+    - name: Run tex-fmt
+      uses: grayespinoza/tex-fmt-action@main
+      with:
+        inputs: "written/*.tex --config written/tex-fmt.toml"
+    - name: Push
+      uses: stefanzweifel/git-auto-commit-action@master
+      with:
+        commit_message: "style: format using tex-fmt"
