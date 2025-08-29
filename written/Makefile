@@ -35,6 +35,6 @@ fresh: clean all
 book:
 	$(CC) $(OPTIONS) $(TARGET)-book
 
-zip: fresh
+zip: fresh book
 	$(MAKE) clean_partial
 	zip archive.zip -r *
