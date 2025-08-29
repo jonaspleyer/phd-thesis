@@ -9,7 +9,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/moderncv/debian-texlive-docker:main
+      image: danteev/texlive:latest
     steps:
       - name: Set up Git repository
         uses: actions/checkout@main
