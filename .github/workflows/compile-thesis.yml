@@ -11,7 +11,7 @@ jobs:
       image: ghcr.io/moderncv/debian-texlive-docker:main
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@main
         with:
           submodules: 'true'
 
@@ -34,7 +34,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@main
       - uses: actions/download-artifact@v4
         with:
           name: archive.zip
