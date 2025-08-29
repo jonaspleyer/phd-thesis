@@ -24,7 +24,6 @@ clean_partial:
 	rm -f *.lol
 	rm -f *.lot
 	rm -f *.out
-	rm -f *.pdf
 	rm -f *.run.xml
 	rm -f *.toc
 
