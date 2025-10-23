@@ -104,6 +104,9 @@ werden. Diese habe ich erstmal als eigene Subsections gelistet.
 \section{cellular\_raza: A novel Agent-Based Framework}
 \cite{Pleyer2025}
 
+“The purpose of abstracting is not to be vague, but to create a new semantic level in which one can be absolutely precise.”
+― Edsger W. Dijkstra
+
 Kapitel 2 gibt eine ausführliche Erklärung von cellular\_raza. Dazu werde ich das JOSS
 Paper und die Dokumentation auf https://cellular-raza.com/ verwenden, die du ja bereits
 beide gelesen hast. Ich werde hier auch auf Details wie die Implementierung und
@@ -119,6 +122,33 @@ die ich im Einleitungskapitel davor motiviert habe.
     \item flexibility
     \item automated testing, good documentation
     \item Rust as proramming language
+\end{itemize}
+
+\subsubsection{Simulation Aspects}
+\begin{itemize}
+    \item use this list: \url{https://cellular-raza.com/internals/concepts/}
+\end{itemize}
+
+\paragraph{Spatial Partitioning}
+\begin{itemize}
+    \item Why can we do that? $\rightarrow$ finite interactions
+    \item How do we do this? $\rightarrow$ in-cell approach
+    \item agnostic with respect to particular partitioning; use trait for this
+    \item List examples of partitioning:
+    \begin{itemize}
+        \item Grid (this is what we do)
+        \item k-d-tree
+        \item quad tree
+        \item STR \& STR+
+        \item Z-curve
+        \item Hilbert curve
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Rust}
+\begin{itemize}
+    \item modern language
+    \item good ecosystem; allows for quick reusability and iterations
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
@@ -486,6 +516,7 @@ muss ich dann noch sehen.
 \begin{itemize}
     \item Parameter Estimation
     \item Individual Treatment
+    \item Apply this to Vortex formation~\cite{}
 \end{itemize}
 %---------------------------------------------------------------------------------------------------
 \subsection{Bacterial Branching}
