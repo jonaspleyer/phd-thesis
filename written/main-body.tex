@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage[USenglish]{babel}
 \usepackage[style=ieee]{biblatex}
+\usepackage{booktabs}
 \usepackage{color}
 \usepackage{float}
 \usepackage{graphicx}
@@ -91,7 +92,7 @@ werden. Diese habe ich erstmal als eigene Subsections gelistet.
 \subsection{Mathematical Treatment}
 \begin{itemize}
     \item no "unfiying theory"
-    \item without theoretical framework, we cannot discuss any of the following:
+    \item with theoretical framework, we would be able to systematically discuss any of the following:
         \begin{itemize}
             \item coarse-graining
             \item uncertainty analysis
@@ -108,15 +109,49 @@ werden. Diese habe ich erstmal als eigene Subsections gelistet.
 ― Edsger W. Dijkstra
 
 Kapitel 2 gibt eine ausführliche Erklärung von cellular\_raza. Dazu werde ich das JOSS
-Paper und die Dokumentation auf https://cellular-raza.com/ verwenden, die du ja bereits
-beide gelesen hast. Ich werde hier auch auf Details wie die Implementierung und
-Performance eingehen. Ein wichtiger Bestandteil wird auch die zugrundeliegende Denkweise,
-die ich im Einleitungskapitel davor motiviert habe.
+Paper und die Dokumentation auf https://cellular-raza.com/ verwenden.
+Ich werde hier auch auf Details wie die Implementierung und Performance eingehen.
+Ein wichtiger Bestandteil wird auch die zugrundeliegende Denkweise, indem ich die zellulären systeme in ihre "Aspecte" aufteile.
+Diese werde ich im Einleitungskapitel davor motiviert habe.
 
 %---------------------------------------------------------------------------------------------------
 \subsection{Goals/Justification}
-%---------------------------------------------------------------------------------------------------
+%...................................................................................................
+\subsubsection{Simulation Aspects}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lll}
+        Aspect\\
+        \toprule
+        \textbf{(C) Cellular}\\
+        \midrule
+        Position    (Spatial representation of the cell)\\
+        Velocity    (Velocity of the cell)\\
+        Cell-Cycle\\
+        Intracellular Reactions   &\\
+        \midrule
+        \textbf{(CC) Cell-Cell}\\
+        Physical Interactions\\
+        Contact Reactions\\
+        \midrule
+        \textbf{(CE) Cell-Environment}\\
+        \midrule
+        Coupling of Intra- and Extracellular Reactions\\
+        External Force\\
+        \textbf{(E) Environment}\\
+        \midrule
+        Fluid Dynamics \& Extracellular Reactions\\
+        \textbf{(O) Other}\\
+        \midrule
+        Controller\\
+        \bottomrule
+    \end{tabular}
+    \caption{TODO}
+\end{table}
+
+%...................................................................................................
 \subsection{Structure \& Development}
+\paragraph{Key concepts to keep in mind}
 \begin{itemize}
     \item simulation aspects: cell, cell-cell, domain-cell, other
     \item flexibility
@@ -124,12 +159,16 @@ die ich im Einleitungskapitel davor motiviert habe.
     \item Rust as proramming language
 \end{itemize}
 
-\subsubsection{Simulation Aspects}
-\begin{itemize}
-    \item use this list: \url{https://cellular-raza.com/internals/concepts/}
-\end{itemize}
+\paragraph{Modular Layout} (Make this into a nice dependency graph)
+\begin{enumerate}
+    \item concepts
+    \item building blocks
+    \item core (solvers, etc.)
+    \item main package, benchmarks
+\end{enumerate}
 
-\paragraph{Spatial Partitioning}
+%...................................................................................................
+\subsubsection{Spatial Partitioning}
 \begin{itemize}
     \item Why can we do that? $\rightarrow$ finite interactions
     \item How do we do this? $\rightarrow$ in-cell approach
@@ -145,16 +184,28 @@ die ich im Einleitungskapitel davor motiviert habe.
     \end{itemize}
 \end{itemize}
 
-\paragraph{Rust}
+%...................................................................................................
+\subsubsection{Algorithm \& Code Generation}
+\begin{itemize}
+    \item insert code as needed depending on which simulation aspects are solved
+    \item macro-based approach
+    \item modularize components
+    \item allow for all kinds of agents and domains/environments
+\end{itemize}
+
+%...................................................................................................
+\subsubsection{Rust}
 \begin{itemize}
     \item modern language
     \item good ecosystem; allows for quick reusability and iterations
+    \item safety, robustness
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Functionality \& Limitations}
+\subsubsection{Functionality \& Limitations}
 
 %---------------------------------------------------------------------------------------------------
+\pagebreak
 \subsection{Benchmarks}
 This section provides multiple benchmarks which can be read and unserstood separately.
 Their purpose is to provide insights into performance characteristics and assert the correctness of
