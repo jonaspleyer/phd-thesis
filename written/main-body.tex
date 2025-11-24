@@ -15,6 +15,20 @@
 \usepackage{parskip}
 \usepackage{siunitx}
 
+% /--- See https://www.tug.org/FontCatalogue/ ------------------------------------------------------
+% \-------------------------------------------------------------------------------------------------
+
+% /--- Everything about fancyhdr -------------------------------------------------------------------
+\usepackage{fancyhdr}
+% \fancyhead{} % clear all header fields
+\fancyfoot{} % clear all footer fields
+\fancyhead[LO,RE]{\rightmark}
+\fancyhead[RO,LE]{Jonas Pleyer}
+\fancyfoot[LO,RE]{\thepage}
+
+\setlength{\headheight}{13.6pt}
+% \-------------------------------------------------------------------------------------------------
+
 % Configure lstlistings
 \definecolor{beige}{RGB}{255, 245, 240}
 \lstset{
@@ -35,6 +49,10 @@
 
 \begin{document}
 % TITLEPAGE
+
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection~ ~#1}}
+% \renewcommand{\chaptermark}[1]{\markboth{\chaptername~\thechapter~-~ #1}{}}
 
 \input{titlepage}
 
@@ -58,6 +76,8 @@
     \acro{ib}[IB]{Individual-Based}
     \acro{msd}[MSD]{Mean Squared Displacement}
 \end{acronym}
+
+\section*{Overview}
 
 %###################################################################################################
 \newpage
@@ -149,7 +169,7 @@ Diese werde ich im Einleitungskapitel davor motiviert habe.
     \caption{TODO}
 \end{table}
 
-%...................................................................................................
+%---------------------------------------------------------------------------------------------------
 \subsection{Structure \& Development}
 \paragraph{Key concepts to keep in mind}
 \begin{itemize}
@@ -205,7 +225,6 @@ Diese werde ich im Einleitungskapitel davor motiviert habe.
 \subsubsection{Functionality \& Limitations}
 
 %---------------------------------------------------------------------------------------------------
-\pagebreak
 \subsection{Benchmarks}
 This section provides multiple benchmarks which can be read and unserstood separately.
 Their purpose is to provide insights into performance characteristics and assert the correctness of
@@ -593,10 +612,34 @@ muss ich dann noch sehen.
 
 %###################################################################################################
 \newpage
-\section*{Supplementary Material}
 
-\renewcommand{\thesection}{S\arabic{section}}
-\setcounter{section}{0}
+% \setcounter{section}{0}
+\newcounter{suppsection}
+\newcounter{supptable}
+\newcounter{suppfigure}
+\newcounter{suppequation}
+
+% \addtocounter{suppsection}{\value{section}}
+% \addtocounter{supptable}{\value{table}}
+% \addtocounter{suppfigure}{\value{figure}}
+% \addtocounter{suppequation}{\value{equation}}
+
+\renewcommand{\thesection}{S\arabic{suppsection}}
+\renewcommand{\thetable}{S\arabic{supptable}}%
+\renewcommand{\thefigure}{S\arabic{suppfigure}}%
+\renewcommand{\theequation}{S\arabic{suppequation}}%
+
+\let\oldsection\section
+\let\oldequation\equation
+\let\oldtable\table
+\let\oldfigure\figure
+% \renewcommand{\section}{\@ifstar{\@oldsection}{\@stepcounter{suppsection}\@oldsection}}
+\makeatletter
+\renewcommand{\section}{\@ifstar{\oldsection*}{\stepcounter{suppsection}\oldsection}}
+\renewcommand{\equation}{\@ifstar{\oldequation*}{\stepcounter{suppequation}\oldequation}}
+\renewcommand{\table}{\@ifstar{\oldtable*}{\stepcounter{supptable}\oldtable}}
+\renewcommand{\figure}{\@ifstar{\oldfigure*}{\stepcounter{suppfigure}\oldfigure}}
+\makeatother
 
 %###################################################################################################
 \section{My Supplement}
