@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="322.59583mm"
+   height="190.48456mm"
+   viewBox="0 0 322.59583 190.48456"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   sodipodi:docname="concept-encapsulation.svg"
+   inkscape:export-filename="concept-encapsulation.pdf"
+   inkscape:export-xdpi="150.82"
+   inkscape:export-ydpi="150.82"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0574425"
+     inkscape:cx="609.48942"
+     inkscape:cy="346.59096"
+     inkscape:window-width="2560"
+     inkscape:window-height="1396"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-9.4349585,-40.720789)">
+    <rect
+       style="fill:#6bd2db;fill-opacity:1;stroke:#1e747b;stroke-width:1.5;stroke-linecap:round;stroke-opacity:1"
+       id="rect1"
+       width="69.558556"
+       height="30.775902"
+       x="10.184958"
+       y="52.980476" />
+    <text
+       xml:space="preserve"
+       style="font-size:10.5833px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="45.067589"
+       y="72.151131"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="45.067589"
+         y="72.151131">Mechanics</tspan></text>
+    <rect
+       style="fill:#6bd2db;fill-opacity:1;stroke:#1e747b;stroke-width:1.5;stroke-linecap:round;stroke-opacity:1"
+       id="rect1-5"
+       width="69.558556"
+       height="30.775902"
+       x="261.72223"
+       y="98.043571" />
+    <text
+       xml:space="preserve"
+       style="font-size:10.5833px;line-height:0.9;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="296.93558"
+       y="111.9281"
+       id="text1-2"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:0.9;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="296.93558"
+         y="111.9281"
+         id="tspan5">Shape</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29167px;line-height:0.9;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="296.93558"
+         y="121.66577"
+         id="tspan7">Wall, Cytoskeleton ..</tspan></text>
+    <rect
+       style="fill:#6bd2db;fill-opacity:1;stroke:#1e747b;stroke-width:1.5;stroke-linecap:round;stroke-opacity:1"
+       id="rect1-0"
+       width="69.558556"
+       height="30.775902"
+       x="94.030708"
+       y="52.980476" />
+    <text
+       xml:space="preserve"
+       style="font-size:10.5833px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="128.91333"
+       y="72.151131"
+       id="text1-6"><tspan
+         sodipodi:role="line"
+         id="tspan1-1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="128.91333"
+         y="72.151131">Cycle</tspan></text>
+    <rect
+       style="fill:#6bd2db;fill-opacity:1;stroke:#1e747b;stroke-width:1.5;stroke-linecap:round;stroke-opacity:1"
+       id="rect1-0-6"
+       width="69.558556"
+       height="30.775902"
+       x="177.87646"
+       y="52.980476" />
+    <text
+       xml:space="preserve"
+       style="font-size:10.5833px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="212.75908"
+       y="72.151123"
+       id="text1-6-5"><tspan
+         sodipodi:role="line"
+         id="tspan1-1-6"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="212.75908"
+         y="72.151123">Reactions</tspan></text>
+    <rect
+       style="fill:#6bd2db;fill-opacity:1;stroke:#1e747b;stroke-width:1.5;stroke-linecap:round;stroke-opacity:1"
+       id="rect1-5-8"
+       width="69.558556"
+       height="30.775902"
+       x="261.71637"
+       y="143.10666" />
+    <text
+       xml:space="preserve"
+       style="font-size:10.5833px;line-height:0.9;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="296.72308"
+       y="156.9912"
+       id="text1-2-8"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.9;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="296.72308"
+         y="156.9912"
+         id="tspan2">Compounds</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29167px;line-height:0.9;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="296.72308"
+         y="166.72887"
+         id="tspan8">Proteins, Food, ..</tspan></text>
+    <rect
+       style="fill:#6bd2db;fill-opacity:1;stroke:#1e747b;stroke-width:1.5;stroke-linecap:round;stroke-opacity:1"
+       id="rect1-5-8-5"
+       width="69.558556"
+       height="30.775902"
+       x="261.71637"
+       y="188.16975" />
+    <rect
+       style="fill:#6bd2db;fill-opacity:1;stroke:#1e747b;stroke-width:1.5;stroke-linecap:round;stroke-opacity:1"
+       id="rect1-2"
+       width="40.913673"
+       height="17.76495"
+       x="24.507399"
+       y="104.54903" />
+    <rect
+       style="fill:#6bd2db;fill-opacity:1;stroke:#1e747b;stroke-width:1.5;stroke-linecap:round;stroke-opacity:1"
+       id="rect1-2-1"
+       width="40.913673"
+       height="17.76495"
+       x="108.39965"
+       y="104.54903" />
+    <rect
+       style="fill:#6bd2db;fill-opacity:1;stroke:#1e747b;stroke-width:1.5;stroke-linecap:round;stroke-opacity:1"
+       id="rect1-2-1-9"
+       width="40.913673"
+       height="17.76495"
+       x="192.1989"
+       y="104.54903" />
+    <rect
+       style="fill:#6bd2db;fill-opacity:1;stroke:#1e747b;stroke-width:1.5;stroke-linecap:round;stroke-opacity:1"
+       id="rect1-2-1-7"
+       width="40.913673"
+       height="17.76495"
+       x="108.39965"
+       y="149.61214" />
+    <rect
+       style="fill:#6bd2db;fill-opacity:1;stroke:#1e747b;stroke-width:1.5;stroke-linecap:round;stroke-opacity:1"
+       id="rect1-2-1-9-1"
+       width="40.913673"
+       height="17.76495"
+       x="192.1989"
+       y="149.61214" />
+    <rect
+       style="fill:#6bd2db;fill-opacity:1;stroke:#1e747b;stroke-width:1.5;stroke-linecap:round;stroke-opacity:1"
+       id="rect1-2-7"
+       width="40.913673"
+       height="17.76495"
+       x="24.507401"
+       y="194.67525" />
+    <rect
+       style="fill:#6bd2db;fill-opacity:1;stroke:#1e747b;stroke-width:1.5;stroke-linecap:round;stroke-opacity:1"
+       id="rect1-2-1-6"
+       width="40.913673"
+       height="17.76495"
+       x="108.39965"
+       y="194.67525" />
+    <path
+       style="fill:none;stroke:#e8702a;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 86.750039,40.720789 V 231.20534"
+       id="path2"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#e8702a;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 170.96294,40.720793 V 231.20534"
+       id="path2-8"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#e8702a;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 254.34855,40.720791 V 231.20534"
+       id="path2-8-9"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:10.5833px;line-height:0.9;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="296.49564"
+       y="203.55771"
+       id="text1-2-8-0"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.9;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="296.49564"
+         y="203.55771"
+         id="tspan2-9">Appendages</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29167px;line-height:0.9;font-family:'Liberation Mono';-inkscape-font-specification:'Liberation Mono';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="296.49564"
+         y="213.29538"
+         id="tspan8-6">Pili, Flagella, ..</tspan></text>
+  </g>
+</svg>
