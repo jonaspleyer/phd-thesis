@@ -6,6 +6,8 @@
 \usepackage[style=ieee]{biblatex}
 \usepackage{booktabs}
 \usepackage{color}
+\usepackage{epigraph}
+\usepackage{enumitem}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage[hidelinks]{hyperref}
@@ -47,6 +49,10 @@
 \date{11.11.2025}\let\Date\@date
 \makeatother
 
+\numberwithin{equation}{section}
+
+\setlist{noitemsep}
+
 \begin{document}
 % TITLEPAGE
 
@@ -82,6 +88,17 @@
 %###################################################################################################
 \newpage
 \pagenumbering{arabic}
+
+\section*{Preface \& Readers Guide}
+\begin{itemize}
+    \item section 1: gives overview of everything and aims to build bridge between the topics
+    \item section 2+3: conceptual, generalizable for many systems
+    \item section 4+5: specific for elongated bacteria
+    \item section 6: collection of many distinct applications
+\end{itemize}
+
+%###################################################################################################
+\pagebreak
 \section{Introduction}
 
 Kapitel 1 soll eine Einführung in ABMs geben. Dabei möchte ich vor Allem das Mini-Review
@@ -120,13 +137,30 @@ werden. Diese habe ich erstmal als eigene Subsections gelistet.
         \end{itemize}
 \end{itemize}
 
+%---------------------------------------------------------------------------------------------------
+\subsection{Are we flexible yet?}
+\begin{itemize}
+    \item flexibility matters (why)
+    \item show some examples: rust pear fungus (differing cell types interacting), budding yeast
+        elongated bacteria (non-trivial geometry)
+    \item we are not there yet
+\end{itemize}
+
+%---------------------------------------------------------------------------------------------------
+\subsection{Are we calibrated yet?}
+\begin{itemize}
+    \item many \acp{abm} do not do proper parameter estimation
+    \item what are we actually modeling here?
+\end{itemize}
+
 %###################################################################################################
 \pagebreak
 \section{cellular\_raza: A novel Agent-Based Framework}
-\cite{Pleyer2025}
 
-“The purpose of abstracting is not to be vague, but to create a new semantic level in which one can be absolutely precise.”
-― Edsger W. Dijkstra
+\epigraph{The purpose of abstracting is not to be vague, but to create a new semantic level in which one can be absolutely precise.}
+{\textit{Edsger W. Dijkstra}}
+
+\cite{Pleyer2025}
 
 Kapitel 2 gibt eine ausführliche Erklärung von cellular\_raza. Dazu werde ich das JOSS
 Paper und die Dokumentation auf https://cellular-raza.com/ verwenden.
@@ -207,7 +241,7 @@ Ideas from game development: https://www.youtube.com/watch?v=wo84LFzx5nI
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/concept-encapsulation.pdf}
-    \caption{TODO,
+    \caption[Encapsulation boundaries]{TODO,
         encapsulation boundaries;
         important for architecture;
         Think in terms of cellular processes;
@@ -580,6 +614,8 @@ deviation of the MSD is lowest at this point in time.
 This is a practical challenge since the initial steps of the solver are less accurate and thus the
 overall uncertainty of the numerically obtained results.
 
+\subsection{Discussion}
+
 %###################################################################################################
 \pagebreak
 \section{ABM Theory}
@@ -611,7 +647,24 @@ overall uncertainty of the numerically obtained results.
 
 %###################################################################################################
 \pagebreak
-\section{Applications}
+\section{An AI-driven workflow to map Biology to \acsp{abm} at the example of elongated Bacteria}
+\subsection{Introduction to Spatial Elongated Bacteria}
+\subsection{Mathematical Models}
+\subsection{Taxonomy}
+\subsection{Analysis of AI-Tools}
+\subsection{Discussion}
+
+%###################################################################################################
+\pagebreak
+\section{Parameter Estimation, Model Validation \& Reduction for Mechanical Models of Elongated Bacteria}
+\subsection{A Computational Model for Rod-Shaped Bacteria}
+\subsection{Methodology}
+\subsection{Applications}
+\subsection{Discussion}
+
+%###################################################################################################
+\pagebreak
+\section{Further Applications}
 
 Kapitel 4 beinhaltet Anwendungsbeispiele. Mein Ziel hier ist, dass jedes dieser Beispiele
 (subsections) mit dem Hintergrundwissen von Kapitel 1-3 lesbar ist. Dabei möchte ich hier
@@ -622,13 +675,7 @@ muss ich dann noch sehen.
 
 %---------------------------------------------------------------------------------------------------
 \subsection{Cell-Sorting}
-%---------------------------------------------------------------------------------------------------
-\subsection{Bacterial Rods}
-\begin{itemize}
-    \item Parameter Estimation
-    \item Individual Treatment
-    \item Apply this to Vortex formation~\cite{}
-\end{itemize}
+
 %---------------------------------------------------------------------------------------------------
 \subsection{Bacterial Branching}
 \begin{itemize}
@@ -638,6 +685,18 @@ muss ich dann noch sehen.
 
 %---------------------------------------------------------------------------------------------------
 \subsection{Puzzle Cells}
+
+%---------------------------------------------------------------------------------------------------
+\subsection{Sender-Receiver}
+
+%---------------------------------------------------------------------------------------------------
+\subsection{Pool Model}
+
+%---------------------------------------------------------------------------------------------------
+\subsection{Clustering of ATG19 in Selective Autophagy}
+
+%---------------------------------------------------------------------------------------------------
+\subsection{Pear Rust Fungus?}
 
 %###################################################################################################
 \section{Discussion}
@@ -655,7 +714,7 @@ muss ich dann noch sehen.
 \newpage
 
 % \setcounter{section}{0}
-\newcounter{suppsection}
+\newcounter{suppsubsection}
 \newcounter{supptable}
 \newcounter{suppfigure}
 \newcounter{suppequation}
@@ -665,25 +724,57 @@ muss ich dann noch sehen.
 % \addtocounter{suppfigure}{\value{figure}}
 % \addtocounter{suppequation}{\value{equation}}
 
-\renewcommand{\thesection}{S\arabic{suppsection}}
+\renewcommand{\thesubsection}{S\arabic{suppsubsection}}
 \renewcommand{\thetable}{S\arabic{supptable}}%
 \renewcommand{\thefigure}{S\arabic{suppfigure}}%
 \renewcommand{\theequation}{S\arabic{suppequation}}%
 
-\let\oldsection\section
+\let\oldsubsection\subsection
 \let\oldequation\equation
 \let\oldtable\table
 \let\oldfigure\figure
 % \renewcommand{\section}{\@ifstar{\@oldsection}{\@stepcounter{suppsection}\@oldsection}}
 \makeatletter
-\renewcommand{\section}{\@ifstar{\oldsection*}{\stepcounter{suppsection}\oldsection}}
+\renewcommand{\subsection}{\@ifstar{\oldsubsection*}{\stepcounter{suppsubsection}\oldsubsection}}
 \renewcommand{\equation}{\@ifstar{\oldequation*}{\stepcounter{suppequation}\oldequation}}
 \renewcommand{\table}{\@ifstar{\oldtable*}{\stepcounter{supptable}\oldtable}}
 \renewcommand{\figure}{\@ifstar{\oldfigure*}{\stepcounter{suppfigure}\oldfigure}}
 \makeatother
 
+\numberwithin{equation}{subsection}
+\numberwithin{figure}{subsection}
+\numberwithin{table}{subsection}
+
+\section*{Supplement}
+\addcontentsline{toc}{section}{Supplement}
+
 %###################################################################################################
-\section{My Supplement}
+\subsection{Supplement one}
+
+\begin{equation}
+    a^2+b^2=c^2
+\end{equation}
+
+\begin{equation}
+    e^2+b^2=c^2
+\end{equation}
+
+\begin{figure}
+    \centering
+    \caption[Supp Fig]{TODO}
+\end{figure}
+
+%###################################################################################################
+\subsection{My Supplement New}
+
+\begin{equation}
+    e^2+b^2=c^2
+\end{equation}
+
+\begin{table}
+    \centering
+    \caption[Supp Tab]{TODO}
+\end{table}
 
 \newpage
 \thispagestyle{empty}
