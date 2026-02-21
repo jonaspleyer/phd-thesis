@@ -102,8 +102,9 @@
 \end{abstract}
 
 \newpage
-\tableofcontents
 \pagenumbering{Roman}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Contents}
+\tableofcontents
 \newpage
 
 \listoffigures
@@ -121,13 +122,10 @@
     \acro{bsubtilis}[\textit{B.subtilis}]{\textit{Bacillus subtilis}}
 \end{acronym}
 
-\section*{Overview}
+% \newpage
+% \chapter*{Overview}
 
-%###################################################################################################
-\newpage
-\pagenumbering{arabic}
-
-\section*{Preface \& Readers Guide}
+\chapter*{Preface \& Readers Guide}
 \begin{itemize}
     \item section 1: gives overview of everything and aims to build bridge between the topics
     \item section 2+3: conceptual, generalizable for many systems
@@ -137,6 +135,7 @@
 
 %###################################################################################################
 \pagebreak
+\pagenumbering{arabic}
 \chapter{Introduction}
 
 Kapitel 1 soll eine Einführung in ABMs geben. Dabei möchte ich vor Allem das Mini-Review
