@@ -124,7 +124,7 @@
 
 %###################################################################################################
 \pagebreak
-\section{Introduction}
+\chapter{Introduction}
 
 Kapitel 1 soll eine Einführung in ABMs geben. Dabei möchte ich vor Allem das Mini-Review
 von uns verwenden und auf Gemeinsamkeiten, Unterschiede, und ein wenig Geschichte
@@ -132,7 +132,7 @@ eingehen. Hier möchte ich schon einige Ideen aufbringen, die später wieder auf
 werden. Diese habe ich erstmal als eigene Subsections gelistet.
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Cellular Building Blocks}
+\section{Cellular Building Blocks}
 \begin{itemize}
     \item complex organisms from collection of cells
     \item self-organization/pattern formation
@@ -140,7 +140,7 @@ werden. Diese habe ich erstmal als eigene Subsections gelistet.
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Comparison of Simulation Frameworks}
+\section{Comparison of Simulation Frameworks}
 \begin{itemize}
     \item use mainly mini-review for this subsection \cite{Pleyer2023}
     \item many frameworks
@@ -151,7 +151,7 @@ werden. Diese habe ich erstmal als eigene Subsections gelistet.
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Mathematical Treatment}
+\section{Mathematical Treatment}
 \begin{itemize}
     \item no "unfiying theory"
     \item with theoretical framework, we would be able to systematically discuss any of the following:
@@ -163,7 +163,7 @@ werden. Diese habe ich erstmal als eigene Subsections gelistet.
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Are we flexible yet?}
+\section{Are we flexible yet?}
 \begin{itemize}
     \item flexibility matters (why)
     \item show some examples: rust pear fungus (differing cell types interacting), budding yeast
@@ -172,7 +172,7 @@ werden. Diese habe ich erstmal als eigene Subsections gelistet.
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Are we calibrated yet?}
+\section{Are we calibrated yet?}
 \begin{itemize}
     \item many \acp{abm} do not do proper parameter estimation
     \item what are we actually modeling here?
@@ -180,7 +180,7 @@ werden. Diese habe ich erstmal als eigene Subsections gelistet.
 
 %###################################################################################################
 \pagebreak
-\section{cellular\_raza: A novel Agent-Based Framework}
+\chapter{Overarching Aspects at the Example of Elongated Bacteria}
 
 \epigraph{The purpose of abstracting is not to be vague, but to create a new semantic level in which one can be absolutely precise.}
 {\textit{Edsger W. Dijkstra}}
@@ -194,10 +194,10 @@ Ein wichtiger Bestandteil wird auch die zugrundeliegende Denkweise, indem ich di
 Diese werde ich im Einleitungskapitel davor motiviert habe.
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Goals/Justification}
+\section{Goals/Justification}
 
 %...................................................................................................
-\subsubsection{Systems that noone can look at so far}
+\subsection{Systems that noone can look at so far}
 
 \textbf{Ideas for complex interactions}
 \begin{itemize}
@@ -211,7 +211,7 @@ Diese werde ich im Einleitungskapitel davor motiviert habe.
 \end{itemize}
 
 %...................................................................................................
-\subsubsection{Simulation Aspects}
+\subsection{Simulation Aspects}
 \begin{table}[H]
     \centering
     \begin{tabular}{lll}
@@ -244,7 +244,7 @@ Diese werde ich im Einleitungskapitel davor motiviert habe.
 \end{table}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Structure \& Development}
+\section{Structure \& Development}
 \paragraph{Key concepts to keep in mind}
 \begin{itemize}
     \item simulation aspects: cell, cell-cell, domain-cell, other
@@ -283,7 +283,7 @@ Ideas from game development: https://www.youtube.com/watch?v=wo84LFzx5nI
 \end{enumerate}
 
 %...................................................................................................
-\subsubsection{Spatial Partitioning}
+\subsection{Spatial Partitioning}
 \begin{itemize}
     \item Why can we do that? $\rightarrow$ finite interactions
     \item How do we do this? $\rightarrow$ in-cell approach
@@ -303,7 +303,7 @@ Ideas from game development: https://www.youtube.com/watch?v=wo84LFzx5nI
 \end{itemize}
 
 %...................................................................................................
-\subsubsection{Algorithm \& Code Generation}
+\subsection{Algorithm \& Code Generation}
 \begin{itemize}
     \item insert code as needed depending on which simulation aspects are solved
     \item macro-based approach
@@ -312,7 +312,7 @@ Ideas from game development: https://www.youtube.com/watch?v=wo84LFzx5nI
 \end{itemize}
 
 %...................................................................................................
-\subsubsection{Rust}
+\subsection{Rust}
 \begin{itemize}
     \item modern language
     \item good ecosystem; allows for quick reusability and iterations
@@ -320,15 +320,15 @@ Ideas from game development: https://www.youtube.com/watch?v=wo84LFzx5nI
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
-\subsubsection{Functionality \& Limitations}
+\subsection{Functionality \& Limitations}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Benchmarks}
+\section{Benchmarks}
 This section provides multiple benchmarks which can be read and unserstood separately.
 Their purpose is to provide insights into performance characteristics and assert the correctness of
 the solvers and routines used within \texttt{cellular\_raza}.
 
-\subsubsection{Multithreading Performance (Amdahl's Law)}
+\subsection{Multithreading Performance (Amdahl's Law)}
 
 \paragraph{Theory}
 One measure of multithreaded performance is to calculate the possible theoretical speedup
@@ -491,7 +491,7 @@ This can be directly ascribed to the implementation and the fundamental assumpti
 \texttt{cellular\_raza} that all interactions are strictly local, and subdomains only interact along
 their borders.
 
-\subsubsection{Scaling with Problem Size}
+\subsection{Scaling with Problem Size}
 For interactions with infinite range the computational complexity~\cite{Knuth1976} of calculating
 all interactions between every agent growths quadratic with the number of agents $\mathcal{O}(N^2)$.
 This can be seen when writing down the most simplistic implementation of calculating interaction
@@ -541,8 +541,8 @@ capped from above and thus, we expect a linear scaling $O(N)$ in the properly de
 This graph illustrates how interactions between cells are calculated when assuming a
 rectangular decomposition scheme.
 
-\subsubsection{Accuracy Testing of Contact Reactions}
-\subsubsection{Testing Stochastic Motion via the Fluctuation-Dissipation Theorem}
+\subsection{Accuracy Testing of Contact Reactions}
+\subsection{Testing Stochastic Motion via the Fluctuation-Dissipation Theorem}
 Stochastic motion on a particle level is often well described by Brownian3D or Langevin3D
 dynamics~\cite{Brown1828,Lemons1997}.
 The Fluctuation-Dissipation theorem~\cite{Callen1951} gives estimates the for \ac{msd} of a
@@ -639,11 +639,11 @@ deviation of the MSD is lowest at this point in time.
 This is a practical challenge since the initial steps of the solver are less accurate and thus the
 overall uncertainty of the numerically obtained results.
 
-\subsection{Discussion}
+\section{Discussion}
 
 %###################################################################################################
 \pagebreak
-\section{ABM Theory}
+\chapter{ABM Theory - A language of cellular ABMs}
 
 \begin{itemize}
     \item theoretical/mathematical treatment of \acp{abm}
@@ -654,21 +654,21 @@ overall uncertainty of the numerically obtained results.
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Theoretical Framework}
+\section{Theoretical Framework}
 \begin{itemize}
     \item use to-be-released paper
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Parameter Estimation \& Sensitivity Analysis}
+\section{Parameter Estimation \& Sensitivity Analysis}
 %---------------------------------------------------------------------------------------------------
-\subsection{Coarse-Graining}
+\section{Coarse-Graining}
 \begin{itemize}
     \item bacterial branching
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Pattern Formation}
+\section{Pattern Formation}
 
 %###################################################################################################
 \pagebreak
@@ -689,7 +689,7 @@ overall uncertainty of the numerically obtained results.
 
 %###################################################################################################
 \pagebreak
-\section{Further Applications}
+\chapter{Further Applications}
 
 Kapitel 4 beinhaltet Anwendungsbeispiele. Mein Ziel hier ist, dass jedes dieser Beispiele
 (subsections) mit dem Hintergrundwissen von Kapitel 1-3 lesbar ist. Dabei möchte ich hier
@@ -699,7 +699,7 @@ Beispiele sowohl numerische Simulation als auch eine theoretische Abhandlung bek
 muss ich dann noch sehen.
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Cell-Sorting}
+\section{Bacterial Branching}
 
 %---------------------------------------------------------------------------------------------------
 \subsection{Bacterial Branching}
@@ -709,25 +709,25 @@ muss ich dann noch sehen.
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Puzzle Cells}
+\section{Pool Model}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Sender-Receiver}
+\section{Cell-Sorting}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Pool Model}
+\section{Trichome Patterning}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Clustering of ATG19 in Selective Autophagy}
+\section{Puzzle Cells}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Pear Rust Fungus?}
+\section{Pear Rust Fungus?}
 
 %###################################################################################################
-\section{Discussion}
+\chapter{Discussion}
 
 %###################################################################################################
-\section{Conclusion}
+\chapter{Conclusion}
 
 % keywords can be removed
 % \keywords{}
@@ -770,11 +770,11 @@ muss ich dann noch sehen.
 \numberwithin{figure}{subsection}
 \numberwithin{table}{subsection}
 
-\section*{Supplement}
-\addcontentsline{toc}{section}{Supplement}
+\chapter{Supplement}
+% \addcontentsline{toc}{section}{Supplement}
 
 %###################################################################################################
-\subsection{Supplement one}
+\section{Supplement one}
 
 \begin{equation}
     a^2+b^2=c^2
@@ -790,7 +790,7 @@ muss ich dann noch sehen.
 \end{figure}
 
 %###################################################################################################
-\subsection{My Supplement New}
+\section{My Supplement New}
 
 \begin{equation}
     e^2+b^2=c^2
