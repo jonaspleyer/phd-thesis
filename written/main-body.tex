@@ -53,6 +53,31 @@
 
 \setlist{noitemsep}
 
+\usepackage{setspace}
+\onehalfspacing
+
+% Define epigraph (quotations at beginning of every section)
+\setlength\epigraphwidth{0.7\textwidth}
+% \renewcommand{\epigraphflush}{flush}
+\renewcommand{\beforeepigraphskip}{0.0cm}
+\renewcommand{\afterepigraphskip}{2.0cm}
+
+% Define style for chapter heading
+\usepackage{titlesec}
+\titleformat
+{\chapter}% command
+[display]% shape
+{\bfseries\huge}% format
+{\Large Chapter \thechapter}% label
+{0.5ex}% sep
+{}% before code
+[\vspace{-0.5ex}\rule{\textwidth}{0.3pt}] % after-code
+
+\titlespacing{\chapter}{0cm}{0cm}{0.5cm}
+
+% \renewcommand*{\chapterheadstartvskip}{\vspace*{0cm}}
+% \renewcommand*{\chapterheadendvskip}{\vspace{0cm}}
+
 \begin{document}
 % TITLEPAGE
 
