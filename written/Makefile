@@ -14,11 +14,6 @@ clean_partial:
 	rm -f *.bcf
 	rm -f *.bcf-SAVE-ERROR
 	rm -f *.blg
-	rm -f *-book.bcf
-	rm -f *-book.lof
-	rm -f *-book.lol
-	rm -f *-book.lot
-	rm -f *-book.run.xml
 	rm -f *.fdb_latexmk
 	rm -f *.fls
 	rm -f *.lof
