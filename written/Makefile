@@ -2,7 +2,9 @@ CC:=latexmk
 OPTIONS:=-pdf -xelatex
 TARGET:=main
 
-all:
+all: pdf book
+
+pdf:
 	$(CC) $(OPTIONS) $(TARGET)
 
 clean_partial:
