@@ -785,44 +785,20 @@ muss ich dann noch sehen.
 
 \newpage
 \printbibliography
+\addcontentsline{toc}{chapter}{Bibliography}
 
 %###################################################################################################
 \newpage
 
-% \setcounter{section}{0}
-\newcounter{suppsubsection}
-\newcounter{supptable}
-\newcounter{suppfigure}
-\newcounter{suppequation}
+\renewcommand{\thesection}{S\arabic{section}}
 
-% \addtocounter{suppsection}{\value{section}}
-% \addtocounter{supptable}{\value{table}}
-% \addtocounter{suppfigure}{\value{figure}}
-% \addtocounter{suppequation}{\value{equation}}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\numberwithin{listing}{section}
 
-\renewcommand{\thesubsection}{S\arabic{suppsubsection}}
-\renewcommand{\thetable}{S\arabic{supptable}}%
-\renewcommand{\thefigure}{S\arabic{suppfigure}}%
-\renewcommand{\theequation}{S\arabic{suppequation}}%
-
-\let\oldsubsection\subsection
-\let\oldequation\equation
-\let\oldtable\table
-\let\oldfigure\figure
-% \renewcommand{\section}{\@ifstar{\@oldsection}{\@stepcounter{suppsection}\@oldsection}}
-\makeatletter
-\renewcommand{\subsection}{\@ifstar{\oldsubsection*}{\stepcounter{suppsubsection}\oldsubsection}}
-\renewcommand{\equation}{\@ifstar{\oldequation*}{\stepcounter{suppequation}\oldequation}}
-\renewcommand{\table}{\@ifstar{\oldtable*}{\stepcounter{supptable}\oldtable}}
-\renewcommand{\figure}{\@ifstar{\oldfigure*}{\stepcounter{suppfigure}\oldfigure}}
-\makeatother
-
-\numberwithin{equation}{subsection}
-\numberwithin{figure}{subsection}
-\numberwithin{table}{subsection}
-
-\chapter{Supplement}
-% \addcontentsline{toc}{section}{Supplement}
+\chapter*{Supplement}
+\addcontentsline{toc}{chapter}{Supplement}
 
 %###################################################################################################
 \section{Supplement one}
