@@ -103,15 +103,29 @@
 
 \newpage
 \pagenumbering{Roman}
-\addcontentsline{toc}{chapter}{\protect\numberline{}Contents}
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Contents}
 \tableofcontents
 \newpage
 
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{section}{\listfigurename}
 \listoffigures
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{section}{\listtablename}
 \listoftables
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{section}{Listings}
 \lstlistoflistings
 
 \chapter*{Acronyms}
+\addcontentsline{toc}{section}{Acronyms}
 \begin{acronym}
     \acro{abm}[ABM]{Agent-Based Model}
     \acro{ode}[ODE]{Ordinary Differential Equation}
@@ -126,6 +140,7 @@
 % \chapter*{Overview}
 
 \chapter*{Preface \& Readers Guide}
+\addcontentsline{toc}{section}{Preface \& Readers Guide}
 \begin{itemize}
     \item section 1: gives overview of everything and aims to build bridge between the topics
     \item section 2+3: conceptual, generalizable for many systems
@@ -827,6 +842,12 @@ muss ich dann noch sehen.
     \centering
     \caption[Supp Tab]{TODO}
 \end{table}
+
+\newpage
+\thispagestyle{empty}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Report}
+\listoftodos
+
 
 \newpage
 \thispagestyle{empty}
