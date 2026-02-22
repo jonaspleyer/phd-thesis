@@ -98,6 +98,7 @@
 \renewcommand{\sectionmark}[1]{\markright{\thesection~ ~#1}}
 % \renewcommand{\chaptermark}[1]{\markboth{\chaptername~\thechapter~-~ #1}{}}
 
+\pdfbookmark[1]{Titlepage}{titlepage}
 \input{titlepage}
 
 %###################################################################################################
@@ -107,29 +108,21 @@
 
 \newpage
 \pagenumbering{Roman}
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{chapter}{Contents}
+\pdfbookmark[0]{Contents}{contents}
 \tableofcontents
 \newpage
 
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{section}{\listfigurename}
+\pdfbookmark[1]{\listfigurename}{listoffigures}
 \listoffigures
 
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{section}{\listtablename}
+\pdfbookmark[1]{\listtablename}{listoftables}
 \listoftables
 
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{section}{Listings}
+\pdfbookmark[1]{Listings}{listoflistings}
 \lstlistoflistings
 
 \chapter*{Acronyms}
-\addcontentsline{toc}{section}{Acronyms}
+\pdfbookmark[1]{Acronyms}{listofacronyms}
 \begin{acronym}
     \acro{abm}[ABM]{Agent-Based Model}
     \acro{ode}[ODE]{Ordinary Differential Equation}
@@ -144,7 +137,7 @@
 % \chapter*{Overview}
 
 \chapter*{Preface \& Readers Guide}
-\addcontentsline{toc}{section}{Preface \& Readers Guide}
+\pdfbookmark[1]{Preface \& Readers Guide}{preface}
 \begin{itemize}
     \item section 1: gives overview of everything and aims to build bridge between the topics
     \item section 2+3: conceptual, generalizable for many systems
