@@ -2,10 +2,10 @@ CC:=latexmk
 OPTIONS:=-pdf -xelatex
 TARGET:=main
 
-all: pdf book
-
 pdf:
 	$(CC) $(OPTIONS) $(TARGET)
+
+all: pdf book
 
 clean_partial:
 	rm -f *.aux
