@@ -1,0 +1,73 @@
+Kapitel 1 soll eine Einführung in ABMs geben. Dabei möchte ich vor Allem das Mini-Review
+von uns verwenden und auf Gemeinsamkeiten, Unterschiede, und ein wenig Geschichte
+eingehen. Hier möchte ich schon einige Ideen aufbringen, die später wieder aufgegriffen
+werden. Diese habe ich erstmal als eigene Subsections gelistet.
+
+%---------------------------------------------------------------------------------------------------
+\section{Scales in Physics and Biology}
+\begin{itemize}
+    \item smallest proteins:
+        \begin{itemize}
+            \item \textit{spoVM} \cite{Levin1993} (sporulation in Bacillus subtilis)
+            \item \textit{TAL peptide} (smallest naturally ocurring, discovered in Drosophila melanogaster in 2007) \cite{Galindo2007}
+        \end{itemize}
+    \item largest scales: population dynamics across continents (earth $\approx 40'000\text{km}$ circumference)
+\end{itemize}
+
+%---------------------------------------------------------------------------------------------------
+\section{Cellular Building Blocks}
+\begin{itemize}
+    \item complex organisms from collection of cells
+    \item self-organization/pattern formation
+    \item single-cell vs bulk
+\end{itemize}
+
+%---------------------------------------------------------------------------------------------------
+\section{Comparison of Simulation Frameworks}
+\begin{itemize}
+    \item use mainly mini-review for this subsection \cite{Pleyer2023}
+    \item many frameworks
+    \item some similar approaches
+    \item purpose-built solutions
+    \item missing flexibility in model design or ability to apply to various systems
+    \item large number of parameters which need to be supplied
+\end{itemize}
+
+%---------------------------------------------------------------------------------------------------
+\section{Mathematical Treatment}
+\begin{itemize}
+    \item no "unfiying theory"
+    \item with theoretical framework, we would be able to systematically discuss any of the following:
+        \begin{itemize}
+            \item coarse-graining
+            \item uncertainty analysis
+            \item dimensionality reduction
+        \end{itemize}
+\end{itemize}
+
+%---------------------------------------------------------------------------------------------------
+\section{Are we flexible yet?}
+\begin{itemize}
+    \item flexibility matters (why)
+    \item show some examples: rust pear fungus (differing cell types interacting), budding yeast
+        elongated bacteria (non-trivial geometry)
+    \item we are not there yet
+\end{itemize}
+
+%---------------------------------------------------------------------------------------------------
+\section{Are we calibrated yet?}
+\begin{itemize}
+    \item many \acp{abm} do not do proper parameter estimation
+    \item what are we actually modeling here?
+\end{itemize}
+
+%---------------------------------------------------------------------------------------------------
+\section{The mesoscopic approach}
+\begin{itemize}
+    \item physicists: natural tendency to go big (many particles, large scale), or go small
+        (fine-grained look at things, sub-microscopig)
+    \item no real natural tendency to go mesoscopic
+    \item we operate on the scale of 1-100 cells making it sometimes feasible to employ statistics
+        and sometimes feasible to account for natural cell-cell variability
+    \item depends on specific cases all the time
+\end{itemize}
