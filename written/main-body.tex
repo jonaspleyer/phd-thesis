@@ -1,7 +1,9 @@
 \usepackage[utf8]{inputenc}
 
 \usepackage[printonlyused,withpage]{acronym}
-\usepackage{amsmath}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 \usepackage[USenglish]{babel}
 \usepackage[
     style=ieee,
@@ -20,9 +22,15 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{listings}
 \usepackage{listings-rust/listings-rust}
+\usepackage{makecell}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
 % No indent after paragraphs
 \usepackage{parskip}
 \usepackage{siunitx}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{onimage}
 
 % /--- See https://www.tug.org/FontCatalogue/ ------------------------------------------------------
 % \-------------------------------------------------------------------------------------------------
@@ -55,6 +63,8 @@
 }
 
 \addbibresource{references.bib}
+
+\DeclareSIUnit\pixel{pixel}
 
 \newcommand{\subtitle}{On Theory, Implementation and Application}
 
@@ -89,6 +99,17 @@
 [\vspace{-0.5ex}\rule{\textwidth}{0.3pt}] % after-code
 
 \titlespacing{\chapter}{0cm}{0cm}{0.5cm}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\CS}{\mathscr{C}}
+\newcommand{\EV}{\mathscr{E}}
+
+% Define definition, example, lemma, proof and theorem.
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{theorem}[definition]{Theorem}
 
 % \renewcommand*{\chapterheadstartvskip}{\vspace*{0cm}}
 % \renewcommand*{\chapterheadendvskip}{\vspace{0cm}}
@@ -137,6 +158,24 @@
     \acro{ls}[LS]{Least Squares}
     \acro{ecoli}[\textit{E.coli}]{\textit{Escherichia coli}}
     \acro{bsubtilis}[\textit{B.subtilis}]{\textit{Bacillus subtilis}}
+
+    \acro{cabm}[CABM]{Cellular Agent-Based Model}
+    \acro{sde}[SDE]{Stochastic Differential Equation}
+    \acro{pde}[PDE]{Partial Differential Equation}
+    \acro{ca}[CA]{Cellular Automaton}
+    \acroplural{ca}[CA]{Cellular Automata}
+    \acro{cpm}[CPM]{Cellular Pottes Model}
+    \acro{paeruginosa}[\textit{P.aeruginosa}]{\textit{Pseudomonas aeruginosa}}
+    \acro{pg}[PG]{peptidoglycan}
+    \acro{a22}[A22]{S-(3,4-Dichlorobenzyl)isothiourea}
+    \acro{mre}[\textit{mre}]{murein formation gene cluster E}
+    \acro{tirf}[TIRF-M]{total internal reflection fluorescence microscopy}
+    \acro{ecm}[ECM]{extracellular matrix}
+    \acro{qs}[QS]{quorum sensing}
+    \acro{crispr}[CRISPR]{Clustered Regularly Interspaced Short Palindromic Repeats)}
+    \acro{flavo}[\textit{F. johnsoniae}]{\textit{Flavobacterium johnsoniae}}
+    \acro{serratia}[\textit{S. marcescens}]{\textit{Serratia marcescens}}
+    \acro{lcd}[LCD]{Liquid Crystal Display}
 \end{acronym}
 
 \chapter*{Preface \& Readers Guide}
