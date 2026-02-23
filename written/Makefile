@@ -5,6 +5,16 @@ TARGET:=main
 pdf:
 	$(CC) $(OPTIONS) $(TARGET)
 
+texcount:
+	texcount 01-introduction.tex\
+		02-elongated-bacteria.tex\
+		03-cellular-raza.tex\
+		05-bacterial-rods.tex\
+		06-further-applications.tex\
+		07-discussion.tex\
+		08-conclusion.tex\
+		20-supplement.tex
+
 all: pdf book
 
 clean_partial:
