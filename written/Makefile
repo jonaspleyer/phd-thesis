@@ -33,6 +33,15 @@ clean_partial:
 	rm -f *.out
 	rm -f *.run.xml
 	rm -f *.toc
+	rm -f *.dtx
+	rm -f *.glo
+	rm -f *.hd
+	rm -f *.idx
+	rm -f *.ins
+	rm -f *.tdo
+	rm -f *.xdv
+	rm -f *.aux
+	rm -f archive.zip
 
 clean: clean_partial
 	rm -f *.pdf
