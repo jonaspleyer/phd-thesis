@@ -31,9 +31,15 @@
 \usepackage{fancyhdr}
 % \fancyhead{} % clear all header fields
 \fancyfoot{} % clear all footer fields
-\fancyhead[LO,RE]{\rightmark}
-\fancyhead[RO,LE]{Jonas Pleyer}
-\fancyfoot[LO,RE]{\thepage}
+\fancyhead[L]{\rightmark}
+\fancyhead[R]{Jonas Pleyer}
+\fancyfoot[RO,LE]{\thepage}
+
+\fancypagestyle{plain}{% % <-- this is new
+    \fancyfoot{} % clear all footer fields
+    \fancyhead{} % clear all header fields
+    \fancyfoot[RO,LE]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}}% remove rule
 
 \setlength{\headheight}{13.6pt}
 % \-------------------------------------------------------------------------------------------------
