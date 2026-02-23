@@ -16,3 +16,9 @@
 *.toc
 *.xdv
 *.tdo
+*.dtx
+*.glo
+*.hd
+*.idx
+*.ins
+archive.zip
