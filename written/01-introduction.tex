@@ -9,9 +9,11 @@ werden. Diese habe ich erstmal als eigene Subsections gelistet.
     \item smallest proteins:
         \begin{itemize}
             \item \textit{spoVM} \cite{Levin1993} (sporulation in Bacillus subtilis)
-            \item \textit{TAL peptide} (smallest naturally ocurring, discovered in Drosophila melanogaster in 2007) \cite{Galindo2007}
+            \item \textit{TAL peptide} (smallest naturally ocurring, discovered in
+                Drosophila melanogaster in 2007) \cite{Galindo2007}
         \end{itemize}
-    \item largest scales: population dynamics across continents (earth $\approx 40'000\text{km}$ circumference)
+    \item largest scales: population dynamics across continents (earth $\approx
+        40'000\text{km}$ circumference)
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
@@ -37,7 +39,8 @@ werden. Diese habe ich erstmal als eigene Subsections gelistet.
 \section{Mathematical Treatment}
 \begin{itemize}
     \item no "unfiying theory"
-    \item with theoretical framework, we would be able to systematically discuss any of the following:
+    \item with theoretical framework, we would be able to systematically discuss any of
+        the following:
         \begin{itemize}
             \item coarse-graining
             \item uncertainty analysis
@@ -71,3 +74,557 @@ werden. Diese habe ich erstmal als eigene Subsections gelistet.
         and sometimes feasible to account for natural cell-cell variability
     \item depends on specific cases all the time
 \end{itemize}
+
+\section{Introduction}
+\label{sec:self-organization}
+% Self-organization~\cite{camazineSelfOrganizationBiologicalSystems2020} is an energy
+% consuming dynamic process in which the collective behavior of individual agents
+% exhibits emergent phenomena by forming spontaneous order through interaction between
+% the agents, i.e., exchange of information, without the need of an external controlling agent.
+% The emerging patterns cannot directly be inferred by the properties of the individual
+% agents and are typically robust with respect to perturbations.
+% Self-organization needs to be distinguished from self-assembly, which \nt{results from
+% minimization of the free energy of a thermodynamic}
+% system~\cite{johnAlternativeMechanismsStructuring2005,dambricourtmalasseSelfOrganizationNewParadigm2022},
+% e.g., the self-assembly of a lipid bilayer or the spontaneous folding of
+% proteins~\cite{kuhlmanAdvancesProteinStructure2019,albertsLipidBilayer2002,wedlich-soldnerSelforganizationFundamentCell2018}.
+% \nt{In contrast,} self-organization happens in non-equilibrium conditions and are
+% conceptually far more difficult to comprehend than equilibrium phenomena like
+% self-assembly
+% ~\cite{hakenScienceStructureSynergetics1984,ebelingPhysicsSelfOrganizationEvolution2011}.
+% Examples for self-organization in
+% biology~\cite{karsentiSelforganizationCellBiology2008} are social structures of
+% insects~\cite{bonabeauSelforganizationSocialInsects1997}, developmental pattern
+% formation~\cite{meinhardtModelsBiologicalPattern2008} and
+% morphogenesis~\cite{collinetProgrammedSelforganizedFlow2021}.
+% Self-organizing systems share common
+% principles~\cite{bonabeauSwarmIntelligenceNatural1999}: the process of organization
+% requires non-linear underlying dynamics, agents need to be able to communicate and
+% interact, and a supply of energy to the system needs to be guaranteed
+% \cite{karsentiSelforganizationCellBiology2008}.
+% Interactions between cells can occur in a multitude of different ways and on different
+% length scales: (short range) mechanical forces~\cite{viningMechanicalForcesDirect2017}
+% and cellular junctions~\cite{bloemendalCelltocellCommunicationPlants2013}, (medium
+% range) diffusing chemicals~\cite{duesterRetinoicAcidSynthesis2008}, and (long range)
+% hormones~\cite{greenwoodGrowthHormoneSecretion1966}.
+% Besides the exchange of information it is necessary that the cells (agents) process the
+% signals and respond in a sufficiently non-linear manner, including feedback loops
+% ~\cite{mitrophanovPositiveFeedbackCellular2008,deriteiFeedbackLoopConditionally2019},
+% which can also provide robustness of the self-organizing
+% structure~\cite{gerardEffectPositiveFeedback2012}.
+% Self-organization expresses itself in the cellular reactions such as
+% proliferation/apoptosis, migration, differentiation or in general change of behavior
+% which are either modulated or activated as a response to signals transmitted by other
+% cells~\cite{wolpertPrinciplesDevelopment2015}.
+% In the context of cellular biology, self-organization is often synonymous with modeling
+% spatial
+% formation~\cite{deglincertiChapterSixSelfOrganization2016,karsentiSelforganizationCellBiology2008}.
+% TODO talk about phenomena that we want to observe
+Interacting cellular biological systems, such as bacterial communities, tissues,
+organoids, exhibit a plethora of phenomena, which are often not easy to understand intuitively.
+To explore and analyse cellular systems mathematical equations and/or computer
+simulations can be powerful tools.
+Because the fundamental building blocks or units of biological systems are cells,
+agent-based models with cells as the individual agents are natural simulation tools to
+study such systems.
+Pattern formation in cellular systems requires interactions between cells, the exchange
+of information, and, in case of self-organisation, that cells respond in a sufficiently
+non-linear manner, including feedback loops
+~\cite{Mitrophanov2008,Deritei2019}.
+Exchange of information can occur in a multitude of different ways and on different
+length scales: (short range) mechanical forces~\cite{viningMechanicalForcesDirect2017}
+and cellular junctions~\cite{Bloemendal2013}, (medium range)
+diffusing chemicals~\cite{Duester2008}, and (long range)
+hormones~\cite{GREENWOOD1966}.
+Due to the individual cell based perspective agent-based models make it easy to implement
+these interactions and also the signal processing and response of the cells.
+In this mini-review we consider agent-based software frameworks with individual cells as
+agents, which are actively maintained and developed, provide documentation beyond a
+minimum, and provide a model development workflow \footnote{An extended list of other
+\acp{abm} can be found in the appendix.}.\\
+Traditionally, pattern formation in biology is studied using \acp{pde} that model
+continuous distribution of
+cells~\cite{Kolmogorov1937,Turing1952,Koch1994,Gierer1972}.
+There is a wealth of literature on how to solve coupled non-linear \acp{pde}, estimate
+the parameters from data, and how to explore their behavior, e.g., sensitivity analysis,
+bifurcation analysis, see, e.g.,
+\cite{Browder1998,Muller2004,Stavroulakis2004,Baker2008,Saltelli2008,Kielhfer2012}.
+\acp{pde} are powerful tools, however, in a \ac{pde} cells have no spatial extension,
+ignoring the underlying cellular spatial structure.
+Although it is possible in a \ac{pde} to distinguish between the inside of the cells and
+their micro-environment, there is no unique or canonical way to handle, e.g., cell
+proliferation, differentiation, internal cell structure and other properties of the
+cells, which may be relevant for the questions at hand.
+% BITTE FORMULIERE ES SO, DASS CA ZUERST GENANNT WERDEN (WAS WAR DENN DIE MOTIVATION?
+% BIOLOGISCHE SYSTEME?) DANN ERKLÄRE WAS CA SIND.
+% DANN KOMME AUF ABMS ZU SPRECHEN UND ZITIERE EIN FRÜHES PAPER UND NICHT NUR EIN PAPER VON 2019}\\
+This problem can be solved by \ac{ca}~\cite{VonNeumann1966}
+which consist of a regular grid with a finite number of states at each grid point and
+rules, determining how to update them accordingly.
+A further development of \ac{ca} introduced
+\acp{abm}~\cite{Schelling1971,Reynolds1987,Glen2019}
+where the modeling approach is to handle cells as individual agents with rules,
+potentially with an internal structure and/or moving in space.
+By using coarse-graining or homogenization techniques one could derive a system of
+coupled \acp{pde} from an \ac{abm}; there is, however, no unique way to go from a
+\ac{pde} to an \ac{abm} \cite{Nandakumaran2007}.
+
+\section{Agent-Based Models}
+\label{sec:abms}\noindent
+%
+% DEFINITIONS (C)ABM(F) AND CA + EXAMPLES
+An \ac{abm} is a collection of autonomous agents with a predefined set of rules, which
+depend on the existing state of the agent and external
+factors~\cite{Bodine2020,Metzcar2019,Tomlin2007,Nagarajan2022}.
+The rules can be discrete following logical if-else statements, continuous, i.e.,
+\acp{ode} for intra-cellular reactions or a combination of both.
+Also, graphs, neural networks and other intricate algorithms can be implemented~\cite{Haynes1996}.
+Nevertheless, one usually strives to employ the most simple set of rules sufficient to
+accurately describe the complexity of the desired system.
+Compared to macroscopic \ac{pde} models, \acp{abm} are considered microscopic modeling,
+since they deal with agents directly and are thus more common in a bottom-up
+approach~\cite{Bonabeau2002}.
+\acp{abm} should not be seen as a technologically distinct toolset but rather as a
+mindset for researchers by modeling complex systems from the perspective of individual constituents.
+\newline
+%
+Historically, precursors to \acp{abm} were \acl{ca}, which were developed
+by~\cite{VonNeumann1966}.
+They reached widespread recognition even in the general public with the introduction of
+Conway's 'Game of Life'~\cite{Games1970,Berlekamp2001}.
+Not long after, the first \acp{abm} were being envisioned to study a biological
+system~\cite{Schelling1971}.
+Up until the break of the century, \acp{abm} were used in many fields of research such as
+modeling human crowd stampedes~\cite{Helbing2000}, bird
+flocks~\cite{Reynolds1987} or the prediction of financial
+markets~\cite{Kephart2000}.
+With the rapidly growing accessibility and power of modern computer hardware, the
+popularity of \acp{abm} kept on increasing, where tools such as
+NanoHUB~\cite{Klimeck2008} or the
+\ac{sbml}~\cite{Keating2020} further helped to share computational
+models between researchers.
+In order to study complex phenomena such as pattern formation \acp{abm} must be able to
+capture cell-cell communication and cellular response
+mechanisms~\cite{Bajpai2021,Nakamasu2009,Schnakenberg1979,Gierer1972,Wolpert2015}.
+In the next section we will compare the available \ac{abm} frameworks and discuss how
+they cover different cellular properties.
+%
+\subsection{Comparison of ABMs}\noindent
+\label{subsec:abms-comparison-of-abms}\noindent
+The effort of writing efficient solving algorithms and data structures in a usable
+fashion is considerable.
+Therefore, \acp{abmf} have emerged that define a certain workflow and implement a set of
+features, so that users of the frameworks can focus on their research question instead of
+having to spend a significant amount of time for design and implementation.
+\newline
+%
+% WE PRESENT THE MODELS
+The majority of \acp{cabmf} evolved as generalizations of solutions to specific problems.
+% Biocellion~\cite{kangBiocellionAcceleratingComputer2014} simulates whole living-systems
+% and is applied by companies in consumer research modeling
+% cancer~\cite{aguilarGeneralizableDatadrivenMulticellular2020}.
+BSim~\cite{Gorochowski2012} was specifically designed to model
+bacterial populations and has been used to study gene regulatory
+control~\cite{Martinelli2022} and bacterial biofilms~\cite{Jin2020}.
+Chaste\footnote{We only consider here the cell-based part of the chaste software
+environment.} was designed as a \textbf{C}ancer, \textbf{H}eart and \textbf{S}oft
+\textbf{T}issue \textbf{E}nvironment~\cite{Cooper2020} and has been used
+in studying growth of epithelial monolayers~\cite{Dunn2012}.
+CompuCell3D~\cite{Swat2012} originated from
+CompuCell~\cite{Izaguirre2004}, which was one of the first
+frameworks created and originally used to model only simple \ac{rd} systems but was since
+extended considerably to cover a wider range of topics such as
+angiogenesis~\cite{Nivlouei2021},
+cancer~\cite{Asadullah2021} and tissue engineering~\cite{Moldovan2021}.
+EPISIM was used to understand how varying proportions of T-cells emerge in different
+vertebrate taxa~\cite{Aghaallaei2021}.
+% The authors of LBIBCell~\cite{tanakaLBIBCellCellbasedSimulation2015} aimed to
+% investigate \ac{2d} morphogenetic cellular systems such as apical surface dynamics of
+% epithelia~\cite{farhadifarInfluenceCellMechanics2007}.
+% MecaGen~\cite{delileCellbasedComputationalModel2017} provided interesting case-studies
+% about \ac{tp} formations in embryonic stages of zebrafish tissue formation.
+Morpheus~\cite{Starruss2014} was applied to self-organization
+in neural stem cell divisions in adult
+zebrafish~\cite{Mulberry2020} and polarization of the
+multiciliated planarian epidermis~\cite{Vu2019}.
+MultiCellSim~\cite{Dang2020} resulted from the in-depth analysis
+of cell-cell communication and was since applied to Immuno-Oncology~\cite{Karolak2021}.
+PhysiCell~\cite{Ghaffarizadeh2018} is mainly used modeling cancer and
+tumor dynamics~\cite{PoncedeLeon2022,Goncalves2021}.
+TiSim/CellSys~\cite{Hoehme2010b} was applied to liver
+regeneration processes~\cite{Hoehme2010c}.
+VirtualLeaf~\cite{Merks2011} was specifically designed for modeling plants and emphasizes
+intercellular connections and details of the mechanical properties of the cell wall.
+%
+% TALK ABOUT THE TABLE
+Table~\ref{tab:abms-compare-abm-frameworks} displays general characteristics of these
+modeling frameworks.
+\begin{table}
+    \centering
+    \begin{tabular}{@{}lcccc@{}}
+        \toprule
+        Framework       &\makecell{Spatial Representation\\\& Dimension} &Intracellular
+        &Extracellular &\makecell{Cell-Cell\\Forces}\\
+        \cmidrule{1-5}
+        % BioCellion      &\makecell{off-lattice\\\acs{2d} + \acs{3d}} &secretion \&
+        % uptake &\makecell{\ac{rd} \acp{pde} with\\adaptive mesh resizing}
+        % &\makecell{ellipsoidal/cylindrical\\ cell potentials}\\
+        BSim            &\makecell{off-lattice,\\Arbitrary Meshes\\\acs{3d}}
+        &\makecell{\acsp{ode}} &\makecell{\acsp{pde},\\Molecule-Agents}
+        &\makecell{Micro-Scale Meshing and\\Collision Detection}\\
+        Chaste          &\makecell{\acs{cpm}, off-lattice,\\\ac{ca},
+        Vertex-Model\\\acs{2d} + \acs{3d}} &\acp{ode}, \ac{sbml} &\acs{rd} \acp{pde},
+        \ac{sbml} &custom force laws\\
+        CompuCell3D     &\makecell{\acs{cpm} on regular lattice\\\acs{2d} + \acs{3d}}
+        &\makecell{\acp{ode}, \ac{sbml},\\\acsp{pbpk}} &\makecell{\ac{rd} \acp{pde},
+        \acs{sbml},\\\acsp{pbpk}} &\makecell{force terms via\\\acs{cpm} hamiltonian}\\
+        EPISIM          &\makecell{off-lattice, hexagonal\\\acs{2d} + \acs{3d}}
+        &\makecell{\acsp{ode}, \acs{sbml}} &\makecell{\ac{sbml}} &spherical cell potentials\\
+        % LBIBCell        &\makecell{off-lattice motion +\\\acs{cpm} on regular
+        % lattice\\\acs{2d}} &\makecell{\ac{rd} \acp{pde}} &\makecell{\ac{rd} \acp{pde}}
+        % &\makecell{Immersed Boundary\\method}\\
+        % MecaGen         &\makecell{off-lattice\\\acs{3d}} &\acp{ode} &\ac{rd} \acp{pde}
+        % &\makecell{Discrete Element method,\\ellipsoidal cell potentials}\\
+        Morpheus        &\makecell{\acs{cpm} on regular lattice\\\acs{2d} + \acs{3d}}
+        &\acsp{ode}, \acs{sbml} &\makecell{\ac{rd} \acsp{pde}, \ac{ca}
+        lattice\\\acsp{ode}, finite state\\gradient-based} &\makecell{force terms
+        via\\\acs{cpm} hamiltonian}\\
+        MultiCellSim    &\makecell{\acs{ca} +\\Brownian motion} &secretion \& uptake
+        &\acs{rd} \acsp{pde} &-\\
+        PhysiCell       &\makecell{off-lattice\\\acs{2d} + \acs{3d}}
+        &\makecell{\acs{sbml}, Boolean Networks,\\\acl{dfba}} &\makecell{BioFVM
+        Reaction\\Kinetics} &Spheres with Potential\\
+        TiSim/CellSys   &\makecell{off-lattice\\\acs{2d} + \acs{3d}} &\acsp{ode},
+        \acs{sbml} &\makecell{diffusion +\\advection} &\makecell{frictional, elastic
+        and\\stochastic force terms}\\
+        VirtualLeaf     &\makecell{vertex model \acs{2d}} &\acsp{ode} &- &polygonal
+        finite elements\\
+        \bottomrule
+    \end{tabular}
+    \caption{
+        Comparison of \acp{cabmf} in alphabetical order with respect to implementations
+        of spatial representation, dimension, intra- and extracellular processes and
+        cell-cell forces.
+        For additional modeling tools (not necessarily \acp{abm}) see~\ref{appendix-a}.
+    }
+    \label{tab:abms-compare-abm-frameworks}
+\end{table}
+
+%
+% SPATIAL REPRESENTATION
+% - TRANSPORT
+% - MIGRATION
+% - ADHESION
+% - CHEMOTAXIS
+\subsubsection*{Spatial Representation}
+\label{subsec:abms-spatial-representation}\noindent
+A key distinction between \acp{abm} is given by the difference of the spatial
+representation of cells and chemicals.
+\acp{abm} can be separated into lattice-based and lattice-free, the former meaning that
+cells can only migrate between predefined lattice nodes, while the later permits free
+movement of cells in a given domain.
+Frameworks such as Chaste, PhysiCell, TiSim/CellSys and VirtualLeaf utilize off-lattice motion.
+Chaste\footnote{Cell-based Chaste supports off-lattice as well as on-lattice
+representations.}, CompuCell3D and Morpheus utilize lattice-based methods for cell-migration.
+This also means that no particular cellular shape is modeled explicitly, but rather cells
+follow rules (often potentials) to determine their respective quantity on lattice points.
+The disadvantage of the lattice-based approach is that it is limited in the spatial
+resolution, but in turn as an advantage it can yield considerable performance improvements.
+Off-lattice models often take a cell centre~\cite{Drasdo2007}
+approach meaning, a cell is defined by a single location vector and a shape (such as
+sphere, ellipsoid or cylinder) that governs interactions.
+BSim additionally has the ability to represent microbes as meshed objects thus offering a
+much higher resolution at micro-scale although at increased computational cost.
+Another less common modeling choice is to use a vertex
+model~\cite{Nagai2001,Smith2006} that represents
+each cell by a polygon, determined by a number of vertices, which can be subject to
+external forces, pressure, friction, adhesion, chemotaxis and other external and internal
+contributing factors.
+Lattice-bound models can utilize different discretizations such as regular Cartesian
+meshes, hexagonal or triangulated ones.
+Most of the presented frameworks in Table~\ref{tab:abms-compare-abm-frameworks} can be
+used to simulate \ac{2d} as well as \ac{3d} scenarios.
+%
+%
+The \acl{cpm}, also known as \ac{ggh}
+model~\cite{Graner1992,Savill1997},
+is a common choice for many frameworks.
+Typically, in a Cellular Potts Model a Hamiltonian is formulated which describes the
+phenomenological “energy” of a given configuration of the system on a Euclidean lattice.
+Subsequently, the systems is evolved by minimizing the energy.
+LBIBCell modifies the classical \ac{cpm} approach by representing cells as evolving
+polygons with the immersed boundary method and thus obtains off-lattice cellular
+representations~\cite{Drasdo2007,Peskin2002}.
+%
+% INTRA-/EXTRACELLULAR REACTIONS
+\subsubsection*{External Microenvironment}
+\label{subsec:abms-intra-extra-cellular-reactions-secretion}\noindent
+Transport processes of chemicals typically involve numerically solving (convection-)
+diffusion
+equations~\cite{Alberts2002,Chandrasekhar1943}
+with cell to extracellular matrix interaction nodes at the positions of the cellular
+agents on a (often euclidean) mesh.
+One exception is presented by VirtualLeaf where intracellular compartments are connected
+via membranes to adjacent cells and model transport through membrane-potentials~\cite{Merks2011}.
+Many \acp{abm} utilize \acp{pde} to model intracellular or extracellular transport
+processes such as convection and diffusion and allow for custom forms of reactions either
+via well-defined user-interfaces like
+Morpheus~\cite{Starruss2014} or direct implementation into
+the source code.
+
+% Other models such as Biocellion~\cite{kangBiocellionAcceleratingComputer2014} and
+% MecaGen~\cite{delileCellbasedComputationalModel2017} provide predefined formats for
+% specifying reaction \acp{ode}.
+% This limits possibilities but is a middle ground between writing source code and
+% interacting only via a graphical user interface.
+%
+%
+% CELL-SPECIFIC PROCESSES
+\subsubsection*{Cellular Processes}
+\label{subsec:abms-cellular-processes}\noindent
+In an agent-based approach the processes occuring inside a cell can naturally be
+described by giving the agents the required set of functions.
+%
+% - CYCLES
+%   - PROLIFERATION
+%   - DEATH
+Each framework mentioned in Table~\ref{tab:abms-compare-abm-frameworks} implements
+proliferation and cell-death mechanisms as key components.
+However, predefined and detailed cell-cycle routines such as utilized in
+PhysiCell~\cite{Ghaffarizadeh2018} are less common, but are important
+to consider if, e.g., external factors such as growth hormones affect the
+cell-cycle~\cite{Kassem1993}.
+In addition, internal chemicals may be released upon cell death.
+%
+% - DIFFERENTIATION
+In order to model developmental processes such as embryogenesis, the framework needs to
+support cell-differentiation with dynamic modifications of the phenotype.
+%
+% - POLARITY
+Cell polarity can play an important role in many phenomena such as in ciliary rootlets in
+planarian epidermis~\cite{Vu2019}.
+Many frameworks like CompuCell3D, Chaste, Morpheus, VirtualLeaf support this feature.
+%
+% - GEOMETRY/VOLUME
+The geometry of the cell includes its spatial representation together with mechanical
+features such as adhesion and repulsion.
+PhysiCell utilize spheroid/ellipsoid cellular geometries, meaning each cell is
+represented by a sphere or ellipsoid and a corresponding potential.
+% Biocellion is also able to map other shapes such as cylinders to individual cells while
+% Chaste and LBIBCell resolve cell-agents with multiple polygons subject to forces and
+% internal pressure.
+Further, adhesion plays an important role in cell-cell interactions and communication.
+Lattice-free frameworks often model it by choosing a particular form of interaction potential.
+One sophisticated example is the experimental \ac{jkr}
+potential~\cite{Johnson1971}, which was derived from the Hertz
+contact model~\cite{Hertz1882}.
+It also models cell separation and is implemented by CellSys.
+Other frameworks that implement a \ac{cpm} treat adhesion via interaction terms in its
+Hamiltonian Formulation~\cite{Maree2007}.
+In the context of vertex models, force potentials can also be utilized although the
+implementation is often more complex.
+% - MECHANICS
+%
+All of the above \acp{abm} are able to model stochastic cell migration, excluding
+VirtualLeaf since almost all plant cells are non-motile.
+Collectively arising forces and friction which can play an important role in early
+embryonic development~\cite{Smutny2017} may be harder to simulate
+if the geometry of the cells is solely implemented as spheroid/ellipsoid.
+For frameworks such as PhysiCell and TiSim/CellSys who additionally do not support
+polarity, modeling of force-mitigated spatial effects is difficult.
+Chemotaxis is a key concept in cell-sorting~\cite{Vasiev1999} and
+can be implemented by any framework that supports migration and can calculate reactant gradients.
+% - INTRACELLULAR REACTIONS
+All of the presented frameworks can capture intracellular reactions by using ODEs
+ignoring the internal spatial structure of the cells; different reaction compartments can
+be easily introduced by coupling of ODEs.
+Some (e.g., Chaste, EPISIM) can also handle intracellular stochastic reactions, using the
+Gillespie algorithm \cite{Gillespie2007}.
+%
+%
+% TECHNICAL DETAILS
+\subsection{Implementational Details}
+\label{subsec:abms-technical-details}\noindent
+\subsubsection*{Development, Standards and Features}
+\label{subsubsec:abms-development}\noindent
+Development and design of efficient algorithms and their implementation require knowledge
+in software engineering and in writing maintainable code, as these frameworks are usually
+developed by teams rather than by individuals and consist of many thousands of lines of code.
+The Chaste framework was one of the first projects to follow agile coding principles and
+other best-practice workflows such as rigorous unit-testing~\cite{Pitt-francis2008}.
+%
+All presented \acp{cabmf} are written in C++ which together with the C and Fortran
+language have historically served as the de-facto languages for high-performance software
+development.
+%
+In addition to \acp{cabmf}, researchers have over the last two decades developed
+internationally recognized formats to seamlessly share model details (e.g. SMBL).
+This is utilized in Chaste, CompuCell3D, Morpheus and PhysiCell\footnote{Via an addon
+libroadrunner and only for intracellular reactions.} and allows for rapid model
+development, implementation and comparison to classical \ac{ode} and \ac{pde} solvers.
+CompuCell3D is also able to model \acp{pbpk}.
+%
+Additionally, many frameworks come with dedicated (sometimes \acp{gui}) tools for
+configuration, analysis, batch-processing, visualization and other workflow-aiding
+features which are valuable additions.
+%
+In this regard, EPISIM is special as it utilizes the popular COPASI~\cite{Hoops2006} and
+Mason~\cite{Luke2005} software and plugins for the eclipse code
+editor~\cite{Burnette2005} to build the application.
+
+\section{Studying Pattern Formation with Agent-Based Models}
+\label{sec:analysis}
+%
+%
+\subsubsection*{Applications}
+\label{subsubsec:abms-comparison-to-pdes}\noindent
+Pattern formation in cellular biological systems can occur via self-assembly or
+self-organization and \acp{abm} have been applied to investigate both aspects.
+%
+% CHASTE
+Chaste was used to study cell migration in the crypt~\cite{Dunn2013}.
+% LBIBCell
+% 1. This paves the way for the development of data-driven 3D simulation frameworks that
+% will be invaluable in the simulation of epithelial dynamics in development and disease.
+% 2. BMP-receptor interaction meets the conditions for a Schnakenberg-type Turing
+% pattern. We propose that receptor-ligand-based mechanisms serve as a molecular basis
+% for the emergence of Turing patterns in many developing tissues.
+% LBIBCell was applied in epithelial cell organization~\cite{iber3DOrganisationCells2022}
+% and modeling BMP-receptor interactions~\cite{baduguDigitPatterningLimb2012}.
+% CompuCell3D:
+% 1. Physical forces among cells and between cell and substrate, along with mobility of
+% individual cells, affect the self-organization process of leader cell formation during
+% collective cell migration.
+% 2. Work on polarization in migrating cells
+Furthermore, CompuCell3D provided examples for self-organization in work on
+polarization~\cite{Thomas2022} and studies of physical forces~\cite{Pan2021} in migrating cells.
+% Morpheus
+% 1. Pattern formation in zebrafish telencephalon
+% 2. growth of the Drosophila wing via cell recruitment
+% PhysiCell:
+% 1. Pattern formation in tumour spheroids
+Morpheus was used to describe pattern formations in the telencephalon of adult
+zebrafish~\cite{Lupperger2020} and was also used to study growth of the Drosophila wing
+via cell recruitment~\cite{Munoz-nava2020}.
+PhysiCell recently provided insights to formation of patterns in tumour
+spheroids~\cite{Goncalves2021}.
+% VirtualLeaf:
+% 1. Secondary vein patterning in dicot leaves
+Pattern formation in dicot leaves was modeled using VirtualLeaf~\cite{Holloway2021}.
+% Biocellion
+% Biocellion followed a data-driven approach to model adenocarcinoma
+% cancer~\cite{aguilarGeneralizableDatadrivenMulticellular2020}.
+%
+\acp{abm} allow researchers to examine complicated models which would otherwise be hard
+to study and interpret with classical \acp{pde}.\\
+Figure~\ref{fig:abms-comparison-physicell-pde} shows results of a multi-scale model using
+PhysiCell~\cite{Ghaffarizadeh2018}.
+We can observe that the pattern changes as the number of patterning cells (type I) increases.
+This simple example shows, how to readily formulate and explore models in an \ac{abm}
+mindset - by increasing the cell number in this case.
+Constructing a corresponding \ac{pde} model is much harder and not uniquely defined.
+%
+%
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/abm-review/turing-pattern.png}
+    \caption[Comparison of \ac{pde} and \ac{abm} simulation results]{
+        We implemented a \ac{rd} system (see also \nameref{appendix}) in an \ac{abm} to
+        showcase results.
+        The simulation contains two distinct cell types, which are both motile and
+        initially randomly distributed.
+        Cell type I (blue-shaded, white border) obey reaction equations given by a
+        substrate-depletion system~\cite{Schnakenberg1979} and are colored by their
+        internal concentration of the activator.
+        Cell type II (orange) is smaller than cell type I and is chemotactically
+        attracted by the activator which is secreted by cell type I.
+        The background displays the density profile of the secreted activator molecule
+        (yellow: high density, blue: low density).
+        The number of cells I is increased from subfigure A-D (256, 484, 1024, 2025),
+        while the number of cells II remains fixed to 3000.
+        Cell death reduces the overall number of agents.
+        The pictures show the final state of the simulation after reaching (up to
+        statistical fluctuations) a steady-state.
+        The variations in cell number alone lead to different emerging patterns.
+        While these results may be obtainable by a modified purely \ac{pde}-based
+        approach, they are much easier to interpret and develop in an \ac{abm}.
+        The simulations were carried out using PhysiCell~\cite{Ghaffarizadeh2018}.
+    }
+    \label{fig:abms-comparison-physicell-pde}
+\end{figure}
+%
+% WHAT ARE CURRENT LIMITATIONS/CHALLENGES
+\subsubsection*{Techniques and Challenges}
+\label{subsec:analysis-challenges}\noindent
+\acp{cabmf} allow researchers to investigate biological systems on the cellular level
+with the option to implement many details, with the downside of substantial computational
+cost. To combat this issue, all presented frameworks are of multi-scale nature.\\
+The relevant time- and length-scales are identified and the corresponding sub-processes
+are modeled and updated according to their scales.
+This can greatly improve performance as for example diffusion-driven processes tend to be
+much faster than cell migrational or phenotypical processes~\cite{Keener2002}.
+Other techniques to improve performance are efficient $\mathcal{O}(N_{\mathrm{cells}})$
+implementations of algorithms~\cite{Meagher1982} to calculate direct cell-cell
+interaction partners~\cite{}, spreading the computational load over multiple processes
+via multiprocessing (for example via OpenMP~\cite{Chandra2001}) or on specialized devices
+such as solving \acp{pde} on a \ac{gpu}~\cite{Steuwer2011}.
+%
+% FEATURE EXTRACTION
+Due to the stochastic nature of the \ac{abm} simulations, appropriate statistical methods
+need to be applied, which is often challenged by the fact that transient developmental
+processes are studied not necessarily reaching a stationary state.
+Analysis of the simulation and comparison with experimental data requires the definition
+of precise features which are extracted from the simulation results.
+It is important to define clear goals and questions upfront, as this will guide the
+process of feature extraction and dimensional reduction.
+To this end machine learning techniques are becoming more and more popular for analysis
+of \ac{abm} results~\cite{Efimenko2020,Caicedo2017}.
+Given current advancements in machine learning, researchers are hopeful that image
+classification of patterns and self-organizing systems can get more automated in the
+future~\cite{Ker2018,Efimenko2020}.
+The authors of TiSim/CellSys have explicitly suggested an image-to-model workflow~\cite{Hoehme2016}.
+Neural networks showed promise in partly replacing analysis procedures~\cite{Chen2021}.
+Other machine learning techniques can also be used to determine rules for agents and
+calibrate the model~\cite{Sivakumar2022}.
+Auto encoders~\cite{Kramer1991} may provide a way to obtain a dimensionally reduced
+representation of complex \ac{abm} simulation results.
+%
+% SENSITITIVY ANALYSIS
+Due to the mechanistic and 'law-driven' nature of \acp{abm}, often multiple unknown
+parameters need to be determined or estimated from data.
+Parameters can be estimated by comparing features extracted from experimental data and
+from simulation results, which is already a substantial effort.
+However, this process will usually yield uncertainties, which need to be quantified, as
+it is not sufficient to evaluate the model locally in parameter space using a sometimes
+arbitrarily chosen parameter set.
+In order to focus on the relevant parameters, sensitivity analysis is an important tool,
+which can also be used for model reduction~\cite{Saltelli2008}.
+Due to highly integrated nature of \acp{abm} sensitivity analysis is demanding and
+incorporates substantial computational costs~\cite{Aguilar2020}.
+Consequently, it is often only possible to arrive at qualitative statements for complex
+\ac{abm} simulations.
+
+\section{Discussion}
+\label{sec:discussion}\noindent
+This review introduced the concepts of \aclp{abm} in cellular systems.
+We compared different frameworks with respect to their conceptual and implementational differences.
+To date, a large number of different \aclp{abmf} with different strengths and weaknesses
+exist and are openly available.
+The multitude of options is a clear indication for the overall interest in the subject.
+\acp{abm} provide a unique tool to integrate combinations of processes and study their
+respective dynamics.
+Even for the exploration of systems that lack sufficient data, \acp{abm} can be used as
+they can be developed initially with rather simplified rule sets, by means of which
+researchers can generate hypotheses, which can in turn guide the design of laboratory experiments.
+By this cycle of experimental and computational methods, the model and the experiments
+can be improved and finally increase the conceptual knowledge about the system.
+Due to this, it is important to understand the challenges of \acp{abm} and their limitations.
+\acp{abm} can be seen as a mapping of specific rules to spatial configurations.
+This mapping is non-unique, and the question arises, how the results of the ABM depend on
+the set of rules and the used parameters.
+How are the values (or distributions) of the parameters estimated? How does the
+uncertainty in the system parameters affect the predictions of the simulations? In
+particular, when analyzing the (often stochastic) results of a simulation, one needs to
+quantify the influence of the parameter uncertainty which is a considerable challenge.
+Besides these questions and challenges it can be expected that \acp{abm} are quickly
+becoming mainstream tools in biology.

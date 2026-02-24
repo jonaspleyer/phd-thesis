@@ -1,15 +1,16 @@
 \chapter{cellular\_raza: A novel Agent-Based Framework}
 
-\epigraph{The purpose of abstracting is not to be vague, but to create a new semantic level in which one can be absolutely precise.}
+\epigraph{The purpose of abstracting is not to be vague, but to create a new semantic
+level in which one can be absolutely precise.}
 {\textit{Edsger W. Dijkstra}}
-
 
 \cite{Pleyer2025}
 
 Kapitel 2 gibt eine ausführliche Erklärung von cellular\_raza. Dazu werde ich das JOSS
 Paper und die Dokumentation auf https://cellular-raza.com/ verwenden.
 Ich werde hier auch auf Details wie die Implementierung und Performance eingehen.
-Ein wichtiger Bestandteil wird auch die zugrundeliegende Denkweise, indem ich die zellulären systeme in ihre "Aspecte" aufteile.
+Ein wichtiger Bestandteil wird auch die zugrundeliegende Denkweise, indem ich die
+zellulären systeme in ihre "Aspecte" aufteile.
 Diese werde ich im Einleitungskapitel davor motiviert habe.
 
 %---------------------------------------------------------------------------------------------------
@@ -108,14 +109,14 @@ Ideas from game development: https://www.youtube.com/watch?v=wo84LFzx5nI
     \item How do we do this? $\rightarrow$ in-cell approach
     \item agnostic with respect to particular partitioning; use trait for this
     \item List examples of partitioning:
-    \begin{itemize}
-        \item Grid (this is what we do)
-        \item k-d-tree
-        \item quad tree
-        \item STR \& STR+
-        \item Z-curve
-        \item Hilbert curve
-    \end{itemize}
+        \begin{itemize}
+            \item Grid (this is what we do)
+            \item k-d-tree
+            \item quad tree
+            \item STR \& STR+
+            \item Z-curve
+            \item Hilbert curve
+        \end{itemize}
     \item discuss repartitioning (in the middle of one simulation)
     \item discuss parallelization wrt. partitioning (how do we bundle together various voxels for
         specific threads, minimize communication)
@@ -143,7 +144,8 @@ Ideas from game development: https://www.youtube.com/watch?v=wo84LFzx5nI
     \item twitter "For You" algorithm rewrite in Rust.
         Old: \url{https://github.com/twitter/the-algorithm}
         New: \url{https://github.com/xai-org/x-algorithm}
-    \item microsoft Rust \url{https://learn.microsoft.com/en-us/windows/dev-environment/rust/overview}
+    \item microsoft Rust
+        \url{https://learn.microsoft.com/en-us/windows/dev-environment/rust/overview}
 \end{enumerate}
 
 %---------------------------------------------------------------------------------------------------
