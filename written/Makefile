@@ -5,6 +5,20 @@ TARGET:=main
 pdf:
 	$(CC) $(OPTIONS) $(TARGET)
 
+%:
+	rm -f temp.tex
+	cp main.tex temp.tex
+	sed -i "s/\\\\input{main-body}//" 	temp.tex
+	echo "\include{00A-header}" 		>> temp.tex
+	echo "\begin{document}" 			>> temp.tex
+	echo "\include{00B-acronyms}" 		>> temp.tex
+	echo "\include{" $@ "}" 	>> temp.tex
+	echo "\end{document}" 				>> temp.tex
+	$(CC) $(OPTIONS) temp.tex
+
+format:
+	tex-fmt *.tex --config tex-fmt.toml
+
 texcount:
 	texcount 01-introduction.tex\
 		02-elongated-bacteria.tex\
@@ -41,6 +55,7 @@ clean_partial:
 	rm -f *.tdo
 	rm -f *.xdv
 	rm -f *.aux
+	rm -f temp.tex
 	rm -f archive.zip
 
 clean: clean_partial
