@@ -1,5 +1,5 @@
 CC:=latexmk
-OPTIONS:=-pdf -xelatex
+OPTIONS:=-pdf
 TARGET:=main
 
 pdf:
@@ -57,6 +57,7 @@ clean_partial:
 	rm -f *.aux
 	rm -f temp.tex
 	rm -f archive.zip
+	rm -f *.dvi
 
 clean: clean_partial
 	rm -f *.pdf
