@@ -1,0 +1,16 @@
+{
+    no warnings 'redefine';
+    use Term::ANSIColor;
+    my $old_warn_running = \&main::warn_running;
+    sub color_warn_running {
+        print STDERR color('green');
+        $old_warn_running->(@_);
+        print STDERR color('reset');
+    }
+    if (-t STDERR) {
+        # Only use color if a terminal is attached
+        *main::warn_running = \&color_warn_running;
+    }
+}
+
+$pdflatex = "./filter.py pdflatex %O %S";
