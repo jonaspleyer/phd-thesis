@@ -13,6 +13,9 @@ pdf:
 	echo "\begin{document}" 			>> temp.tex
 	echo "\input{00B-acronyms}"		>> temp.tex
 	echo "\include{" $@ "}" 	>> temp.tex
+	echo "\newpage"						>> temp.tex
+	echo "\printbibliography" 			>> temp.tex
+	echo "\addcontentsline{toc}{chapter}{Bibliography}" >> temp.tex
 	echo "\end{document}" 				>> temp.tex
 	$(CC) $(OPTIONS) temp.tex
 
