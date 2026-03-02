@@ -1,1 +1,1 @@
-tex-fmt *.tex *bib --config tex-fmt.toml
+tex-fmt *.tex --config tex-fmt.toml
