@@ -151,22 +151,39 @@ interpretation if differentiation of species $A$ or division of species $B$ was 
     \begin{tikzpicture}[level distance=1cm,
             level 1/.style={sibling distance=1.2cm},
         ]
-        \node (c1) {$c_1$}
-        child {node (c3) {$c_{3}$}}
-        child {node (c4) {$c_{4}$}};
-        \node[] at (1.5,0) {$c_2$}
-        child {node (c5) {$c_{5}$}};
-        \node at (4,0) {$c_1$}
-        child {node (d3) {$c_{3}$}};
-        \node[] at (5.5,0) {$c_2$}
-        child {node (d4) {$c_{5}$}}
-        child {node (d5) {$c_{5}$}};
-        \node[] at (2.7,-0.5) {$\nLeftrightarrow$};
+        % Description on the left
+        \node[] at (-2.5,0) {Initial};
+        \node[] at (-2.5,-1) {Final};
+
+        % 1st Process
+        \node[] at (-1.1,0.6) {\textbf{A}};
+        \draw (-1.5,1) rectangle (3,-2);
+        \node[circle, draw, fill=blue!15] (c1) {$c_1$}
+        child {node[circle, draw, fill=blue!15] (c3) {$c_{3}$}}
+        child {node[circle, draw, fill=green!15] (c4) {$c_{4}$}};
+        \node[circle, draw, fill=green!15] at (2,0) {$c_2$}
+        child {node[circle, draw, fill=green!15] (c5) {$c_{5}$}};
+
+        % not equivalent
+        \node[] at (4,-0.5) {$\nLeftrightarrow$};
+
+        % 2nd Process
+        \node[] at (5.4,0.6) {\textbf{B}};
+        \draw (5,1) rectangle (9.5,-2);
+        \node[circle, draw, fill=blue!15] at (6,0) {$c_1$}
+        child {node[circle, draw, fill=blue!15] (d3) {$c_{3}$}};
+        \node[circle, draw, fill=green!15] at (8,0) {$c_2$}
+        child {node[circle, draw, fill=green!15] (d4) {$c_{5}$}}
+        child {node[circle, draw, fill=green!15] (d5) {$c_{5}$}};
     \end{tikzpicture}
     \caption[]{
-        Initial and final cellular configurations via two distinct processes indistinguishable from
-        each other.
-        \todo[inline]{short caption; make caption better}
+        Two systems with identical initial and final state can be achieved through distinct cellular
+        processes.
+        (A) Cell $c_1$ of species $A$ divides into $c_3$ and $c_4$ where the latter differentiates
+        into species $B$.
+        Meanwhile cell $c_2$ stays the same and is thus identical to $c_5$.
+        (B) Cell $c_2$ divides into $c_5$ and $c_6$ while $c_1$ stays the same.
+        \todo[inline]{short caption}
     }
     \label{fig:theory-thought-experiment-2}
 \end{figure}
