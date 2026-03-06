@@ -1,7 +1,11 @@
 \usepackage[utf8]{inputenc}
 
+% This needs to be imported before other packages
+% I do not really which ones though
+\usepackage{thmbox}
+
 \usepackage[printonlyused,withpage]{acronym}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath,amssymb}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage[USenglish]{babel}
@@ -106,11 +110,11 @@
 \newcommand{\EV}{\mathscr{E}}
 
 % Define definition, example, lemma, proof and theorem.
-\newtheorem{definition}{Definition}[section]
-\newtheorem{example}[definition]{Example}
-\newtheorem{lemma}[definition]{Lemma}
-\newtheorem{corollary}[definition]{Corollary}
-\newtheorem{theorem}[definition]{Theorem}
+\newtheorem[S]{definition}{Definition}[section]
+\newtheorem[S]{example}[definition]{Example}
+\newtheorem[S]{lemma}[definition]{Lemma}
+\newtheorem[S]{corollary}[definition]{Corollary}
+\newtheorem[S]{theorem}[definition]{Theorem}
 
 % \renewcommand*{\chapterheadstartvskip}{\vspace*{0cm}}
 % \renewcommand*{\chapterheadendvskip}{\vspace{0cm}}
