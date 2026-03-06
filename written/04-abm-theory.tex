@@ -83,29 +83,105 @@ fundamental effect can be taken into account.
 %---------------------------------------------------------------------------------------------------
 \subsection{The Cellular Space $\CS$}
 \label{subsec:cellular-space}
-This section aims to construct a space in which individual cells can be represented.
-We construct these notions purely from known biological behavioural principles.
-By formulating these concepts in abstract mathematical terms, we allow ourselves to cover a wide
-variety of \acp{abm}.
-It is clear that this approach targets models on the mesoscopic scale such that not every
-fundamental effect can be taken into account.
-
+This section aims to define a space in which individual cells can be represented.
+We leverage known biological behaviour as a template for this construction.
+By formulating these concepts in abstract mathematical terms, we enable ourselves to cover a wide
+variety of \acp{cabm} and in turn cellular systems.
 We assume that each individual cell lives in a set $C$ which describes all possible configurations
-of this single cell.
+of any single cell.
 We will therefore call this set the "cellular configuration space".
-Cellular systems are characterized by the fact that cells are in principle (although in
-practice sometimes more difficult) tracable through time and space.
-Depending on the cellular representation we might encounter two cells with identical parameters and
-properties (eg. position, intracellular concentrations) which are still distinct agents and can not
-be interchanged arbitrarily.
-This case could occur eg. when representing cellular positions by whole numbers as in a
-\ac{ca}.
-This point is further made clear when thinking about cellular proliferation as a tree.
-Figure~\ref{fig:cell-lineage-break} shows a hypothetical change between two child-cells.
+
+The process of imaging cells and tracking their movement through time and space is a considerable
+challenge to this day.
+While a set of tools exist that facilitate static spatial segmentation, \todo{insert citations}
+the dynamic extension of imaging and tracking cells through space still poses a substantial problem.
+\todo{cite cell tracking challenge}
+Leaving practical limitations apart, in principle cellular systems are characterized by the fact
+that cells are in principle tracable through time and space.
+Moreover, this involves keeping track of their lineage by starting at the division of the mother
+cell until the final fate of the cell.
+
+Within any biological system, cells either die via varying mechanisms such as apoptosis or necrosis
+or divide, thus creating new daughter cells which are usually considered distinct entities.
+However when modeling such systems, it is important to also consider other forms of cell addition
+and removal.
+This is especially important since most systems studied only represent a slice of the actual
+biological reality which is often embedded in a larger complex.
+Within this scope cells can be added or removed to the observable environment simply by moving
+into or out of the observed region.
+This is common for microfluidic devices in which bacteria can be kept within their growth phase and
+excess cells are simply sucked away through microfluidic tubules.
+\todo{citation}
+A common method to avoid the pitfalls that are associated with the aforementioned challenges, is by
+enforcing spatially periodic boundary conditions.
+This is a common choice for dense populations such as epithelial cell sheets.
+
+\todo{overall we need more citations here}
+These considerations lead to a notion of cellular identity which is not coupled to the physical
+properties but rather defined by their lineage.
+To illustrate the practial implications of this idea, we perform a thought experimet.
+We assume that a cell is defined by its position on a lattice grid and discrete internal states.
+The dynamics of the system are irrelevant for our considerations but we assume that multiple cells
+can occupy the same position.
+If two cells with matching internal states sit in at the same location, they can not be
+distinguished from each other if no additional properties of both cells are tracked.
+One could be tempted to interpret this within the scope of the principle of indistinguishable
+particles which is employed throughout statistical physics.
+Quantum systems in particular are known to utilize this assumption for elementary particles such as
+bosonic ones where exchange of two particles leaves the wave function unchanged.
+However, said assumption is in general not valid for such complex entities as biological cells.
+
+We perform yet another thought experiment.
+Consider a system of two distinct cell species $A$ and $B$ where both types are able to divide but
+in addition $A$ can differentiate into $B$.
+Consider an initial state of two cells $c_1\in A,c_2\in B$ of distinct species and a final state of
+three cells of species $c_3\in A,c_4\in B,c_5\in B$.
+Considering the dynamics we have two possible paths of achieving the final state.
+Firstly, cell $c_2$ can divide, resulting in $c_4$ and $c_5$ while $c_1=c_3$ stays the same.
+As an alternative $c_1$ can divide into $c_3$ and $c_4$ and the daughter cell $c_4$ differentiates
+into species $B$ while $c_2=c_5$ stays identical.
+The initial and final state are identical in both scenarios but the biological interpretation is
+changed completely.
+Without knowing the de-facto parental relationship between cells $c_1,c_2$ and $c_3,c_4,c_5$, we can
+give no further insights into these dynamics thus missing out on the crucial biological
+interpretation if differentiation of species $A$ or division of species $B$ was the driving factor.
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[level distance=1cm,
+            level 1/.style={sibling distance=1.2cm},
+        ]
+        \node (c1) {$c_1$}
+        child {node (c3) {$c_{3}$}}
+        child {node (c4) {$c_{4}$}};
+        \node[] at (1.5,0) {$c_2$}
+        child {node (c5) {$c_{5}$}};
+        \node at (4,0) {$c_1$}
+        child {node (d3) {$c_{3}$}};
+        \node[] at (5.5,0) {$c_2$}
+        child {node (d4) {$c_{5}$}}
+        child {node (d5) {$c_{5}$}};
+        \node[] at (2.7,-0.5) {$\nLeftrightarrow$};
+    \end{tikzpicture}
+    \caption[]{
+        Initial and final cellular configurations via two distinct processes indistinguishable from
+        each other.
+        \todo[inline]{short caption; make caption better}
+    }
+    \label{fig:theory-thought-experiment-2}
+\end{figure}
+
+The idea of cellular identity being defined by their lineage is further made clear when listing
+cellular relations as a family tree.
+Figure~\ref{fig:theory-thought-experiment-3} shows a hypothetical change between two child-cells.
 If we would interchange child $c_{12}$ with $c_{21}$, this would mean that two grandchild-cells
 $gc_{212}$ and $gc_{221}$ would have different grandparent-cells.
 
-\begin{figure}[h]
+While these thoughts are puristic in nature, they set the stage for the comming theoretical
+considerations.
+They are also crucial for our comparisons of \acp{ca} to \acp{abm}.
+
+\begin{figure}
     \centering
     \begin{tikzpicture}[level distance=1.5cm,
             level 1/.style={sibling distance=3cm},
@@ -137,10 +213,11 @@ $gc_{212}$ and $gc_{221}$ would have different grandparent-cells.
         For example, the two cousin-cells $gc_{212}$ and $gc_{221}$ would have different
         grandparent-cells if $c_{12}$ and $c_{21}$ would be interchanged.
     }
-    \label{fig:cell-lineage-break}
+    \label{fig:theory-thought-experiment-3}
 \end{figure}
 
-This exemplifies the need to assign unique identifiers for cells to correctly trace their lineage.
+Overall this exemplifies the need to assign unique identifiers for cells to correctly trace their
+lineage.
 We call the set of all identifiers $J$ and only consider cells as a combination of an element
 $c\in C$ with an identifier $\iota\in I$.
 Thus a cell is an element of the product $J\times C$.
@@ -149,7 +226,7 @@ To allow for processes such as cell-division and death we additionally must be a
 variable number of cells throughout the evolution of the dynamical system.
 The evolution function of our dynamical system will map cellular states onto each other, thus
 acting on the cellular space $\CS$.
-As can be seen from Figure~\ref{fig:cell-lineage-break}, division of cells introduces two new
+As can be seen from Figure~\ref{fig:theory-thought-experiment-3}, division of cells introduces two new
 identifiers for two new cells and consumes the previously existing cell.
 Cell-death removes cells.
 Newly inserted cells may not obtain previously used identifiers since this would again interfere
