@@ -81,7 +81,7 @@ fundamental effect can be taken into account.
 \end{table}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{The Cellular Space $\CS$}
+\subsection{The Cellular Space}
 \label{subsec:cellular-space}
 This section aims to define a space in which individual cells can be represented.
 We leverage known biological behaviour as a template for this construction.
@@ -101,20 +101,22 @@ that cells are in principle tracable through time and space.
 Moreover, this involves keeping track of their lineage by starting at the division of the mother
 cell until the final fate of the cell.
 
-Within any biological system, cells either die via varying mechanisms such as apoptosis or necrosis
-or divide, thus creating new daughter cells which are usually considered distinct entities.
-However when modeling such systems, it is important to also consider other forms of cell addition
-and removal.
-This is especially important since most systems studied only represent a slice of the actual
-biological reality which is often embedded in a larger complex.
+Within any biological system, the ultimate fate of any living cell is either death via mechanisms
+such as apoptosis or necrosis or division thus creating new daughter cells which are considered
+distinct entities compared to their mother.
+However when modeling such systems, it is important to also consider other forms of addition of
+cells and their removal.
+Most studied systems only represent a slice of the actual biological reality and are embedded in a
+larger complex.
 Within this scope cells can be added or removed to the observable environment simply by moving
 into or out of the observed region.
-This is common for microfluidic devices in which bacteria can be kept within their growth phase and
-excess cells are simply sucked away through microfluidic tubules.
+This is also common in microfluidic devices in which bacteria can be kept in a continuous growth
+phase and excess cells are simply sucked away by fluidic forces.
 \todo{citation}
-A common method to avoid the pitfalls that are associated with the aforementioned challenges, is by
-enforcing spatially periodic boundary conditions.
-This is a common choice for dense populations such as epithelial cell sheets.
+One technique to avoid the challenges of inspecting a subslice of a larger biological system
+is to consider periodic spatial boundary conditions within the constructed model.
+This is for instance commonly employed in densely packed epithelial cell sheets.
+\todo{citation}
 
 \todo{overall we need more citations here}
 These considerations lead to a notion of cellular identity which is not coupled to the physical
