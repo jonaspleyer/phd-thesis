@@ -87,36 +87,36 @@ This section aims to define a space in which individual cells can be represented
 We leverage known biological behaviour as a template for this construction.
 By formulating these concepts in abstract mathematical terms, we enable ourselves to cover a wide
 variety of \acp{cabm} and in turn cellular systems.
-We assume that each individual cell lives in a set $C$ which describes all possible configurations
-of any single cell.
-We will therefore call this set the "cellular configuration space".
-
-The process of imaging cells and tracking their movement through time and space is a considerable
-challenge to this day.
-While a set of tools exist that facilitate static spatial segmentation, \todo{insert citations}
-the dynamic extension of imaging and tracking cells through space still poses a substantial problem.
-\todo{cite cell tracking challenge}
-Leaving practical limitations apart, in principle cellular systems are characterized by the fact
-that cells are in principle tracable through time and space.
-Moreover, this involves keeping track of their lineage by starting at the division of the mother
-cell until the final fate of the cell.
 
 Within any biological system, the ultimate fate of any living cell is either death via mechanisms
 such as apoptosis or necrosis or division thus creating new daughter cells which are considered
-distinct entities compared to their mother.
-However when modeling such systems, it is important to also consider other forms of addition of
-cells and their removal.
-Most studied systems only represent a slice of the actual biological reality and are embedded in a
+distinct entities compared to their mother. \todo{fix this; cells can also fuse}
+However when modeling such systems, it is important to also consider other forms of cell addition
+and removal.
+Most studied systems only represent a slice of the actual biological reality which is embedded in a
 larger complex.
 Within this scope cells can be added or removed to the observable environment simply by moving
-into or out of the observed region.
-This is also common in microfluidic devices in which bacteria can be kept in a continuous growth
-phase and excess cells are simply sucked away by fluidic forces.
+into or out of the observed physical region.
+This is exemplified by microfluidic devices such as mother machines in which bacteria can be kept in
+a state of continuous growth while excess cells are simply sucked away by fluidic forces.
 \todo{citation}
 One technique to avoid the challenges of inspecting a subslice of a larger biological system
 is to consider periodic spatial boundary conditions within the constructed model.
-This is for instance commonly employed in densely packed epithelial cell sheets.
+This is for instance commonly employed in densely packed epithelial cell sheets but can not be
+applied generally across all systems as the previous example of the mother machine shows.
 \todo{citation}
+
+Leaving practical limitations aside, in principle cellular systems are characterized by the fact
+that cells are tracable through time and space.
+Moreover, this involves keeping track of their lineage which starts either at the initial time point
+of the experiment or after the division of their mother cell.
+The cell's lifetime ends when it reaches final fate in death or division or at the end of
+the observed time interval.
+The experimental process of imaging cells and tracking their movement through time and space
+is a considerable challenge to this day.
+While a set of tools exist that facilitate static spatial segmentation, \todo{insert citations}
+the dynamic extension of imaging and tracking cells through space still poses a substantial problem.
+\todo{cite cell tracking challenge}
 
 \todo{overall we need more citations here}
 These considerations lead to a notion of cellular identity which is not coupled to the physical
