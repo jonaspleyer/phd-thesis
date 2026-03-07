@@ -26,6 +26,7 @@ texcount:
 	texcount 01-introduction.tex\
 		02-elongated-bacteria.tex\
 		03-cellular-raza.tex\
+		04-abm-theory.tex\
 		05-bacterial-rods.tex\
 		06-further-applications.tex\
 		07-discussion.tex\
