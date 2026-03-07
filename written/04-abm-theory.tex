@@ -88,9 +88,14 @@ We leverage known biological behaviour as a template for this construction.
 By formulating these concepts in abstract mathematical terms, we enable ourselves to cover a wide
 variety of \acp{cabm} and in turn cellular systems.
 
-Within any biological system, the ultimate fate of any living cell is either death via mechanisms
-such as apoptosis or necrosis or division thus creating new daughter cells which are considered
-distinct entities compared to their mother. \todo{fix this; cells can also fuse}
+Within any biological system, all cells have finite lifetimes with most fates resulting in either
+death via mechanisms such as apoptosis or necrosis or division thus creating new daughter cells
+which are considered distinct entities compared to their mother.
+While these outcomes represent the majority of cellular fates, we have to remind ourselves that
+other such as cellular fusion~\cite{Ogle2004,Whitlock2024} or multiple
+fission~\cite{Suresh1994,Peckov1990} exist.
+
+\todo{fix this; cells can also fuse}
 However when modeling such systems, it is important to also consider other forms of cell addition
 and removal.
 Most studied systems only represent a slice of the actual biological reality which is embedded in a
@@ -110,7 +115,7 @@ Leaving practical limitations aside, in principle cellular systems are character
 that cells are tracable through time and space.
 Moreover, this involves keeping track of their lineage which starts either at the initial time point
 of the experiment or after the division of their mother cell.
-The cell's lifetime ends when it reaches final fate in death or division or at the end of
+The cell's lifetime ends when it reaches final fate such as death or division or at the end of
 the observed time interval.
 The experimental process of imaging cells and tracking their movement through time and space
 is a considerable challenge to this day.
