@@ -485,6 +485,49 @@ Once the process of dying is over, the cell is removed.
     The most common biological reality is the binary case.
 \end{corollary}
 
+\begin{example}[Unique Identifier Constructions I - Global Counter]
+    \label{example:unique-identifiers-1-global-counter}
+    \begin{itemize}
+        \item one large counter; increase whenever new cells are added via division
+        \item only some practical problems when it comes to implementation (ensure that only one
+            variable is incremented; use atomics)
+        \item not local
+        \item keep manually track of cell lineage tree/forest
+    \end{itemize}
+\end{example}
+
+\begin{example}[Unique Identifier Constructions II - Division History]
+    \label{example:unique-identifiers-2-division-history}
+    \begin{itemize}
+        \item give initially placed cells unique identifiers simply by numbers $0\dots N_i$
+        \item construct daughter identifiers from mother and additional counter
+        \item one word $=\text{nth}$ daughter of previous mother
+        \item $(((7,0),1),1)$ 7th (initially) placed cell; then first daughter; then 2nd daughter;
+            then 2nd daughter
+        \item basically includes complete previous history
+        \item problem: newly inserted cells (not via division) need to rely on global counter
+        \item practical challenge: as more division events come into play, the size of the
+            identifier grows considerably; bad for memory in programs
+        \item parental relationship directly encoded
+    \end{itemize}
+\end{example}
+
+\begin{example}[Unique Identifier Constructions III - Spatial Subdivisions]
+    \label{example:unique-identifiers-3-spatial-subdivision}
+    \begin{itemize}
+        \item divide space into discrete entities: voxels
+            (is this always possible that easily?; in practice probably yes)
+        \item new cells are given the identifier of the voxel and a counter that runs per voxel and
+            is incremented whenever a new cell is added.
+            This includes division events.
+        \item fully local solution
+        \item also works well when new cells are inserted without cell division
+        \item no problem with growing word size
+        \item discretization of space needed
+        \item does not encode cell lineage
+    \end{itemize}
+\end{example}
+
 %---------------------------------------------------------------------------------------------------
 \section{Environment}
 \label{section:dynamics}
