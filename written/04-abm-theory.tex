@@ -279,12 +279,17 @@ the experiment without relying on complex comparison metrics.
 
 While these thoughts are puristic in nature, they set the stage for the comming theoretical
 considerations.
-Furthermore these considerations are bound by practical limitations and will generally be difficult
-to enforce in some systems such as when high stochastic fluctuations lead to decorrelation of any
-two successive measured time points.
 Chapter~\ref{chapter:bacterial-rods} utilizes both properties; the uniqueness and
 the parental relationships of the identifiers to construct metrics that can be used to estimate
-parameters of the model at hand.
+parameters of a mechanical model for flexible elongated bacteria.
+This shows that the presented ideas are relevant to some applications.
+
+However, these considerations are bound by practical limitations and can be difficult
+to enforce in other systems such as when high stochastic fluctuations lead to decorrelation of any
+two successive measured time points.
+In these scenarios it is questionable if the concept of cellular identity does provide
+meaningful insights into the spatial dynamics of the system.
+But it can still yield valuable information about cellular fate through differentiation.
 
 \begin{figure}
     \centering
@@ -334,7 +339,8 @@ To allow for processes such as cell-division and death we additionally must be a
 variable number of cells throughout the evolution of the dynamical system.
 The evolution function of our dynamical system will map cellular states onto each other, thus
 acting on the cellular space $\CS$.
-As can be seen from Figure~\ref{fig:theory-thought-experiment-3}, division of cells introduces two new
+As can be seen from Figure~\ref{fig:theory-thought-experiment-3}, division of
+cells introduces two new
 identifiers for two new cells and consumes the previously existing cell.
 Cell-death removes cells.
 Newly inserted cells may not obtain previously used identifiers since this would again interfere
