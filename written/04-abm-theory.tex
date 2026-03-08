@@ -139,21 +139,79 @@ particles which is employed across statistical physics.
 Quantum systems in particular are known to utilize this assumption for elementary particles such as
 bosonic ones where exchange of two particles leaves the wave function unchanged.
 However, said assumption is in general not valid for such complex entities as biological cells.
+The reason that these cells seem indistinguishable is that our reduced model captures only
+coarse cellular properties.
 
-We perform yet another thought experiment.
+But while the specific cellular representation within our model is a key question for any scientist,
+it is not the only source of identity challenges.
+If we set out to directly compare model results to biological observations, a similar problem
+emerges.
+We now omit the assumption of discreteness in our model and consider a situation in which simulation
+results are being compared to experimental observations.
+The model is initialized with a known state given by experimental data and compared at a later time
+point.
+Such a comparison will in practice always require a notion of distance as a metric $d(\cdot,\cdot)$
+in the space of our observable quantity.
+We set out to link experimental cells to the model output but assume that the chosen metric only
+involves physical cellular properties such as the position of the cell or some form of readout
+e.g. by tagging with \ac{gfp}~\cite{Chalfie1994}.
+Consider the case where two cells $c_{m,1},c_{m,2}$ in the model output are approximately equally
+close to the experimental state of a particular cell $c_e$ under this chosen metric, i.e.
+$d(c_{m,1},c_e)\approx d(c_{m,2},c_e)$.
+Without any additional input, we can not tell if $c_{m,1}$ or $c_{m,2}$ of the model output
+corresponds to $c_e$ within the experiment.
+Furthermore even if the obtained distance values would exhibit a clear discrepancy, the link between
+model and experimental reality could be flawed if simply the closest cell is also assumed to be
+linked to the experimental one.
+Such a situation can occur for example if the model output is far from the
+actual biological reality.
+Consider the case in which cell $c_{m,1}$ was first seeded with the information provided by
+$c_e$ at the initial time point.
+If the model produced results such that $c_{m,2}$ was closer to $c_e$,
+the cells would be linked incorrectly by our previously envisioned metric and the resulting error
+would not be caught.
+This will not only result in a mismatched link between but more importantly to a lower
+measured discrepancy between model and reality.
+Such a behaviour is unacpetable when it comes to estimating parameters of any system and therefore
+shows the clear need to include this cellular identity.
+
+% \begin{figure}
+%     \centering
+%     \begin{tikzpicture}[level distance=1.5cm,
+%             level 1/.style={sibling distance=3cm},
+%             level 2/.style={sibling distance=1.5cm}
+%         ]
+%         \node [] at (0,3.75) {\textbf{A}};
+%         \draw [draw,gray] (0.25,1.5) -- (3.25,1.5);
+%         \draw [draw,gray] (0.25,3.0) -- (3.25,3.0);
+%         \draw [draw,gray] (1.0,0.75) -- (1.0,3.75);
+%         \draw [draw,gray] (2.5,0.75) -- (2.5,3.75);
+%         \node [draw,circle,fill=blue!15] at (1.5, 2.0) {$c_1$};
+%         \node [draw,circle,fill=green!15] at (2.0,2.5) {$c_2$};
+%     \end{tikzpicture}
+%     \caption[]{}
+%     \label{}
+% \end{figure}
+
+In a final thought experiment we omit any spatial considerations or concepts of closeness in order
+to further exemplify the idea of cellular identity.
 Consider a system of two distinct cell species $A$ and $B$ where both types are able to divide but
 in addition $A$ can differentiate into $B$.
-Consider an initial state of two cells $c_1\in A,c_2\in B$ of distinct species and a final state of
-three cells of species $c_3\in A,c_4\in B,c_5\in B$.
-Considering the dynamics we have two possible paths of achieving the final state.
-Firstly, cell $c_2$ can divide, resulting in $c_4$ and $c_5$ while $c_1=c_3$ stays the same.
-As an alternative $c_1$ can divide into $c_3$ and $c_4$ and the daughter cell $c_4$ differentiates
-into species $B$ while $c_2=c_5$ stays identical.
-The initial and final state are identical in both scenarios but the biological interpretation is
-changed completely.
+The initial state consists of two cells $c_1\in A,c_2\in B$ of distinct species and the final state
+of three cells $c_3\in A,c_4\in B,c_5\in B$.
+The trajectories of this system are bound by the aforementioned dynamics.
+We are therefore left with only two possible paths of achieving the final state which are depicted
+in Figure~\ref{fig:theory-thought-experiment-2}.
+Firstly, cell $c_2$ can divide into $c_4$ and $c_5$ while $c_1=c_3$ stays the same.
+As an alternative $c_1$ can divide into $c_3$ and $c_4$ and the daughter cell $c_4$ also
+differentiates into species $B$ while $c_2=c_5$ stays identical.
+The initial and final state are identical with respect to cell count of the two species but the
+biological interpretation differs substantially.
+Process (A) is characterized by a division of species $B$ while (B) is characterized by a
+division of species $A$ with differentiation.
 Without knowing the de-facto parental relationship between cells $c_1,c_2$ and $c_3,c_4,c_5$, we can
-give no further insights into these dynamics thus missing out on the crucial biological
-interpretation if differentiation of species $A$ or division of species $B$ was the driving factor.
+give no further insights into the underlying dynamics thus missing out on this crucial biological
+interpretation.
 
 \begin{figure}
     \centering
@@ -161,51 +219,76 @@ interpretation if differentiation of species $A$ or division of species $B$ was 
             level 1/.style={sibling distance=1.2cm},
         ]
         % Description on the left
-        \node[] at (-2.5,0) {Initial};
-        \node[] at (-2.5,-1) {Final};
+        \node[] at (-2,0) {Initial};
+        \node[] at (-2,-1) {Final};
 
         % 1st Process
-        \node[] at (-1.1,0.6) {\textbf{A}};
-        \draw (-1.5,1) rectangle (3,-2);
-        \node[circle, draw, fill=blue!15] (c1) {$c_1$}
-        child {node[circle, draw, fill=blue!15] (c3) {$c_{3}$}}
-        child {node[circle, draw, fill=green!15] (c4) {$c_{4}$}};
+        \node[] at (-0.6,0.6) {\textbf{A}};
+        \draw (-1.0,1) rectangle (3.5,-2);
+        \node[circle, draw, fill=blue!15] {$c_1$}
+        child {node[circle, draw, fill=blue!15] {$c_{3}$}};
         \node[circle, draw, fill=green!15] at (2,0) {$c_2$}
-        child {node[circle, draw, fill=green!15] (c5) {$c_{5}$}};
+        child {node[circle, draw, fill=green!15] {$c_{4}$}}
+        child {node[circle, draw, fill=green!15] {$c_{5}$}};
 
         % not equivalent
         \node[] at (4,-0.5) {$\nLeftrightarrow$};
 
         % 2nd Process
-        \node[] at (5.4,0.6) {\textbf{B}};
-        \draw (5,1) rectangle (9.5,-2);
+        \node[] at (4.9,0.6) {\textbf{B}};
+        \draw (4.5,1) rectangle (9,-2);
         \node[circle, draw, fill=blue!15] at (6,0) {$c_1$}
-        child {node[circle, draw, fill=blue!15] (d3) {$c_{3}$}};
+        child {node[circle, draw, fill=blue!15] {$c_{3}$}}
+        child {node[circle, draw, fill=green!15] {$c_{4}$}};
         \node[circle, draw, fill=green!15] at (8,0) {$c_2$}
-        child {node[circle, draw, fill=green!15] (d4) {$c_{5}$}}
-        child {node[circle, draw, fill=green!15] (d5) {$c_{5}$}};
+        child {node[circle, draw, fill=green!15] {$c_{5}$}};
+
+        \node[] at (11,0) {};
     \end{tikzpicture}
     \caption[]{
-        Two systems with identical initial and final state can be achieved through distinct cellular
-        processes.
-        (A) Cell $c_1$ of species $A$ divides into $c_3$ and $c_4$ where the latter differentiates
+        Two cellular systems with seemingly identical initial and final state can be achieved
+        through distinct cellular processes.
+        (A) Cell $c_2$ divides into $c_5$ and $c_6$ while $c_1$ stays the same.
+        (B) Cell $c_1$ of species $A$ divides into $c_3$ and $c_4$ where the latter differentiates
         into species $B$.
         Meanwhile cell $c_2$ stays the same and is thus identical to $c_5$.
-        (B) Cell $c_2$ divides into $c_5$ and $c_6$ while $c_1$ stays the same.
         \todo[inline]{short caption}
     }
     \label{fig:theory-thought-experiment-2}
 \end{figure}
 
-The idea of cellular identity being defined by their lineage is further made clear when listing
+All of these thought experiments would be solved by keeping track of the cellular identity in the
+form of a identifier which is not only unique at any given time point but throughout the whole
+observed time interval.
+This means in particular that even if a cell is removed from the simulation that no newcoming cell
+will reuse any preexisting identifier.
+These identifiers can not only be used to distinguish between agents but also to keep track of
+mother-daughter relationships.
+The idea of cellular identity being closely tied to their lineage is further made clear when listing
 cellular relations as a family tree.
-Figure~\ref{fig:theory-thought-experiment-3} shows a hypothetical change between two child-cells.
-If we would interchange child $c_{12}$ with $c_{21}$, this would mean that two grandchild-cells
-$gc_{212}$ and $gc_{221}$ would have different grandparent-cells.
+Figure~\ref{fig:theory-thought-experiment-3} shows a tree of multiple parents $p_i$, children
+$c_j$ and grandchildren $gc_k$.
+If we would perform a hypothetical exchange of child $c_{12}$ with $c_{21}$, this would mean that
+two grandchild-cells $gc_{212}$ and $gc_{221}$ would have different grandparent-cells and thus
+result in an invalid parental state.
+
+In general, it has to be noted that the explicit type of representation of the chosen identifiers
+is irrelevant as long as they adhere to the discussed principles.
+This leaves open various choices of how to define them which will be discussed later in
+Example~\ref{example:unique-identifiers-1-global-counter} to
+\ref{example:unique-identifiers-3-spatial-subdivision}.
+Using any choice of such identifiers would circumvent the described problems of the previous
+thought experiments and establish a direct link between cells in the model and
+the experiment without relying on complex comparison metrics.
 
 While these thoughts are puristic in nature, they set the stage for the comming theoretical
 considerations.
-They are also crucial for our comparisons of \acp{ca} to \acp{abm}.
+Furthermore these considerations are bound by practical limitations and will generally be difficult
+to enforce in some systems such as when high stochastic fluctuations lead to decorrelation of any
+two successive measured time points.
+Chapter~\ref{chapter:bacterial-rods} utilizes both properties; the uniqueness and
+the parental relationships of the identifiers to construct metrics that can be used to estimate
+parameters of the model at hand.
 
 \begin{figure}
     \centering
@@ -234,6 +317,7 @@ They are also crucial for our comparisons of \acp{ca} to \acp{abm}.
         \draw[dashed,<->] (c12) -- (c21);
     \end{tikzpicture}
     \caption[Cell lineage tree]{
+        A forest containing a possible lineage of two parent cells $p_1,p_2$.
         Arbitrary cells can not be interchanged freely since this might introduce incorrect
         configurations into the cell-lineage.
         For example, the two cousin-cells $gc_{212}$ and $gc_{221}$ would have different
