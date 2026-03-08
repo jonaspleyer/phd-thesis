@@ -47,10 +47,6 @@ fundamental effect can be taken into account.
 %     \caption[Modeling concept figure]{\todo[inline]{explain concept Figure}}
 % \end{figure}
 
-%---------------------------------------------------------------------------------------------------
-\newpage
-\section{Theoretical Framework}
-
 \begin{itemize}
     \item Start listing example aspects of cellular systems
     \item group aspects in table in (C) Cellular, (CC) Cell-Cell, (EC) Environment-Cell
@@ -81,14 +77,14 @@ fundamental effect can be taken into account.
 \end{table}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{The Cellular Space}
+\section{The Cellular Space}
 \label{subsec:cellular-space}
 This section aims to define a space in which individual cells can be represented.
 We leverage known biological behaviour as a template for this construction.
 By formulating these concepts in abstract mathematical terms, we enable ourselves to cover a wide
 variety of \acp{cabm} and in turn cellular systems.
 
-\subsubsection{Adding and Removing Cells}
+\subsection{Adding and Removing Cells}
 Within any biological system, all cells have finite lifetimes with most fates resulting in either
 death via mechanisms such as apoptosis or necrosis or division thus creating new daughter cells
 which are considered distinct entities compared to their mother.
@@ -112,7 +108,7 @@ This is for instance commonly employed in densely packed epithelial cell sheets 
 applied generally across all systems as the previous example of the mother machine shows.
 \todo{citation}
 
-\subsubsection{The cellular Identity}
+\subsection{Cellular Identity}
 Leaving practical limitations aside, in principle cellular systems are characterized by the fact
 that cells are tracable through time and space.
 Moreover, this involves keeping track of their lineage which starts either at the initial time point
@@ -326,7 +322,7 @@ parameters of the model at hand.
     \label{fig:theory-thought-experiment-3}
 \end{figure}
 
-\subsubsection{The Construction}
+\subsection{The Construction}
 
 Overall this exemplifies the need to assign unique identifiers for cells to correctly trace their
 lineage.
@@ -484,7 +480,7 @@ Once the process of dying is over, the cell is removed.
 \end{corollary}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Dynamics}
+\section{Environment}
 \label{section:dynamics}
 \begin{definition}[Dynamical System]
     A dynamical system is a tuple $(T,M,\phi)$ where $T$ is a monoid (written additively) and
@@ -557,7 +553,7 @@ $\iota\in\phi_t$}
 \end{proof}
 
 %---------------------------------------------------------------------------------------------------
-\subsection{Stochasticity}
+\section{Stochasticity}
 
 %###################################################################################################
 \newpage
