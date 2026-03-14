@@ -1187,6 +1187,19 @@ Take derivative
 %
 %
 
+\subsubection{Idea: Include volumetric Change of domain}
+\begin{itemize}
+    \item the volume of the domain $V_D$ is effectively shrinking when more cells are present since
+        they occupy space in which no extracellular nutrients can be
+    \item we can account for this in vaious ways:
+    \item idea 1: just use some form of reduced overall volume $\tilde{V}_D=V_D-\sum_c V_c$; then
+        use this new volume in places where the old volume was.
+        The dynamics are thus given by the dynamics of the agents
+    \item idea 2: define a volumetric density $\rho(\vec{x})$ which depends on the spatial coordinate $\vec{x}$
+        The total volume is then $V_D=\int_D \rho(x)\text{dVol}$; now use this in equations; do we
+        get derivatives with respect to $V_D$ or with respect to $\rho(x)$?
+\end{itemize}
+
 %---------------------------------------------------------------------------------------------------
 \newpage
 \subsection{The Fractal Structure in Branching Patterns of \textit{Bacillus Subtilis}}
