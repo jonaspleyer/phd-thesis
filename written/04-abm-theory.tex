@@ -80,8 +80,8 @@ fundamental effect can be taken into account.
 %---------------------------------------------------------------------------------------------------
 \section{The Cellular Space}
 \label{subsec:cellular-space}
-This section aims to define a space in which individual cells can be represented.
-We leverage known biological behaviour as a template for this construction.
+This section develops a formal notion of how to describe a collection of unique cellular agents.
+To motivate our constructions, we leverage known biological behaviour as a template.
 By formulating these concepts in abstract mathematical terms, we enable ourselves to cover a wide
 variety of \acp{cabm} and in turn cellular systems.
 
@@ -329,29 +329,41 @@ But it can still yield valuable information about cellular fate through differen
 \end{figure}
 
 \subsection{The Construction}
+The considerations of the preceding section exemplify the need to uniquely label and track cells
+throughout their life-time.
+This can be achieved by assigning unique identifiers to each cell, which enables us to properly
+trace them.
 
-Overall this exemplifies the need to assign unique identifiers for cells to correctly trace their
-lineage.
-We call the set of all identifiers $J$ and only consider cells as a combination of an element
-$c\in C$ with an identifier $\iota\in I$.
-Thus a cell is an element of the product $J\times C$.
-The explicit representation of $J$ can depend on the respective system in question.
-To allow for processes such as cell-division and death we additionally must be able to treat a
-variable number of cells throughout the evolution of the dynamical system.
-The evolution function of our dynamical system will map cellular states onto each other, thus
-acting on the cellular space $\CS$.
-As can be seen from Figure~\ref{fig:theory-thought-experiment-3}, division of
-cells introduces two new
-identifiers for two new cells and consumes the previously existing cell.
-Cell-death removes cells.
-Newly inserted cells may not obtain previously used identifiers since this would again interfere
-with cell lineage.
-This means, we need to keep track of all identifiers $\iota\in I_p$ which have been used in the
-past.
+Every cell $c$ is a discrete entity that lives in a set $C$ which describes its possible
+configurations.
+We will therefore call this set the \textit{Cellular Configuration Space}.
+It can describe properties such as the position of the cell, intracellular nutrient density or state
+of the cell cycle.
+For this particular example, the space would consist of a component for the position, i.e.
+$\vec{x}\in\R^3$, nutrient density $\rho\in\R_{\geq 0}$ and cycle state which can be simplified for
+an eukaryotic cell via $s\in\{1,2,3\}$ denoting resting, interphase and division phase
+respectively~\cite{Alberts2018}.
+In this example, the cellular configuration space is thus given by
+$C=\R^3\times\R_{\geq 0}\times\{1,2,3\}$.
+
+We supply this configuration space with an index set $I$ that holds all possible values of unique
+identifiers which are assignable to cells.
+We also keep a record of all identifiers that have already been used and store it in $I_p$.
+Whenever a new cell is inserted, i.e. due to cell division, a corresponding new identifier $\iota$
+is picked which is neither assigned to any currently living cell nor contained in $I_p$ and assigned
+to this new cell.
+Therefore, formally any cell is a tuple $(\iota,c)\in I\times C$ which we write as
+$(\iota,c)=c_\iota$.
+Furthermore, whenever a cell is removed, i.e. due to cell death, its identifier $\iota$ is stored
+within $I_p$ which ensures that this cell is not assigned again to another cell.
+This means that each cell $c\in C$ defined by its properties in the configuration space $C$ will
+have a unique identifier $\iota\in I$ assigned to it.
+Therefore, the collection of all cells at any time point is a subset of the power set
+$M\subset Pot(I\times C)$.
 
 \begin{definition}[Cellular State]
     \label{def:cellular-state}
-    Let $I$ be a set of identifiers and $C$ be the set describing cellular agents.
+    Let $I$ be a set of identifiers and $C$ be the cellular configuration space.
     We call a set of cells $(I_p,M)\in Pot(I)\times Pot(I\times C)$ a cellular state if
     \begin{enumerate}
         \item Every cell has a unique identifer $\#\pi_1(M)=\#M$.
@@ -361,6 +373,17 @@ past.
     The set $I_p$ contains identifiers which have been used previously.
 \end{definition}
 
+We have so far not discussed how to construct the identifiers $\iota\in I$.
+Their explicit choice can depend on the respective system in question and will be discussed later
+(see \todo{ref}).
+
+Definition~\ref{def:cellular-state} ensures that a cellular state is valid in the sense that
+uniqueness of cells is ensured throughout their life-time.
+However it does not allow us to describe any dynamical processes for the temporal evolution from one
+cellular state into another.
+Mapping one cellular state onto another, requires us to define the \textit{Cellular Space} on which
+all dynamics are described as the collection of all cellular states.
+
 \begin{definition}[Cellular Space]
     \label{def:cellular-space}
     The cellular space $\CS(I, C)$ of an index set $I$ and cellular configuration space $C$
@@ -368,23 +391,60 @@ past.
     \begin{equation}
         \CS(I,C) = \{M\in Pot(I)\times Pot(I\times C) | M \text{ is cellular state }\}.
     \end{equation}
-    We may choose the simplified notation $\CS = \CS(I, C)$ where the context is
-    clear.
-    We write $c_\iota:=(\iota,c)\in M$ where $(I_p,M)\in\CS$ despite the non-exhaustiveness
-    of the index $\iota$ in a single cellular state.
+    We choose a simplified notation $\CS = \CS(I, C)$ whenever the dependencies are clear from the
+    given context.
+    We also write $c_\iota:=(\iota,c)$ and introduce a simplified notation $c_\iota\in\CS$ where the
+    index $\iota$ is taken with respect to all living cells $\iota\in \pi_1(M)$.
 \end{definition}
 
+We have now defined a structure which can capture various snapshots of unique cellular agents but
+are still missing any notion of dynamics.
+While processes such as movement of the cells or physical interactions can change the individual
+cellular configurations $c$, they preserve the unique cells $\pi_1(M)$ and $I_p$ which are contained
+within the state.
+To continue our considerations of uniqueness, we now want to turn our attention to processes such as
+cell division and cell death that lead to changes in the cellular state which require updating the
+tracked indices.
+Other dynamical processes are discussed later (see \todo{insert ref}).
+\todo{maybe hint that the rest is easy and comes later}
+
+To allow for processes such as cell-division and death we additionally must be able to treat a
+variable number of cells throughout the evolution of the dynamical system.
+\todo[inline]{rewrite this sentence such that it makes more sense here}
 Cell division~\cite{bhlitem268752} is a process during which a cell transforms either via binary
 (or multiple) fission~\cite{Biov2014} or mitosis~\cite{Ilowiecki1981,von1835resp} and
 meiosis~\todo{CITATION} into separate
 daughter cells.
-To describe cell division, the dynamics behind this transition needs to be taken into account.
-We will discuss this in the chapter~\ref{section:dynamics}.
-In our agent-based approach, the end of this transition removes the old cell and inserts the new
-daughter cells.
+On the subcellular level, these processes ocurr over extended periods of time which can be
+captured by a corresponding dynamical description of the process leading up to the time point in
+question (see section~\ref{section:dynamics}).
+Our \ac{abm} approach represents cells as discrete entities with well-defined division and death
+timings which may well be one of its weaknesses.
+In animal cells the time of division can for instance be defined by the end of cytokinesis~\cite{}
+\todo{citation}
+which is the instant when the microtubule and membrane that form the bridge between two daughter
+cells is cut.
+However it was shown that human HeLa and mouse BALB/c 3T3 cells are already in $G_1$ state at this
+time point~\cite{Gershony2014}.
+As expressed in the introductory section (\todo{ref. introduction} \ref{}), \acp{abm} usually take a
+mesoscopic approach and it is therefore the task of any researcher to pick a notion of division time
+that is appropriate for their desired model.
+
+With the previous considerations in mind, we now focus on the instantanous event in which the
+discrete entity of a single cell is replaced/removed or inserted.
+Omitting the preceding dynamics, with this framework, cell division can viewed as the combination
+of the removal of one (mother) cell and the insertion of new daughter cells while cell death is
+simply the removal of one cell.
+In practical cases, it is also important to include the concept of insertion and removal of cells
+which have not been the result of cellular division or death.
+Such a situation can become relevant, i.e., when observing a spatial subslice of a larger system
+which is entered by an external cell.
+In this case, a new unique identifier $\iota$ must be picked and assigned to this cell but no known
+relation to any other existing cell can be assumed.
+Analogously, bacteria growing within the confinements of a mother machine may be sucked away by a
+fluidic flow, thus resulting in a de-facto removal from the observable region.
 
 \begin{definition}[Single Cell Division]
-    \label{definition:cell-division-single}
     We call a map $\gamma:C\rightarrow \cup_{n\geq 2}C^n$ a single division function and
     $\Upsilon:\{\gamma:C\rightarrow \cup_{n\geq 2}C^n\}\times I\times\CS\rightarrow\CS$ a
     single division operator if for any initial state $(I_p,M)\in\CS$ with $d_i\in M$ and
@@ -400,10 +460,10 @@ daughter cells.
     In the case when $i\notin\pi_1(M)$, we require $\Upsilon(\eta,i,(I_p,M))=(I_p,M)$.
     The last two conditions are to be thought of as one in order to guarantee uniqueness for each
     cell over the course of the total time of our system.
+    \label{definition:cell-division-single}
 \end{definition}
 
 \begin{definition}[Cell Division]
-    \label{definition:cell-division-function}
     A division function $\gamma$ is the concatenation of single division functions
     $\{\gamma_i,i\in I\}$.
     We require that the overall effect is independent of the order of their individual applications,
@@ -412,6 +472,7 @@ daughter cells.
         \prod\limits_{i_j\in I}\gamma_{i_j} = \prod\limits_{i\in I}\gamma_i
     \end{equation}
     where the product is with respect to the concatenation of maps.
+    \label{definition:cell-division-function}
 \end{definition}
 
 It is important to note that while this definition seems cumbersome in the first place, it is
