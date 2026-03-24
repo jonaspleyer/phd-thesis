@@ -621,11 +621,11 @@ Once the process of dying is over, the cell is removed.
 
 We often write $\phi(t,m) = \phi_t(m)$.
 The dynamics of \acp{abm} are governed by agents and their interactions with each other and the
-simulation domain.
+environment.
 Thus we define our dynamical system to be of this shape.
 
 \begin{definition}
-    An \ac{abm} is a dynamical system which consists of a Cellular Space $\CS$ and a domain
+    An \ac{abm} is a dynamical system which consists of a Cellular Space $\CS$ and an environment
     $\EV$.
     \begin{equation}
         M = \CS\times\EV
@@ -634,10 +634,11 @@ Thus we define our dynamical system to be of this shape.
     $c_\iota\in\pi_1(\phi_t(x))$.
 \end{definition}
 
-It is of importance to consider the domain as an integral part of the dynamical system such that
+It is of importance to consider the environment as an integral part of the
+dynamical system such that
 interactions of the agents with it can permanently alter its constitution.
 In this way, extracellular constituents can interact and change and even the overall spatial
-configuration of the domain could be subject to dynamics.
+configuration of the environment could be subject to dynamics.
 Furthermore, we do not require that the monoid $T$ is a subset of the real numbers in order to allow
 for discrete dynamical systems.
 Furthermore, for simplicity we omit any Stochasticity from our system \todo{Can we fix this?}.
