@@ -285,7 +285,8 @@ considerations.
 Chapter~\ref{chapter:bacterial-rods} utilizes both properties; the uniqueness and
 the parental relationships of the identifiers to construct metrics that can be used to estimate
 parameters of a mechanical model for flexible elongated bacteria.
-This shows that the presented ideas are relevant to some applications.
+This shows that the presented ideas are not only of theoretical nature but can also be useful in
+practical applications.
 
 However, these considerations are bound by practical limitations and can be difficult
 to enforce in other systems such as when high stochastic fluctuations lead to decorrelation of any
@@ -330,7 +331,7 @@ But it can still yield valuable information about cellular fate through differen
     \label{fig:theory-thought-experiment-3}
 \end{figure}
 
-\subsection{The Construction}
+\subsection{Construction}
 The considerations of the preceding section exemplify the need to uniquely label and track cells
 throughout their life-time.
 This can be achieved by assigning unique identifiers to each cell, which enables us to properly
@@ -399,44 +400,127 @@ all dynamics are described as the collection of all cellular states.
     index $\iota$ is taken with respect to all living cells $\iota\in \pi_1(M)$.
 \end{definition}
 
-We have now defined a structure which can capture various snapshots of unique cellular agents but
-are still missing any notion of dynamics.
+We have now defined a structure which can capture snapshots of a variable amount of unique cellular
+agents but are still missing any notion of dynamics.
 While processes such as movement of the cells or physical interactions can change the individual
-cellular configurations $c$, they preserve the unique cells $\pi_1(M)$ and $I_p$ which are contained
-within the state.
-To continue our considerations of uniqueness, we now want to turn our attention to processes such as
+cellular configurations $c$, they preserve the cellular identity and thus the unique cells
+$\pi_1(M)$ and $I_p$ which are contained within the state.
+
+\subsection{Changing the Cellular State - Death, Division \& Others}
+To continue our investigation of uniqueness, we now want to turn our attention to processes such as
 cell division and cell death that lead to changes in the cellular state which require updating the
 tracked indices.
-Other dynamical processes are discussed later (see \todo{insert ref}).
-\todo{maybe hint that the rest is easy and comes later}
+Definition~\ref{def:cellular-space} of the cellular space allows us to treat a variable number of
+cells simultanously.
+However, we have so far not discussed how one particular cellular state $(I_p,M)$ can be mapped onto
+another $(J_p,N)$ by events such as cell division or death.
 
+We first investigate different biological processes that correspond to distinct ways in which the
+cardinality of the cellular state can be altered by a single division or death event.
+These will shape the following definitions and guide the overall throught processes behind them.
+
+\subsubsection{Preliminary Thoughts}
+On the subcellular level, these processes ocurr over extended periods of time.
+In contrast, our \ac{abm} approach represents cells as discrete entities with well-defined division
+and death timings which could be seen as one of its biggest conceptual weaknesses.
+
+To further complicate matters, even the time point of division or death can sometimes not be
+identified properly.
+In animal cells the time of division can for instance be defined by the end of
+cytokinesis~\cite{Gershony2014} which is the instant when the microtubule and membrane that form
+the bridge between two daughter cells is cut.
+However it was shown that human HeLa and mouse BALB/c-3T3 cells are already in $G_1$ state at this
+time point~\cite{Gershony2014} meaning the cell cycle of the daughter cells has already started.
+This emphasizes the point that division is a process on smaller time scales and not inherently
+instantanous.
+\acp{abm} usually operate on the mesoscopic scale in which it is the researcher's task to asses
+which level of detail to utilize and which notion of division time is appropriate within the given
+context.
+Therefore, these processes should be captured by a corresponding dynamical description leading up to
+the time point in question (see section~\ref{section:dynamics}) or be omitted if not required.
+
+\paragraph{Division} via meiosis, mitosis or binary fission are among the most common types of
+cellular reproduction~\cite{Biov2014,Ilowiecki1981,von1835resp}.
+These process lead to the end of the mother's life and mark the beginning of the life the daughter
+cells.
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \filldraw[color=black,fill=black!5](-1,0) circle (0.707) node (m) {$m$};
+        \filldraw[color=black,fill=black!5](2.5,1.5) circle (0.5) node (d1) {$d_1$};
+        \filldraw[color=black,fill=black!5](2.5,-1.5) circle (0.5) node (d2) {$d_2$};
+        \draw[-] (0,0) -- (1.5,0);
+        \draw[->] (1.5,0) -- (2,0.75);
+        \draw[->] (1.5,0) -- (2,-0.75);
+    \end{tikzpicture}
+    \caption[Cellular division with two new unique daughter cells]{
+        The mother cell $m$ is split into two daughter cells $d_1,d_2$ which are treated as new
+        unique entities respecively.
+    }
+    \label{fig:theory-division-basic}
+\end{figure}
+We can therefore represent this as a mapping of one mother cell which is split into two new daughter
+cells as displayed in Figure~\ref{fig:theory-division-basic}.
+The mechanics of this process are assumed to alter the state of the mother cell in a significant
+matter, which justifies the notion of two new daughter cells which are distinct entities.
+However, this process does not need to guarantee that the resulting cells are exact copies but can
+introduce variations and asymmetries.
+Examples are the division of \ac{ecoli}~\cite{Sezonov2007} via binary fission, sporulation in yeasts
+such as \textit{Schizosaccharomyces japonicus}~\cite{Neiman2011,Tanaka1982} and mitosis in Hek293
+embryonic kidney cells~\cite{Molla2017}.
+Notice that these examples include sexual and asexual reproduction.
+
+\paragraph{Internal budding \& multiple fission} are other forms of reproduction which are similar
+to the previous case but do not produce two cells but rather a variable amount.
+Internal budding is observed in parasites such as \textit{Toxoplasma gondii}~\cite{Smyth1994} and
+multiple fission in some \textit{Myxogastria}~\cite{Baldauf1997}.
+For these less common cases, figure~\ref{fig:theory-division-basic} must be adjusted to produce an
+arbitrary amount of cells $n$, not just $n=2$.
+
+% \cite{Niki2014} - S. japonicus alone is dimorphic yeast, which can transit from unicellular yeast to long filamentous hyphae.
+
+\paragraph{Asymmetric reproduction} can, i.e., be observed in \textit{Saccharomyces cerevisiae},
+also known as \textit{budding yeast}.
+It is an eukaryotic model organism for molecular cell biology which reproduces asymmetrically, by
+forming a bud on the envelope of the mother cell that separates into a new daugher
+cell~\cite{Feldmann2010}
+This behavior is similar to the asymmetric division process of stem cells~\cite{BhavsarJog2017}.
+
+In this example, the mother cell can be assumed to not be replaced by two daughter cells but rather
+maintained throughout these processes.
+This is visualized in figure~\ref{fig:theory-asymmetric-reproduction} where the mother cell is not
+replaced but can of course be altered by the process of cell division and additionally a new
+daughter cell $d$ is created.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \filldraw[color=black,fill=black!5](-1,0) circle (0.707) node (m1) {$m$};
+        \filldraw[color=black,fill=black!5](3.5,0) circle (0.707) node (m2) {$m$};
+        \filldraw[color=black,fill=black!5](3.5,-2.0) circle (0.5) node (d) {$d$};
+        \draw[->] (0,0) -- (2.5,0);
+        \draw[->] (1.0,0) -- (2.5,-1.5);
+        % \draw[->] (1.5,0) -- (2,-0.75);
+    \end{tikzpicture}
+    \caption[Asymmetric cellular reproduction]{
+        The mother cell $m$ divides asymmetrically, and thus creates a new daughter $d$ but is not
+        replaced during the reproductive process.
+    }
+    \label{fig:theory-asymmetric-reproduction}
+\end{figure}
+
+\subsubsection{Formal Definitions}
 To allow for processes such as cell-division and death we additionally must be able to treat a
 variable number of cells throughout the evolution of the dynamical system.
 \todo[inline]{rewrite this sentence such that it makes more sense here}
 Cell division~\cite{bhlitem268752} is a process during which a cell transforms either via binary
 (or multiple) fission~\cite{Biov2014} or mitosis~\cite{Ilowiecki1981,von1835resp} and
-meiosis~\todo{CITATION} into separate
-daughter cells.
-On the subcellular level, these processes ocurr over extended periods of time which can be
-captured by a corresponding dynamical description of the process leading up to the time point in
-question (see section~\ref{section:dynamics}).
-Our \ac{abm} approach represents cells as discrete entities with well-defined division and death
-timings which may well be one of its weaknesses.
-In animal cells the time of division can for instance be defined by the end of cytokinesis~\cite{}
-\todo{citation}
-which is the instant when the microtubule and membrane that form the bridge between two daughter
-cells is cut.
-However it was shown that human HeLa and mouse BALB/c 3T3 cells are already in $G_1$ state at this
-time point~\cite{Gershony2014}.
-As expressed in the introductory section (\todo{ref. introduction} \ref{}), \acp{abm} usually take a
-mesoscopic approach and it is therefore the task of any researcher to pick a notion of division time
-that is appropriate for their desired model.
+meiosis~\todo{CITATION} into separate daughter cells.
 
 With the previous considerations in mind, we now focus on the instantanous event in which the
 discrete entity of a single cell is replaced/removed or inserted.
-Omitting the preceding dynamics, with this framework, cell division can viewed as the combination
-of the removal of one (mother) cell and the insertion of new daughter cells while cell death is
-simply the removal of one cell.
+With this framework, cell division can viewed as the combination of the removal of one (mother) cell
+and the insertion of new daughter cells while cell death is simply the removal of one cell.
 In practical cases, it is also important to include the concept of insertion and removal of cells
 which have not been the result of cellular division or death.
 Such a situation can become relevant, i.e., when observing a spatial subslice of a larger system
@@ -446,41 +530,97 @@ relation to any other existing cell can be assumed.
 Analogously, bacteria growing within the confinements of a mother machine may be sucked away by a
 fluidic flow, thus resulting in a de-facto removal from the observable region.
 
+We will now formalize these ideas by defining how one cellular state $(I_p,M)$ is mapped onto
+another by various cellular processes.
+
+First, we consider the division of a single cell and then extend its definition to multiple cells.
+As mentioned earlier, the combination of multiple division events are assumed to ocurr at the same
+time point.
+Any successive division events can simply be described by iteratively applying these methods.
+
+As noted earlier, most cells divide and produce exactly two new daughter cells but other forms such
+as multiple fission~\cite{Suresh1994,Peckov1990} or budding of yeast~\cite{Feldmann2010} can be
+observed in reality.
+Thus our single-cell division map $\gamma$ should be able to cover cases where more than two
+daughter cells result from a single event and also be able to retain the mother cell.
+This means that a single cell $c\in C$ is mapped to a tuple of arbitrary length $(c_1,c_2,\dots)$
+which live in a space $C^n$.
+To enforce the distinction between the products $C^n$ where $n\geq 2$ we utilize the disjoint union
+$\sqcup_{n\geq 2}C^n$ as the target space of the division process.
+% which can be formalized by $\sqcup_{n\geq 2}C^n=\{(n,\vec{c})|n\geq 2,\vec{c}\in C^n\}$.
+We therefore arrive at the function signature
+\begin{equation}
+    \gamma:C\rightarrow \sqcup_{n\geq 2}C^n.
+\end{equation}
+In order to apply the single-division function to a particular cell, we introduce an operator
+$\Upsilon$ which utilizes the division function $\gamma$ and applies it to a particular cell
+$c_\iota$ defined by the identifier $\iota\in M$.
+
+The cell-specific functionality is encoded within $\gamma$ and thus $\Upsilon$ should solely
+manage administrative tasks such as the creation and removal of unique new identifiers for the
+daughter cells.
+Therefore, $\Upsilon$ can be defined abstractly without the particular knowledge of $\gamma$ and is
+specific to the respective simulation framework.
+
 \begin{definition}[Single Cell Division]
-    We call a map $\gamma:C\rightarrow \cup_{n\geq 2}C^n$ a single division function and
-    $\Upsilon:\{\gamma:C\rightarrow \cup_{n\geq 2}C^n\}\times I\times\CS\rightarrow\CS$ a
-    single division operator if for any initial state $(I_p,M)\in\CS$ with $d_i\in M$ and
-    final state $(J_p,N)=\Upsilon(\eta,i,(I_p,M))$
+    We call a map $\gamma:C\rightarrow \sqcup_{n\geq 2}C^n$ a single division function and
+    $\Upsilon:\{\gamma:C\rightarrow \sqcup_{n\geq 2}C^n\}\times I\times\CS\rightarrow\CS$ a
+    single division operator if for any initial state $(I_p,M)\in\CS$ with $c_\iota\in M$ indicating
+    the mother cell and final state $(J_p,N)=\Upsilon(\gamma,\iota,(I_p,M))$, the following
+    conditions hold:
     \begin{enumerate}
-        \item (Removal) Exactly one cell is removed $M\backslash N=\{d_i\}$
-        \item (Insertion) At least two new cells are created:
-            $N\backslash M=\{c_\iota,\tilde{c}_{\tilde{\iota},\dots}\}$
+        \item (Removal) Exactly one cell is removed $M\backslash N=\{c_\iota\}$
+        \item (Insertion) At least two new cells are created by the division function $\gamma$
+        \begin{align}
+            \gamma(c_\iota)&=(c_1,\dots,c_n)\\
+            N\backslash M&=\{c_{i_1},\dots,c_{i_n}\}
+        \end{align}
+        where $\#N\backslash M\geq2$.
         \item (Tracking) We carry forward all old identifiers and the removed one:
             $J_p=I_p\cup\{i\}$
+            \todo[inline]{ensure that all identifiers are still related to the same cells as before}
         \item (Uniqueness) New cells have new identifiers: $\iota,\tilde{\iota},\dots\notin J_p$.
     \end{enumerate}
-    In the case when $i\notin\pi_1(M)$, we require $\Upsilon(\eta,i,(I_p,M))=(I_p,M)$.
+    In the case when $i\notin\pi_1(M)$, we require $\Upsilon(\gamma,i,(I_p,M))=(I_p,M)$.
     The last two conditions are to be thought of as one in order to guarantee uniqueness for each
     cell over the course of the total time of our system.
+    Note that condition 2 also ensures that all other cells remain untouched by the division
+    operator $\Upsilon$.
     \label{definition:cell-division-single}
 \end{definition}
 
+It is important to note that, while this definition seems cumbersome in the first place, it is
+essential in maintaining a valid cellular state.
+From an implementation viewpoint, it is desirable to only specify the single division map $\gamma$
+which maps a single cell $c$ onto new daughter cells.
+The method $\Upsilon$ which acts on $\CS$ may then be defined by the underlying modeling framework.
+It will depend on the choice of identifiers $\iota\in I$ but the overall dynamics of the system
+should be invariant under its particular choice.
+
+Definition~\ref{definition:cell-division-single} maps a single cell $c\in C$ onto multiple new cells
+$\{c_i\}\subset\cup_{n\geq 2}C^n$
+
+The function signature $\gamma:C\rightarrow\cup_{n\geq2}C^n$
+
 \begin{definition}[Cell Division]
-    A division function $\gamma$ is the concatenation of single division functions
-    $\{\gamma_i,i\in I\}$.
+    A division function $\Upsilon:\CS\rightarrow\CS$ is the combination of
+    multiple single division functions
+    $\{\gamma_i\}$.
+
+    concatenation of single division functions
+    $\{\gamma_i\}$.
     We require that the overall effect is independent of the order of their individual applications,
     ie.
     \begin{equation}
-        \prod\limits_{i_j\in I}\gamma_{i_j} = \prod\limits_{i\in I}\gamma_i
+        \gamma = \prod\limits_{i_j}\gamma_{i_j} = \prod\limits_{i}\gamma_i
     \end{equation}
     where the product is with respect to the concatenation of maps.
     \label{definition:cell-division-function}
 \end{definition}
 
-It is important to note that while this definition seems cumbersome in the first place, it is
-essential in upkeeping a valid cellular state.
-From an application standpoint, it is desirable to only specify the division map $\gamma$ and have
-$\Upsilon$ be defined by the underlying modeling framework.
+While it would be possible to construct the denamics of a \ac{cabm} purly by repeatedly applying
+division functions, it common practice to provide a division criterion which triggers the division
+function.
 
 Any single-cell division function is only executed once the division process is completed and the
 two new daughter cells can be identified.
