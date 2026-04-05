@@ -496,18 +496,28 @@ daughter cell $d$ is created.
     \centering
     \begin{tikzpicture}
         \filldraw[color=black,fill=black!5](-1,0) circle (0.707) node (m1) {$m$};
-        \filldraw[color=black,fill=black!5](3.5,0) circle (0.707) node (m2) {$m$};
+        \filldraw[color=black,fill=black!5](3.5,0) circle (0.6) node (m2) {$m$};
         \filldraw[color=black,fill=black!5](3.5,-2.0) circle (0.5) node (d) {$d$};
         \draw[->] (0,0) -- (2.5,0);
         \draw[->] (1.0,0) -- (2.5,-1.5);
         % \draw[->] (1.5,0) -- (2,-0.75);
     \end{tikzpicture}
     \caption[Asymmetric cellular reproduction]{
-        The mother cell $m$ divides asymmetrically, and thus creates a new daughter $d$ but is not
+        The mother cell $m$ divides asymmetrically, thus creating a new daughter $d$, but is not
         replaced during the reproductive process.
+        The state of $m$ can however be modified during this division process.
     }
     \label{fig:theory-asymmetric-reproduction}
 \end{figure}
+
+The process of multipolar budding where multiple budding cites develop simultanously at a single
+mother cell has been observed in
+\textit{Paracoccidioides brasiliensis}~\cite{Almeida2009,Carbonell1967}.
+It can also be induced in budding yeast by increasing polarity proteins within the
+cell~\cite{Chiou2021} or by a complete rewiring of the feedback loop~\cite{Howell2009}.
+In order to capture this phenomenon, we need to extend the right-hand side of
+Figure~\ref{fig:theory-asymmetric-reproduction} from a single daughter cell $d$ to multiple daughter
+cells $d_1,\dots,d_n$ in a similar fashion as done before.
 
 \subsubsection{Formal Definitions}
 To allow for processes such as cell-division and death we additionally must be able to treat a
