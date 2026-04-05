@@ -87,19 +87,20 @@ To motivate our constructions, we leverage known biological behaviour as a templ
 By formulating these concepts in abstract mathematical terms, we enable ourselves to cover a wide
 variety of \acp{cabm} and in turn cellular systems.
 
-\subsection{Adding and Removing Cells - Division, Death \& Others}
-Within any biological system, all cells have finite lifetimes with most fates resulting in either
-death via mechanisms such as apoptosis or necrosis or division thus creating new daughter cells
-which are considered distinct entities compared to their mother.
+\paragraph{Til Death or Division do us part}
+Cells generally have finite lifetimes which mostly result either death by mechanisms such as
+apoptosis (programmed cell death)~\cite{BOHM2003,Green2010,Raff1998},
+autophagy~\cite{Licheva2025,Galluzzi2017} or necrosis~\cite{Fink2005} which can also be regulated
+by genetic pathways~\cite{Berghe2014}.
 While these outcomes represent the majority of cellular fates, we have to remind ourselves that
 other forms such as cellular fusion~\cite{Ogle2004,Whitlock2024} or multiple
 fission~\cite{Suresh1994,Peckov1990} do exist.
+The former was observed as early as 1837 by Theodor Schwann~\cite{Schwann1847}.
 
-\todo{fix this; cells can also fuse}
 However when modeling such systems, it is important to also consider other forms of cell addition
 and removal.
-Most studied systems only represent a slice of the actual biological reality which is embedded in a
-larger complex.
+Most computational studies are only able to capture a slice of the actual biological reality in
+terms of complexity and size.
 Within this scope cells can be added or removed to the observable environment simply by moving
 into or out of the observed physical region.
 This is exemplified by microfluidic devices such as mother machines in which bacteria can be kept in
