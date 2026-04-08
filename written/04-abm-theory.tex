@@ -453,7 +453,8 @@ Notice that these examples include sexual and asexual reproduction.
 \paragraph{Internal budding \& multiple fission} are other forms of reproduction which are similar
 to the previous case but do not produce two cells but rather a variable amount.
 Internal budding is observed in parasites such as \textit{Toxoplasma gondii}~\cite{Smyth1994} and
-multiple fission in some \textit{Myxogastria}~\cite{Baldauf1997}.
+multiple fission in some \textit{Myxogastria}~\cite{Baldauf1997}, \textit{Blastocystis
+hominis}~\cite{Suresh1994} and \textit{Trypanoplasma}~\cite{Peckov1990}.
 For these less common cases, Figure~\ref{fig:theory-division-basic} must be adjusted to produce an
 arbitrary amount of cells $n$, not just $n=2$.
 
@@ -490,14 +491,77 @@ daughter cell $d$ is created.
     \label{fig:theory-asymmetric-reproduction}
 \end{figure}
 
-The process of multipolar budding where multiple budding cites develop simultanously at a single
-mother cell has been observed in
-\textit{Paracoccidioides brasiliensis}~\cite{Almeida2009,Carbonell1967}.
-It can also be induced in budding yeast by increasing polarity proteins within the
+\paragraph{Multipolar budding} describes a process where multiple budding cites develop
+simultanously at a single mother cell.
+It has been observed in \textit{Paracoccidioides brasiliensis}~\cite{Almeida2009,Carbonell1967}
+but can also be induced in budding yeast by increasing the abundance of polarity proteins within the
 cell~\cite{Chiou2021} or by a complete rewiring of the feedback loop~\cite{Howell2009}.
 In order to capture this phenomenon, we need to extend the right-hand side of
 Figure~\ref{fig:theory-asymmetric-reproduction} from a single daughter cell $d$ to multiple daughter
 cells $d_1,\dots,d_n$ in a similar fashion as done before.
+
+\paragraph{Cellular Death} can ocurr in various ways such as apoptosis (programmed cell
+death)~\cite{BOHM2003,Green2010,Raff1998}, autophagy~\cite{Licheva2025,Galluzzi2017} or
+necrosis~\cite{Fink2005} where the latter can also be regulated by genetic
+pathways~\cite{Berghe2014}.
+Similarly to before, if processes such as autophagy~\cite{Marshall2018} are considered, they need to
+be accounted for in the dynamics of the respective system.
+We are now only interested in the instantanous time point at which the cellular entitiy, i.e. agent
+is removed.
+Figure~\ref{fig:theory-cell-death}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \filldraw[color=black,fill=black!5](-1,0) circle (0.707) node (m1) {$m$};
+        \node at (3.5,0) (m2) {$\varnothing$};
+        \draw[->] (0,0) -- (2.5,0);
+    \end{tikzpicture}
+    \caption[Cellular Death \& Removal]{
+        The mother cell $m$ divides asymmetrically, thus creating a new daughter $d$, but is not
+        replaced during the reproductive process.
+        The state of $m$ can however be modified during this division process.
+    }
+    \label{fig:theory-cell-death}
+\end{figure}
+
+\paragraph{Other processes} such as cellular fusion~\cite{Ogle2004,Whitlock2024} where multiple
+cells are combined into one single new cell can also alter the cardinality of the cellular state.
+This phenomenon was first hinted at by Theodor Schwann~\cite{Schwann1847} as early as 1847.
+It would however take until 1960 before this was first induced experimentally~\cite{Barski1960}.
+Fusing two or more cells, regardless of their type, can be viewed as removing said individual
+entities and inserting a completely new agent as displayed in Figure~\ref{fig:theory-cell-fusion}.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \filldraw[color=black,fill=black!5](-1, 1) circle (0.5) node (c1) {$c_1$};
+        \filldraw[color=black,fill=black!5](-1,-1) circle (0.5) node (c2) {$c_2$};
+        \filldraw[color=black,fill=black!5](2.5,0) circle (0.707) node (d1) {$c_3$};
+        \draw[->] (0.75,0) -- (1.5,0);
+        \draw[-] (0, 0.5) -- (0.75,0);
+        \draw[-] (0,-0.5) -- (0.75,0);
+    \end{tikzpicture}
+    \caption[Cellular Fusion]{
+        The two cells $c_1$ and $c_2$ which fuse to form a completely new cellular entitiy $c_3$.
+    }
+    \label{fig:theory-cell-fusion}
+\end{figure}
+
+However when modeling such systems, it is important to also consider other forms of cell addition
+and removal.
+Most computational studies are only able to capture a slice of the actual biological reality in
+terms of complexity and size.
+Within this scope cells can be added or removed to the observable environment simply by moving
+into or out of the observed physical region.
+This is exemplified by microfluidic devices such as mother machines in which bacteria can be kept in
+a state of continuous growth while excess cells are simply sucked away by fluidic forces.
+\todo{citation}
+One technique to avoid the challenges of inspecting a subslice of a larger biological system
+is to consider periodic spatial boundary conditions within the constructed model.
+This is for instance commonly employed in densely packed epithelial cell sheets but can not be
+applied generally across all systems as the previous example of the mother machine shows.
+\todo{citation}
 
 \subsubsection{Formal Definitions}
 To allow for processes such as cell-division and death we additionally must be able to treat a
@@ -505,7 +569,7 @@ variable number of cells throughout the evolution of the dynamical system.
 \todo[inline]{rewrite this sentence such that it makes more sense here}
 Cell division~\cite{bhlitem268752} is a process during which a cell transforms either via binary
 (or multiple) fission~\cite{Biov2014} or mitosis~\cite{Ilowiecki1981,von1835resp} and
-meiosis~\todo{CITATION} into separate daughter cells.
+meiosis~\cite{Urry2020} into separate daughter cells.
 
 With the previous considerations in mind, we now focus on the instantanous event in which the
 discrete entity of a single cell is replaced/removed or inserted.
