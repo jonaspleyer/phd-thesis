@@ -87,38 +87,17 @@ To motivate our constructions, we leverage known biological behaviour as a templ
 By formulating these concepts in abstract mathematical terms, we enable ourselves to cover a wide
 variety of \acp{cabm} and in turn cellular systems.
 
-\paragraph{Til Death or Division do us part}
-Cells generally have finite lifetimes which mostly result either death by mechanisms such as
-apoptosis (programmed cell death)~\cite{BOHM2003,Green2010,Raff1998},
-autophagy~\cite{Licheva2025,Galluzzi2017} or necrosis~\cite{Fink2005} which can also be regulated
-by genetic pathways~\cite{Berghe2014}.
-While these outcomes represent the majority of cellular fates, we have to remind ourselves that
-other forms such as cellular fusion~\cite{Ogle2004,Whitlock2024} or multiple
-fission~\cite{Suresh1994,Peckov1990} do exist.
-The former was observed as early as 1837 by Theodor Schwann~\cite{Schwann1847}.
-
-However when modeling such systems, it is important to also consider other forms of cell addition
-and removal.
-Most computational studies are only able to capture a slice of the actual biological reality in
-terms of complexity and size.
-Within this scope cells can be added or removed to the observable environment simply by moving
-into or out of the observed physical region.
-This is exemplified by microfluidic devices such as mother machines in which bacteria can be kept in
-a state of continuous growth while excess cells are simply sucked away by fluidic forces.
-\todo{citation}
-One technique to avoid the challenges of inspecting a subslice of a larger biological system
-is to consider periodic spatial boundary conditions within the constructed model.
-This is for instance commonly employed in densely packed epithelial cell sheets but can not be
-applied generally across all systems as the previous example of the mother machine shows.
-\todo{citation}
+The next subsections will discuss how the concepts of cellular identity, division and death can be
+interpreted using an individual-based approach.
+We will also briefly discuss some practical aspects such as construction of unique identifiers and
+tracability of cells in applications.
 
 \subsection{A Cellular Identity Crisis}
 Leaving practical limitations aside, in principle cellular systems are characterized by the fact
 that cells are tracable through time and space.
 Moreover, this involves keeping track of their lineage which starts either at the initial time point
 of the experiment or after the division of their mother cell.
-The cell's lifetime ends when it reaches a final fate such as in death or division or at the end of
-the observed time interval.
+The cell's lifetime ends when it reaches a final fate such as in death or division.
 The experimental process of imaging cells and tracking their movement through time and space
 is a considerable challenge to this day.
 While a set of tools exist that facilitate static spatial segmentation, \todo{insert citations}
@@ -332,7 +311,7 @@ But it can still yield valuable information about cellular fate through differen
     \label{fig:theory-thought-experiment-3}
 \end{figure}
 
-\subsection{Construction}
+\subsection{Construction of the Cellular State}
 The considerations of the preceding section exemplify the need to uniquely label and track cells
 throughout their life-time.
 This can be achieved by assigning unique identifiers to each cell, which enables us to properly
@@ -407,7 +386,7 @@ While processes such as movement of the cells or physical interactions can chang
 cellular configurations $c$, they preserve the cellular identity and thus the unique cells
 $\pi_1(M)$ and $I_p$ which are contained within the state.
 
-\subsection{Changing the Cellular State - Death, Division \& Others}
+\subsection{Til Death or Division do us part}
 To continue our investigation of uniqueness, we now want to turn our attention to processes such as
 cell division and cell death that lead to changes in the cellular state which require updating the
 tracked indices.
@@ -420,7 +399,7 @@ We first investigate different biological processes that correspond to distinct 
 cardinality of the cellular state can be altered by a single division or death event.
 These will shape the following definitions and guide the overall throught processes behind them.
 
-\subsubsection{A Primer on Cellular Reproduction}
+\subsubsection{A Primer on Cellular Reproduction \& Death}
 On the subcellular level, these processes ocurr over extended periods of time.
 In contrast, our \ac{abm} approach represents cells as discrete entities with well-defined division
 and death timings which could be seen as one of its biggest conceptual weaknesses.
