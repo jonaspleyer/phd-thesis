@@ -525,12 +525,13 @@ Figure~\ref{fig:theory-cell-death}
     \label{fig:theory-cell-death}
 \end{figure}
 
-\paragraph{Other processes} such as cellular fusion~\cite{Ogle2004,Whitlock2024} where multiple
+\paragraph{Other processes} such as fusion~\cite{Ogle2004,Whitlock2024} where multiple
 cells are combined into one single new cell can also alter the cardinality of the cellular state.
-This phenomenon was first hinted at by Theodor Schwann~\cite{Schwann1847} as early as 1847.
-It would however take until 1960 before this was first induced experimentally~\cite{Barski1960}.
+Theodor Schwann hinted at this phenomenon as early as 1847~\cite{Schwann1847} but it would take
+until 1960 before it was first achieved experimentally~\cite{Barski1960}.
 Fusing two or more cells, regardless of their type, can be viewed as removing said individual
-entities and inserting a completely new agent as displayed in Figure~\ref{fig:theory-cell-fusion}.
+entities and inserting a completely new agent in their place which is displayed in 
+Figure~\ref{fig:theory-cell-fusion}.
 
 \begin{figure}[h]
     \centering
@@ -543,34 +544,39 @@ entities and inserting a completely new agent as displayed in Figure~\ref{fig:th
         \draw[-] (0,-0.5) -- (0.75,0);
     \end{tikzpicture}
     \caption[Cellular Fusion]{
-        The two cells $c_1$ and $c_2$ which fuse to form a completely new cellular entitiy $c_3$.
+        Cells $c_1$ and $c_2$ fuse to form a completely new cellular entitiy $c_3$.
+        The cell $c_3$ is therefore related to $c_1$ and $c_2$ but not due to division.
     }
     \label{fig:theory-cell-fusion}
 \end{figure}
 
-However when modeling such systems, it is important to also consider other forms of cell addition
-and removal.
-Most computational studies are only able to capture a slice of the actual biological reality in
-terms of complexity and size.
+\paragraph{Other forms of additional and removal} need to be accounted for as well.
+When modeling cellular systems, most computational studies are only able to capture a small slice of
+the actual size of the biological reality present.
 Within this scope cells can be added or removed to the observable environment simply by moving
 into or out of the observed physical region.
-This is exemplified by microfluidic devices such as mother machines in which bacteria can be kept in
-a state of continuous growth while excess cells are simply sucked away by fluidic forces.
-\todo{citation}
-One technique to avoid the challenges of inspecting a subslice of a larger biological system
+This can be seen in a puristic manner in microfluidic devices such as mother
+machines~\cite{Wang2010Robust} in which bacteria can be kept in a state of continuous
+growth~\cite{Yang2018,Kaiser2018} while excess cells are sucked away by fluidic
+forces~\cite{Grnberger2014}.
+However, when studying other systems such as the varying modes of cancer migration~\cite{Friedl2003}
+or swarming of \textit{Paenibacillus}~\cite{Ingham2008}, this puristic notion can not be upheld and
+tracability of cells begins to get messy.
+
+One common technique to avoid the challenges of inspecting a subslice of a larger biological system
 is to consider periodic spatial boundary conditions within the constructed model.
-This is for instance commonly employed in densely packed epithelial cell sheets but can not be
-applied generally across all systems as the previous example of the mother machine shows.
-\todo{citation}
+This is for instance commonly employed in densely packed epithelial cell
+sheets~\cite{Bi2015,Bi2016,Tong2022} but can only be applied when a sufficiently small area of the
+complete tissue is investigated and is only a valid simplification in certain justified scenarios
+and not generally applicable across all systems.
+
+Another case that deliberate cellular insertion is of practical importance can be made when
+investigating the effect of predator-like cells such as \textit{Bdellovibrio bacteriovorus} on the
+growth of \ac{ecoli}~\cite{Sockett2009}.
+In these studies, preformed prey assays are used where the \ac{ecoli} colony is allowed to grow,
+often by forming biofilms, before the predator is introduced into the system~\cite{Kadouri2005}.
 
 \subsubsection{Formal Definitions}
-To allow for processes such as cell-division and death we additionally must be able to treat a
-variable number of cells throughout the evolution of the dynamical system.
-\todo[inline]{rewrite this sentence such that it makes more sense here}
-Cell division~\cite{bhlitem268752} is a process during which a cell transforms either via binary
-(or multiple) fission~\cite{Biov2014} or mitosis~\cite{Ilowiecki1981,von1835resp} and
-meiosis~\cite{Urry2020} into separate daughter cells.
-
 With the previous considerations in mind, we now focus on the instantanous event in which the
 discrete entity of a single cell is replaced/removed or inserted.
 With this framework, cell division can viewed as the combination of the removal of one (mother) cell
