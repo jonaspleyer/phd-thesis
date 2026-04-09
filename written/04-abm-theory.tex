@@ -87,12 +87,45 @@ To motivate our constructions, we leverage known biological behaviour as a templ
 By formulating these concepts in abstract mathematical terms, we enable ourselves to cover a wide
 variety of \acp{cabm} and in turn cellular systems.
 
-The next subsections will discuss how the concepts of cellular identity, division and death can be
+The next subsections will discuss how the concepts of cellular uniqueness, division and death can be
 interpreted using an individual-based approach.
 We will also briefly discuss some practical aspects such as construction of unique identifiers and
 tracability of cells in applications.
 
 \subsection{A Cellular Identity Crisis}
+The concepts discussed in this section cover the concept of cellular identifiability, meaning the
+ability to observe, model and asses cells as individual entitites which is foundational to the
+individual-based approach of \acp{cabm}.
+Treating every cell as individual entitity will allow our framework to properly account for
+cell-to-cell variability and phenotypic/genotypic heterogeneity.
+These concepts should not be confused with the question of cell types which is sometimes also
+referred to as cellular identity.
+In order to clearly separate these from each other, we first summarize the latter genomic approach
+and then focus on the former individual-based choice.
+
+\subsubsection{Differentiating Cell Types - The Success of Single-Cell Genomics}
+The concept of cellular identity or the notion of cell types is to categorize individual cells
+into groups of similar behaviour, but its precise meaning remains poorly
+defined~\cite{Morris2019}.
+When dealing with \acp{grn}, one can view any single cell as defined by its transcription factors
+and resulting reaction dynamics~\cite{Cahan2014}.
+
+Another viewpoint of cellular identity is by means of the epigenetic
+landscape which was first introduced by Waddington in 1958~\cite{Waddington1958} and could later
+be understood in terms of modern single-cell genomics~\cite{Huang2011,Wagner2016}.
+Within this framework, cell-types can be understood as local attractors~\cite{Ye2018}.
+
+In contrast to the \ac{grn}-based approach, other forms of cellular identity have also been proposed
+over the later years~\cite{Kim2021}.
+One can summarize all of the presented efforts by stating that their main goal is to categorize a
+collection of cells by a respective commonality shared between them.
+
+\subsubsection{Individual-based Approach \& Cellular Identifiability}
+In contrast to the bulk-based approach explained just before, we are now interested in individual
+cells of a larger collection.
+This section discusses various conceptual and practical aspects of this individual-based approach.
+
+\todo[inline]{rephrase the following sentences. Remove the word "identity". Make everything nicer.}
 Leaving practical limitations aside, in principle cellular systems are characterized by the fact
 that cells are tracable through time and space.
 Moreover, this involves keeping track of their lineage which starts either at the initial time point
@@ -100,9 +133,9 @@ of the experiment or after the division of their mother cell.
 The cell's lifetime ends when it reaches a final fate such as in death or division.
 The experimental process of imaging cells and tracking their movement through time and space
 is a considerable challenge to this day.
-While a set of tools exist that facilitate static spatial segmentation, \todo{insert citations}
-the dynamic extension of imaging and tracking cells through space still poses a substantial problem.
-\todo{cite cell tracking challenge}
+While a set of tools exist that facilitate static spatial
+segmentation~\cite{Cutler2022,Stringer2020,Hardo2022}, the dynamic extension of imaging and tracking
+cells through space still poses a substantial problem~\cite{Maka2014,Maka2023,Ulman2017,Wen2021}.
 
 \todo{overall we need more citations here}
 These considerations lead to a notion of cellular identity which is not coupled to the physical
