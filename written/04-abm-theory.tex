@@ -288,30 +288,6 @@ If we would perform a hypothetical exchange of child $c_{12}$ with $c_{21}$, thi
 two grandchild-cells $gc_{212}$ and $gc_{221}$ would have different grandparent-cells and thus
 result in an invalid parental state.
 
-In general, it has to be noted that the explicit type of representation of the chosen identifiers
-is irrelevant as long as they adhere to the discussed principles.
-This leaves open various choices of how to define them which will be discussed later in
-Example~\ref{example:unique-identifiers-1-global-counter} to
-\ref{example:unique-identifiers-3-spatial-subdivision}.
-Using any choice of such identifiers would circumvent the described problems of the previous
-thought experiments and establish a direct link between cells in the model and
-the experiment without relying on complex comparison metrics.
-
-While these thoughts are puristic in nature, they set the stage for the comming theoretical
-considerations.
-Chapter~\ref{chapter:bacterial-rods} utilizes both properties; the uniqueness and
-the parental relationships of the identifiers to construct metrics that can be used to estimate
-parameters of a mechanical model for flexible elongated bacteria.
-This shows that the presented ideas are not only of theoretical nature but can also be useful in
-practical applications.
-
-However, these considerations are bound by practical limitations and can be difficult
-to enforce in other systems such as when high stochastic fluctuations lead to decorrelation of any
-two successive measured time points.
-In these scenarios it is questionable if the concept of cellular identity does provide
-meaningful insights into the spatial dynamics of the system.
-But it can still yield valuable information about cellular fate through differentiation.
-
 \begin{figure}
     \centering
     \begin{tikzpicture}[level distance=1.5cm,
@@ -422,6 +398,31 @@ agents but are still missing any notion of dynamics.
 While processes such as movement of the cells or physical interactions can change the individual
 cellular configurations $c$, they preserve the cellular identity and thus the unique cells
 $\pi_1(M)$ and $I_p$ which are contained within the state.
+
+\subsubsection{Conclusions}
+In general, it has to be noted that the explicit type of representation of the chosen identifiers
+is irrelevant as long as they adhere to the discussed principles.
+This leaves open various choices of how to define them which will be discussed later in
+Example~\ref{example:unique-identifiers-1-global-counter} to
+\ref{example:unique-identifiers-3-spatial-subdivision}.
+Using any choice of such identifiers would circumvent the described problems of the previous
+thought experiments and establish a direct link between cells in the model and
+the experiment without relying on complex comparison metrics.
+
+While these thoughts are puristic in nature, they set the stage for the comming theoretical
+considerations.
+Chapter~\ref{chapter:bacterial-rods} utilizes both properties; the uniqueness and
+the parental relationships of the identifiers to construct metrics that can be used to estimate
+parameters of a mechanical model for flexible elongated bacteria.
+This shows that the presented ideas are not only of theoretical nature but can also be useful in
+practical applications.
+
+However, these considerations are bound by practical limitations and can be difficult
+to enforce in other systems such as when high stochastic fluctuations lead to decorrelation of any
+two successive measured time points.
+In these scenarios it is questionable if the concept of cellular identity does provide
+meaningful insights into the spatial dynamics of the system.
+But it can still yield valuable information about cellular fate through differentiation.
 
 \subsection{Til Death or Division do us part}
 To continue our investigation of uniqueness, we now want to turn our attention to processes such as
