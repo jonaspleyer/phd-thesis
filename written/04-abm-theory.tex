@@ -93,37 +93,63 @@ We will also briefly discuss some practical aspects such as construction of uniq
 tracability of cells in applications.
 
 \subsection{A Cellular Identity Crisis}
-\todo[inline]{rephrase the following sentences. Remove the word "identity". Make everything nicer.}
-Leaving practical limitations aside, in principle cellular systems are characterized by the fact
-that cells are tracable through time and space.
-Moreover, this involves keeping track of their lineage which starts either at the initial time point
-of the experiment or after the division of their mother cell.
-The cell's lifetime ends when it reaches a final fate such as in death or division.
-The experimental process of imaging cells and tracking their movement through time and space
-is a considerable challenge to this day.
-While a set of tools exist that facilitate static spatial
-segmentation~\cite{Cutler2022,Stringer2020,Hardo2022}, the dynamic extension of imaging and tracking
-cells through space still poses a substantial problem~\cite{Maka2014,Maka2023,Ulman2017,Wen2021}.
+Our mathematical formalism aims to describe a variable amount of cells.
+In order to properly distinguish cells from each other we aim to provide an identification scheme
+that discriminates between each individual entity.
+The following examples should be viewed as thought-provoking background information and motivation
+for the coming definitions.
 
-\todo{overall we need more citations here}
-These considerations lead to a notion of cellular identity which is not coupled to the physical
-properties of the cell but rather defined by its lineage.
-To illustrate the practial implications of this idea, we perform a thought experimet.
-We assume that a cell is defined by its position on a lattice grid and discrete internal states.
+% \todo[inline]{rephrase the following sentences. Remove the word "identity". Make everything nicer.}
+\subsubsection{Tracability}
+Cellular systems are characterized by the fact that---leaving practical limitations aside---cells
+are tracable through time and space.
+This means that the trajectory of any cell can be followed precisely over the course of its
+lifetime.
+Moreover, this involves keeping track of its lineage which starts either at the initial time point
+of the experiment or when the cell is newly created, e.g. after the division of their mother cell.
+These ideas tie into the concept of \textbf{Cellular Continuity} which states that any cell arises
+purely from other pre-existing cells~\cite{Mazzarello1999}.
+But this is not merely a genetic relation which is supported by the observations that new membranes
+are only formed by extending and dividing existing ones~\cite{Harold2005} and mitochondria need to
+be inherited during cell division~\cite{Westermann2010}.
+The cell's lifetime ends when it reaches a final fate such as death or division.
+Furthermore, once a cell has ceased to exist, it will not reemerge by any other mechanism.
+These conceptually simple ideas already capture important core ideas of how to identify cells.
+On the application side, the process of identifying cells in microscopic (3D) images is known as
+spatial segmentation~\cite{Cutler2022,Stringer2020,Hardo2022}.
+These methods can be extended to dynamically track cells over the course of time but the additional
+complexity still poses substantial problems for existing
+solutions~\cite{Maka2014,Maka2023,Ulman2017,Wen2021}.
+
+\subsubsection{Identification via Cellular Properties}
+One could be tempted to identify each cell by its physical and internal properties.
+However, while this idea is supported by the concept of \textbf{Cellular Uniqueness} which states
+that no two cells will ever be identical, even when sharing equal genetic material, it leaves out
+practical challenges of modeling such systems.
+To illustrate this, we perform a thought experiment.
+% \todo{overall we need more citations here}
+% These considerations lead to a notion of cellular identity which is not coupled to the physical
+% properties of the cell but rather defined by its lineage.
+% \todo{our concept of uniqueness is not defined by lineage}
+% To illustrate the practial implications of this idea, we perform a thought experimet.
+We assume that a cell is defined by its position on a lattice grid $\mathbb{Z}$ together with some
+form of discrete internal state.
 The dynamics of the system are irrelevant for our considerations but we assume that multiple cells
 can occupy the same position.
 If two cells with matching internal states sit at the same location, they can not be
 distinguished from each other if no additional properties of both cells are tracked.
 One could be tempted to interpret this within the scope of the principle of indistinguishable
-particles which is employed across statistical physics.
+particles which is employed across statistical physics often attributed to Dirac~\cite{Dirac1926}.
 Quantum systems in particular are known to utilize this assumption for elementary particles such as
-bosonic ones where exchange of two particles leaves the wave function unchanged.
+bosonic ones where exchange of two particles leaves the wave function
+unchanged~\cite{Griffiths2018}.
 However, said assumption is in general not valid for such complex entities as biological cells.
-The reason that these cells seem indistinguishable is that our reduced model captures only
+The only reason that these cells seem indistinguishable is that our reduced model captures only
 coarse cellular properties.
+Slight model adjustments could lead to a proper discrimination between the two entities.
 
 But while the specific cellular representation within our model is a key question for any scientist,
-it is not the only source of identity challenges.
+it is not the only source of identification challenges.
 If we set out to directly compare model results to biological observations, a similar problem
 emerges.
 We now omit the assumption of discreteness in our model and consider a situation in which simulation
@@ -132,17 +158,19 @@ The model is initialized with a known state given by experimental data and compa
 point.
 Such a comparison will in practice always require a notion of distance as a metric $d(\cdot,\cdot)$
 in the space of our observable quantity.
-We set out to link experimental cells to the model output but assume that the chosen metric only
-involves physical cellular properties such as the position of the cell or some form of readout
-e.g. by tagging with \ac{gfp}~\cite{Chalfie1994}.
-Consider the case where two cells $c_{m,1},c_{m,2}$ in the model output are approximately equally
-close to the experimental state of a particular cell $c_e$ under this chosen metric, i.e.
+We set out to link experimental cell states to states produced by our model but assume that the
+chosen metric only involves physical cellular properties such as the position of the cell or some
+form of readout e.g. by tagging with \ac{gfp}~\cite{Chalfie1994}.
+In general, we can not assume that the model output and experimental results will match identically,
+but rather be within some given margin of error.
+We now consider the case where two cells $c_{m,1},c_{m,2}$ in the model output are approximately
+equally close to the experimental state of a particular cell $c_e$ under this chosen metric, i.e.
 $d(c_{m,1},c_e)\approx d(c_{m,2},c_e)$.
 Without any additional input, we can not tell if $c_{m,1}$ or $c_{m,2}$ of the model output
 corresponds to $c_e$ within the experiment.
-Furthermore even if the obtained distance values would exhibit a clear discrepancy, the link between
-model and experimental reality could be flawed if simply the closest cell is also assumed to be
-linked to the experimental one.
+Going one step further; even if the obtained distance values would exhibit a clear discrepancy, the
+link between model and experimental reality could be flawed if simply the closest cell is also
+assumed to be linked to the experimental one.
 Such a situation can occur for example if the model output is far from the
 actual biological reality.
 Consider the case in which cell $c_{m,1}$ was first seeded with the information provided by
@@ -150,10 +178,10 @@ $c_e$ at the initial time point.
 If the model produced results such that $c_{m,2}$ was closer to $c_e$,
 the cells would be linked incorrectly by our previously envisioned metric and the resulting error
 would not be caught.
-This will not only result in a mismatched link between but more importantly to a lower
-measured discrepancy between model and reality.
-Such a behaviour is unacpetable when it comes to estimating parameters of any system and therefore
-shows the clear need to include this cellular identity.
+This will not only result in a mismatched link of experiment and model but more importantly also
+lead to a lower measured discrepancy between model and reality.
+Such a behaviour is unacceptable when it comes to estimating parameters of any system and therefore
+shows the clear need for another method of cellular identification.
 
 % \begin{figure}
 %     \centering
@@ -173,6 +201,7 @@ shows the clear need to include this cellular identity.
 %     \label{}
 % \end{figure}
 
+\subsubsection{Cell Lineage}
 In a final thought experiment we omit any spatial considerations or concepts of closeness in order
 to further exemplify the idea of cellular identity.
 Consider a system of two distinct cell species $A$ and $B$ where both types are able to divide but
