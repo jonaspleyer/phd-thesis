@@ -99,7 +99,6 @@ that discriminates between each individual entity.
 The following examples should be viewed as thought-provoking background information and motivation
 for the coming definitions.
 
-% \todo[inline]{rephrase the following sentences. Remove the word "identity". Make everything nicer.}
 \subsubsection{Tracability}
 Cellular systems are characterized by the fact that---leaving practical limitations aside---cells
 are tracable through time and space.
@@ -127,11 +126,7 @@ However, while this idea is supported by the concept of \textbf{Cellular Uniquen
 that no two cells will ever be identical, even when sharing equal genetic material, it leaves out
 practical challenges of modeling such systems.
 To illustrate this, we perform a thought experiment.
-% \todo{overall we need more citations here}
-% These considerations lead to a notion of cellular identity which is not coupled to the physical
-% properties of the cell but rather defined by its lineage.
-% \todo{our concept of uniqueness is not defined by lineage}
-% To illustrate the practial implications of this idea, we perform a thought experimet.
+\todo{overall we need more citations here}
 We assume that a cell is defined by its position on a lattice grid $\mathbb{Z}$ together with some
 form of discrete internal state.
 The dynamics of the system are irrelevant for our considerations but we assume that multiple cells
@@ -202,8 +197,7 @@ shows the clear need for another method of cellular identification.
 % \end{figure}
 
 \subsubsection{Cell Lineage}
-In a final thought experiment we omit any spatial considerations or concepts of closeness in order
-to further exemplify the idea of cellular identity.
+In a final thought experiment we omit any spatial considerations or concepts of closeness.
 Consider a system of two distinct cell species $A$ and $B$ where both types are able to divide but
 in addition $A$ can differentiate into $B$.
 The initial state consists of two cells $c_1\in A,c_2\in B$ of distinct species and the final state
@@ -265,15 +259,15 @@ interpretation.
     \label{fig:theory-thought-experiment-2}
 \end{figure}
 
-All of these thought experiments would be solved by keeping track of the cellular identity in the
-form of a identifier which is not only unique at any given time point but throughout the whole
+The preceding thought exercises would be resolved by assigning a unique identifier to each new
+cellular entity which is not only unique at any given time point but throughout the whole
 observed time interval.
 This means in particular that even if a cell is removed from the simulation that no newcoming cell
 will reuse any preexisting identifier.
-These identifiers can not only be used to distinguish between agents but also to keep track of
-mother-daughter relationships.
-The idea of cellular identity being closely tied to their lineage is further made clear when listing
-cellular relations as a family tree.
+Identifiers can not only be used to distinguish between agents but also to keep track of
+parental relationships between the cells.
+The idea of cellular identification being closely tied to their lineage is further made clear when
+listing cellular relations as a family tree.
 Figure~\ref{fig:theory-thought-experiment-3} shows a tree of multiple parents $p_i$, children
 $c_j$ and grandchildren $gc_k$.
 If we would perform a hypothetical exchange of child $c_{12}$ with $c_{21}$, this would mean that
@@ -340,7 +334,7 @@ But it can still yield valuable information about cellular fate through differen
     \label{fig:theory-thought-experiment-3}
 \end{figure}
 
-\subsection{Construction of the Cellular State}
+\subsubsection{Definition of the Cellular State}
 The considerations of the preceding section exemplify the need to uniquely label and track cells
 throughout their life-time.
 This can be achieved by assigning unique identifiers to each cell, which enables us to properly
@@ -428,7 +422,7 @@ We first investigate different biological processes that correspond to distinct 
 cardinality of the cellular state can be altered by a single division or death event.
 These will shape the following definitions and guide the overall throught processes behind them.
 
-\subsubsection{A Primer on Cellular Reproduction \& Death}
+\subsubsection{A Primer on Cellular Reproduction, Death \& Fusion}
 On the subcellular level, these processes ocurr over extended periods of time.
 In contrast, our \ac{abm} approach represents cells as discrete entities with well-defined division
 and death timings which could be seen as one of its biggest conceptual weaknesses.
@@ -530,7 +524,7 @@ Figure~\ref{fig:theory-asymmetric-reproduction} from a single daughter cell $d$ 
 cells $d_1,\dots,d_n$ in a similar fashion as done before.
 
 \paragraph{Cellular Death} can ocurr in various ways such as apoptosis (programmed cell
-death)~\cite{BOHM2003,Green2010,Raff1998}, autophagy~\cite{Licheva2025,Galluzzi2017} or
+death)~\cite{Kerr1972,BOHM2003,Green2010,Raff1998}, autophagy~\cite{Licheva2025,Galluzzi2017} or
 necrosis~\cite{Fink2005} where the latter can also be regulated by genetic
 pathways~\cite{Berghe2014}.
 Similarly to before, if processes such as autophagy~\cite{Marshall2018} are considered, they need to
