@@ -570,22 +570,42 @@ exist.
 cell~\cite{Ogle2004,Whitlock2024}.
 Theodor Schwann hinted at this phenomenon as early as 1847~\cite{Schwann1847} but it would take
 until 1960 before it was first achieved experimentally~\cite{Barski1960}.
-Fusing two or more cells, regardless of their type, can be viewed as removing said individual
-entities and inserting a completely new agent in their place which is displayed in 
-Figure~\ref{fig:theory-cell-fusion}.
-This process therefore also alters the cardinality of the cellular state.
 Its arguably most notable example is the fertilization process of a human oocyte which is the fusion
 of the sperm and egg into a single-celled zygote~\cite{Cobb2012,Neaves2017,Primakoff2002}.
+Fusion can also be observed in the formation of skeletal muscle fibers which was initially believed
+to be an artifact of lab-grown cells but was later replicated \textit{in Vivo}~\cite{Mintz1967}.
+Using the \textit{Drosophila} model orgnaism, it could be shown that myblast fusion is asymmetrical
+and ocurrs between distinct classes of cells where one cell acts as a "Founder cell"
+while the remaining partners mainly contribute bulk mass~\cite{Bate1990,Bour2000}.
+Another example is the mammalian placenta whose outer tissue layer consists of
+\textit{syncytiotrophoblast} with multiple nuclei~\cite{Midgley1963}.
+Surprisingly, it was found that the \textit{Syncytin-1} protein driving the fusion is not a human
+gene but rather of a virus whose genetic code is now being repurposed~\cite{Mi2000,Dupressoir2009}.
+
+The listed examples show in great detail that the underlying complexity warrants that the resulting
+cell can both be treated as a new cell (e.g. fertilization) or as an existing cell (e.g. myoblast
+fusion).
+Fusing two cells can therefore be viewed as either removing both cells and inserting a completely
+new one or removing one cell and adjusting the state of the other.
+This process is displayed schematically in Figure~\ref{fig:theory-asymmetric-reproduction}.
 
 \begin{figure}[h]
     \centering
     \begin{tikzpicture}
+        \node at (-2,1.5) {\textbf{A}};
         \filldraw[color=black,fill=black!5](-1, 1) circle (0.5) node (c1) {$c_1$};
         \filldraw[color=black,fill=black!5](-1,-1) circle (0.5) node (c2) {$c_2$};
         \filldraw[color=black,fill=black!5](2.5,0) circle (0.707) node (d1) {$c_3$};
         \draw[->] (0.75,0) -- (1.5,0);
         \draw[-] (0, 0.5) -- (0.75,0);
         \draw[-] (0,-0.5) -- (0.75,0);
+
+        \node at (5,1.5) {\textbf{B}};
+        \filldraw[color=black,fill=black!5](6, 1) circle (0.5) node (c1) {$c_1$};
+        \filldraw[color=black,fill=black!5](6,-1) circle (0.5) node (c2) {$c_2$};
+        \filldraw[color=black,fill=black!5](9.5,1) circle (0.707) node (d1) {$c_1$};
+        \draw[->] (7,1) -- (8.5,1);
+        \draw[-] (7,-0.25) -- (8,1);
     \end{tikzpicture}
     \caption[Cellular Fusion]{
         Cells $c_1$ and $c_2$ fuse to form a completely new cellular entitiy $c_3$.
