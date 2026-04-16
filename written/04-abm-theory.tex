@@ -714,21 +714,21 @@ This allows us to factorize $\gamma$ via
         \draw[->] (i2) -- node[right,below,xshift=1em] {$\pi_{2,3}$} ++ (i3);
     \end{tikzpicture}
 \end{figure}
-where $\pi$ is symbolic for the projection onto the components $\{2,3\}$ and
+where $\pi_{2,3}$ is the projection onto the components $(2,3)$ and
 $\tilde{\gamma}(c)_0=\gamma(c)=s$.
 This means whenever a division function $\gamma:C\rightarrow C\times C$ is presented, we will be
 able to utilize it by applying $\tilde{\gamma}$ within the respective simulation framework.
 
 \begin{definition}[Single Cell Division]
     We call a map $\gamma:C\rightarrow \{0,1\}\times\sqcup_{n\geq 2}C^n$ a division function
-    with output $\gamma(c_\iota) = (s,(c^1,\dots,c^n))$.
-    We call the variable $s$ the (binary) \textbf{Mode} of division.
-    We formalize criteria under which the map
+    with output $\gamma(c_\iota) = (s,(c^1,\dots,c^n))$ where we call the variable $s$ the (binary)
+    \textbf{Mode of Division}.
+    This definition formalizes criteria under which the map
     \begin{equation}
         \Upsilon:\{\gamma:C\rightarrow
             \{0,1\}\times\sqcup_{n\geq 2}C^n\}\times I\times\CS\rightarrow\CS
     \end{equation}
-    is called a \textbf{single division operator}.
+    is called a \textbf{Division Operator}.
     We call its input $(I_p,M)\in\CS$ the initial state with $c_\iota\in M$ indicating the mother
     cell and $(J_p,N)=\Upsilon(\gamma,\iota,(I_p,M))$ the final state.
     \begin{enumerate}
@@ -737,7 +737,7 @@ able to utilize it by applying $\tilde{\gamma}$ within the respective simulation
             Otherwise no cell is removed $M\backslash N=\emptyset$.
         \item (Insertion) The inserted cells are given by
             \begin{equation}
-                N\backslash M = \{c_{\iota_{s+1}},\dots,c_{\iota_n}\}
+                N\backslash M = \{c_{\iota_{1+s}},\dots,c_{\iota_n}\}
             \end{equation}
             where the new cells $c_{\iota_j}=c^j$ match the output of $\gamma(c_\iota)_1$.
         \item (Update)
@@ -746,29 +746,29 @@ able to utilize it by applying $\tilde{\gamma}$ within the respective simulation
             with the value of the first component of $\gamma(c_\iota)_1$.
             Notice that this assignment of a new value does not change the identifier $\iota$ of the
             mother cell.
-        \item (Tracking) We carry forward all old identifiers and the removed one:
-            $J_p=I_p\cup\{i\}$
+        \item (Tracking) We carry forward all old identifiers and the removed one
+            $J_p=I_p\cup\{\iota\}$ depending on the mode $s=0$ or otherwise require $J_p:=I_p$.
             % \todo[inline]{ensure that all identifiers are still related to the same cells as before}
-        \item (Uniqueness) New cells have new identifiers: $\iota_1,\dots,\iota_n\notin J_p$.
+        \item (Uniqueness) New cells have new identifiers: $\iota_{1+s},\dots,\iota_n\notin J_p$.
     \end{enumerate}
     In the case when $i\notin\pi_1(M)$, we require $\Upsilon(\gamma,i,(I_p,M))=(I_p,M)$.
-    The last two conditions are to be thought of as one in order to guarantee uniqueness for each
-    cell over the course of the total time of our system.
-    Note that condition 2 also ensures that all other cells remain untouched by the division
-    operator $\Upsilon$.
     \label{definition:cell-division-single}
 \end{definition}
 
 It is important to note that, while this definition seems cumbersome in the first place, it is
 essential in maintaining a valid cellular state.
-So far, we have only applied the division function $\gamma$ to a single cell of interest $c_\iota$.
-In order to apply multiple division operators successively, we first state two observations that
-aim to provide a clear picture of the coming definitions.
+The last two conditions of Definition~\ref{definition:cell-division-single} are to be thought of as
+one in order to guarantee uniqueness for each cell over the course of the total time of our system.
+The following corollary is a direct consequence of our definition.
 
 \begin{corollary}
     Any living cell not targeted by the division operation persists in its original state which is
     a direct consequence of property (2) in Definition~\ref{definition:cell-division-single}.
 \end{corollary}
+
+So far, we have only applied the division function $\gamma$ to a single cell of interest $c_\iota$.
+In order to apply multiple division operators successively, we first state two observations that
+aim to provide a clear picture of the coming definitions.
 
 \begin{lemma}
     For any identifiers $\kappa\in K\subset\pi_1(M)$ of living cells, the successive application of
@@ -812,8 +812,8 @@ $\bar{\gamma}(c)=1$ or not $\bar{\gamma}(c)=0$.
 
 \begin{definition}[Cell Division Criterion]
     A division criterion is a map $\bar{\gamma}:C\rightarrow\{0,1\}$ which determines if the
-    single division function~\ref{definition:cell-division-single} for the particular cell $c$ is
-    realized.
+    single division function of Definition~\ref{definition:cell-division-single} for the particular
+    cell $c$ is realized.
     \label{definition:cell-division-criterion}
 \end{definition}
 
