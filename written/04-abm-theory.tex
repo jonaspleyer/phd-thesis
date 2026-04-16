@@ -542,12 +542,19 @@ cells $d_1,\dots,d_n$ in a similar fashion as done before.
 
 \paragraph{Cellular Death} can ocurr in various ways such as apoptosis (programmed cell
 death)~\cite{Kerr1972,BOHM2003,Green2010,Raff1998}, via autophagy~\cite{Licheva2025,Galluzzi2017} or
-necrosis~\cite{Fink2005} where the latter can also be regulated by genetic
+necrosis~\cite{Gerschenson2001,Fink2005} where the latter can also be regulated by genetic
 pathways~\cite{Berghe2014}.
-Similarly to before, if processes such as autophagy~\cite{Marshall2018} are considered, they need to
-be accounted for in the dynamics of the respective system.
-We are now only interested in the instantanous time point at which the cellular entitiy, i.e. agent
-is removed.
+Similarly as before, cell-death is a process rather than a single event and these dynamics need to
+be incorporated in the lead-up of the death event within the model.
+Many cell types, even in tissues of high turnover rate, are known to release "Find-me" signals thus
+requesting cleanup at a time point in which they are still fully intact~\cite{Ravichandran2011}.
+Another mechanism is the release of growth-inducing substances that motivate neighboring cells to
+compensate the loss of density~\cite{Fan2008}.
+While mechanisms such as autophagy usually suppress apoptosis~\cite{Marshall2018,Boya2005}, an
+extreme form of autophagy can trigger a type of cell death called autosis~\cite{Liu2013}.
+These processes need to be accounted for in the dynamics of the respective system.
+We are now again only interested in the instantanous time point at which the cellular entitiy, i.e.
+agent is removed.
 Figure~\ref{fig:theory-cell-death} shows the underwhelming process one a single cell that ceases to
 exist.
 
