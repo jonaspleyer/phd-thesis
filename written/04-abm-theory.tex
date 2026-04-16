@@ -640,70 +640,109 @@ growth of \ac{ecoli}~\cite{Sockett2009}.
 In these studies, preformed prey assays are used where the \ac{ecoli} colony is allowed to grow,
 often by forming biofilms, before the predator is introduced into the system~\cite{Kadouri2005}.
 
-\subsubsection{Formal Definitions}
-With the previous considerations in mind, we now focus on the instantanous event in which the
-discrete entity of a single cell is replaced/removed or inserted.
-With this framework, cell division can viewed as the combination of the removal of one (mother) cell
-and the insertion of new daughter cells while cell death is simply the removal of one cell.
-In practical cases, it is also important to include the concept of insertion and removal of cells
-which have not been the result of cellular division or death.
-Such a situation can become relevant, i.e., when observing a spatial subslice of a larger system
-which is entered by an external cell.
-In this case, a new unique identifier $\iota$ must be picked and assigned to this cell but no known
-relation to any other existing cell can be assumed.
-Analogously, bacteria growing within the confinements of a mother machine may be sucked away by a
-fluidic flow, thus resulting in a de-facto removal from the observable region.
+\subsubsection{Formalizing Cellular Reproductive \& Death Processes}
+We now turn our attention to the question of how to mathemtically capture the previously discussed
+cellular processes.
+Each of the presented examples can be viewed as a combination of removal of a cell, insertion of
+new cells and modification of existing ones which all depend on the current state of the related
+cells (mother cell or constituent cells for fusion).
+We first focus on the reproductive processes and cell death and will discuss cellular fusion with
+other forms of cellular insertion and removal later.
 
-We will now formalize these ideas by defining how one cellular state $(I_p,M)$ is mapped onto
-another by various cellular processes.
+Division such as binary fission or mitosis can be viewed as the removal of the mother
+cell and an insertion of two new daughter cells which can be captured in a mapping of the form
+$C\rightarrow C\times C$.
+Extending this simple map to also apply to multiple fission will yield a tuple of cells
+$(c_1,c_2,\dots)$ which live in a product of the form $C^n$ where $n\geq 2$.
+However, the amount of newly created cells $n$ is variable and therefore the extended map takes
+values in the disjoint union $\sqcup_{n\geq 2}C^n$.
+The disjoint union ensures that the mapping takes values in exactly one of the $C^n$ and can be
+formalized via $\sqcup_{n\geq 2}C^n = \cup_{n\geq 2}(n,C^n)$.
 
-First, we consider the division of a single cell and then extend its definition to multiple cells.
-As mentioned earlier, the combination of multiple division events are assumed to ocurr at the same
-time point.
-Any successive division events can simply be described by iteratively applying these methods.
+As explained earlier, other processes such as budding will not remove the mother cell but instead
+modify it and additionally insert a new daughter cell at the division time point.
+In its most simple form this can also be captured by another map $C\rightarrow C\times C$ where
+the interpretation is now distinct to the previous one.
+We define the convention that the first component (cell) of the map is the mother cell which is
+modified while the second component (cell) is the new daughter cell (compare with
+Figure~\ref{fig:theory-asymmetric-reproduction}) which is inserted.
+Extending this asymmetric division to include multipolar budding yet again takes values in the
+disjoint union of all $C^n$ where the convention that the first cell is the modified mother cell
+still holds.
 
-As noted earlier, most cells divide and produce exactly two new daughter cells but other forms such
-as multiple fission~\cite{Suresh1994,Peckov1990} or budding of yeast~\cite{Feldmann2010} can be
-observed in reality.
-Thus our single-cell division map $\gamma$ should be able to cover cases where more than two
-daughter cells result from a single event and also be able to retain the mother cell.
-This means that a single cell $c\in C$ is mapped to a tuple of arbitrary length $(c_1,c_2,\dots)$
-which live in a space $C^n$.
-To enforce the distinction between the products $C^n$ where $n\geq 2$ we utilize the disjoint union
-$\sqcup_{n\geq 2}C^n$ as the target space of the division process.
-% which can be formalized by $\sqcup_{n\geq 2}C^n=\{(n,\vec{c})|n\geq 2,\vec{c}\in C^n\}$.
-We therefore arrive at the function signature
+In order to distinguish between the two cases, we additionally produce a boolean value $s=0,1$
+which indicates if the mother cell is removed $s=0$ or kept $s=1$.
+The final result is a division map of the form
 \begin{equation}
-    \gamma:C\rightarrow \sqcup_{n\geq 2}C^n.
+    \gamma:C\rightarrow\{0,1\} \times \sqcup_{n\geq 2}C^n
 \end{equation}
+with two distinct interpretations that need to be taken into account when mapping one cellular
+state $(I_p,M)$ onto another.
 In order to apply the single-division function to a particular cell, we introduce an operator
 $\Upsilon$ which utilizes the division function $\gamma$ and applies it to a particular cell
 $c_\iota$ defined by the identifier $\iota\in M$.
 
 The cell-specific functionality is encoded within $\gamma$ and thus $\Upsilon$ should solely
-manage administrative tasks such as the creation and removal of unique new identifiers for the
-daughter cells.
+manage administrative tasks such as the creation and removal of unique new identifiers of the cells.
 Therefore, $\Upsilon$ can be defined abstractly without the particular knowledge of $\gamma$ and is
-specific to the respective simulation framework.
+specific to the respective simulation framework rather than to the model itself.
+It will depend on the choice of identifiers $\iota\in I$ but the overall dynamics of the system
+must be invariant under the particular choice of utilized identifiers $I$.
+
+We will now introduce a convention that simplifies the notation of division functions.
+Most common examples will deal with only one form of binary division such as binary fission, mitosis
+or budding.
+This means, that the most common division function will be of the form
+$\gamma:C\rightarrow C\times C$ where the indicator $\gamma(c)_0$ of the mother cells removal or
+persistance is fixed, meaning $\gamma(c)_0=s\forall c$.
+This allows us to factorize $\gamma$ via
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node (i1) at (0,0) {$C$};
+        \node (i2) at (3,0) {$\{0,1\}\times\sqcup_{n\geq 2}C^n$};
+        \node (i3) at (0,-1.5) {$C\times C$};
+        \draw[->] (i1) -- node[above] {$\tilde{\gamma}$} ++ (i2);
+        \draw[->] (i1) -- node[left] {$\gamma$} ++ (i3);
+        \draw[->] (i2) -- node[right,below,xshift=1em] {$\pi_{2,3}$} ++ (i3);
+    \end{tikzpicture}
+\end{figure}
+where $\pi$ is symbolic for the projection onto the components $\{2,3\}$ and
+$\tilde{\gamma}(c)_0=\gamma(c)=s$.
+This means whenever a division function $\gamma:C\rightarrow C\times C$ is presented, we will be
+able to utilize it by applying $\tilde{\gamma}$ within the respective simulation framework.
 
 \begin{definition}[Single Cell Division]
-    We call a map $\gamma:C\rightarrow \sqcup_{n\geq 2}C^n$ a single division function and
-    $\Upsilon:\{\gamma:C\rightarrow \sqcup_{n\geq 2}C^n\}\times I\times\CS\rightarrow\CS$ a
-    single division operator if for any initial state $(I_p,M)\in\CS$ with $c_\iota\in M$ indicating
-    the mother cell and final state $(J_p,N)=\Upsilon(\gamma,\iota,(I_p,M))$, the following
-    conditions hold:
+    We call a map $\gamma:C\rightarrow \{0,1\}\times\sqcup_{n\geq 2}C^n$ a division function
+    with output $\gamma(c_\iota) = (s,(c^1,\dots,c^n))$.
+    We call the variable $s$ the (binary) \textbf{Mode} of division.
+    We formalize criteria under which the map
+    \begin{equation}
+        \Upsilon:\{\gamma:C\rightarrow
+            \{0,1\}\times\sqcup_{n\geq 2}C^n\}\times I\times\CS\rightarrow\CS
+    \end{equation}
+    is called a \textbf{single division operator}.
+    We call its input $(I_p,M)\in\CS$ the initial state with $c_\iota\in M$ indicating the mother
+    cell and $(J_p,N)=\Upsilon(\gamma,\iota,(I_p,M))$ the final state.
     \begin{enumerate}
-        \item (Removal) Exactly one cell is removed $M\backslash N=\{c_\iota\}$
-        \item (Insertion) At least two new cells are created by the division function $\gamma$
-        \begin{align}
-            \gamma(c_\iota)&=(c_1,\dots,c_n)\\
-            N\backslash M&=\{c_{i_1},\dots,c_{i_n}\}
-        \end{align}
-        where $\#N\backslash M\geq2$.
+        \item (Removal) Exactly one cell is removed $M\backslash N=\{c_\iota\}$ if
+            the mother cell is replaced $\gamma(c_\iota)_0=0$ during the division.
+            Otherwise no cell is removed $M\backslash N=\emptyset$.
+        \item (Insertion) The inserted cells are given by
+            \begin{equation}
+                N\backslash M = \{c_{\iota_{s+1}},\dots,c_{\iota_n}\}
+            \end{equation}
+            where the new cells $c_{\iota_j}=c^j$ match the output of $\gamma(c_\iota)_1$.
+        \item (Update)
+            If the mother cell is not removed, i.e. $s=1$, we require
+            $N\ni c_\iota=c^1$, i.e. the mother cell identified by identifier $\iota$ is updated
+            with the value of the first component of $\gamma(c_\iota)_1$.
+            Notice that this assignment of a new value does not change the identifier $\iota$ of the
+            mother cell.
         \item (Tracking) We carry forward all old identifiers and the removed one:
             $J_p=I_p\cup\{i\}$
-            \todo[inline]{ensure that all identifiers are still related to the same cells as before}
-        \item (Uniqueness) New cells have new identifiers: $\iota,\tilde{\iota},\dots\notin J_p$.
+            % \todo[inline]{ensure that all identifiers are still related to the same cells as before}
+        \item (Uniqueness) New cells have new identifiers: $\iota_1,\dots,\iota_n\notin J_p$.
     \end{enumerate}
     In the case when $i\notin\pi_1(M)$, we require $\Upsilon(\gamma,i,(I_p,M))=(I_p,M)$.
     The last two conditions are to be thought of as one in order to guarantee uniqueness for each
@@ -715,16 +754,41 @@ specific to the respective simulation framework.
 
 It is important to note that, while this definition seems cumbersome in the first place, it is
 essential in maintaining a valid cellular state.
-From an implementation viewpoint, it is desirable to only specify the single division map $\gamma$
-which maps a single cell $c$ onto new daughter cells.
-The method $\Upsilon$ which acts on $\CS$ may then be defined by the underlying modeling framework.
-It will depend on the choice of identifiers $\iota\in I$ but the overall dynamics of the system
-should be invariant under its particular choice.
+So far, we have only applied the division function $\gamma$ to a single cell of interest $c_\iota$.
+In order to apply multiple division operators successively, we first state two observations that
+aim to provide a clear picture of the coming definitions.
 
-Definition~\ref{definition:cell-division-single} maps a single cell $c\in C$ onto multiple new cells
-$\{c_i\}\subset\cup_{n\geq 2}C^n$
+\begin{corollary}
+    Any living cell not targeted by the division operation persists in its original state which is
+    a direct consequence of property (2) in Definition~\ref{definition:cell-division-single}.
+\end{corollary}
 
-The function signature $\gamma:C\rightarrow\cup_{n\geq2}C^n$
+\begin{lemma}
+    For any identifiers $\kappa\in K\subset\pi_1(M)$ of living cells, the successive application of
+    the division operator $\Upsilon$ with possibly varying division functions $\gamma_\kappa$ can
+    only lead to differences in the identifiers of the daughter cells.
+\end{lemma}
+\begin{proof}
+    This is a consequence of the preceding corollary and the fact that identifiers of mother cells
+    either get removed or persist.
+    Since the identifiers of mother cells $\kappa\in K$ will be removed, the resulting sets of
+    previously assigned identifiers $J_p$ will be identical.
+    In the case where two orders of divisions $\kappa_{i_l},\kappa_{j_l}$ also lead to the same set
+    of new identifiers
+    \begin{align}\begin{split}
+        (J_p,L_i) &= \Upsilon(\gamma_{\kappa_{i_0}},\kappa_{i_0}, \Upsilon(\gamma_{\kappa_{i_1}},k_i,\dots))\\
+        (J_p,L_j) &= \Upsilon(\gamma_{\kappa_{j_0}},\kappa_{j_0}, \Upsilon(\gamma_{\kappa_{j_1}},k_j,\dots))\\
+        L_i &= L_j
+        \label{eq:theory-reorder-division-operators}
+    \end{split}\end{align}
+    they can be mapped onto each other via an isomorphism between two sets of identical cardinality.
+    However Definition~\ref{definition:cell-division-single} does not generally require that the
+    reordering property of Equation~\ref{eq:theory-reorder-division-operators} holds true in all
+    cases.
+\end{proof}
+
+\todo[inline]{Everything after that needs to be rewritten.}
+
 
 \begin{definition}[Cell Division]
     A division function $\Upsilon:\CS\rightarrow\CS$ is the combination of
