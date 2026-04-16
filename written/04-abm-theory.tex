@@ -817,28 +817,44 @@ $\bar{\gamma}(c)=1$ or not $\bar{\gamma}(c)=0$.
     \label{definition:cell-division-criterion}
 \end{definition}
 
-Another important process is that of cell death which is similarly as cell-division not instantanous
-but occurs over a period of time.
-Death schemes are categorized into programmed cell-death, also known as apoptosis~\cite{Kerr1965}
-and necrosis~\cite{Gerschenson2001} which occurrs due to damage from external effects.
-In principle, these processes take time in order to commence and the cell may interact with its
-environment (ie. through secretion) during this stage.
-Such transitions can be described by \todo{fill this} and will be discussed in
-chapter~\ref{section:dynamics}.
-Once the process of dying is over, the cell is removed.
+Another important process is cell death which ocurrs over a time span, similarly to cell division.
+As discussed before, cell-death comes in various forms which can lead to differences in interactions
+of the dying cells with their environment.
+The dynamics of the processes leading up to the death event such as cell-cell signalling need to be
+accounted for within the dynamics of the model (see Section~\ref{section:dynamics}).
+We again now focus on the time point at which the cellular entitiy is considered to no longer exist
+and therefore removed from the model.
+Later we will slightly extend this definition in order to account for processes that ocurr right at
+the time of death such as the release of intracellular compounds~\cite{Kono2008,Chen2010}.
+This requires us to introduce the notion of the environment of the cell which is able to take up the
+released compounds.
+
+As discussed earlier, the removal of a cell does not have to be the result of a death event but
+could also be due to the cell leaving the inspected spatial region (subslice) of interest which is
+common in mother machines.
+Definition~\ref{definition:cell-removal} captures the instant at which the cellular entitiy is
+removed.
 
 \begin{definition}[Cell Removal]
-    \label{definition:cell-death}
     % We call a map $\zeta:I_p\rightarrow \text{Pot}(I_p)$ a death-function
-    Any cell-death removes a particular index $\iota\in I_p$.
-    Thus the combination of many cell-daths is a mapping $\zeta:I_p\rightarrow \text{Pot}(I_p)$
-    where $\text{Pot}(I_p)$ is the power set of $I_p$.
+    A map $\delta:I\times\CS\rightarrow\CS$ is called a removal function if for $\iota\in\pi_1(M)$
+    and $\delta(\iota,(I_p,M))=(J_p,N)$, the two conditions
+    \begin{align}\begin{split}
+        I_p\cup\{\iota\}&=J_p\\
+        \pi_1(M\backslash N)&=\{c_\iota\}
+    \end{split}\end{align}
+    hold where $\pi_1$ is the projection onto the first component.
+    In particular if $\iota\notin\pi_1(M)$, then $I_p=J_P$ and $M=N$.
+    \label{definition:cell-removal}
+\end{definition}
 
-    \todo[inline]{
-        - apoptosis
-        - necrosis
-        - removal
-    }
+Removal of cells is also indicated purely by their internal state and can be formalized with a
+criterion similarly to the division criterion of
+Definition~\ref{definition:cell-division-criterion}.
+
+\begin{definition}[Cell Removal Criterion]
+    A removal criterion is a map $\bar{\delta}:C\rightarrow\{0,1\}$ which determines if the cell in
+    question is removed by the removal function of Definition~\ref{definition:cell-removal}.
 \end{definition}
 
 \begin{lemma}[Cell Lineage]
