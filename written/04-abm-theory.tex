@@ -794,36 +794,24 @@ aim to provide a clear picture of the coming definitions.
     cases.
 \end{proof}
 
-\todo[inline]{Everything after that needs to be rewritten.}
+With these two statements, we have shown what we have already previously discussed.
+The unique identifiers $\iota$ which are assigned to each individual cell do not carry any
+particular meaning but rather relate them to their parent and are used to track them throughout
+their lifetime and distinguish them from other cells.
+For this reason, it is irrelevant in which order multiple division operations at the same time
+point are treated and it is left for to the respective simulation framework to choose.
 
-
-\begin{definition}[Cell Division]
-    A division function $\Upsilon:\CS\rightarrow\CS$ is the combination of
-    multiple single division functions
-    $\{\gamma_i\}$.
-
-    concatenation of single division functions
-    $\{\gamma_i\}$.
-    We require that the overall effect is independent of the order of their individual applications,
-    ie.
-    \begin{equation}
-        \gamma = \prod\limits_{i_j}\gamma_{i_j} = \prod\limits_{i}\gamma_i
-    \end{equation}
-    where the product is with respect to the concatenation of maps.
-    \label{definition:cell-division-function}
-\end{definition}
-
-While it would be possible to construct the denamics of a \ac{cabm} purly by repeatedly applying
-division functions, it common practice to provide a division criterion which triggers the division
-function.
-
-Any single-cell division function is only executed once the division process is completed and the
-two new daughter cells can be identified.
-To indicate the end of the division process a division criterion is used.
+However, one important question that remains is when a division is triggered.
+So far we have not delved deeper into how to define the dynamics of the \ac{abm}.
+While cells interact with their environment and other cells at any given moment, the time point of
+division is purely determined by their internal state as in the previously discussed example of
+the end of cytokinesis~\cite{Gershony2014}.
+This allows us to define a division criterion $\bar{\gamma}:C\rightarrow\{0,1\}$ which can be
+evaluated for any state of the cell and will determine if the cell should divide, i.e.
+$\bar{\gamma}(c)=1$ or not $\bar{\gamma}(c)=0$.
 
 \begin{definition}[Cell Division Criterion]
-    A division criterion is a map $\bar{\gamma}:\mathscr{C} \rightarrow \{0,1\}$ which
-    determines if the
+    A division criterion is a map $\bar{\gamma}:C\rightarrow\{0,1\}$ which determines if the
     single division function~\ref{definition:cell-division-single} for the particular cell $c$ is
     realized.
     \label{definition:cell-division-criterion}
