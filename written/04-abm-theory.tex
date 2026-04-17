@@ -859,30 +859,105 @@ Definition~\ref{definition:cell-division-criterion}.
     question is removed by the removal function of Definition~\ref{definition:cell-removal}.
 \end{definition}
 
+As cells continuously reproduce and die, their lineage can be traced back over multiple generations.
+Without any cell fusion, the resulting structure is that of a tree, or more precisely a forest,
+which is the collection of multiple distinct trees.
+Figure~\ref{fig:theory-cell-lineage-with-fusion} shows such a setting but additionally includes a
+fusion event where two granddaughter cells fuse into a new cell.
+We formalize this notion of cellular lineage without fusion in the following two theorems.
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[
+            every child/.style={black},
+            every node/.style={fill=black,circle,inner sep=2pt},
+            level distance=8mm,
+            level 1/.style={sibling distance=24mm},
+            level 2/.style={sibling distance=12mm},
+            level 3/.style={sibling distance=6mm}
+        ]
+        \node {}
+        child {node {}
+            child {node {} child[->] {node[fill=gray!0] {$\varnothing$}}}
+            child {node {}}
+        }
+        child {node {}
+            child {node {}
+                child {node {}}
+                child {node {}}
+                child {node {}}
+            }
+            child {node (c1) {}}
+        };
+        \node at (4.5,0) {}
+        child {node {}
+            child {node (c2) {}}
+            child {node {}}
+        }
+        child {node {}
+            child {node {}}
+            child {node {}
+                child {node {}}
+                child {node {}}
+            }
+        };
+        \node (f1) at (22.5mm,-24mm) {};
+        \draw[dashed] (c1) -- (f1);
+        \draw[dashed] (c2) -- (f1);
+    \end{tikzpicture}
+    \caption[Example cell lineage with fusion]{
+        The figure shows two trees which have emerged from various division events.
+        In the middle we indicate how two cells can link trees by cell fusion, indicated by the
+        dashed lines.
+        Furthermore, the granddaughter cell on the far left has died, as indicated by $\varnothing$.
+        Without the process of fusion, these trees would remain separated from each other, unless a
+        previously unknown shared ancestor is discovered that connects the two top nodes (mother
+        cells) via a higher level.
+    }
+    \label{fig:theory-cell-lineage-with-fusion}
+\end{figure}
+
 \begin{lemma}[Cell Lineage]
-    Given an initial state $(I_p,M)\in\CS$, an arbitrary combination of applications of
-    division and death functions creates a forest.
+    Given an initial state $(I_p,\{c_\iota\})\in\CS$ of one cell, an arbitrary combination of
+    applications of division and death functions creates a tree where the vertices are the
+    identifiers of cells and the edges are the mother-daughter relationship.
+    This statement can be extended to general initial states $(I_p,M)$ which will result in a
+    forest.
+    We call forest containing all trees the \textbf{Cell Lineage}.
+    Starting at any identifier $\iota$ in a tree and moving upwards to the root results in the
+    path of ancestry of the single cell $c_\iota$.
     \label{lemma:cell-lineage}
 \end{lemma}
+
 \begin{proof}
-    We proof this statement via induction. For $n=0$ we are presented with a cellular state
-    $M\in\CS$ which consists of cells $\{c_\iota\in M\}$.
-    We interpret each cell as root of a new tree.
-    In the induction step $n\rightarrow n+1$, we may assume that $G=(C,E)$ is a tree with
-    cells as vertices.
-    Any application of a division function $\Upsilon(\gamma, \dot)$ consumes a cell $c_{\iota_0}$
-    and produces new cells $\{c_{\iota_1},\dots,c_{\iota_n}\}$.
-    We thus insert the new cells as additional vertices with the edges
-    $\{c_{\iota_0},c_{\iota_1}\},\dots,\{c_{\iota_0},c_{\iota_n}\}$.
-    From the Uniqueness property of the cell-division
-    definition~\ref{definition:cell-division-single},
-    we know that the index of the removed cell $c_{\iota_0}$ will not occur for any further
-    application of the division operator which means that the vertex of cell $c_{\iota_0}$ has $n$
-    children.
-    In the case of a death function, nothing happens.
-    The associated cell $c_\iota$ will remain and endpoint for any further applications of death
-    or division.
+    We prove this statement via induction.
+    It is enough to show that an arbitrary combination of division and death functions to a single
+    cell produces one tree.
+    This result can then be generalized to an arbitrary collection of cells.
+    For $n=1$ we observe that a death function will terminate the tree, immediately while a
+    division function of any mode will result in at least one new connected edge.
+    By property (5) of Definition~\ref{definition:cell-division-single}, we know that all
+    identifiers are unique.
+    In the induction step $n\rightarrow n+1$, we may assume that a tree exists and that the division
+    and death operations are applied to its leaves.
+    Any death process, terminates the leaf while a division operation will again result in new
+    vertices with new identifiers.
+    Property (4) and (5) of Definition~\ref{definition:cell-division-single} enforce that the new
+    identifiers have not been used before and therefore represent new vertices.
 \end{proof}
+
+\begin{corollary}
+    Given a cellular space $\CS$ and an existing forest which was the result of division and death
+    functions, additional applications of division and death functions will only extend the forest.
+\end{corollary}
+
+\begin{proof}
+    Lemma~\ref{lemma:cell-lineage} has shown that applications of division and death functions to an
+    arbitrary initial state $(I_p,M)$ lead to a forest.
+    We take the leaves of the existing tree as initial state $M$, apply
+    Lemma~\ref{lemma:cell-lineage} and extend the existing tree at the leaves.
+\end{proof}
+
 \begin{corollary}[$k$-ary and Binary Cell Division]
     In the case where the single division function
     $\eta:C\rightarrow C^k\subset\cup_{n\in\mathbb{N}}C^n$
