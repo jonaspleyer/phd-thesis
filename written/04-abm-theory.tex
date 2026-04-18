@@ -722,7 +722,8 @@ able to utilize it by applying $\tilde{\gamma}$ within the respective simulation
 \begin{definition}[Single Cell Division]
     We call a map $\gamma:C\rightarrow \{0,1\}\times\sqcup_{n\geq 2}C^n$ a division function
     with output $\gamma(c_\iota) = (s,(c^1,\dots,c^n))$ where we call the variable $s$ the (binary)
-    \textbf{Mode of Division}.
+    \textbf{Mode of Division} and refer to $s=0$ as the consuming mode and $s=1$ as the progenitive
+    mode of division.
     This definition formalizes criteria under which the map
     \begin{equation}
         \Upsilon:\{\gamma:C\rightarrow
@@ -746,9 +747,8 @@ able to utilize it by applying $\tilde{\gamma}$ within the respective simulation
             with the value of the first component of $\gamma(c_\iota)_1$.
             Notice that this assignment of a new value does not change the identifier $\iota$ of the
             mother cell.
-        \item (Tracking) We carry forward all old identifiers and the removed one
-            $J_p=I_p\cup\{\iota\}$ depending on the mode $s=0$ or otherwise require $J_p:=I_p$.
-            % \todo[inline]{ensure that all identifiers are still related to the same cells as before}
+        \item (Tracking) We carry forward all old identifiers and the removed one, i.e.
+            $J_p=I_p\cup\{\iota\}$ for the consuming mode $s=0$ or otherwise $J_p=I_p$.
         \item (Uniqueness) New cells have new identifiers: $\iota_{1+s},\dots,\iota_n\notin J_p$.
     \end{enumerate}
     In the case when $i\notin\pi_1(M)$, we require $\Upsilon(\gamma,i,(I_p,M))=(I_p,M)$.
