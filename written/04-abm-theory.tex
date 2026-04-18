@@ -943,7 +943,7 @@ The following theorem captures this reality.
         ]
         \node {}
         child {node {}
-            child {node {} child[->] {node[fill=gray!0] {$\varnothing$}}}
+            child {node {} child[->,dashed] {node[fill=gray!0] {$\varnothing$}}}
             child {node {}}
         }
         child {node {}
@@ -960,18 +960,18 @@ The following theorem captures this reality.
             child {node {}}
         }
         child {node {}
-            child {node {}}
-            child {node {}
-                child {node {}}
-                child {node {}}
-            }
+            % child {node {}}
+            % child {node {}
+            %     child {node {}}
+            %     child {node {}}
+            % }
         };
         \node (f1) at (22.5mm,-24mm) {};
         \draw[dashed] (c1) -- (f1);
         \draw[dashed] (c2) -- (f1);
     \end{tikzpicture}
     \caption[Example cell lineage with fusion]{
-        The figure shows two trees which have emerged from various division events.
+        Two trees that have emerged from various division events.
         In the middle we indicate how two cells can link trees by cell fusion, indicated by the
         dashed lines.
         Furthermore, the granddaughter cell on the far left has died, as indicated by $\varnothing$.
