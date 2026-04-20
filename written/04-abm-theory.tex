@@ -840,15 +840,16 @@ Definition~\ref{definition:cell-removal} captures the instant at which the cellu
 removed.
 
 \begin{definition}[Cell Removal]
-    % We call a map $\zeta:I_p\rightarrow \text{Pot}(I_p)$ a death-function
-    A map $\delta:I\times\CS\rightarrow\CS$ is called a removal function if for $\iota\in\pi_1(M)$
-    and $\delta(\iota,(I_p,M))=(J_p,N)$, the two conditions
-    \begin{align}\begin{split}
-        I_p\cup\{\iota\}&=J_p\\
-        \pi_1(M\backslash N)&=\{c_\iota\}
-    \end{split}\end{align}
-    hold where $\pi_1$ is the projection onto the first component.
-    In particular if $\iota\notin\pi_1(M)$, then $I_p=J_P$ and $M=N$.
+    We define the removal function $\delta:I\times\CS\rightarrow\CS$ via
+    \begin{equation}
+        \delta(\iota, (I_p,M))=
+        \begin{cases}
+            (I_p\cup\{\iota\},M\backslash\{c_\iota\}) &\text{if } \iota\in\pi_1(M)\\
+            (I_p,M) &\text{else}
+        \end{cases}.
+    \end{equation}
+    Due to condition (2) of Definition~\ref{def:cellular-state}, the union $I_p\cup\{\iota\}$ is
+    disjoint by definition.
     \label{definition:cell-removal}
 \end{definition}
 
@@ -859,6 +860,7 @@ Definition~\ref{definition:cell-division-criterion}.
 \begin{definition}[Cell Removal Criterion]
     A removal criterion is a map $\bar{\delta}:C\rightarrow\{0,1\}$ which determines if the cell in
     question is removed by the removal function of Definition~\ref{definition:cell-removal}.
+    \label{definition:cell-removal-criterion}
 \end{definition}
 
 As cells continuously reproduce and die, their lineage can be traced back over multiple generations.
