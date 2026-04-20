@@ -16,6 +16,11 @@ jobs:
         with:
           submodules: 'true'
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.13
+
       - name: Compile
         run: |
           python -m venv .venv
