@@ -11,6 +11,7 @@ pdf:
 	sed -i "s/\\\\input{main-body}//" 	temp.tex
 	echo "\input{00A-header}" 			>> temp.tex
 	echo "\begin{document}" 			>> temp.tex
+	echo "\tableofcontents" 			>> temp.tex
 	echo "\input{00B-acronyms}"			>> temp.tex
 	echo "\include{" $@ "}" 			>> temp.tex
 	echo "\newpage"						>> temp.tex
