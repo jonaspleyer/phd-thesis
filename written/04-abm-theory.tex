@@ -94,7 +94,7 @@ fundamental effect can be taken into account.
 % \end{table}
 
 %---------------------------------------------------------------------------------------------------
-\section{The Cellular Space}
+% \section{The Cellular Space}
 \label{subsec:cellular-space}
 This section develops a formal notion of how to describe a collection of unique cellular agents.
 To motivate our constructions, we leverage known biological behaviour as a template.
@@ -106,14 +106,14 @@ interpreted using an individual-based approach.
 We will also briefly discuss some practical aspects such as construction of unique identifiers and
 tracability of cells in applications.
 
-\subsection{A Cellular Identity Crisis}
+\section{A Cellular Identity Crisis}
 Our mathematical formalism aims to describe a variable amount of cells.
 In order to properly distinguish cells from each other we aim to provide an identification scheme
 that discriminates between each individual entity.
 The following examples should be viewed as thought-provoking background information and motivation
 for the coming definitions.
 
-\subsubsection{Tracability}
+\subsection{Tracability}
 Cellular systems are characterized by the fact that---leaving practical limitations aside---cells
 are tracable through time and space.
 This means that the trajectory of any cell can be followed precisely over the course of its
@@ -134,7 +134,7 @@ These methods can be extended to dynamically track cells over the course of time
 complexity still poses substantial problems for existing
 solutions~\cite{Maka2014,Maka2023,Ulman2017,Wen2021}.
 
-\subsubsection{Identification via Cellular Properties}
+\subsection{Identification via Cellular Properties}
 One could be tempted to identify each cell by its physical and internal properties.
 However, while this idea is supported by the concept of \textbf{Cellular Uniqueness} which states
 that no two cells will ever be identical, even when sharing equal genetic material, it leaves out
@@ -210,7 +210,7 @@ shows the clear need for another method of cellular identification.
 %     \label{}
 % \end{figure}
 
-\subsubsection{Cell Lineage}
+\subsection{Persistance through Cellular History}
 In a final thought experiment we omit any spatial considerations or concepts of closeness.
 Consider a system of two distinct cell species $A$ and $B$ where both types are able to divide but
 in addition $A$ can differentiate into $B$.
@@ -280,7 +280,7 @@ This means in particular that even if a cell is removed from the simulation that
 will reuse any preexisting identifier.
 Identifiers can not only be used to distinguish between agents but also to keep track of
 parental relationships between the cells.
-The idea of cellular identification being closely tied to their lineage is further made clear when
+The idea of cellular identification being closely tied to their history is further made clear when
 listing cellular relations as a family tree.
 Figure~\ref{fig:theory-thought-experiment-3} shows a tree of multiple parents $p_i$, children
 $c_j$ and grandchildren $gc_k$.
@@ -314,17 +314,17 @@ result in an invalid parental state.
         };
         \draw[dashed,<->] (c12) -- (c21);
     \end{tikzpicture}
-    \caption[Cell lineage tree]{
-        A forest containing a possible lineage of two parent cells $p_1,p_2$.
+    \caption[Cellular history example tree]{
+        A forest containing an example history of two parent cells $p_1,p_2$.
         Arbitrary cells can not be interchanged freely since this might introduce incorrect
-        configurations into the cell-lineage.
+        configurations into mother-daughter relationships.
         For example, the two cousin-cells $gc_{212}$ and $gc_{221}$ would have different
         grandparent-cells if $c_{12}$ and $c_{21}$ would be interchanged.
     }
     \label{fig:theory-thought-experiment-3}
 \end{figure}
 
-\subsubsection{Definition of the Cellular State}
+\section{The Cellular Space}
 The considerations of the preceding section exemplify the need to uniquely label and track cells
 throughout their life-time.
 This can be achieved by assigning unique identifiers to each cell, which enables us to properly
@@ -422,7 +422,7 @@ any two successively measured time points.
 In such scenarios it is questionable if the concept of assigning unique identifiers to each cell
 does provide meaningful insights into the dynamics of the system.
 
-\subsection{Till Death or Division do us part}
+\section{Till Death or Division do us part}
 To continue our investigation of uniqueness, we now want to turn our attention to processes such as
 cell division and cell death that lead to changes in the cellular state which require updating the
 tracked indices.
@@ -435,7 +435,7 @@ We first investigate different biological processes that correspond to distinct 
 cardinality of the cellular state can be altered by a single division or death event.
 These will shape the following definitions and guide the overall throught processes behind them.
 
-\subsubsection{A Primer on Cellular Reproduction, Death \& Fusion}
+\subsection{A Primer on Cellular Reproduction, Death \& Fusion}
 On the subcellular level, these processes ocurr over extended periods of time.
 In contrast, our \ac{abm} approach represents cells as discrete entities with well-defined division
 and death timings which could be seen as one of its biggest conceptual weaknesses.
@@ -647,7 +647,8 @@ growth of \ac{ecoli}~\cite{Sockett2009}.
 In these studies, preformed prey assays are used where the \ac{ecoli} colony is allowed to grow,
 often by forming biofilms, before the predator is introduced into the system~\cite{Kadouri2005}.
 
-\subsubsection{Formalizing Cellular Reproductive \& Death Processes}
+\subsection{Formalizing Cellular Reproductive \& Death Processes}
+\label{subsec:theory-formalizing-cellular-reproduction}
 We now turn our attention to the question of how to mathemtically capture the previously discussed
 cellular processes.
 Each of the presented examples can be viewed as a combination of removal of a cell, insertion of
