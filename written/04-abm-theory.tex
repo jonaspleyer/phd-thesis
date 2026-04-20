@@ -893,11 +893,11 @@ to \ref{example:unique-identifiers-3-spatial-subdivision}.
     The division function is given by
     \begin{equation}
         \gamma(c) = \begin{cases}
-            (1,1)&\text{\normalfont{if }}c=2\\
-            (2,1)&\text{\normalfont{if }}c=3\\
-            (2c/5,3c/5)&\text{\normalfont{if }}c\equiv0\text{ \normalfont{mod}}5\\
-            (4c/7,3c/7)&\text{\normalfont{if }}c\equiv0\text{ \normalfont{mod}}7\\
-            (6c/11,5c/11)&\text{\normalfont{if }}c\equiv0\text{ \normalfont{mod}}11\\
+            (1,1)&\text{\normalfont{\phantom{else }if }}c=2\\
+            (2,1)&\text{\normalfont{else if }}c=3\\
+            (2c/5,3c/5)&\text{\normalfont{else if }}c\equiv0\text{ \normalfont{mod}}5\\
+            (4c/7,3c/7)&\text{\normalfont{else if }}c\equiv0\text{ \normalfont{mod}}7\\
+            (6c/11,5c/11)&\text{\normalfont{else if }}c\equiv0\text{ \normalfont{mod}}11\\
         \end{cases}
     \end{equation}
     which will consume the mother cell and split its capacity between the daughter cells, producing
@@ -919,24 +919,26 @@ to \ref{example:unique-identifiers-3-spatial-subdivision}.
             \bar{\delta}(c) = 0\\
             c &\text{\normalfont{else}}
         \end{cases}
+        \label{eq:theory-simple-abm-update-function}
     \end{equation}
     if the cell is neither dividing nor dying.
-    Since this \ac{abm} does not contain any interactions between distinct agents, it suffices to
-    analyze a single agent which is initialized with a given capacity.
+    One iteration of the \ac{abm} consists of applying the (by definition) mutually exclusive
+    functions \eqref{eq:theory-simple-abm-division-criterion} to
+    \eqref{eq:theory-simple-abm-update-function} which is also displayed in
+    Algorithm~\ref{algorithm:simple-abm-main-loop}.
+    \label{example:theory-simple-abm}.
 \end{example}
 
-\todo[inline]{Describe and discuss this short example in more detail}
-
+\begin{figure}\centering\begin{minipage}{0.7\textwidth}
 \begin{algorithm}[H]
-    \caption{}
-    \label{}
+    \caption{Main loop of \ac{abm}~\ref{example:theory-simple-abm}}
+    \label{algorithm:simple-abm-main-loop}
     \begin{algorithmic}[1]
-        \Procedure{main\_loop}{}
         \For{$c_\iota\in\CS$}
             \If{$\bar{\gamma}(c_\iota)$}
                 \State $\CS \gets \Upsilon(\gamma,\iota,\CS)$
                 \Comment{Perform Division}
-            \ElsIf{$\bar{\delta}(c_iota)$}
+            \ElsIf{$\bar{\delta}(c_\iota)$}
                 \State $\CS \gets \delta(\iota, \CS)$
                 \Comment{Remove Cell}
             \Else
@@ -944,9 +946,10 @@ to \ref{example:unique-identifiers-3-spatial-subdivision}.
                 \Comment{Increase cell capacity}
             \EndIf
         \EndFor
-        \EndProcedure
     \end{algorithmic}
 \end{algorithm}
+\end{minipage}\end{figure}
+
 
 \begin{figure}
     \centering
