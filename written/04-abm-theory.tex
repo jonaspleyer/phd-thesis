@@ -950,6 +950,62 @@ to \ref{example:unique-identifiers-3-spatial-subdivision}.
 \end{algorithm}
 \end{minipage}\end{figure}
 
+Example~\ref{example:theory-simple-abm} defines a simple \ac{abm} which we now intend to study in
+order to show that these simple definitions are already capable of exhibiting interesting
+properties.
+Since the \ac{abm} of Example~\ref{example:theory-simple-abm} does not contain any interactions
+between distinct agents, it suffices to analyze a single agent which is initialized with a given
+capacity.
+Furthermore, this also means that the order of iteration of cells in
+algorithm~\ref{algorithm:simple-abm-main-loop} does not influence the obtained results.
+We will now show that the \ac{abm} always converges in a finite amount of iteration steps which
+justifies the approach of investigating a single cell as starting point and running the \ac{abm}
+until completion.
+
+\begin{theorem}
+    \ac{abm}~\ref{example:theory-simple-abm} converges in finitely many steps for any given
+    initial state $c\in\mathbb{N}$ into a state where all cells have been removed.
+    \label{theorem:theory-simple-abm-converges}
+\end{theorem}
+
+\begin{proof}
+    We prove this theorem via induction but also explicitly discuss cases $c\leq7$.
+    In the case of $c=1$, the \ac{abm} is done since the death function is invoked.
+    Case $c=2$ will lead to two daughter cells with capacity $1$ and the \ac{abm} stops after
+    that.
+    Similarly, case $c=3$ will lead to two daughter cells of capacity $1$ and $2$ which are
+    captured by the previous analysis.
+    For $c=4$, the capacity will be increased to $5$ and then divided and deposited into two
+    daughter cells of capacity $2$ and $3$ which then further develop by the previous paths.
+    The case $c=5$ has thus been covered and for $c=6$, the value will be increased to $c=7$ which
+    then produces two cells with capacity $4$ and $3$ which we have already covered.
+
+    To generalize this we first observe that if $c$ is not divisible by $5,7$ or $11$, that we
+    gradually increase $c$ until reaching a value $\tilde{c}=c+n$ that is divisible by any of these
+    parameters where $n<5$.
+    This operation takes finitely many steps due to the finiteness of the divisors $5,7$ and $11$.
+    Furthermore, when performing the division function $\gamma$, the resulting daughter cells will
+    have capacity values less than $c$.
+    To prove the last statement, we exaime the largest possible capacity value produced by the
+    division function $\gamma$ which is given by the divison
+    $\tilde{c}\rightarrow(\dots,3\tilde{c}/5)$.
+    With $\tilde{c}=c+n$, we require $3(c+n)/5 < c$ which is equivalent to $3n/2 < c$.
+    Using $n<5$, we can infer that this condition is always true for $8\leq c$.
+
+    Utilizing the method of strong induction, we can assume that the theorem is true for all
+    values less than $c$.
+    We have explicitly shown that the \ac{abm} converges for $c\leq7$ and can now infer that
+    any value $c\geq8$ will ultimately be increased gradually and then reduced by the division
+    operation to two cells with capacity values smaller than $c$.
+    These operations take finitely many steps each.
+    Strong induction uses the premise that the statement is true for all capacity values smaller
+    than $c$.
+    Therefore the division function $\gamma$ produces daughter cells with capacity values which fall
+    in this range where the premise of our induction method allows us to assume that the statement
+    holds.
+    The sum of the number of steps for initial reduction and reduction of daughter cells remains
+    finite.
+\end{proof}
 
 \begin{figure}
     \centering
