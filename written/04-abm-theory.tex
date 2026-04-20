@@ -863,6 +863,99 @@ Definition~\ref{definition:cell-division-criterion}.
     \label{definition:cell-removal-criterion}
 \end{definition}
 
+Although we have yet formally discussed how to capture dynamics of \acp{cabm}, we want to
+investigate a first simple example which only utilizes cell division, death and a minor update step
+for every individual cell.
+The following example is not based on any particular biological reality but rather shows how a
+simply \ac{abm} can be constructed using the previously introduced notions.
+For this example, we will not discuss the explicit construction of the unique identifiers
+$\iota\in I$ but simply assume that we can utilize them in the way defined.
+Their construction is discussed later in Examples~\ref{example:unique-identifiers-1-global-counter}
+to \ref{example:unique-identifiers-3-spatial-subdivision}.
+
+\begin{example}[Simple \acs{abm} using only Division and Death functions]
+    \normalfont
+    We define the cellular configuration space $C=\mathbb{N}$ as the natural numbers.
+    This counter acts as the carrying capacity of a single cell and will determine its capability to
+    reproduce.
+    We then define the division criterion (see Definition~\ref{definition:cell-division-criterion})
+    \begin{equation}
+        \bar{\gamma}(c) = \begin{cases}
+            1 &\text{\normalfont{if} } c\in\{2,3\}\\
+            1 &\text{\normalfont{if} } c\equiv0 \text{ \normalfont{mod} } p
+                \text{ \normalfont{for any} } p\in\{5,7,11\}\\
+            0 &\text{\normalfont{else}}
+        \end{cases}
+    \end{equation}
+    which indicates when a division should ocurr and also specify the division function
+    $\gamma:C\rightarrow C\times C$ using the short-hand notation previously introduced in
+    subsection~\ref{subsec:theory-formalizing-cellular-reproduction}.
+    The division function is given by
+    \begin{equation}
+        \gamma(c) = \begin{cases}
+            (1,1)&\text{\normalfont{if }}c=2\\
+            (2,1)&\text{\normalfont{if }}c=3\\
+            (2c/5,3c/5)&\text{\normalfont{if }}c\equiv0\text{ \normalfont{mod}}5\\
+            (4c/7,3c/7)&\text{\normalfont{if }}c\equiv0\text{ \normalfont{mod}}7\\
+            (6c/11,5c/11)&\text{\normalfont{if }}c\equiv0\text{ \normalfont{mod}}11\\
+        \end{cases}
+    \end{equation}
+    which will consume the mother cell and split its capacity between the daughter cells, producing
+    asymmetries in this process.
+    In addition to the division, we also define a death criterion (see
+    Definition~\ref{definition:cell-removal-criterion})
+    \begin{equation}
+        \bar{\delta}(c) = \begin{cases}
+            1 &\text{\normalfont{if} } c=1\\
+            0 &\text{\normalfont{else}}
+        \end{cases}
+    \end{equation}
+    which removes the cell when the carrying capacity reaches $c=1$.
+    In addition to these processes, we employ an update function $\phi$ which increases the capacity
+    of the cell
+    \begin{equation}
+        \phi(c) = \begin{cases}
+            c+1 &\text{\normalfont{if }} \bar{\gamma}(c) = 0 \text{\normalfont{ and }}
+            \bar{\delta}(c) = 0\\
+            c &\text{\normalfont{else}}
+        \end{cases}
+    \end{equation}
+    if the cell is neither dividing nor dying.
+    Since this \ac{abm} does not contain any interactions between distinct agents, it suffices to
+    analyze a single agent which is initialized with a given capacity.
+\end{example}
+
+\todo[inline]{Describe and discuss this short example in more detail}
+
+\begin{algorithm}[H]
+    \caption{}
+    \label{}
+    \begin{algorithmic}[1]
+        \Procedure{main\_loop}{}
+        \For{$c_\iota\in\CS$}
+            \If{$\bar{\gamma}(c_\iota)$}
+                \State $\CS \gets \Upsilon(\gamma,\iota,\CS)$
+                \Comment{Perform Division}
+            \ElsIf{$\bar{\delta}(c_iota)$}
+                \State $\CS \gets \delta(\iota, \CS)$
+                \Comment{Remove Cell}
+            \Else
+                \State $c_\iota \gets c_\iota+1$
+                \Comment{Increase cell capacity}
+            \EndIf
+        \EndFor
+        \EndProcedure
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{combined.pdf}%
+    \caption[]{}
+    \label{}
+\end{figure}
+
+\section{Cell Lineage}
 As cells continuously reproduce and die, their lineage can be traced back over multiple generations.
 Without any cell fusion, the resulting structure is that of a tree, or more precisely a forest,
 which is the collection of multiple distinct trees.
