@@ -204,7 +204,7 @@ if __name__ == "__main__":
         h, a, full, hi = calc_tree(i)
         y.append((h, a))
         all.append(full)
-        if i == 99:
+        if i == 44:
             hist = hi
     y = np.array(y)
 
