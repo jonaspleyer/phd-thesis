@@ -1026,9 +1026,49 @@ until reaching $2p$ thus leading to a cycle.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/abm-theory/example-simple-abm.pdf}%
-    \caption[]{}
+    \caption[Numerical analysis of \ac{abm}~\ref{example:theory-simple-abm}]{
+        (A) Shows the number of iterations required for convergence of the \ac{abm} against the
+        capacity of the initial agent with logarithmic fit.
+        (B) Population size averaged across the duration of one simulation against initial capacity.
+        (C) Population of population for each initial capacity, ranging from lower $c=1$ (orange) to
+        higher $c=1000$ (blue) values.
+        (D) Full dynamics of \ac{abm} for $c=44$.
+        Every horizontal slice represents a snapshot of the system at a particular iteration step.
+        The numbers represent the capacity of the cell.
+        Divisions lead to bifurcations in the graph.
+    }
     \label{fig:theory-simple-abm-analysis}
 \end{figure}
+
+We will now continue to inspect the \ac{abm} numerically.
+Figure~\ref{fig:theory-simple-abm-analysis} shows various readouts of initializing the \ac{abm}
+with a single cell of capactiy $c\in[1,1000]\subset\mathbb{N}$ and running to completion.
+Subfigure (A) shows that the number of iterations that it takes for the \ac{abm} to complete,
+increases logarithmically.
+When inverting this relation, we can infer that the capacity of the initial cell increases
+exponentially with the number of total iterations needed to complete the \ac{abm}.
+Subfigure (B) shows that the population (number of agents at time point $i$) $P_i = \#\CS_i$ averaged
+over all time steps of the \ac{abm} grows linearly with the capacity of the initial cell thus
+justifying the notion of capacity.
+The temporal evolution of number of individual agents is depicted in subfigure (C) which shows a
+family of curves, one for each initial value $c\in[1,1000]$ corresponding to orange for lower values
+and ending in dark blue for higher initial values.
+We can see that the overall shape of the curve is similar for each iteration but maximum population
+(indicated by black crosses) and total duration of the \ac{abm} increase with the initial capacity.
+We can also visualize the evolution of this system by displaying the cell lineage as shown in
+subfigure (D).
+This graph is an extension of the cell lineage as it contains intermediate steps.
+When removing them, it is reduced to the familiar cell lineage tree as described by the following
+Lemma~\ref{lemma:cell-lineage}.
+
+Overall, the definition of this \ac{abm} shows how the previously established notions can be used to
+construct \acp{abm}.
+In particular, we did not yet utilize an explicit representation of identifiers $\iota\in I$ but
+rather only utilized their parental relation to each other.
+Furthermore, we also did not specify the division function $\Upsilon$ acting on the cellular space
+$\CS$.
+As we will see later, these properties can be attributed to the modeling framework rather than to
+the model itself and therefore need no explicit consideration when constructing the \ac{abm}.
 
 \section{Cell Lineage}
 As cells continuously reproduce and die, their lineage can be traced back over multiple generations.
