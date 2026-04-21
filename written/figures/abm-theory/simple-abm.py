@@ -164,7 +164,7 @@ def draw_tree(hist, ax):
 
 
 if __name__ == "__main__":
-    x = np.arange(1, 1000)
+    x = np.arange(1, 1001)
 
     set_mpl_rc_params()
 
