@@ -27,6 +27,7 @@ jobs:
           source .venv/bin/activate
           pip install colorama
           make -C ${{ env.dir }} zip
+        shell: bash
 
       - name: Upload pdf as artifact
         uses: actions/upload-artifact@v4
