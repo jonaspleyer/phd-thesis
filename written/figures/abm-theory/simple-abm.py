@@ -133,22 +133,32 @@ def draw_tree(hist, ax):
 
     level_max = len(hist)
 
-    configure_ax(ax)
+    configure_ax(ax, minor=False)
     ax.invert_yaxis()
     for id, (pos, states) in agents.items():
         color = cmap(states[-1][0] / level_max)
         parent_id = id[1:]
-        ax.scatter([pos[0]], [pos[1]], marker="o", color=color, s=10)
-        ax.text(
-            *pos,
-            str(states[-1][1].count),
-            horizontalalignment="center",
-            verticalalignment="center",
-        )
+        prev_pos = None
         if parent_id != "":
-            parent_pos = agents[parent_id][0]
-            ax.plot([parent_pos[0], pos[0]], [parent_pos[1], pos[1]], color=color)
+            prev_pos = np.array(agents[parent_id][0])
+            prev_pos[1] += len(agents[parent_id][1]) - 1
+            # prev_pos[1] += len(agents[parent_id])
 
+        for k in range(len(states)):
+            ax.scatter([pos[0]], [pos[1]], marker="o", color=color, s=10)
+            ax.text(
+                pos[0],
+                pos[1] + k,
+                str(states[0][1].count + k),
+                horizontalalignment="center",
+                verticalalignment="center",
+            )
+            if prev_pos is not None:
+                ax.plot([prev_pos[0], pos[0]], [prev_pos[1], pos[1] + k], color=color)
+            prev_pos = [pos[0], pos[1] + k]
+
+    ax.set_yticks(np.arange(level_max - 1), minor=False)
+    ax.tick_params(which="minor", left=False)
     ax.set_ylabel("Iteration Step")
     ax.set_xticks([])
 
