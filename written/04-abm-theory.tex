@@ -874,11 +874,10 @@ $\iota\in I$ but simply assume that we can utilize them in the way defined.
 Their construction is discussed later in Examples~\ref{example:unique-identifiers-1-global-counter}
 to \ref{example:unique-identifiers-3-spatial-subdivision}.
 
-\begin{example}[Simple \acs{abm} using only Division and Death functions]
+\begin{example}[Cells with capacity]
     \normalfont
-    We define the cellular configuration space $C=\mathbb{N}$ as the natural numbers.
-    This counter acts as the carrying capacity of a single cell and will determine its capability to
-    reproduce.
+    The cellular space is defined as the natural numbers $C=\mathbb{N}$ which could be viewed as the
+    capacity of a particular cell and determine its capability to reproduce.
     We then define the division criterion (see Definition~\ref{definition:cell-division-criterion})
     \begin{equation}
         \bar{\gamma}(c) = \begin{cases}
@@ -889,10 +888,10 @@ to \ref{example:unique-identifiers-3-spatial-subdivision}.
         \end{cases}
         \label{eq:theory-simple-abm-division-criterion}
     \end{equation}
-    which indicates when a division should ocurr and also specify the division function
+    which indicates when a division should ocurr and specify the division function
     $\gamma:C\rightarrow C\times C$ using the short-hand notation previously introduced in
     subsection~\ref{subsec:theory-formalizing-cellular-reproduction}.
-    The division function is given by
+    It is given by
     \begin{equation}
         \gamma(c) = \begin{cases}
             (1,1)&\text{\normalfont{\phantom{else }if }}c=2\\
