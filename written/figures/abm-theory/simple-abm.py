@@ -136,26 +136,30 @@ def draw_tree(hist, ax):
     configure_ax(ax, minor=False)
     ax.invert_yaxis()
     for id, (pos, states) in agents.items():
-        color = cmap(states[-1][0] / level_max)
         parent_id = id[1:]
         prev_pos = None
         if parent_id != "":
             prev_pos = np.array(agents[parent_id][0])
             prev_pos[1] += len(agents[parent_id][1]) - 1
-            # prev_pos[1] += len(agents[parent_id])
 
         for k in range(len(states)):
-            ax.scatter([pos[0]], [pos[1]], marker="o", color=color, s=10)
+            pos_new = np.array([pos[0], pos[1] + k])
             ax.text(
-                pos[0],
-                pos[1] + k,
+                pos_new[0],
+                pos_new[1],
                 str(states[0][1].count + k),
                 horizontalalignment="center",
                 verticalalignment="center",
+                fontweight="semibold",
+                color="k",
             )
             if prev_pos is not None:
-                ax.plot([prev_pos[0], pos[0]], [prev_pos[1], pos[1] + k], color=color)
-            prev_pos = [pos[0], pos[1] + k]
+                pi = np.array(prev_pos)
+                pf = np.array(pos_new)
+                ax.plot(
+                    [pi[0], pf[0]], [pi[1], pf[1]], color="gray", linewidth=2, alpha=0.5
+                )
+            prev_pos = pos_new
 
     ax.set_yticks(np.arange(level_max - 1), minor=False)
     ax.tick_params(which="minor", left=False)
