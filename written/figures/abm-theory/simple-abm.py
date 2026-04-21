@@ -77,8 +77,7 @@ class Agent:
             h1 = 6 * part
             h2 = 5 * part
         else:
-            self.count += 1
-            return [self]
+            return [Agent(self.ident, self.count + 1)]
         return [Agent([0, *self.ident], h1), Agent([1, *self.ident], h2)]
 
 
