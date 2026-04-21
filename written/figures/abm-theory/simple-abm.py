@@ -1,6 +1,7 @@
 import numpy as np
 import scipy as sp
 import matplotlib.pyplot as plt
+from matplotlib.colors import Normalize
 from matplotlib import colors
 from dataclasses import dataclass
 
@@ -158,7 +159,8 @@ if __name__ == "__main__":
 
     set_mpl_rc_params()
 
-    fig, axs = plt.subplots(2, 3, figsize=(24, 16))
+    cbar_width = 0.1
+    fig, axs = plt.subplots(2, 3, figsize=(24, 16), width_ratios=(1, 1, 1 + cbar_width))
     gs = axs[1, 2].get_gridspec()
     axs[1, 0].remove()
     axs[1, 1].remove()
@@ -227,14 +229,28 @@ if __name__ == "__main__":
     # fig3, ax3 = plt.subplots(figsize=(8, 8))
     configure_ax(ax3)
     n_x = len(x)
+    handle_line = None
+    handle_scatter = None
     for i, full in zip(x, all):
         yi = np.array(full) / np.average(full)
         ni = np.argwhere(yi.max() == yi)[0, 0]
         xi = np.arange(len(full))
-        ax3.plot(xi, yi, alpha=0.3, color=cmap(1 - i / n_x))
-        ax3.scatter([ni], [yi[ni]], color="k", marker="x")
-    ax3.set_xlabel("Time Step i")
-    ax3.set_ylabel("Relative Population Pᵢ/Mean(Pᵢ)")
-    ax3.set_title("Temporal Population Evolution")
+        handle_line = ax3.plot(xi, yi, alpha=0.3, color=cmap(1 - i / n_x), label="")[0]
+        handle_scatter = ax3.scatter([ni], [yi[ni]], color="k", marker="x", label="")
+
+    ax3.set_xlabel("Iteration")
+    ax3.set_ylabel("Rel. Population Pᵢ/Mean(Pᵢ)")
+    ax3.set_title("Population Evolution")
+    ax3.legend(handles=[handle_scatter], labels=["Max"], loc="upper right")
+    map = plt.cm.ScalarMappable(
+        cmap=cmap.reversed(), norm=Normalize(vmin=0, vmax=len(all))
+    )
+    fig.colorbar(
+        map,
+        ax=ax3,
+        location="right",
+        pad=0,
+        fraction=cbar_width,
+    )
     fig.tight_layout(w_pad=2, h_pad=2)
     fig.savefig("figures/abm-theory/example-simple-abm.pdf")
