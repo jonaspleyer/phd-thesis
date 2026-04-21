@@ -210,32 +210,27 @@ if __name__ == "__main__":
 
     draw_tree(hist, ax4)
 
-    ax1.plot(x, y[:, 0], color=COLOR2, linestyle="-", alpha=0.5, label="Max Steps")
-
     # Fit curve
     def fit_curve(t, a, b):
         return a * np.log(b * t)
 
     popt, pcov = sp.optimize.curve_fit(fit_curve, x, y[:, 0])
+    ax1.plot(x, y[:, 0], color=COLOR2, linestyle="-", alpha=0.5, label="Data")
     ax1.plot(x, fit_curve(x, *popt), color=COLOR3, linestyle="--", label="Log fit")
     ax1.legend(loc="lower right")
-    ax1.set_title("Maximum Number of Steps for Convergence")
-    ax1.set_xlabel("Initial count")
-    ax1.set_ylabel("Iteration Step")
-    # fig1.savefig("temp1.pdf")
+    ax1.set_title("Convergence Steps")
+    ax1.set_xlabel("Initial capacity")
+    ax1.set_ylabel("Max. Iterations")
 
-    # fig2, ax2 = plt.subplots(figsize=(8, 8))
     configure_ax(ax2)
-    ax2.plot(x, y[:, 1], color=COLOR2, label="Average Population", alpha=0.5)
+    ax2.plot(x, y[:, 1], color=COLOR2, label="Data", alpha=0.5)
     (a, b), pcov2 = sp.optimize.curve_fit(lambda t, a, b: a * t + b, x, y[:, 1])
     ax2.plot(x, a * x + b, color=COLOR3, linestyle="--", label="Linear fit")
     ax2.legend(loc="lower right")
-    ax2.set_title("Population Size until Convergence")
-    ax2.set_ylabel("Number of Agents")
-    ax2.set_xlabel("Initial count")
-    # fig2.savefig("temp2.pdf")
+    ax2.set_title("Population Size")
+    ax2.set_ylabel("Average Population Mean(Pᵢ)")
+    ax2.set_xlabel("Initial capacity")
 
-    # fig3, ax3 = plt.subplots(figsize=(8, 8))
     configure_ax(ax3)
     n_x = len(x)
     handle_line = None
@@ -261,5 +256,5 @@ if __name__ == "__main__":
         pad=0,
         fraction=cbar_width,
     )
-    fig.tight_layout(w_pad=2, h_pad=2)
+    fig.tight_layout(w_pad=1, h_pad=1)
     fig.savefig("figures/abm-theory/example-simple-abm.pdf")
