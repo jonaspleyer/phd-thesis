@@ -111,7 +111,7 @@ def draw_tree(hist, ax):
     n_size_max = 2 ** (power + 1)
 
     # Find all identifiers
-    agents = {}
+    agents: dict[str, tuple[np.ndarray, list[tuple[int, Agent]]]] = {}
     for iter, hi in enumerate(hist):
         for a in hi:
             id = "".join([str(i) for i in a.ident])
