@@ -1008,6 +1008,21 @@ until completion.
     finite.
 \end{proof}
 
+Note that Example~\ref{example:theory-simple-abm} contains three distinct divisors $p\in\{5,7,11\}$.
+We want to emphasize that a single divisor will not be enough to prove
+theorem~\ref{theorem:theory-simple-abm-converges}.
+This can be seen when utilizing $p=5$ and inspecting any value $6\leq c\leq10$.
+The value $c$ will be gradually increased until it reaches $c=10$ where the division results in two
+daughter cell with capacities $4$ and $6$.
+We can see that the former will decay but the latter will repeat the process from before, thus
+entering a never-ending cycle.
+More specifically, the divisor $p=11$ would also not stop this cycle.
+
+The previous statement can be generalized to any prime number $p$ as long as the division function
+produces daughter cells with capacities via $pm\rightarrow((p-1)m/2,((p-1)/2+1)m)$.
+For the case $m=2$, the second daughter cell has capacity $p+1$ which would be gradually incremented
+until reaching $2p$ thus leading to a cycle.
+
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/abm-theory/example-simple-abm.pdf}%
