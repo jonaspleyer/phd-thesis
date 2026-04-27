@@ -879,6 +879,46 @@ Definition~\ref{definition:cell-division-criterion}.
     \label{definition:cell-removal-criterion}
 \end{definition}
 
+Cell fusion can be seen as the permanent combination of at least two cells into one cell.
+As previously discussed, fusion can be viewed as keeping one constituent cell persistent and
+aggregating additional cells or fusing cells into a cell defined by a new identity (see
+Figure~\ref{fig:theory-cell-fusion}).
+This can be formalized by the following definition.
+
+\begin{definition}[Cell Fusion]
+    We call a map $\xi:\sqcup_{n\geq 2}C^n\rightarrow \{0,1\}\times C$ a fusion function with
+    $\xi((c^1,\dots,c^n))=(s, \bar{c})$ where we call $s$ the \textbf{Mode of Fusion} where $s=0$ is
+    the consuming and $s=1$ the accretive mode of fusion (compare
+    Definition~\ref{definition:cell-division-single}).
+    We use the same convention where the first cell is kept in the accretive mode $s=1$.
+    Futhermore the map
+    \begin{equation}
+        \Xi:\{\xi:\sqcup_{n\geq2}C^n\rightarrow\{0,1\}\times C\}
+            \times \sqcup_{n\geq2}I^n
+            \times\CS\rightarrow\CS
+    \end{equation}
+    is called a \textbf{Fusion Operator} if for $(J_p,N)=\Xi((\iota_1,\dots,\iota_n), (I_p,M))$
+    the following conditions hold:
+    \begin{enumerate}
+        \item (Removal) The removed cells are given by
+            \begin{equation}
+                M\backslash N=\{c_{\iota_{1+s}},\dots,c_{\iota_n}\}.
+            \end{equation}
+        \item (Insertion/Update) If the fusion mode is consuming $s=0$, a new cell is inserted
+            $N\backslash M = \{c_{\bar{\iota}}\}$ where $c_{\bar{\iota}}=\bar{c}$.
+            Otherwise the first cell is kept and updated $c_{\iota_1}=\bar{c}$.
+        \item (Tracking) We carry forward the identifiers of the removed cells via
+            $J_p = I_p \cup \{\iota_{1+s},\dots,\iota_n\}$.
+        \item (Uniqueness) If the fusion mode is consuming $s=0$, the newly inserted cell has a new
+            identifier $\bar{\iota}\notin I_p$.
+    \end{enumerate}
+\end{definition}
+
+Similarly to the division function (see Definition~\ref{definition:cell-division-single}), we
+utilize a notation convention where we can specify the fusion via $\xi:C\times C\rightarrow C$ or
+analogous function signatures if binary fusion is the only relevant case.
+
+\subsection{Cells with reproductive Capacity - An introductory Example}
 Although we have yet formally discussed how to capture dynamics of \acp{cabm}, we want to
 investigate a first simple example which only utilizes cell division, death and a minor update step
 for every individual cell.
@@ -1079,7 +1119,7 @@ We can see that the overall shape of the curve is similar for each iteration but
 Subfigure (D) shows the capacity of each cell over the iteration steps.
 This graph is an extension of the cell lineage as it contains intermediate steps.
 When removing them, it is reduced to the familiar cell lineage tree as described by the following
-Lemma~\ref{lemma:cell-lineage}.
+Theorem~\ref{theorem:cell-lineage}.
 Every column can be interpreted as one identifier, referring to any single cell.
 We can see that the divisions introduce slight asymmetries which leads to overall differences within
 the the left and right sides of the graph and each subgraph.
@@ -1099,27 +1139,32 @@ Without any cell fusion, the resulting structure is that of a tree, or more prec
 which is the collection of multiple distinct trees.
 The following theorems formalize this notion of cellular lineage.
 
-\begin{lemma}[Cell Lineage]
+\begin{theorem}[Cell Lineage]
     Given an initial state $(I_p,\{c_\iota\})\in\CS$ of one cell, an arbitrary combination of
     applications of division and death functions creates a tree where the vertices are the
     identifiers of cells and the edges are the mother-daughter relationship.
     This statement can be extended to general initial states $(I_p,M)$ which will result in a
     forest.
-    We call the forest containing all trees the \textbf{Cell Lineage} and the path from a single
+    If fusion events are considered in addition, the forest is reduced to an undirected graph.
+
+    We call the graph containing all trees the \textbf{Cell Lineage} and all paths from a single
     vertex upwards to the root the \textbf{ancestry of a single cell}.
-    We might also refer to this as the lineage of a single cell.
-    Starting at any identifier $\iota$ in a tree and moving upwards to the root results in the
-    path of ancestry of the single cell $c_\iota$.
-    \label{lemma:cell-lineage}
-\end{lemma}
+    We might also refer to this as a lineage of a single cell.
+    \label{theorem:cell-lineage}
+\end{theorem}
 
 \begin{proof}
+    A graph is a pair $(V,E)$ where $V$ is a set of vertices and $E$ a set of unordered pairs
+    $\{v_1,v_2\}$ called edges.
+    The vertices are all identifiers of cells $V=I_p\cup\pi_1(M)$ and the edges
+    $\{\iota_1,\iota_2\}$ are determined by division events via
+    $\gamma(c_{\iota_1})=(\dots,c_{\iota_2},\dots)$.
     We prove this statement via induction.
     It is enough to show that an arbitrary combination of division and death functions to a single
     cell produces one tree.
     This result can then be generalized to an arbitrary collection of cells.
     For $n=1$ we observe that a death function will terminate the tree, immediately while a
-    division function of any mode will result in at least one new connected edge.
+    division function of any mode will result in at least one new connected vertex.
     By property (5) of Definition~\ref{definition:cell-division-single}, we know that all
     identifiers are unique.
     In the induction step $n\rightarrow n+1$, we may assume that a tree exists and that the division
@@ -1128,6 +1173,10 @@ The following theorems formalize this notion of cellular lineage.
     result in new vertices with new identifiers.
     Property (4) and (5) of Definition~\ref{definition:cell-division-single} enforce that the new
     identifiers have not been used before and therefore represent new vertices.
+
+    When including fusion events, any vertex given by an identifier $\iota$ may have formed due to
+    fusion which means that it has two ore more parent vertices which will result in a graph
+    structure.
 \end{proof}
 
 The principle of cellular continuity states that every living cell was produced by other living
@@ -1138,13 +1187,22 @@ it.
 \begin{corollary}
     Given a cellular space $\CS$ and an existing forest which was the result of division and death
     functions, additional applications of division and death functions will only extend the forest.
+
+    Including fusion events, any existing graph can be extended by the aforementioned procedure to
+    yield a new graph.
 \end{corollary}
 
 \begin{proof}
-    Lemma~\ref{lemma:cell-lineage} has shown that applications of division and death functions to an
-    arbitrary initial state $(I_p,M)$ lead to a forest.
+    Theorem~\ref{theorem:cell-lineage} has shown that applications of division and death functions
+    to an arbitrary initial state $(I_p,M)$ lead to a forest.
     We take the leaves of the existing tree as initial state $M$, apply
-    Lemma~\ref{lemma:cell-lineage} and extend the existing tree at the leaves.
+    Theorem~\ref{theorem:cell-lineage} and extend the existing tree at the leaves.
+
+    Including fusion events, may require to connect two graphs at more than one identifier.
+    Furthermore it may also permit to combine more than two graphs, i.e. when one graph per two
+    constituent cells is present and one graph of the resulting fused cell.
+    Under the premise that the individual identifiers of each graph are distinct, these graphs are
+    only adjoined at their outer vertices, thus creating a new graph again.
 \end{proof}
 
 Furthermore, it is true that any two trees where only the leaf of one tree and the root of another
@@ -1162,7 +1220,7 @@ The following theorem captures this reality.
 
 \begin{corollary}[$k$-ary and Binary Cell Division]
     In the case where the division function is of $k$-ary nature, i.e.
-    $\eta:C\rightarrow C^k\subset\cup_{n\in\mathbb{N}}C^n$, lemma~\ref{lemma:cell-lineage} retains
+    $\eta:C\rightarrow C^k\subset\cup_{n\in\mathbb{N}}C^n$, theorem~\ref{theorem:cell-lineage} retains
     a $k$-ary tree for division mode $s=0$ and a $k-1$-ary tree for division mode $s=1$.
     The most common biological reality is the binary case with mode $s=0$, i.e. replacement of the
     mother cell.
