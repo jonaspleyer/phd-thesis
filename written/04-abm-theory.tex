@@ -1146,10 +1146,12 @@ The following theorems formalize this notion of cellular lineage.
     identifiers of cells and the edges are the mother-daughter relationship.
     This statement can be extended to general initial states $(I_p,M)$ which will result in a
     forest.
-    If fusion events are considered in addition, the forest is reduced to an undirected graph.
+    If fusion events are considered in addition, the forest needs to be generalized to a collection
+    of undirected graphs.
 
-    We call the graph containing all trees the \textbf{Cell Lineage} and all paths from a single
-    vertex upwards to the root the \textbf{ancestry of a single cell}.
+    We call the collection of graphs holding every identifier the \textbf{Cell Lineage} and all
+    paths from a single vertex upwards against the direction of the gaph to the root an
+    \textbf{ancestry of a single cell}.
     We might also refer to this as a lineage of a single cell.
     \label{theorem:cell-lineage}
 \end{theorem}
@@ -1168,17 +1170,28 @@ The following theorems formalize this notion of cellular lineage.
     division function of any mode will result in at least one new connected vertex.
     By property (5) of Definition~\ref{definition:cell-division-single}, we know that all
     identifiers are unique.
-    In the induction step $n\rightarrow n+1$, we may assume that a tree exists and that the division
-    and death operations are applied to its leaves.
+    In the induction step $n\rightarrow n+1$, we may assume that a tree exists and that the
+    division and death operations are applied to its leaves.
     Any death process, terminates the vertex into a leaf while a division operation will again
     result in new vertices with new identifiers.
     Property (4) and (5) of Definition~\ref{definition:cell-division-single} enforce that the new
     identifiers have not been used before and therefore represent new vertices.
 
     When including fusion events, any vertex given by an identifier $\iota$ may have formed due to
-    fusion which means that it has two ore more parent vertices which will result in a graph
-    structure.
+    fusion which means that it has two ore more parent vertices which will result in a collection
+    of graphs.
 \end{proof}
+
+\begin{corollary}
+    Furthermore the structure of Theorem~\ref{theorem:cell-lineage} can be endowed with an ordering
+    by pointing from progenitor cells to their progenies (mother to daughter and constituent to
+    fused) cell as defined by the cell division (see
+    Definition~\ref{definition:cell-division-single}) and fusion operators (see
+    Definition~\ref{definition:cell-fusion}).
+    These connections are of distinct type (division/fusion), which results in a labeled polytree
+    (labeled directed tree) without fusion events or a labeled directed graph when including fusion
+    events.
+\end{corollary}
 
 The principle of cellular continuity states that every living cell was produced by other living
 cells.
@@ -1191,6 +1204,7 @@ it.
 
     Including fusion events, any existing graph can be extended by the aforementioned procedure to
     yield a new graph.
+    \label{corollary:extend-cell-lineage}
 \end{corollary}
 
 \begin{proof}
@@ -1206,18 +1220,20 @@ it.
     only adjoined at their outer vertices, thus creating a new graph again.
 \end{proof}
 
-Furthermore, it is true that any two trees where only the leaf of one tree and the root of another
-tree are identical, can be combined into a larger tree.
-This not only shows that existing cell lineages can be further developed but also that preceding
-cell lineages can be prepended before existing ones.
+Corollary~\ref{corollary:extend-cell-lineage} not only shows that any existing cell lineage can be
+further developed by cellular processes but also that two cell lineages can amend one another if
+they are compatible which means that cells with same identifiers need to be located exclusively at
+the end of one graph and at the beginning of the other.
+In the case of no cell fusion, this statement means that any forest can be exteneded at one leaf
+with a tree that holds the identifier of this particular leaf as its root.
 
-The previous observations have been independent of the division mode, which could in principle vary
-for any single division event.
+The previous observations have been independent of the division and fusion mode, which could in
+principle vary between different division events.
 However, the biologically most relevant division types are the cases of binary consuming (e.g.
 mitosis) and binary progenitive (e.g. budding) division type.
 A slight generalization of this observation is the assumption that the division function is of
 $k$-ary nature, meaning it always produces $k$ daughter cells.
-The following theorem captures this reality.
+Corollary~\ref{corollary:k-ary-division} captures this reality.
 
 \begin{corollary}[$k$-ary and Binary Cell Division]
     In the case where the division function is of $k$-ary nature, i.e.
@@ -1225,6 +1241,7 @@ The following theorem captures this reality.
     a $k$-ary tree for division mode $s=0$ and a $k-1$-ary tree for division mode $s=1$.
     The most common biological reality is the binary case with mode $s=0$, i.e. replacement of the
     mother cell.
+    \label{corollary:k-ary-division}
 \end{corollary}
 
 \begin{figure}
