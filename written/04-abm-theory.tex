@@ -741,7 +741,7 @@ able to utilize it by applying $\tilde{\gamma}$ within the respective simulation
     This definition formalizes criteria under which the map
     \begin{equation}
         \Upsilon:\{\gamma:C\rightarrow
-            \{0,1\}\times\sqcup_{n\geq 2}C^n\}\times I\times\CS\rightarrow\CS
+        \{0,1\}\times\sqcup_{n\geq 2}C^n\}\times I\times\CS\rightarrow\CS
     \end{equation}
     is called a \textbf{Division Operator}.
     We call its input $(I_p,M)\in\CS$ the initial state with $c_\iota\in M$ indicating the mother
@@ -798,12 +798,16 @@ aim to provide a clear picture of the coming definitions.
     previously assigned identifiers $J_p$ will be identical.
     In the case where two orders of divisions $\kappa_{i_l},\kappa_{j_l}$ also lead to the same set
     of new identifiers
-    \begin{align}\begin{split}
-        (J_p,L_i) &= \Upsilon(\gamma_{\kappa_{i_0}},\kappa_{i_0}, \Upsilon(\gamma_{\kappa_{i_1}},k_i,\dots))\\
-        (J_p,L_j) &= \Upsilon(\gamma_{\kappa_{j_0}},\kappa_{j_0}, \Upsilon(\gamma_{\kappa_{j_1}},k_j,\dots))\\
-        L_i &= L_j
-        \label{eq:theory-reorder-division-operators}
-    \end{split}\end{align}
+    \begin{align}
+        \begin{split}
+            (J_p,L_i) &= \Upsilon(\gamma_{\kappa_{i_0}},\kappa_{i_0},
+            \Upsilon(\gamma_{\kappa_{i_1}},k_i,\dots))\\
+            (J_p,L_j) &= \Upsilon(\gamma_{\kappa_{j_0}},\kappa_{j_0},
+            \Upsilon(\gamma_{\kappa_{j_1}},k_j,\dots))\\
+            L_i &= L_j
+            \label{eq:theory-reorder-division-operators}
+        \end{split}
+    \end{align}
     they can be mapped onto each other via an isomorphism between two sets of identical cardinality.
     However Definition~\ref{definition:cell-division-single} does not generally require that the
     reordering property of Equation~\ref{eq:theory-reorder-division-operators} holds true in all
@@ -891,10 +895,11 @@ to \ref{example:unique-identifiers-3-spatial-subdivision}.
     capacity of a particular cell and determine its capability to reproduce.
     We then define the division criterion (see Definition~\ref{definition:cell-division-criterion})
     \begin{equation}
-        \bar{\gamma}(c) = \begin{cases}
+        \bar{\gamma}(c) =
+        \begin{cases}
             1 &\text{\normalfont{if} } c\in\{2,3\}\\
             1 &\text{\normalfont{if} } c\equiv0 \text{ \normalfont{mod} } p
-                \text{ \normalfont{for any} } p\in\{5,7,11\}\\
+            \text{ \normalfont{for any} } p\in\{5,7,11\}\\
             0 &\text{\normalfont{else}}
         \end{cases}
         \label{eq:theory-simple-abm-division-criterion}
@@ -904,7 +909,8 @@ to \ref{example:unique-identifiers-3-spatial-subdivision}.
     subsection~\ref{subsec:theory-formalizing-cellular-reproduction}.
     It is given by
     \begin{equation}
-        \gamma(c) = \begin{cases}
+        \gamma(c) =
+        \begin{cases}
             (1,1)&\text{\normalfont{\phantom{else }if }}c=2\\
             (2,1)&\text{\normalfont{else if }}c=3\\
             (2c/5,3c/5)&\text{\normalfont{else if }}c\equiv0\text{ \normalfont{mod}}5\\
@@ -917,7 +923,8 @@ to \ref{example:unique-identifiers-3-spatial-subdivision}.
     In addition to the division, we also define a death criterion (see
     Definition~\ref{definition:cell-removal-criterion})
     \begin{equation}
-        \bar{\delta}(c) = \begin{cases}
+        \bar{\delta}(c) =
+        \begin{cases}
             1 &\text{\normalfont{if} } c=1\\
             0 &\text{\normalfont{else}}
         \end{cases}
@@ -926,7 +933,8 @@ to \ref{example:unique-identifiers-3-spatial-subdivision}.
     In addition to these processes, we employ an update function $\phi$ which increases the capacity
     of the cell
     \begin{equation}
-        \phi(c) = \begin{cases}
+        \phi(c) =
+        \begin{cases}
             c+1 &\text{\normalfont{if }} \bar{\gamma}(c) = 0 \text{\normalfont{ and }}
             \bar{\delta}(c) = 0\\
             c &\text{\normalfont{else}}
@@ -941,26 +949,28 @@ to \ref{example:unique-identifiers-3-spatial-subdivision}.
     \label{example:theory-simple-abm}.
 \end{example}
 
-\begin{figure}\centering\begin{minipage}{0.7\textwidth}
-\begin{algorithm}[H]
-    \caption{Main loop of \ac{abm}~\ref{example:theory-simple-abm}}
-    \label{algorithm:simple-abm-main-loop}
-    \begin{algorithmic}[1]
-        \For{$c_\iota\in\CS$}
-            \If{$\bar{\gamma}(c_\iota)$}
+\begin{figure}\centering
+    \begin{minipage}{0.7\textwidth}
+        \begin{algorithm}[H]
+            \caption{Main loop of \ac{abm}~\ref{example:theory-simple-abm}}
+            \label{algorithm:simple-abm-main-loop}
+            \begin{algorithmic}[1]
+                \For{$c_\iota\in\CS$}
+                \If{$\bar{\gamma}(c_\iota)$}
                 \State $\CS \gets \Upsilon(\gamma,\iota,\CS)$
                 \Comment{Perform Division}
-            \ElsIf{$\bar{\delta}(c_\iota)$}
+                \ElsIf{$\bar{\delta}(c_\iota)$}
                 \State $\CS \gets \delta(\iota, \CS)$
                 \Comment{Remove Cell}
-            \Else
+                \Else
                 \State $c_\iota \gets c_\iota+1$
                 \Comment{Increase cell capacity}
-            \EndIf
-        \EndFor
-    \end{algorithmic}
-\end{algorithm}
-\end{minipage}\end{figure}
+                \EndIf
+                \EndFor
+            \end{algorithmic}
+        \end{algorithm}
+    \end{minipage}
+\end{figure}
 
 Example~\ref{example:theory-simple-abm} defines a simple \ac{abm} which we now intend to study in
 order to show that these simple definitions are already capable of exhibiting interesting
