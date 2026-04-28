@@ -1,0 +1,145 @@
+import numpy as np
+import pyvista as pv
+
+
+def generate_tapered_volumetric_graph(
+    nodes_2d, edges, grid_res=128, r_start=0.02, r_end=0.05
+):
+    # 1. Setup Grid
+    # We use a float field to store 'density' for better contouring
+    volume = np.zeros((grid_res, grid_res, grid_res))
+
+    # Normalize nodes
+    nodes_min, nodes_max = nodes_2d.min(axis=0), nodes_2d.max(axis=0)
+    scale = (nodes_max - nodes_min).max()
+
+    def to_grid_coords(pts):
+        norm = (pts - nodes_min) / scale
+        # 20% padding to keep the graph away from the box edges
+        return (norm * (grid_res * 0.6) + (grid_res * 0.2)).astype(float)
+
+    nodes_idx = to_grid_coords(nodes_2d)
+    z_mid = grid_res // 2
+
+    # 2. Iterate through edges and fill volume
+    for start_idx, end_idx in edges:
+        p1 = np.array([nodes_idx[start_idx][0], nodes_idx[start_idx][1], z_mid])
+        p2 = np.array([nodes_idx[end_idx][0], nodes_idx[end_idx][1], z_mid])
+
+        # Define the local bounding box for this edge to save time
+        pad = int(r_end * grid_res) + 5
+        mins = np.maximum(0, np.floor(np.minimum(p1, p2) - pad)).astype(int)
+        maxs = np.minimum(grid_res, np.ceil(np.maximum(p1, p2) + pad)).astype(int)
+
+        # Create a grid of coordinates for the local window
+        z, y, x = np.ogrid[mins[0] : maxs[0], mins[1] : maxs[1], mins[2] : maxs[2]]
+
+        # w is the vector from p1 to every voxel in the window
+        # Shape becomes (depth, height, width, 3)
+        w_x = x - p1[2]
+        w_y = y - p1[1]
+        w_z = z - p1[0]
+
+        v = p2 - p1  # Edge vector
+        l2 = np.sum(v**2)
+        if l2 == 0:
+            continue
+
+        # Vector projection: (w dot v) / l2
+        # We manually broadcast the dot product
+        dot_wv = w_z * v[0] + w_y * v[1] + w_x * v[2]
+        t = np.clip(dot_wv / l2, 0, 1)
+
+        # Distance calculation: dist = || w - t*v ||
+        dist_sq = (w_z - t * v[0]) ** 2 + (w_y - t * v[1]) ** 2 + (w_x - t * v[2]) ** 2
+
+        # Radius calculation: varies along t
+        target_r = (r_start + t * (r_end - r_start)) * grid_res
+
+        # Mark voxels inside the radius (as 1.0)
+        mask = dist_sq <= target_r**2
+        volume[mins[0] : maxs[0], mins[1] : maxs[1], mins[2] : maxs[2]] = np.maximum(
+            volume[mins[0] : maxs[0], mins[1] : maxs[1], mins[2] : maxs[2]],
+            mask.astype(float),
+        )
+
+    # 3. Meshing
+    grid = pv.ImageData(dimensions=volume.shape)
+    # VTK uses Fortran order (F) for flattening arrays
+    grid.point_data["values"] = volume.flatten(order="F")
+
+    # Extract the manifold surface
+    mesh = grid.contour(isosurfaces=[0.5])
+
+    # 4. Smoothing
+    return mesh.smooth_taubin(n_iter=80, pass_band=0.002, boundary_smoothing=True)
+
+
+# --- EXECUTION ---
+nodes = np.array(
+    [
+        [0, 0],
+        [-1, 1],
+        [1, 1],
+        [-1.5, 2],
+        [-0.5, 2],
+        [0.5, 2],
+        [1.5, 2],
+        [-2, 3],
+        [-1, 3],
+        [0, 3],
+        [1, 3],
+        [0.5, 4],
+        [1.5, 4],
+        [0, -0.3],
+    ]
+)
+nodes[:, 1] *= -1
+edges = [
+    (0, 1),
+    (0, 2),
+    (1, 3),
+    (1, 4),
+    (2, 5),
+    (2, 6),
+    (3, 7),
+    (3, 8),
+    (5, 9),
+    (5, 10),
+    (10, 11),
+    (10, 12),
+    (13, 0),
+]
+
+tree_mesh1 = generate_tapered_volumetric_graph(
+    nodes, edges, grid_res=120, r_start=0.02 / 2 ** (1 / 3), r_end=0.02
+)
+tree_mesh2 = generate_tapered_volumetric_graph(
+    nodes, edges, grid_res=120, r_start=0.04 / 2 ** (1 / 3), r_end=0.04
+)
+
+# Plot
+p = pv.Plotter(off_screen=True)
+p.enable_anti_aliasing("msaa", multi_samples=16)
+mean = np.mean(nodes, axis=0)
+light1 = pv.Light(position=[*mean, 3], focal_point=[*mean, 0], color="white")
+light1.cone_angle = 90
+light1.intensity = 0.1
+p.add_light(light1)
+
+light2 = pv.Light(
+    position=[mean[0] + 2, mean[0], 2], focal_point=[*mean, 0], color="white"
+)
+light2.cone_angle = 90
+light2.intensity = 0.2
+p.add_light(light2)
+
+p.add_mesh(
+    tree_mesh1, color="darkslategray", smooth_shading=True, specular=0.3, opacity=0.1
+)
+p.add_mesh(tree_mesh2, color="tab:cyan", smooth_shading=True, specular=0.8, opacity=0.7)
+p.view_xy()
+p.camera.zoom("tight")
+p.camera.clipping_range = (-p.camera.position[2] * 1.1, p.camera.position[2] * 1.1)
+p.window_size = (2000, 2000)
+p.save_graphic("figures/abm-theory/smooth-tree.pdf")
