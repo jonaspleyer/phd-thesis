@@ -77,71 +77,82 @@ def generate_tapered_volumetric_graph(
     mesh = grid.contour(isosurfaces=[0.5])
 
     # 4. Smoothing
-# --- EXECUTION ---
-nodes = np.array(
-    [
-        [0, 0],
-        [-1, 1],
-        [1, 1],
-        [-1.5, 2],
-        [-0.5, 2],
-        [0.5, 2],
-        [1.5, 2],
-        [-2, 3],
-        [-1, 3],
-        [0, 3],
-        [1, 3],
-        [0.5, 4],
-        [1.5, 4],
-        [0, -0.3],
+    return mesh.smooth_taubin(n_iter=n_smooth, pass_band=0.002, boundary_smoothing=True)
+
+
+if __name__ == "__main__":
+    # --- EXECUTION ---
+    nodes = np.array(
+        [
+            [0, 0],
+            [-1, 1],
+            [1, 1],
+            [-1.5, 2],
+            [-0.5, 2],
+            [0.5, 2],
+            [1.5, 2],
+            [-2, 3],
+            [-1, 3],
+            [0, 3],
+            [1, 3],
+            [0.5, 4],
+            [1.5, 4],
+            [0, -0.3],
+        ]
+    )
+    nodes[:, 1] *= -1
+    edges = [
+        (0, 1),
+        (0, 2),
+        (1, 3),
+        (1, 4),
+        (2, 5),
+        (2, 6),
+        (3, 7),
+        (3, 8),
+        (5, 9),
+        (5, 10),
+        (10, 11),
+        (10, 12),
+        (13, 0),
     ]
-)
-nodes[:, 1] *= -1
-edges = [
-    (0, 1),
-    (0, 2),
-    (1, 3),
-    (1, 4),
-    (2, 5),
-    (2, 6),
-    (3, 7),
-    (3, 8),
-    (5, 9),
-    (5, 10),
-    (10, 11),
-    (10, 12),
-    (13, 0),
-]
 
-tree_mesh1 = generate_tapered_volumetric_graph(
-    nodes, edges, grid_res=120, r_start=0.02 / 2 ** (1 / 3), r_end=0.02
-)
-tree_mesh2 = generate_tapered_volumetric_graph(
-    nodes, edges, grid_res=120, r_start=0.04 / 2 ** (1 / 3), r_end=0.04
-)
+    tree_mesh1 = generate_tapered_volumetric_graph(
+        nodes,
+        edges,
+        grid_res=300,
+        r_start=0.01 / 2 ** (1 / 3),
+        r_end=0.01,
+        n_smooth=80,
+    )
+    tree_mesh2 = generate_tapered_volumetric_graph(
+        nodes, edges, grid_res=300, r_start=0.03 / 2 ** (1 / 3), r_end=0.03
+    )
 
-# Plot
-p = pv.Plotter(off_screen=True)
-p.enable_anti_aliasing("msaa", multi_samples=16)
-mean = np.mean(nodes, axis=0)
-light1 = pv.Light(position=[*mean, 3], focal_point=[*mean, 0], color="white")
-light1.cone_angle = 90
-light1.intensity = 0.1
-p.add_light(light1)
+    # Plot
+    p = pv.Plotter(off_screen=True)
+    p.enable_anti_aliasing("msaa", multi_samples=16)
+    mean = np.mean(nodes, axis=0)
+    light1 = pv.Light(position=[*mean, 3], focal_point=[*mean, 0], color="white")
+    light1.cone_angle = 90
+    light1.intensity = 0.1
+    p.add_light(light1)
 
-light2 = pv.Light(
-    position=[mean[0] + 2, mean[0], 2], focal_point=[*mean, 0], color="white"
-)
-light2.cone_angle = 90
-light2.intensity = 0.2
-p.add_light(light2)
+    light2 = pv.Light(
+        position=[mean[0] + 2, mean[0], 2], focal_point=[*mean, 0], color="white"
+    )
+    light2.cone_angle = 90
+    light2.intensity = 0.2
+    p.add_light(light2)
 
-p.add_mesh(tree_mesh1, color="black", smooth_shading=True, specular=0.3, opacity=0.1)
-p.add_mesh(
-    tree_mesh2, color="steelblue", smooth_shading=True, specular=0.8, opacity=0.7
-)
-p.view_xy()
-p.camera.zoom("tight")
-p.camera.clipping_range = (-p.camera.position[2] * 1.1, p.camera.position[2] * 1.1)
-p.window_size = (2000, 2000)
-p.save_graphic("figures/abm-theory/smooth-tree.pdf")
+    p.add_mesh(
+        tree_mesh1, color="black", smooth_shading=True, specular=0.3, opacity=0.1
+    )
+    p.add_mesh(
+        tree_mesh2, color="steelblue", smooth_shading=True, specular=1.0, opacity=0.3
+    )
+    p.view_xy()
+    p.camera.zoom("tight")
+    p.camera.clipping_range = (-p.camera.position[2] * 1.1, p.camera.position[2] * 1.1)
+    p.window_size = (2000, 2000)
+    p.save_graphic("figures/abm-theory/smooth-tree.pdf")
