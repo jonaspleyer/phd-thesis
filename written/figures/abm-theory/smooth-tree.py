@@ -134,10 +134,10 @@ light2.cone_angle = 90
 light2.intensity = 0.2
 p.add_light(light2)
 
+p.add_mesh(tree_mesh1, color="black", smooth_shading=True, specular=0.3, opacity=0.1)
 p.add_mesh(
-    tree_mesh1, color="darkslategray", smooth_shading=True, specular=0.3, opacity=0.1
+    tree_mesh2, color="steelblue", smooth_shading=True, specular=0.8, opacity=0.7
 )
-p.add_mesh(tree_mesh2, color="tab:cyan", smooth_shading=True, specular=0.8, opacity=0.7)
 p.view_xy()
 p.camera.zoom("tight")
 p.camera.clipping_range = (-p.camera.position[2] * 1.1, p.camera.position[2] * 1.1)
