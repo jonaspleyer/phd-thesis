@@ -3,7 +3,12 @@ import pyvista as pv
 
 
 def generate_tapered_volumetric_graph(
-    nodes_2d, edges, grid_res=128, r_start=0.02, r_end=0.05
+    nodes_2d,
+    edges,
+    grid_res=128,
+    r_start=0.02,
+    r_end=0.05,
+    n_smooth=200,
 ):
     # 1. Setup Grid
     # We use a float field to store 'density' for better contouring
@@ -72,9 +77,6 @@ def generate_tapered_volumetric_graph(
     mesh = grid.contour(isosurfaces=[0.5])
 
     # 4. Smoothing
-    return mesh.smooth_taubin(n_iter=80, pass_band=0.002, boundary_smoothing=True)
-
-
 # --- EXECUTION ---
 nodes = np.array(
     [
