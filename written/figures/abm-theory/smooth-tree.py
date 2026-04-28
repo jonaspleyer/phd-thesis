@@ -1,5 +1,6 @@
 import numpy as np
 import pyvista as pv
+import matplotlib.pyplot as plt
 
 
 def generate_tapered_volumetric_graph(
@@ -80,6 +81,64 @@ def generate_tapered_volumetric_graph(
     return mesh.smooth_taubin(n_iter=n_smooth, pass_band=0.002, boundary_smoothing=True)
 
 
+def draw_tree_normal(nodes_2d, edges, img, radius_pad):
+    fig, ax = plt.subplots(figsize=(12, 8))
+    ax.set_axis_off()
+
+    xmin = np.min(nodes_2d[:, 0])
+    xmax = np.max(nodes_2d[:, 0])
+    ymin = np.min(nodes_2d[:, 1])
+    ymax = np.max(nodes_2d[:, 1])
+    dx = xmax - xmin
+    dy = ymax - ymin
+    bounds = (
+        xmin - radius_pad + dx + 2 * radius_pad,
+        xmax + radius_pad + dx + 2 * radius_pad,
+        ymin - radius_pad,
+        ymax + radius_pad,
+    )
+
+    ax.imshow(img, extent=bounds)
+
+    ax.scatter(nodes[:-1, 0], nodes[:-1, 1], marker="o", color="k", s=200)
+    for e1, e2 in edges:
+        ax.plot(
+            [nodes[e1][0], nodes[e2][0]],
+            [nodes[e1][1], nodes[e2][1]],
+            color="k",
+            linewidth=4,
+        )
+
+    q = 0.1
+    xlow = xmin - q * dx
+    xhigh = bounds[1] + q * dx
+    ylow = bounds[2] - q * dy
+    yhigh = bounds[3] + q * dy
+    ax.set_xlim(xlow, xhigh)
+    ax.set_ylim(ylow, yhigh)
+
+    for k, label in enumerate(["A", "B"]):
+        ax.text(
+            0.03 + k * 0.5,
+            0.97,
+            label,
+            fontsize=40,
+            fontweight="semibold",
+            fontfamily="serif",
+            va="top",
+            horizontalalignment="left",
+            transform=ax.transAxes,
+        )
+
+    # ax.grid(which="major", axis="y")
+    for y in np.unique(nodes[:, 1]):
+        ax.hlines(y, xmin - dx, xmax + 2 * dx, color="gray", alpha=0.5)
+
+    # ax.set_axis_off()
+    fig.tight_layout()
+    fig.savefig("figures/abm-theory/smooth-tree.pdf")
+
+
 if __name__ == "__main__":
     # --- EXECUTION ---
     nodes = np.array(
@@ -155,4 +214,6 @@ if __name__ == "__main__":
     p.camera.zoom("tight")
     p.camera.clipping_range = (-p.camera.position[2] * 1.1, p.camera.position[2] * 1.1)
     p.window_size = (2000, 2000)
-    p.save_graphic("figures/abm-theory/smooth-tree.pdf")
+    img = p.show(return_img=True)  # screenshot="figures/abm-theory/smooth-tree.png")
+
+    draw_tree_normal(nodes, edges, img, 0.22)
