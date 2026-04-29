@@ -1244,55 +1244,48 @@ Corollary~\ref{corollary:k-ary-division} captures this reality.
     \label{corollary:k-ary-division}
 \end{corollary}
 
+\subsection{The Temporal Embedding Interpretation}
+The lineage of cells is often displayed as a tree or forest, gradually moving downwards,
+incrementing the vertical y-axis with each continuous division event as done in
+Figure~\ref{fig:theory-thought-experiment-3}.
+However, one downside of this representation is that it hides information such as the relative
+timings of the division events or the respective age of the involved agents.
+This information can be added when displaying the cell lineage as in
+Figure~\ref{fig:theory-simple-abm-analysis} where horizontal lines indicate discrete iteration steps
+of the system.
+But even this representation can be further extended, as done in
+Figure~\ref{fig:theory-cell-lineage-as-manifold}.
+Subfigure (A) shows the cell lineage displayed as a graph while (B) includes temporal information
+and embeds the cells in a higher-dimensional space.
+The temporal evolution of two cells has stopped at distinct intermediate time points, indicating
+their removal from the \ac{abm}.
+Furthermore, we can now clearly see the difference in lifetimes of each cell (see
+Definition~\ref{definition:cellular-lifetime}).
+
+We can now interpret the unique discrete cells as the individual connected components of the
+embedding displayed in subfigure (B) when slicing it at any time point.
+This further exemplifies that the assignment of identifiers $\iota$ for individual entities is based
+on an appropriate embedding of the system.
+As we have discussed earlier (see section~\ref{subsec:a-primer-on-cellular-processes}), daughter
+cells can already be in $G_1$ phase before their physical separation is
+complete~\cite{Gershony2014}.
+This shows that the assignment of identifiers $\iota$ and the notion of when a cell is considered an
+individual entity depends on the chosen embedding.
+In the discussed example cells may be considered as individual entities at a later stage when
+utilizing the physical separation as an embedding compared to an embedding that builds on the growth
+states of the daughter cells.
+
 \begin{figure}
     \centering
-    \begin{tikzpicture}[
-            every child/.style={black},
-            every node/.style={fill=black,circle,inner sep=2pt},
-            level distance=8mm,
-            level 1/.style={sibling distance=24mm},
-            level 2/.style={sibling distance=12mm},
-            level 3/.style={sibling distance=6mm}
-        ]
-        \node {}
-        child {node {}
-            child {node {} child[->,dashed] {node[fill=gray!0] {$\varnothing$}}}
-            child {node {}}
-        }
-        child {node {}
-            child {node {}
-                child {node {}}
-                child {node {}}
-                child {node {}}
-            }
-            child {node (c1) {}}
-        };
-        \node at (4.5,0) {}
-        child {node {}
-            child {node (c2) {}}
-            child {node {}}
-        }
-        child {node {}
-            % child {node {}}
-            % child {node {}
-            %     child {node {}}
-            %     child {node {}}
-            % }
-        };
-        \node (f1) at (22.5mm,-24mm) {};
-        \draw[dashed] (c1) -- (f1);
-        \draw[dashed] (c2) -- (f1);
-    \end{tikzpicture}
-    \caption[Example cell lineage with fusion]{
-        Two trees that have emerged from various division events.
-        In the middle we indicate how two cells can link trees by cell fusion, indicated by the
-        dashed lines.
-        Furthermore, the granddaughter cell on the far left has died, as indicated by $\varnothing$.
-        Without the process of fusion, these trees would remain separated from each other, unless a
-        previously unknown shared ancestor is discovered that connects the two top nodes (mother
-        cells) via a higher level.
+    \includegraphics[width=0.5\textwidth]{figures/abm-theory/smooth-tree.pdf}
+    \caption[Cell Lineage as Graph and as Manifold]{
+        Comparison of cell lineage visualizations.
+        (A) Typical cell lineage represented as a tree with nodes indicating division events.
+        (B) Artistic representation where for every time point, the living cells $c_\iota\in C$ of
+        the cell lineage have been embedded in a higher-dimensional space, running downwards the
+        y-axis.
     }
-    \label{fig:theory-cell-lineage-with-fusion}
+    \label{fig:theory-cell-lineage-as-manifold}
 \end{figure}
 
 \subsection{First Examples}
