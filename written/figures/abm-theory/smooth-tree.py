@@ -117,6 +117,31 @@ def draw_tree_normal(nodes_2d, edges, img, radius_pad):
     ax.set_xlim(xlow, xhigh)
     ax.set_ylim(ylow, yhigh)
 
+    xb = bounds[1] + 0.125 * q * dx
+    yb = bounds[3] + 0.250 * q * dy
+
+    ax.arrow(xb, yb, -0.6 * dy, 0, width=0.01, head_width=0.05, color="k")
+    ax.arrow(xb, yb, 0, -0.6 * dy, width=0.01, head_width=0.05, color="k")
+    ax.text(
+        xb + 0.1 * q * dx,
+        yb - 0.3 * dy,
+        "Time",
+        rotation="vertical",
+        fontfamily="Courier New",
+        va="center",
+        horizontalalignment="left",
+        fontsize=25,
+    )
+    ax.text(
+        xb - 0.3 * dy,
+        yb + 0.1 * q * dy,
+        "Embedding",
+        fontfamily="Courier New",
+        va="bottom",
+        horizontalalignment="center",
+        fontsize=25,
+    )
+
     for k, label in enumerate(["A", "B"]):
         ax.text(
             0.03 + k * 0.5,
@@ -130,11 +155,6 @@ def draw_tree_normal(nodes_2d, edges, img, radius_pad):
             transform=ax.transAxes,
         )
 
-    # ax.grid(which="major", axis="y")
-    for y in np.unique(nodes[:, 1]):
-        ax.hlines(y, xmin - dx, xmax + 2 * dx, color="gray", alpha=0.5)
-
-    # ax.set_axis_off()
     fig.tight_layout()
     fig.savefig("figures/abm-theory/smooth-tree.pdf")
 
