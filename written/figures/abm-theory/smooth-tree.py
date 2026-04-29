@@ -196,8 +196,17 @@ if __name__ == "__main__":
         (13, 0),
     ]
 
+    ymin = np.min(nodes[:, 1])
+    rng = np.random.default_rng(seed=0)
+    nodes_offset = nodes + np.array([0.0, 0.6]) * rng.random(nodes.shape, dtype=float)
+    nodes_offset[:, 0] *= 1.2
+    nodes_offset[0] = nodes[0]
+    nodes_offset[9, 0] -= 0.25
+    nodes_offset[7:10, 1] = ymin
+    nodes_offset[11:13, 1] = ymin
+
     tree_mesh1 = generate_tapered_volumetric_graph(
-        nodes,
+        nodes_offset,
         edges,
         grid_res=300,
         r_start=0.01 / 2 ** (1 / 3),
@@ -205,7 +214,11 @@ if __name__ == "__main__":
         n_smooth=80,
     )
     tree_mesh2 = generate_tapered_volumetric_graph(
-        nodes, edges, grid_res=300, r_start=0.03 / 2 ** (1 / 3), r_end=0.03
+        nodes_offset,
+        edges,
+        grid_res=300,
+        r_start=0.03 / 2 ** (1 / 3),
+        r_end=0.03,
     )
 
     # Plot
