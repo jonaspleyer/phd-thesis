@@ -885,8 +885,13 @@ removed.
     \label{definition:cell-removal}
 \end{definition}
 
-Removal of cells is also indicated purely by their internal state and can be formalized with a
-criterion similarly to the division criterion of
+Note that we generally consider this type of removal to be permanent, meaning that the removed cell
+will not enter the simulation at a later time point.
+Cells that die fit this criterion but others who might leave a confined spatial subslice and reenter
+it should be treated differently.
+
+Removal of cells is also indicated purely by their current state and properties and can be
+formalized with a criterion similarly to the division criterion of
 Definition~\ref{definition:cell-division-criterion}.
 
 \begin{definition}[Cell Removal Criterion]
