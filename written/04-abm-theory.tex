@@ -460,7 +460,22 @@ the time point in question (see section~\ref{section:dynamics}) or be omitted if
 cellular reproduction~\cite{Biov2014,Ilowiecki1981,von1835resp}.
 These process lead to the end of the mother's life and mark the beginning of the life the daughter
 cells.
-\begin{figure}[h]
+We can therefore represent this as a mapping of one mother cell which is split into two new daughter
+cells as displayed in Figure~\ref{fig:theory-division-basic}.
+The mechanics of this process are assumed to alter the state of the mother cell in a significant
+matter, which justifies the notion of two new daughter cells which are distinct entities.
+However, this process does not need to guarantee that the resulting cells are exact copies but can
+introduce variations and asymmetries.
+Examples are the division of \ac{ecoli}~\cite{Sezonov2007} via binary fission, sporulation in yeasts
+such as \textit{Schizosaccharomyces japonicus}~\cite{Neiman2011,Tanaka1982} and mitosis in Hek293
+embryonic kidney cells~\cite{Molla2017}.
+Internal budding is a process where to daughter buds form within a mother cell
+and ultimately it before separating into two distinct cells.
+It is observed in parasites such as \textit{Toxoplasma gondii}~\cite{Smyth1994} and can also be
+described by the same mapping.
+Notice that these examples include sexual and asexual reproduction.
+
+\begin{figure}
     \centering
     \begin{tikzpicture}
         \filldraw[color=black,fill=black!5](-1,0) circle (0.707) node (m) {$m$};
@@ -476,20 +491,6 @@ cells.
     }
     \label{fig:theory-division-basic}
 \end{figure}
-We can therefore represent this as a mapping of one mother cell which is split into two new daughter
-cells as displayed in Figure~\ref{fig:theory-division-basic}.
-The mechanics of this process are assumed to alter the state of the mother cell in a significant
-matter, which justifies the notion of two new daughter cells which are distinct entities.
-However, this process does not need to guarantee that the resulting cells are exact copies but can
-introduce variations and asymmetries.
-Examples are the division of \ac{ecoli}~\cite{Sezonov2007} via binary fission, sporulation in yeasts
-such as \textit{Schizosaccharomyces japonicus}~\cite{Neiman2011,Tanaka1982} and mitosis in Hek293
-embryonic kidney cells~\cite{Molla2017}.
-Internal budding is a process where to daughter buds form within a mother cell
-and ultimately it before separating into two distinct cells.
-It is observed in parasites such as \textit{Toxoplasma gondii}~\cite{Smyth1994} and can also be
-described by the same mapping.
-Notice that these examples include sexual and asexual reproduction.
 
 \paragraph{Multiple fission} is another form of reproduction similar to the previous case but does
 not produce two cells but rather a variable amount.
