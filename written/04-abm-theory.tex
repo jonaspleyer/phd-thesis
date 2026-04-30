@@ -779,7 +779,8 @@ able to utilize it by applying $\tilde{\gamma}$ within the respective simulation
             mother cell.
         \item (Tracking) We carry forward all old identifiers and the removed one, i.e.
             $J_p=I_p\cup\{\iota\}$ for the consuming mode $s=0$ or otherwise $J_p=I_p$.
-        \item (Uniqueness) New cells have new identifiers: $\iota_{1+s},\dots,\iota_n\notin J_p$.
+        \item (Uniqueness) New cells have new identifiers:
+            $\iota_{1+s},\dots,\iota_n\notin J_p\cup\pi_1(M)$.
     \end{enumerate}
     In the case when $i\notin\pi_1(M)$, we require $\Upsilon(\gamma,i,(I_p,M))=(I_p,M)$.
     \label{definition:cell-division-single}
@@ -957,7 +958,8 @@ Definition~\ref{definition:cell-insertion} formalizes these principles.
     \begin{equation}
         N = M\cup\{c_{\iota_1},\dots,c_{\iota_n}\}
     \end{equation}
-    where $c_{\iota_1},\dots,c_{\iota_n}\notin I_p$.
+    where $c_{\iota_1},\dots,c_{\iota_n}\notin I_p\cup\pi_1(M)$ where $\pi_1$ is the projection on
+    the first coordinate.
     \label{definition:cell-insertion}
 \end{definition}
 
