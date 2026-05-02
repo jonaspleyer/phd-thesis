@@ -1272,19 +1272,84 @@ Corollary~\ref{corollary:k-ary-division} captures this reality.
     \label{corollary:k-ary-division}
 \end{corollary}
 
-\subsection{The Temporal Embedding Interpretation}
-The lineage of cells is often displayed as a tree or forest, gradually moving downwards,
-incrementing the vertical y-axis with each continuous division event as done in
-Figure~\ref{fig:theory-thought-experiment-3}.
-However, one downside of this representation is that it hides information such as the relative
-timings of the division events or the respective age of the involved agents.
-This information can be added when displaying the cell lineage as in
-Figure~\ref{fig:theory-simple-abm-analysis} where horizontal lines indicate discrete iteration steps
-of the system.
-But even this representation can be further extended, as done in
+\subsection{The Temporal Identity-Encoding Interpretation}
+We will now take a closer look at how cell-lineage can be used to understand and interpret the
+strategy for assigning identifiers and what is considered to be a discrete cellular identity.
+We first note that the lineage of cells is often displayed as a tree or more generally a graph,
+gradually moving downwards along the y-axis, incrementing with each successive division (fusion)
+event as done in Figure~\ref{fig:theory-thought-experiment-3}.
+However, one downside of this representation is that it hides information such as the timings of the
+division events or during which time point a cell is alive.
+This information can be added when displaying the cell lineage as done in
+Figure~\ref{fig:theory-simple-abm-analysis} (D) where horizontal lines indicate discrete iteration
+steps of the system.
+But even this representation can be further enriched, as done in
 Figure~\ref{fig:theory-cell-lineage-as-manifold}.
-Subfigure (A) shows the cell lineage displayed as a graph while (B) includes temporal information
-and embeds the cells in a higher-dimensional space.
+Subfigure (A) shows the cell lineage displayed as a graph purely informed by division events while
+(B) includes temporal information and maps each cell to its spatial envelope at a particular point
+in time.
+We can formalize any such representation as an encoding of the cell.
+
+\begin{definition}[Encoding of identity]
+    A map $\mu:C\rightarrow\mathcal{P}(\R^d)$ is called an \textbf{identity encoding} if $C$ is a
+    topological space and $\mu$ is continuous on $C$.
+    Here $\mathcal{P}(\R^d)$ denotes the powerset of $\R^d$.
+\end{definition}
+
+Any encoding $\mu$, can be used to embed the cell lineage in $\R^{d+1}$ via its graph
+\begin{equation}
+    G=\{(\cup_{c_\iota}\mu(c_\iota(t),t)|c_\iota(t)\text{ is alive at }t\}\hookrightarrow\R^{d+1}
+    \label{eq:cell-lineage-graph-encoding}
+\end{equation}
+where we are using the notion of a cell being alive at a particular point in time $t$ that will be
+introduced later on (see Definition~\ref{definition:cellular-lifetime}).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/abm-theory/smooth-tree.pdf}
+    \caption[Cell Lineage as Graph and as Manifold]{
+        Comparison of cell lineage visualizations.
+        (A) Typical cell lineage represented as a tree with nodes indicating division events.
+        (B) Artistic representation of the same cell lineage where for every time point, the living
+        cells $c_\iota\in C$ of the cell lineage have been embedded in a higher-dimensional space,
+        running downwards the y-axis.
+    }
+    \label{fig:theory-cell-lineage-as-manifold}
+\end{figure}
+
+We turn our attention to investigate the implications of this representation.
+It is in genral not straightforward to make any generalized statements about the nature of $G$
+without assuming any particular example.
+If the encoding $\mu(c_\iota(t))$ has a particular structure, such as that of a $n$-manifold, it
+does not necessarily mean that the graph $G$ retains a similar structure such as a $n+1$ manifold.
+The following example illustrates this point.
+
+\begin{example}[Spatially mass-averaged position encoding]
+    We assume that the cell is a physical entity in space $\R^k$ with a mass density function
+    $\rho:\R^k\rightarrow\R$.
+    Then we define the sptatiall mass-averaged position of the cell via
+    \begin{equation}
+        \mu(c_\iota(t))=\int\rho(x)(t)x_\iota(t)\text{\normalfont dx}\in\R^k
+    \end{equation}
+    where we can losen our notation, and simply writ
+    where we have loosened our notation via $\mu(c_\iota(t))\in\mathcal{P}(\R^k)$ has only one
+    element which can we consider as the 
+    We generally assume that this position function $x_\iota(t)$ is well defined and at least
+    continuous in $t$.
+\end{example}
+
+When a division event ocurrs at time $t_d$, the average position of the daughter cells will not be
+identical to its parent.
+When we inspect how $G$ will look like in this situation, we will find a discontinuity in the graph,
+meaning the relation
+\begin{equation}
+    \limsup_{t\rightarrow t_d} \mu(c_\iota(t))=
+        \liminf_{t\rightarrow t_d}\bigcup_i\mu(c_{\iota_i}(t))
+\end{equation}
+will not be obeyed.
+Here $c_{\iota_i}$ are the daughter cells of $c_\iota$ and $\liminf,\limsup$ are the set-theoretic
+limits.
+
 The temporal evolution of two cells has stopped at distinct intermediate time points, indicating
 their removal from the \ac{abm}.
 Furthermore, we can now clearly see the difference in lifetimes of each cell (see
@@ -1303,18 +1368,11 @@ In the discussed example cells may be considered as individual entities at a lat
 utilizing the physical separation as an embedding compared to an embedding that builds on the growth
 states of the daughter cells.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{figures/abm-theory/smooth-tree.pdf}
-    \caption[Cell Lineage as Graph and as Manifold]{
-        Comparison of cell lineage visualizations.
-        (A) Typical cell lineage represented as a tree with nodes indicating division events.
-        (B) Artistic representation where for every time point, the living cells $c_\iota\in C$ of
-        the cell lineage have been embedded in a higher-dimensional space, running downwards the
-        y-axis.
-    }
-    \label{fig:theory-cell-lineage-as-manifold}
-\end{figure}
+The dependence of cellular identification on the utilized embedding clearly poses a conceptual
+weakness of the \ac{abm} approach as also discussed previously.
+When choosing a particular embedding and thus a particular notion of cellular identification, the
+implications of this choice on the interpretation of the represented biological model, should be
+considered beforehand.
 
 %---------------------------------------------------------------------------------------------------
 \section{Environment \& Dynamics}
