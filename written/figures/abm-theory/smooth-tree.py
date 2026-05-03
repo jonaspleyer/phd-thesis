@@ -1,6 +1,9 @@
 import numpy as np
 import pyvista as pv
 import matplotlib.pyplot as plt
+from matplotlib.colors import to_rgba
+from scipy.optimize import fsolve
+from simple_abm import COLOR1, COLOR3, COLOR5
 
 
 def generate_tapered_volumetric_graph(
@@ -82,7 +85,10 @@ def generate_tapered_volumetric_graph(
 
 
 def draw_tree_normal(nodes_2d, edges, img, radius_pad):
-    fig, ax = plt.subplots(figsize=(12, 8))
+    fig = plt.figure(figsize=(18, 8))
+    gs = fig.add_gridspec(1, 2, width_ratios=(2, 1))
+    ax = fig.add_subplot(gs[0, 0])
+    ax2 = fig.add_subplot(gs[0, 1], projection="3d")
     ax.set_axis_off()
 
     xmin = np.min(nodes_2d[:, 0])
@@ -135,7 +141,7 @@ def draw_tree_normal(nodes_2d, edges, img, radius_pad):
     ax.text(
         xb - 0.3 * dy,
         yb + 0.1 * q * dy,
-        "Embedding",
+        "Encoding",
         fontfamily="Courier New",
         va="bottom",
         horizontalalignment="center",
@@ -155,8 +161,155 @@ def draw_tree_normal(nodes_2d, edges, img, radius_pad):
             transform=ax.transAxes,
         )
 
-    fig.tight_layout()
-    fig.savefig("figures/abm-theory/smooth-tree.pdf")
+    fig.text(
+        0.03 + 2 * 0.325,
+        0.95,
+        "C",
+        fontsize=40,
+        fontweight="semibold",
+        fontfamily="serif",
+        va="top",
+        horizontalalignment="left",
+    )
+
+    return fig, ax2
+
+
+def union_area_residual(R, d, target_area):
+    """
+    Function to find the root where current union area - target area = 0.
+    Calculates the area of two intersecting circles of radius R with centers distance d apart.
+    """
+    if d >= 2 * R:
+        # No overlap
+        return 2 * np.pi * R**2 - target_area
+
+    # Area of intersection (lens shape)
+    overlap = 2 * R**2 * np.arccos(d / (2 * R)) - (d / 2) * np.sqrt(4 * R**2 - d**2)
+    current_area = 2 * np.pi * R**2 - overlap
+    return current_area - target_area
+
+
+def generate_connected_evolution_mesh(y_range=(10, -25), num_y=30, num_theta=80):
+    """
+    Generates a single mesh where the perimeter is a union of two circles.
+    Masks the bridge with NaNs when the circles fully separate.
+    """
+    y_steps = np.linspace(y_range[0], y_range[1], num_y)
+
+    # Evolution Parameters
+    base_area = np.pi * (5**2)
+    total_area = np.linspace(base_area, 2.8 * base_area, num_y)
+
+    # Separation starts at y = 5
+    dist = np.zeros(num_y)
+    split_y = 5
+    separation_mask = y_steps < split_y
+    dist[separation_mask] = np.linspace(0, 15, np.sum(separation_mask))
+
+    # Pre-allocate grids
+    X = np.zeros((num_y, num_theta))
+    Y = np.zeros((num_y, num_theta))
+    Z = np.zeros((num_y, num_theta))
+
+    current_R_guess = 5.0
+    alpha = 0.0
+
+    for i, d in enumerate(dist):
+        target = total_area[i]
+
+        # Solve for the radius required to maintain the growth profile
+        R_sol = fsolve(union_area_residual, current_R_guess, args=(d, target))
+        R = R_sol[0]
+        current_R_guess = R
+
+        # Calculate intersection angle if they overlap
+        if 0 <= d < 2 * R:
+            alpha = np.arccos(d / (2 * R))  # angle from center to intersection point
+
+            # Divide theta into two segments: the outer arcs of circle A and circle B
+            n_half = num_theta // 2
+            theta_a = np.linspace(alpha, 2 * np.pi - alpha, n_half)
+            theta_b = np.linspace(np.pi + alpha, 3 * np.pi - alpha, num_theta - n_half)
+
+            # Circle A coordinates (Center at -d/2, 0)
+            xa = -d / 2 + R * np.cos(theta_a)
+            za = R * np.sin(theta_a)
+
+            # Circle B coordinates (Center at d/2, 0)
+            xb = d / 2 + R * np.cos(theta_b)
+            zb = R * np.sin(theta_b)
+
+            X[i, :] = np.concatenate([xa, xb])
+            Z[i, :] = np.concatenate([za, zb])
+
+        elif d >= 2 * R:
+            # Completely separated: Mask the connection point with NaNs
+            n_half = num_theta // 2
+
+            # Circle A
+            a = -0.0 * np.pi
+            t_a = np.linspace(a, a + 2 * np.pi, n_half)
+            X[i, :n_half] = -d / 2 + R * np.cos(t_a)
+            Z[i, :n_half] = R * np.sin(t_a)
+
+            # Bridge Mask: inserting NaN prevents plot_surface from drawing faces here
+            X[i, n_half - 1] = np.nan
+            Z[i, n_half - 1] = np.nan
+
+            # Circle B
+            a = np.arccos(1.0)
+            t_b = np.linspace(a + np.pi, a + 3 * np.pi, num_theta - n_half)
+            X[i, n_half:] = d / 2 + R * np.cos(t_b)
+            Z[i, n_half:] = R * np.sin(t_b)
+        else:
+            # Single circle (d=0)
+            t = np.linspace(0, 2 * np.pi, num_theta)
+            X[i, :] = R * np.cos(t)
+            Z[i, :] = R * np.sin(t)
+
+        Y[i, :] = y_steps[i]
+
+    return X, Y, Z, split_y
+
+
+def calculate_connected_face_colors(X, Y, split_y):
+    # Centroids of the faces
+    x_face = 0.25 * (X[:-1, :-1] + X[1:, :-1] + X[:-1, 1:] + X[1:, 1:])
+    y_face = 0.25 * (Y[:-1, :-1] + Y[1:, :-1] + Y[:-1, 1:] + Y[1:, 1:])
+
+    # Base colors
+    c_origin = np.array(to_rgba(COLOR3))
+    c_left = np.array(to_rgba(COLOR1))
+    c_right = np.array(to_rgba(COLOR5))
+
+    # Evolution factor (0 at split, 1 at end)
+    y_min = Y.min()
+    evol_factor = np.clip((split_y - y_face) / (split_y - y_min), 0, 1)
+
+    # Create output color array
+    fcolors = np.zeros((x_face.shape[0], x_face.shape[1], 4))
+
+    for i in range(x_face.shape[0]):
+        for j in range(x_face.shape[1]):
+            t = evol_factor[i, j]
+            x = x_face[i, j]
+
+            # Handle faces adjacent to NaN coordinates
+            if np.isnan(x):
+                fcolors[i, j] = [0, 0, 0, 0]  # Fully transparent
+                continue
+
+            if y_face[i, j] >= split_y:
+                # Before split
+                fcolors[i, j] = c_origin
+            else:
+                # During split: blend based on X position and time
+                weight_right = 1 / (1 + np.exp(-x * 0.5))
+                target_color = (1 - weight_right) * c_left + weight_right * c_right
+                fcolors[i, j] = (1 - t) * c_origin + t * target_color
+
+    return fcolors
 
 
 if __name__ == "__main__":
@@ -249,4 +402,30 @@ if __name__ == "__main__":
     p.window_size = (2000, 2000)
     img = p.show(return_img=True)  # screenshot="figures/abm-theory/smooth-tree.png")
 
-    draw_tree_normal(nodes, edges, img, 0.22)
+    fig, ax2 = draw_tree_normal(nodes, edges, img, 0.22)
+
+    # Generate data
+    X, Y, Z, split_y = generate_connected_evolution_mesh()
+
+    fcolors = calculate_connected_face_colors(X, Y, split_y)
+
+    # plot_surface automatically ignores faces containing NaN vertices
+    surf = ax2.plot_surface(
+        X,
+        Y,
+        Z,
+        facecolors=fcolors,
+        shade=True,
+        edgecolor="gray",
+        lw=0.0001,
+        rstride=1,
+        cstride=1,
+        alpha=1.0,
+    )
+
+    ax2.set_axis_off()
+    ax2.set_box_aspect([8, 10, 6], zoom=1.3)
+    ax2.view_init(elev=-60, azim=-110, roll=-170)
+
+    fig.tight_layout()
+    fig.savefig("figures/abm-theory/smooth-tree.pdf")
