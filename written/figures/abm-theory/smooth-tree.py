@@ -424,8 +424,29 @@ if __name__ == "__main__":
     )
 
     ax2.set_axis_off()
-    ax2.set_box_aspect([8, 10, 6], zoom=1.3)
+    ax2.set_box_aspect([8, 10, 6], zoom=1.27)
     ax2.view_init(elev=-60, azim=-110, roll=-170)
+
+    n = X.shape[1]
+    for k in [0, X.shape[0] // 2, -1]:
+        ax2.plot(
+            X[k],
+            Y[k][0],
+            Z[k],
+            color="#444",
+            linewidth=7,
+            zorder=10,
+            linestyle="--",
+        )
+        ax2.plot(
+            X[k],
+            Y[k][0],
+            Z[k],
+            color="#EEE",
+            linewidth=3,
+            zorder=12,
+            linestyle="--",
+        )
 
     fig.tight_layout()
     fig.savefig("figures/abm-theory/smooth-tree.pdf")
