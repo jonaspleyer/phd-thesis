@@ -190,7 +190,7 @@ def union_area_residual(R, d, target_area):
     return current_area - target_area
 
 
-def generate_connected_evolution_mesh(y_range=(10, -25), num_y=30, num_theta=80):
+def generate_connected_evolution_mesh(y_range=(10, -25), num_y=30, num_theta=50):
     """
     Generates a single mesh where the perimeter is a union of two circles.
     Masks the bridge with NaNs when the circles fully separate.
@@ -416,8 +416,8 @@ if __name__ == "__main__":
         Z,
         facecolors=fcolors,
         shade=True,
-        edgecolor="gray",
-        lw=0.0001,
+        edgecolor="#999",
+        lw=1,
         rstride=1,
         cstride=1,
         alpha=1.0,
