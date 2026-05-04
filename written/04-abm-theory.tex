@@ -1300,21 +1300,12 @@ Figure~\ref{fig:theory-cell-lineage-as-manifold}.
 Subfigure (A) shows the cell lineage displayed as a graph purely informed by division events while
 (B) includes temporal information and maps each cell to its spatial envelope at a particular point
 in time.
-We can formalize any such representation as an encoding of the cell.
-
-\begin{definition}[Encoding of identity]
-    A map $\mu:C\rightarrow\mathcal{P}(\R^d)$ is called an \textbf{identity encoding} if $C$ is a
-    topological space and $\mu$ is continuous on $C$.
-    Here $\mathcal{P}(\R^d)$ denotes the powerset of $\R^d$.
-\end{definition}
-
-Any encoding $\mu$, can be used to embed the cell lineage in $\R^{d+1}$ via its graph
-\begin{equation}
-    G=\{(\cup_{c_\iota}\mu(c_\iota(t),t)|c_\iota(t)\text{ is alive at }t\}\hookrightarrow\R^{d+1}
-    \label{eq:cell-lineage-graph-encoding}
-\end{equation}
-where we are using the notion of a cell being alive at a particular point in time $t$ that will be
-introduced later on (see Definition~\ref{definition:cellular-lifetime}).
+Subfigure (C) shows the temporal evolution of one cell division event.
+The spatial envelope of one cell is given by \ac{2d} circle which splits into two overlapping
+circles as the division continues.
+They gradually move away from each other before finally separating.
+The time point at which the division criterion is active $\bar{\gamma}=1$ is the moment where the
+two circles only overlap in exactly one singular point.
 
 \begin{figure}
     \centering
@@ -1323,7 +1314,7 @@ introduced later on (see Definition~\ref{definition:cellular-lifetime}).
         Comparison of cell lineage visualizations.
         (A) Typical cell lineage represented as a tree with nodes indicating division events.
         (B) Artistic representation of the cell lineage of (A) where for every time point, the
-        living cells $c_\iota\in C$ of the cell lineage have been embedded in a higher-dimensional
+        living cells $c_\iota\in C$ of the cell lineage have been encoded in a higher-dimensional
         space, running downwards the y-axis.
         Bright and dark colors indicate different encodings.
         (C) Cells are encoded via their circular cell envelope.
@@ -1332,6 +1323,54 @@ introduced later on (see Definition~\ref{definition:cellular-lifetime}).
     }
     \label{fig:theory-cell-lineage-as-manifold}
 \end{figure}
+
+As we have seen be the preceding examples, the encoding scheme can be interpreted as a physically
+measurable quantity which is accessible to the researcher by measurement.
+This can include intracellular properties such as specific protein concentrations which could be
+read out e.g. via tagging with \ac{gfp}~\cite{Chalfie1994},
+mCherry~\cite{Campbell2002,Matz1999,Shaner2004} or HaloTag~\cite{Los2008}.
+While it is useful to utilize physically measurable quantities in order to provide a direct link to
+the biological reality, our formalism does not require this assumption.
+
+In order to formalize the presented throughts, we first note that the encoding takes values in the
+power set $\mathcal{P}(\R^k)$ which is motivated by looking at the example of using the cellular
+envelope as done in Figure~\ref{fig:theory-cell-lineage-as-manifold} (C) which is a subset of
+$\R^3$.
+Furthermore, every biological cell is spatially bound and consists of only one single connected
+region.
+We therefore assume that the values of our encoding are compact and connected.
+This means, that we restrict ourselves to the set $\mathcal{P}_\text{\normalfont cp}(\R^k)$ which
+only contains compact and path-connected subsets of $\R^k$.
+To measure distances within this space, we define a metric between two sets
+$A,B\in\mathcal{P}_\text{\normalfont cp}(\R^k)$ using the Hausdorff metric~\cite{Hausdorff1914}
+\begin{equation}
+    d_H(A,B) = \max \left\{
+        \sup_{a\in A}\text{\normalfont dist}(a,B),
+        \sup_{b\in B}\text{\normalfont dist}(b,A) \right\}
+\end{equation}
+where $d(x,X)=\sup\text{\normalfont dist}(x,X)$ denotes the supremum of the smallest distance
+between point $x$ and the set $X$ which can be simplified in this case by using the maximum since
+every set in $\mathcal{P}_\text{\normalfont cp}$ is compact and the supremum takes its value.
+
+Another important property which can be seen in the discussion surrounding the temporal evolution of
+the division displayed in Figure~\ref{fig:theory-cell-lineage-as-manifold} (C) is that the two
+daughter cells produced by $\gamma$ are overlapping in a single point and are not entirely disjoint
+right at the division event.
+While this particular intersection is only a singular point, it may be more complex in other
+scenarios.
+Consider Figure~\ref{fig:theory-cell-lineage-as-manifold} (D) where the cellular envelope is that of
+a cylinder which grows along its axis of elongation and divides into two new cylindrically-shaped
+cells.
+The two resulting cylinders will overlap exactly at their bases pointing to each other.
+Despite that the biological reality will most certainly not exhibit such overlaps between cells,
+other forms such as numerical simulations or immaging artifacts can be subject to them.
+This indicates that such overlaps are not merely an artifact of the chosen cellular representation
+but rather a common occurence which needs to be dealt with properly.
+
+In order to identify individual cells from a particular encoding, we can define a decoder
+$\sigma:\mathcal{P}(\R^k)\rightarrow\sqcup_{n\in\mathbb{N}}\{0,\dots,n\}\sqcup\mathbb{N}$ which is
+able to take any subset of $\R^k$ and identify distinct cells from it.
+With these considerations we can now formailze the encoding of a cell.
 
 We turn our attention to investigate the implications of this representation.
 It is in genral not straightforward to make any generalized statements about the nature of $G$
