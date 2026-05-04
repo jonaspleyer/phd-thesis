@@ -1277,6 +1277,16 @@ Corollary~\ref{corollary:k-ary-division} captures this reality.
 \subsection{The Temporal Identity-Encoding Interpretation}
 We will now take a closer look at how cell-lineage can be used to understand and interpret the
 strategy for assigning identifiers and what is considered to be a discrete cellular identity.
+This section also partially deals with the theoretical question of how to distinguish individual
+cells from each other when presented with extracted information of the system in question.
+A common task is, given a microscopic image of cells, to find the individual segments that belong to
+their respective cells.
+A subset of the information contained in each cell---in this case their spatial envelope---is enough
+to identify the cells and distinguish them from each other.
+To formalize these ideas, we will think of the cellular envelope as an encoding scheme which can be
+generalized beyond this introductory example and of the segmentation task as a decoding operation
+which is able to identify individual cells but not necessarily obtain deeper information about them.
+
 We first note that the lineage of cells is often displayed as a tree or more generally a graph,
 gradually moving downwards along the y-axis, incrementing with each successive division (fusion)
 event as done in Figure~\ref{fig:theory-thought-experiment-3}.
