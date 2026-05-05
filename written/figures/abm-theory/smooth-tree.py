@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgba, LightSource
 from matplotlib.patches import Circle, FancyArrowPatch, ArrowStyle
 from mpl_toolkits.mplot3d.proj3d import proj_transform
+from mpl_toolkits.mplot3d import art3d
 from scipy.optimize import fsolve
 from simple_abm import COLOR1, COLOR3, COLOR5
 
@@ -342,6 +343,64 @@ def calculate_connected_face_colors(X, Y, split_y):
     return fcolors
 
 
+def plot_cylinder(
+    start_x,
+    start_z,
+    radius,
+    width_x,
+    ax,
+    color1,
+    color2,
+    alpha=1.0,
+    n_x=20,
+    n_theta=20,
+    zorder=3,
+):
+    x = start_x + np.linspace(0, width_x, n_x)
+    theta = np.linspace(0, 2 * np.pi, n_theta)
+    theta_grid, x_grid = np.meshgrid(theta, x)
+    y_grid = radius * np.cos(theta_grid)
+    z_grid = radius * np.sin(theta_grid) + start_z
+
+    # Create facecolors
+    c1 = np.array(to_rgba(color1)).reshape((1, 4))
+    c1[0, 3] = alpha
+    c2 = np.array(to_rgba(color2)).reshape((1, 4))
+    c2[0, 3] = alpha
+    t = np.repeat(np.arange(n_x) / (n_x - 1), n_theta).reshape((n_x, n_theta, 1))
+    fcs = (1 - t) @ c1 + t @ c2
+
+    ls = LightSource(azdeg=250, altdeg=250)
+
+    def plot_cap(xi, ci, zorder):
+        r = np.linspace(0, radius, 5, endpoint=True)
+        r_grid, theta_grid = np.meshgrid(r, theta)
+        y = r_grid * np.cos(theta_grid)
+        z = start_z + r_grid * np.sin(theta_grid)
+        ax.plot_surface(
+            xi,
+            y,
+            z,
+            facecolor=ci,
+            shade=True,
+            lightsource=ls,
+            zorder=zorder,
+        )
+
+    plot_cap(start_x, c1, zorder - 1)
+    ax.plot_surface(
+        x_grid,
+        y_grid,
+        z_grid,
+        facecolors=fcs,
+        edgecolor="#999",
+        shade=True,
+        lightsource=ls,
+        zorder=zorder,
+    )
+    plot_cap(start_x + width_x, c2, zorder + 1)
+
+
 if __name__ == "__main__":
     # --- EXECUTION ---
     nodes = np.array(
@@ -495,6 +554,55 @@ if __name__ == "__main__":
             zorder=12,
             linestyle="--",
         )
+
+    def plot_circle(xpos, start_z, radius, color, zorder=3):
+        circ = Circle((0, start_z), radius=radius, color=color, zorder=zorder)
+        ax3.add_patch(circ)
+        art3d.pathpatch_2d_to_3d(circ, z=xpos, zdir="x")
+        theta = np.linspace(0, 2 * np.pi, 20, endpoint=True)
+        y = radius * np.cos(theta)
+        z = start_z + radius * np.sin(theta)
+        ax3.plot(xpos, y, z, color="#444", linewidth=7, zorder=zorder)
+        ax3.plot(
+            xpos,
+            y,
+            z,
+            color="#EEE",
+            linewidth=3,
+            zorder=zorder + 1,
+            gapcolor="#444",
+            linestyle=(0, (2, 1)),
+        )
+
+    r = 0.5
+    # Step 1
+    plot_cylinder(-0.15, -0.5, r, 0.7, ax3, COLOR3, COLOR3, zorder=3, alpha=0.7)
+    # Step 2
+    plot_cylinder(-0.2, 1.0, r, 0.4, ax3, COLOR1, COLOR3, zorder=5, alpha=0.7)
+    plot_cylinder(0.2, 1.0, r, 0.4, ax3, COLOR3, COLOR5, zorder=12, alpha=0.7)
+    plot_circle(0.2, 1.0, 1.05 * r, "#FF6060A0", zorder=20)
+    # Step 3
+    plot_cylinder(-0.3, 2.5, r, 0.5, ax3, COLOR1, COLOR1, zorder=5, alpha=0.7)
+    plot_cylinder(0.2, 2.5, r, 0.5, ax3, COLOR5, COLOR5, zorder=12, alpha=0.7)
+    plot_circle(0.2, 2.5, 1.05 * r, "#FF606080", zorder=20)
+
+    ax3.set_axis_off()
+    ax3.view_init(elev=0, azim=85, roll=170)
+    ax3.set_box_aspect([4, 4, 4], zoom=1.4)
+    ars = ArrowStyle("-|>", head_length=7.5, head_width=3.0, widthA=3.0, widthB=3.0)
+    arrow = Arrow3D(0.7, 0, -1, 0, 0, 1.5, arrowstyle=ars, color="k")
+    ax3.add_patch(arrow)
+    ax3.text(
+        0.7,
+        0,
+        -0.25,
+        "Time",
+        zdir=(0, 0, 1),
+        fontfamily="Courier New",
+        va="center",
+        horizontalalignment="left",
+        fontsize=25,
+    )
 
     fig.tight_layout()
     fig.savefig("figures/abm-theory/smooth-tree.pdf")
