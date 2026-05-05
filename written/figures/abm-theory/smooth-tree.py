@@ -113,10 +113,11 @@ def generate_tapered_volumetric_graph(
 
 
 def draw_tree_normal(nodes_2d, edges, img, radius_pad):
-    fig = plt.figure(figsize=(18, 8))
-    gs = fig.add_gridspec(1, 2, width_ratios=(2, 1))
+    fig = plt.figure(figsize=(24, 8))
+    gs = fig.add_gridspec(1, 3, width_ratios=(2, 1, 1))
     ax = fig.add_subplot(gs[0, 0])
     ax2 = fig.add_subplot(gs[0, 1], projection="3d")
+    ax3 = fig.add_subplot(gs[0, 2], projection="3d", computed_zorder=False)
     ax.set_axis_off()
 
     xmin = np.min(nodes_2d[:, 0])
@@ -189,18 +190,19 @@ def draw_tree_normal(nodes_2d, edges, img, radius_pad):
             transform=ax.transAxes,
         )
 
-    fig.text(
-        0.03 + 2 * 0.325,
-        0.95,
-        "C",
-        fontsize=40,
-        fontweight="semibold",
-        fontfamily="serif",
-        va="top",
-        horizontalalignment="left",
-    )
+    for k, label in [(2, "C"), (3, "D")]:
+        fig.text(
+            0.0225 + k * 0.24,
+            0.95,
+            label,
+            fontsize=40,
+            fontweight="semibold",
+            fontfamily="serif",
+            va="top",
+            horizontalalignment="left",
+        )
 
-    return fig, ax2
+    return fig, ax2, ax3
 
 
 def union_area_residual(R, d, target_area):
@@ -430,7 +432,7 @@ if __name__ == "__main__":
     p.window_size = (2000, 2000)
     img = p.show(return_img=True)  # screenshot="figures/abm-theory/smooth-tree.png")
 
-    fig, ax2 = draw_tree_normal(nodes, edges, img, 0.22)
+    fig, ax2, ax3 = draw_tree_normal(nodes, edges, img, 0.22)
 
     # Generate data
     X, Y, Z, split_y = generate_connected_evolution_mesh()
