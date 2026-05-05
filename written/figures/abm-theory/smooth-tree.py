@@ -1,7 +1,7 @@
 import numpy as np
 import pyvista as pv
 import matplotlib.pyplot as plt
-from matplotlib.colors import to_rgba
+from matplotlib.colors import to_rgba, LightSource
 from matplotlib.patches import Circle, FancyArrowPatch, ArrowStyle
 from mpl_toolkits.mplot3d.proj3d import proj_transform
 from scipy.optimize import fsolve
@@ -440,6 +440,7 @@ if __name__ == "__main__":
     fcolors = calculate_connected_face_colors(X, Y, split_y)
 
     # plot_surface automatically ignores faces containing NaN vertices
+    ls = LightSource(azdeg=250, altdeg=250)
     surf = ax2.plot_surface(
         X,
         Y,
@@ -451,6 +452,7 @@ if __name__ == "__main__":
         rstride=1,
         cstride=1,
         alpha=1.0,
+        lightsource=ls,
     )
 
     ax2.set_axis_off()
@@ -481,13 +483,14 @@ if __name__ == "__main__":
             color="#444",
             linewidth=7,
             zorder=10,
-            linestyle="--",
+            linestyle="-",
         )
         ax2.plot(
             X[k],
             Y[k][0],
             Z[k],
             color="#EEE",
+            gapcolor="#444",
             linewidth=3,
             zorder=12,
             linestyle="--",
