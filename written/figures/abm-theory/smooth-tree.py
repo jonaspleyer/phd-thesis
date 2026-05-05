@@ -157,7 +157,7 @@ def draw_tree_normal(nodes_2d, edges, img, radius_pad):
     ax.arrow(xb, yb, -0.6 * dy, 0, width=0.01, head_width=0.05, color="k")
     ax.arrow(xb, yb, 0, -0.6 * dy, width=0.01, head_width=0.05, color="k")
     ax.text(
-        xb + 0.1 * q * dx,
+        xb + 0.2 * q * dx,
         yb - 0.3 * dy,
         "Time",
         rotation="vertical",
@@ -454,6 +454,21 @@ if __name__ == "__main__":
     ax2.set_axis_off()
     ax2.set_box_aspect([8, 10, 6], zoom=1.27)
     ax2.view_init(elev=-60, azim=-110, roll=-170)
+
+    ars = ArrowStyle("-|>", head_length=7.5, head_width=3.0, widthA=3.0, widthB=3.0)
+    arrow = Arrow3D(-13, 10, 0, 0, -10, 10, arrowstyle=ars, color="k")
+    ax2.add_patch(arrow)
+    ax2.text(
+        -14.5,
+        0,
+        0.25,
+        "Time",
+        zdir=(0, -1, 1),
+        fontfamily="Courier New",
+        va="center",
+        horizontalalignment="left",
+        fontsize=25,
+    )
 
     n = X.shape[1]
     for k in [0, X.shape[0] // 2, -1]:
