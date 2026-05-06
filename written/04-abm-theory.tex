@@ -1627,7 +1627,8 @@ domain.
 %---------------------------------------------------------------------------------------------------
 \section{Stochasticity}
 
-\section{Distinction of \acsp{abm} to \acs{ca}}
+%---------------------------------------------------------------------------------------------------
+\section{Distinction of \aclp{abm} to \aclp{ca}}
 
 In the broader literate \acp{abm} are often treated within the same class as \acp{ca}.
 However this association is superficial and one of the only shared aspects is the discrete nature of
@@ -1636,11 +1637,9 @@ This subsection explores key differences between \acp{abm} and \acp{ca}.
 We illustrate these discrepancies by fully classifying elementary \acp{ca} and further study other
 variations of \acp{ca}.
 
-\begin{itemize}
-    \item cellular potts model; not for cells directly but rather for sections of cells
-\end{itemize}
+\subsection{Implementing Rule $110$ in an \acl{abm}}
 
-\subsubsection{Elementary \aclp{ca}}
+\subsection{Elementary \aclp{ca}}
 
 \begin{itemize}
     \item distinguish between lattice points and biological cells
@@ -1651,18 +1650,107 @@ variations of \acp{ca}.
         problems
 \end{itemize}
 
-\subsubsection{Other \aclp{ca}}
+\subsubsection{Most Elementary \aclp{ca} are not cell-based}
+
+This statement can be generalized to the class of elementary \acp{ca}~\cite{Wolfram1983}.
+The statement of the following theorem relies on a number of assumptions.
+We assume that during the advancement of the \ac{ca} only one of two processes is triggered:
+division or death.
+The particular reason for any one of them is not taken into account as this depends on which
+problem is being modeled.
+We explicitly exclude other processes such as stochastic effects and spatial movement
+(compare Table~\ref{tab:cellular-aspects}).
+
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{ r c c c c c c c c }
+        Current State & $111$ & $110$ & $101$ & $100$ & $011$ & $010$ & $001$ & $000$\\
+        \midrule
+        New State & $a_8$ & $a_7$ & $a_6$ & $a_5$ & $a_4$ & $a_3$ & $a_2$ & $a_1$\\
+        % Reduced     & $a_8$ & $b$   & $a_6$ & $c$   & $b$   & $a_3$ & $c$   & $0$
+    \end{tabular}
+    \caption{
+        Elementary \acp{ca} can be characterized by their transition rules.
+        The binary number $a_8\dots a_1$ converted to decimal, results in the rule number of
+        the associated \ac{ca} (i.e. $01101110_2=110_d$).
+        There exist $256$ rules in total.
+    }
+    \label{fig:wolfram-code}
+\end{figure}
+
+\begin{theorem}[Most Elementary \aclp{ca} are not cell-based]
+    Elementary \acp{ca} are characterized by their transition rules.
+    In total there are $8$ states from which the next value is determined.
+    To simplify notation, the Wolfram Code (Figure~\ref{fig:wolfram-code}) was
+    proposed~\cite{Wolfram1994-yw}.
+\end{theorem}
+\begin{proof}
+    We fist inspect the last transition rule $000\rightarrow a_1$ which presents an empty subspace
+    (no cells existing) and advances it.
+    If $a_1=1$, we would create a new cell from nothing.
+    This is contrary to the biological reality in which cells divide and reproduce.
+    We can infer, that \acp{ca} which have $a_1=1$ are not cell-based.
+    Furthermore, due to the isotropy of space, we expect that all initial states deliver identical
+    results to their mirrored version which requires $a_7=a_4$ and $a_5=a_2$.
+    These considerations reduce the total number of possible rules to $2^5=32$.
+
+    \begin{itemize}
+        \item Show for all Wolfram Rules that most of them can not be cell-based models
+        \item Consider migration as an additional rule instead of just division and death
+        \item Formal question: given an initial state $x_0$ and final state $x_1$ does a combination
+            of cell-based rules exist which produces this state?
+        \item Additional question: Is this procedure deterministic? (It should not have to be
+            deterministic imho)
+    \end{itemize}
+\end{proof}
+
+\subsubsection{Scaling Behaviour of Elementary \aclp{ca}}
+
+\begin{figure}
+\begin{minipage}{0.5\textwidth}
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{cccc}
+                Type & Dim & Step & Scaling\\
+                \midrule
+                Moore      & $1$ & $1$ & $2n+1$\\
+                Moore       & $2$ & $1$ & $(2n+1)^2$\\
+                v.Neumann      & $2$ & $1$ & $2n(n+1)+1$\\
+                Moore       & $d$ & $1$ & $(2n+1)^d$\\
+                v.Neumann      & $d$ & $1$ & \textbf{todo}\\
+                Moore       & $d$ & $k$ & $(2kn+1)^d$\\
+                v.Neumann      & $d$ & $k$ & \textbf{todo}
+            \end{tabular}
+            \caption{}
+            \label{tab:ca-scaling}
+        \end{table}
+    \end{minipage}%
+    \hspace{0.05\textwidth}%
+    \begin{minipage}{0.44\textwidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{figures/ca-rules/scaling.pdf}
+            \caption{TODO insert new image of various scalings; caption for image}
+            \label{fig:ca-scaling}
+        \end{figure}
+    \end{minipage}
+\end{figure}
+
+\begin{theorem}[]
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+\subsection{Other \aclp{ca}}
 
 \begin{itemize}
+    \item cellular potts model; not for cells directly but rather for sections of cells
     \item growth in \acp{ca} is always limited if density is limited
     \item conway's game of life: individual (spatial) cells are not biological cells; look at
         glider; this consists of multiple cells and only many of them together form something that
         is deemed "living"
 \end{itemize}
 
-%###################################################################################################
-\section{Comparison with \aclp{ca}}
-\label{section:comparison-with-ca}
 Classical \acp{ca} such as Conway's Game of Life \cite{games1970fantastic} \todo[inline]{MORE CITATIONS}
 % or the Cellular Potts Model \cite{Graner1992}
 are spatially and temporally discrete dynamical systems.
@@ -1781,136 +1869,6 @@ distinct entities.
     }
     \label{fig:conway-non-abm-transition}
 \end{figure}
-
-This statement can be generalized to the class of elementary \acp{ca}~\cite{Wolfram1983}.
-The statement of the following theorem relies on a number of assumptions.
-We assume that during the advancement of the \ac{ca} only one of two processes is triggered:
-division or death.
-The particular reason for any one of them is not taken into account as this depends on which
-problem is being modeled.
-We explicitly exclude other processes such as stochastic effects and spatial movement
-(compare Table~\ref{tab:cellular-aspects}).
-
-\begin{theorem}[Elementary \aclp{ca} are not cell-based]
-    Elementary \acp{ca} are characterized by their transition rules.
-    In total there are $8$ states from which the next value is determined.
-    To simplify notation, the Wolfram Code (Figure~\ref{fig:wolfram-code}) was
-    proposed~\cite{Wolfram1994-yw}.
-    \begin{figure}[H]
-        \centering
-        \begin{tabular}{ r c c c c c c c c }
-            Current State & $111$ & $110$ & $101$ & $100$ & $011$ & $010$ & $001$ & $000$\\
-            \midrule
-            New State & $a_8$ & $a_7$ & $a_6$ & $a_5$ & $a_4$ & $a_3$ & $a_2$ & $a_1$\\
-            % Reduced     & $a_8$ & $b$   & $a_6$ & $c$   & $b$   & $a_3$ & $c$   & $0$
-        \end{tabular}
-        \caption{
-            Elementary \acp{ca} can be characterized by their transition rules.
-            The binary number $a_8\dots a_1$ converted to decimal, results in the rule number of
-            the associated \ac{ca} (i.e. $01101110_2=110_d$).
-            There exist $256$ rules in total.
-        }
-        \label{fig:wolfram-code}
-    \end{figure}
-\end{theorem}
-\begin{proof}
-    We fist inspect the last transition rule $000\rightarrow a_1$ which presents an empty subspace
-    (no cells existing) and advances it.
-    If $a_1=1$, we would create a new cell from nothing.
-    This is contrary to the biological reality in which cells divide and reproduce.
-    We can infer, that \acp{ca} which have $a_1=1$ are not cell-based.
-    Furthermore, due to the isotropy of space, we expect that all initial states deliver identical
-    results to their mirrored version which requires $a_7=a_4$ and $a_5=a_2$.
-    These considerations reduce the total number of possible rules to $2^5=32$.
-
-    \begin{itemize}
-        \item Show for all Wolfram Rules that most of them can not be cell-based models
-        \item Consider migration as an additional rule instead of just division and death
-        \item Formal question: given an initial state $x_0$ and final state $x_1$ does a combination
-            of cell-based rules exist which produces this state?
-        \item Additional question: Is this procedure deterministic? (It should not have to be
-            deterministic imho)
-    \end{itemize}
-\end{proof}
-
-\subsection{Scaling Behaviour}
-
-\begin{figure}
-    \begin{minipage}{0.5\textwidth}
-        \centering
-        \begin{tabular}{lccc}
-            Neighborhood & Dimension & Step & Scaling\\
-            \midrule
-            1D                  & $1$ & $1$ & $2n+1$\\
-            2D Moore            & $2$ & $1$ & $(2n+1)^2$\\
-            2D von Neumann      & $2$ & $1$ & $2n(n+1)+1$\\
-            d-Dim Moore         & $d$ & $1$ & $(2n+1)^d$\\
-            d-Dim von Neumann   & $d$ & $1$ & \textbf{todo}\\
-            d-Dim Moore  & $d$ & $k$ & $(2kn+1)^d$\\
-            d-Dim von Neumann & $d$ & $k$ & \textbf{todo}
-        \end{tabular}
-    \end{minipage}%
-    \hspace{0.05\textwidth}%
-    \begin{minipage}{0.44\textwidth}
-        \includegraphics[width=\textwidth]{ca-rules/ca-scaling.pdf}
-    \end{minipage}
-    \caption{TODO insert new image of various scalings; caption for image}
-    \label{fig:ca-scaling}
-\end{figure}
-
-\begin{theorem}[]
-\end{theorem}
-\begin{proof}
-\end{proof}
-
-%###################################################################################################
-\section{Spatial Locality}
-\label{section:spatial-decomposition}
-We assume that the physical domain $D$ can be split into smaller subdomains
-$\bigcup_{i\in I}S_i=D$ which are pairwise disjoint.
-We will later require that any dynamics can be calculated by considering cellular agents inside a
-given subdomain $S_i$ and their interactions with neighboring subdomains.
-This also applies to spatial effects such as diffusion.
-Therefore, we must first develop the notion of being a \textbf{neighbor}.
-
-\begin{definition}[Neighbor]
-    The notion of neighbor can be defined by two equivalent methods.
-    \begin{enumerate}
-        \item We call $\eta:I\rightarrow Pot(I)$ a \textbf{neighbor map} if
-        \item $i\in\eta(j) \Leftrightarrow j\in\eta(i)$ for each $i,j\in I$.
-            We call a relation $||$ on $I$ a \textbf{neighbor relation} if it is symmetric.
-    \end{enumerate}
-\end{definition}
-
-\begin{example}[Moore Neighbors]
-    The neighborhood used in the Game of Life~\ref{example:game-of-life} is the 2-dimensional
-    special case.
-    In general, for any discrete space $\mathbb{Z}^n$, we consider the Moore neighborhood $U(x)$ for
-    any point $x\in\mathbb{Z}^n$ to be
-    \begin{equation}
-        U(x) := \{y\in\mathbb{Z}^n:\max\limits_{i\in\{1..n\}}|x_i-y_i|=1\}.
-    \end{equation}
-    This definition ensures that at least one component of the value $y$ is not identical to the
-    point in question $x$.
-    This metric is also often called uniform norm, supremum norm (in a possibly infinite-dimensional
-    case) or Chebyshev norm~\cite{Rudin1976}.
-\end{example}
-
-Note that in the numerical implementation it is often more convenient to work with the first
-definition while the second can be more useful in a theoretical context.
-
-\begin{proof}
-    $1) \Rightarrow 2)$ Let $\eta$ be a neighbor map.
-    We define a relation $||$ by $i||j \Leftrightarrow i\in\eta(j)$.
-    It is clear that $||$ is symmetric.\\
-    $2) \Rightarrow 1)$ Let $||$ be a symmetric relation on $I$.
-    We define the function $\eta:I\rightarrow Pot(I)$ via
-    $\eta(i):=\{j\in I \text{ such that } i||j\}$.
-    If $j\in\eta(i)$ then $i||j \Leftrightarrow j||i$ and thus $i\in\eta(j)$.
-\end{proof}
-
-Equipped with this notion of \textbf{neighbor}, we can now formalize the spatial splitting of our
-domain.
 
 %###################################################################################################
 \section{Applications}
@@ -2111,8 +2069,8 @@ most generalized version.
 
 \subsubsection{Model Aspects}
 
-\todo{check this section for notations of "domain". We will change that into "environment" but when
-    integrating over the "environment" we probably want to distinguish between
+\todo[inline]{check this section for notations of "domain". We will change that into "environment"
+    but when integrating over the "environment" we probably want to distinguish between
     the full environment that
 also contains extracellular compounds and the physical size only}
 
@@ -2137,9 +2095,9 @@ The system of equations is given by
     \partial^2_t\textbf{y}_c &= &\sum\limits_{s\neq c}& \textbf{F}_\CS(c,s) + \textbf{F}_\EV(c) +
     \textbf{F}_c
     \label{eq:equations-of-motion-2}\\
-    &\gamma:&\CS&\rightarrow\CS\times\CS\\
-    &\bar{\gamma}:&\CS&\rightarrow\{0,1\}\\
-    &.
+    &&&\gamma:\CS\rightarrow\CS\times\CS\\
+    &&&\bar{\gamma}:\CS\rightarrow\{0,1\}\\
+    &&&\bar{\delta}:\CS\rightarrow\{0,1\}
 \end{alignat}
 \todo{Explain division functions}
 \todo{Insert death functions}
