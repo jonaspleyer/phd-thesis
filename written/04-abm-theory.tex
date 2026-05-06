@@ -1436,12 +1436,18 @@ considered beforehand.
 \section{Environment \& Dynamics}
 \label{section:dynamics}
 
+\subsection{A primer on Cellular \& Environmental Processes}
+
+\subsubsection{Cellular Processes}
+\subsubsection{Cell-Cell Interactions}
+\subsubsection{Cell-Environment Interactions}
+\subsubsection{Environmental Dynamics}
+
 \begin{itemize}
     \item physical space; boundaries, i.e., petri dish, mother machine etc.
     \item extracellular compounds; nutrients, proteins, salt, viruses, etc.
     \item external influences: temperature, humidity
 \end{itemize}
-
 
 \begin{definition}[Dynamical System]
     A dynamical system is a tuple $(T,M,\phi)$ where $T$ is a monoid (written additively) and
@@ -1488,22 +1494,25 @@ pseudo-stochastic processes within a deterministic framework.
 \todo{Define our dynamical system more precisely. What does it mean to be an index?
 $\iota\in\phi_t$}
 
-\begin{lemma}[Lifetime of a cell]
-    \label{thm:cellular-uniqueness}
+\begin{definition}[Lifetime of a cell]
+    \label{definition:cellular-lifetime}
     Given an index $\iota\in I$ to an initial state $x$ of an \ac{abm}, we define the
     \textbf{Life-Span} of $\iota$ which is the set of all time-points for which the cell is alive
     \begin{equation}
         T_\iota=\{t\in T: c_\iota \text{ is alive}\}.
     \end{equation}
-    If $T$ is an ordered and path-connected topological space, then $T_\iota$ is also
-    path-connected.
-    If $\mu$ is a measure on $T$, we also define the \textbf{Lifetime} with respect to this measure
-    via
+    If $\mu$ is a measure on $T$, we define the \textbf{Lifetime} with respect to this measure via
     \begin{equation}
         t_\iota:=\mu\left(T_\iota\right).
     \end{equation}
     In practial examples, $\mu$ will be given by the Lebesgue measure.
-\end{lemma}
+\end{definition}
+
+\begin{theorem}
+    If $T$ is an ordered and path-connected topological space, then $T_\iota$ is also
+    path-connected.
+\end{theorem}
+
 \begin{proof}
     Let $t<s\in T_\iota$ arbitrary.
     We pick a path $\gamma:[0,1]\rightarrow T$ from $t$ to $s$.
@@ -1513,6 +1522,54 @@ $\iota\in\phi_t$}
     between the points of insertion and removal are part of $T_\iota$ and thus
     $\gamma(h)\in T_\iota\forall h\in [0,1]$.
 \end{proof}
+
+\subsection{Spatial Locality}
+\label{section:spatial-decomposition}
+We assume that the physical domain $D$ can be split into smaller subdomains
+$\bigcup_{i\in I}S_i=D$ which are pairwise disjoint.
+We will later require that any dynamics can be calculated by considering cellular agents inside a
+given subdomain $S_i$ and their interactions with neighboring subdomains.
+This also applies to spatial effects such as diffusion.
+Therefore, we must first develop the notion of being a \textbf{neighbor}.
+
+\begin{definition}[Neighbor]
+    The notion of neighbor can be defined by two equivalent methods.
+    \begin{enumerate}
+        \item We call $\eta:I\rightarrow Pot(I)$ a \textbf{neighbor map} if
+        \item $i\in\eta(j) \Leftrightarrow j\in\eta(i)$ for each $i,j\in I$.
+            We call a relation $||$ on $I$ a \textbf{neighbor relation} if it is symmetric.
+    \end{enumerate}
+\end{definition}
+
+\begin{example}[Moore Neighbors]
+    The neighborhood used in the Game of Life~\ref{example:game-of-life} is the 2-dimensional
+    special case.
+    In general, for any discrete space $\mathbb{Z}^n$, we consider the Moore neighborhood $U(x)$ for
+    any point $x\in\mathbb{Z}^n$ to be
+    \begin{equation}
+        U(x) := \{y\in\mathbb{Z}^n:\max\limits_{i\in\{1..n\}}|x_i-y_i|=1\}.
+    \end{equation}
+    This definition ensures that at least one component of the value $y$ is not identical to the
+    point in question $x$.
+    This metric is also often called uniform norm, supremum norm (in a possibly infinite-dimensional
+    case) or Chebyshev norm~\cite{Rudin1976}.
+\end{example}
+
+Note that in the numerical implementation it is often more convenient to work with the first
+definition while the second can be more useful in a theoretical context.
+
+\begin{proof}
+    $1) \Rightarrow 2)$ Let $\eta$ be a neighbor map.
+    We define a relation $||$ by $i||j \Leftrightarrow i\in\eta(j)$.
+    It is clear that $||$ is symmetric.\\
+    $2) \Rightarrow 1)$ Let $||$ be a symmetric relation on $I$.
+    We define the function $\eta:I\rightarrow Pot(I)$ via
+    $\eta(i):=\{j\in I \text{ such that } i||j\}$.
+    If $j\in\eta(i)$ then $i||j \Leftrightarrow j||i$ and thus $i\in\eta(j)$.
+\end{proof}
+
+Equipped with this notion of \textbf{neighbor}, we can now formalize the spatial splitting of our
+domain.
 
 \begin{definition}[Decomposition]
 
