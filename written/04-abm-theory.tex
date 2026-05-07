@@ -1365,19 +1365,104 @@ daughter cells produced by $\gamma$ are overlapping in a single point and are no
 right at the division event.
 While this particular intersection is only a singular point, it may be more complex in other
 scenarios.
-Consider Figure~\ref{fig:theory-cell-lineage-as-manifold} (D) where the cellular envelope is that of
-a cylinder which grows along its axis of elongation and divides into two new cylindrically-shaped
-cells.
-The two resulting cylinders will overlap exactly at their bases pointing to each other.
-Despite that the biological reality will most certainly not exhibit such overlaps between cells,
-other forms such as numerical simulations or immaging artifacts can be subject to them.
-This indicates that such overlaps are not merely an artifact of the chosen cellular representation
-but rather a common occurence which needs to be dealt with properly.
+Consider Figure~\ref{fig:theory-cell-lineage-as-manifold} (D) where the cellular envelope of the
+underlying model is that of a cylinder which grows along its axis of elongation and divides into two
+new cylindrically-shaped cells.
+The two resulting cylinders will overlap exactly at the two bases closest to each other.
+These overlaps should not be interpreted as two cells that partially share a spatial region but
+rather as a consequence of our model and encoding choice.
+But they are still relevant since they might surface in numerical results and imaging techniques.
+This motivates the approach to not merely treat them as an artifact but rather a common occurence
+and part of our a practical reality that needs to be dealt with.
 
-In order to identify individual cells from a particular encoding, we can define a decoder
-$\sigma:\mathcal{P}(\R^k)\rightarrow\sqcup_{n\in\mathbb{N}}\{0,\dots,n\}\sqcup\mathbb{N}$ which is
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \node (model) at (0,1.5)
+            {\begin{tabular}{c}
+                \textbf{Model}\\
+                \includegraphics[width=0.2\textwidth]{figures/abm-theory/177_model.pdf}\\
+                \phantom{a}
+            \end{tabular}};
+        \node (enc) at (6,0)
+            {\begin{tabular}{c}
+                \textbf{Encoding}\\
+                \includegraphics[width=0.2\textwidth]{figures/abm-theory/177_masks.pdf}\\
+                \phantom{a}
+            \end{tabular}};
+        \node (bio) at (0,-1.5)
+            {\begin{tabular}{c}
+                \textbf{Biology}\\
+                \includegraphics[width=0.2\textwidth]{figures/abm-theory/177_img.pdf}\\
+                \phantom{a}
+            \end{tabular}};
+        \node (identity) at (11,0)
+            {\begin{tabular}{c}
+                \textbf{Identity}\\
+                \framebox(80,40){$\{\iota_1,\iota_2,\dots\}$}\\
+                \phantom{a}
+            \end{tabular}};
+        \draw[-latex] (bio) --
+            node[midway,above,sloped] {measure}
+            node[midway,below,sloped] {\& compute} ++ (enc);
+        \draw[-latex] (model) -- node[midway,above,sloped] {encode $\mu$} ++ (enc);
+        \draw[-latex] (enc) -- node[above] {deocde $\sigma$} ++ (identity);
+        \draw[-latex] (model) -- (0,3.5) -- node[midway,below] {known} (11,3.5) -- (identity);
+    \end{tikzpicture}
+    \caption[Relation of Model, Biological Reality, Encoding and Cellular Identity]{
+
+    }
+    \todo[inline]{make this figure more clear: what is the purpose?}
+    \label{fig:theory-cell-lineage-segmentation}
+\end{figure}
+
+In order to identify individual cells from a particular encoding, we can define a decoding map
+$\sigma$ which aims to reobtain the original identities of cells from a collection of encodings.
+If a single encoding is takes values in $\mathcal{P}_\text{\normalfont kp}(\R^k)$, then a
+combination of encodings for a countable number of cells is the union of countably many elements of
+$K_i\in\mathcal{P}_\text{\normalfont kp}(\R^k)$.
+A finite union of sets $K_i$ may not be connected anymore and a countable amount may not be bound
+anymore.
+We therefore need to generalize the domain of the decoder to
+$\mathcal{P}_\text{\normalfont c}(\R^k)$ which only contains (c) closed sets.
+
+
+We therefore define the decoder to map 
+
+$\sigma:\mathcal{P}(\R^k)\rightarrow
+\mathcal{P}\left(\mathcal{P}_\text{\normalfont kp}(\R^k)^\mathbb{N}\right)$
+which is
 able to take any subset of $\R^k$ and identify distinct cells from it.
 With these considerations we can now formailze the encoding of a cell.
+This combination of encoding and decoding should not be understood in terms of a full reconstruction
+of the provided input information but is rather tied to the 
+
+\begin{definition}[Encoding \& Decoding of Cellular Identity]
+    We call a continuous map $\mu:C\rightarrow\mathcal{P}_\text{\normalfont kp}(\R^k)$ an
+    \textbf{identity encoding} and a map
+    $\sigma:\mathcal{P}\rightarrow\sqcup_{n\in\mathbb{N}}\{0,\dots,n\}\sqcup\mathbb{N}$ an
+    \textbf{identity decoding}.
+\end{definition}
+
+The encoding of a cell can be interpreted as
+
+\begin{definition}[Decoding of identity]
+    For any division $\gamma$ or fusion $\zeta$ let $c_{\iota_1},\dots,c_{\iota_n}$ be the
+    initial and $c_{\bar{\iota}_1},\dots,c_{\bar{\iota}_m}$ the final cells of these operations.
+    \todo[inline]{correct the intersection part.}
+    If the encodings of initial and final cells are pairwise disjoint, i.e.
+    $\mu(c_{\iota_i})\cap\mu(c_{\iota_j}) = \emptyset$ and
+    $\mu(c_{\bar{\iota}_i})\cap\mu(c_{\bar{\iota}_j}) = \emptyset$ for every $i\neq j$, then we call
+    $\mu$ \textbf{separable}.
+\end{definition}
+
+Any encoding $\mu$, can be used to embed the cell lineage in $\R^{d+1}$ via its graph
+\begin{equation}
+    G=\{(\cup_{c_\iota}\mu(c_\iota(t),t)|c_\iota(t)\text{ is alive at }t\}\hookrightarrow\R^{d+1}
+    \label{eq:cell-lineage-graph-encoding}
+\end{equation}
+where we are using the notion of a cell being alive at a particular point in time $t$ that will be
+introduced later on (see Definition~\ref{definition:cellular-lifetime}).
 
 We turn our attention to investigate the implications of this representation.
 It is in genral not straightforward to make any generalized statements about the nature of $G$
@@ -1387,23 +1472,21 @@ does not necessarily mean that the graph $G$ retains a similar structure such as
 The following example illustrates this point.
 
 \begin{example}[Spatially mass-averaged position encoding]
-    We assume that the cell is a physical entity in space $\R^k$ with a mass density function
-    $\rho:\R^k\rightarrow\R$.
+    We assume that every cell is a physical entity in space $\R^k$ with an (Lebesuge) integrable
+    mass density function $\rho:\R^k\rightarrow\R$.
     Then we define the sptatiall mass-averaged position of the cell via
     \begin{equation}
-        \mu(c_\iota(t))=\int\rho(x)(t)x_\iota(t)\text{\normalfont dx}\in\R^k
+        \mu(c_\iota(t))=\bar{x}_\iota(t)=\int\rho(x)(t)x_\iota(t)\text{\normalfont dx}\in\R^k
     \end{equation}
-    where we can losen our notation, and simply writ
-    where we have loosened our notation via $\mu(c_\iota(t))\in\mathcal{P}(\R^k)$ has only one
-    element which can we consider as the 
+    where we used a simplified notation since the set $\mu(c_\iota(t))$ only consists of one element
+    and therefore $\mu(c_\iota(t))\in\R^k$.
     We generally assume that this position function $x_\iota(t)$ is well defined and at least
     continuous in $t$.
 \end{example}
 
 When a division event ocurrs at time $t_d$, the average position of the daughter cells will not be
-identical to its parent.
-When we inspect how $G$ will look like in this situation, we will find a discontinuity in the graph,
-meaning the relation
+identical to its parent, which leads to a discontinuity in the graph $G$.
+This means that the relation
 \begin{equation}
     \limsup_{t\rightarrow t_d} \mu(c_\iota(t))=
         \liminf_{t\rightarrow t_d}\bigcup_i\mu(c_{\iota_i}(t))
@@ -1411,7 +1494,59 @@ meaning the relation
 will not be obeyed.
 Here $c_{\iota_i}$ are the daughter cells of $c_\iota$ and $\liminf,\limsup$ are the set-theoretic
 limits.
+However, despite this discontinuity at the division time point, the spatially mass-averaged position
+encoding is frequently utilized.
 
+
+\begin{example}[Spatial cell-envelope encoding]
+    We again assume that any cell
+\end{example}
+
+Even in simple examples where $\mu(c_\iota)$ can be given by a circle for each time point, the
+resulting structure of $G$ will only be a continuous manifold, not even differentiable which is
+displayed in Figure~\ref{fig:theory-cell-lineage-as-manifold} (C).
+
+
+
+
+
+
+However, for all times between division or fusion events, we retain the structure of a $1$-manifold
+if the produced coordinats $x_\iota(t)$ are spatially distinct, meaning
+$x_\iota(t)\neq x_{\bar{\iota}}(t)$ for $\iota\neq\bar{\iota}$.
+
+If at any time, between fusion events
+
+\todo[inline]{correct all of this. these are not embeddings!}
+
+We now turn to investigate transitions between division and fusion events of the graph defined by
+Equation~\ref{eq:cell-lineage-graph-encoding}.
+Let $c_{\iota_1},\dots,c_{\iota_n}$ be the input and $\bar{c}_{\iota_1},\dots,\bar{c}_{\iota_m}$
+be the output cells.
+
+\begin{theorem}
+    If $\mu(c_\iota(t))$ is a $d$-dimensional manifold for each time point $t$ and all transitions
+    between division or fusion points $t_i$ are continuous, i.e.
+    \begin{equation}
+        \lim_{t\nearrow t_i}\cup_j\mu(c_{\iota_j}(t)) =
+        \lim_{t\searrow t_i}\cup_k\mu(c_{\iota_k}(t))
+    \end{equation}
+    then the graph $G$ is a topological space which ..
+    \todo[inline]{finish this theorem}
+    If $\mu(c_\iota(t))$ is path-connected for all $t$, then $G$ is path-connected.
+\end{theorem}
+
+consisting of 3 spatial dimensions which have been reduced to the x-axis of the Figure and one time
+coordinate.
+This can be expressed mathematically via a feature extraction
+
+and uses the spatial envelope of the cell
+
+
+and embeds the living cells $(I_p,M)\in\CS$ in a higher-dimensional space $V$
+\begin{equation}
+    M\hookrightarrow V.
+\end{equation}
 The temporal evolution of two cells has stopped at distinct intermediate time points, indicating
 their removal from the \ac{abm}.
 Furthermore, we can now clearly see the difference in lifetimes of each cell (see
