@@ -134,6 +134,48 @@ These methods can be extended to dynamically track cells over the course of time
 complexity still poses substantial problems for existing
 solutions~\cite{Maka2014,Maka2023,Ulman2017,Wen2021}.
 
+\subsubsection{Experimental Methods of Tracking}
+
+\textbf{Optical Diffraction Tomography}
+\begin{itemize}
+    \item First theorized by Wolf~\cite{Wolf1969} (Optical Diffraction Tomography)
+    \item First experimental proof by Fercher~\cite{Fercher1979}
+    \item Improvement on Optical Diffraction Tomography via Rytov approximation \cite{Sung2009}
+    \item Now used for live-imaging of intestinal organoids~\cite{Lee2024} and reconstruction of 3D
+        cancer tissues \cite{Park2025}; today known as Holotomography
+\end{itemize}
+
+\textbf{CRISPR "Flight Recorder"}
+\begin{itemize}
+    \item Give every cell a "scratchpad" \ac{dna} and \ac{crispr} machinery
+    \item Cells (stochastically) cut the \ac{dna} and repair these cuts - mistakes are made in the
+        process small insertions or deletions called "indels" (scars). They are permanent
+    \item Daughter cells inherit the same scars
+    \item daughters further write new scars onto the \ac{dna}
+    \item when \ac{dna} is sequenced the cell tree can be reconstructed
+\end{itemize}
+
+\begin{itemize}
+    \item GESTALT (Genome Editing of Synthetic Target Arrays for Lineage Tracing);
+        First discovered in 2016 \cite{McKenna2016}; Track all cells of whole organism (zebrafish)
+    \item MEMOIR (Memory by Engineered Mutagenesis with Optical In situ Readout)
+    \item Read scratchpads without distroying tissue \cite{Frieda2016}; use single-molecule RNA
+        fluorescence hybridization (smFISH)
+    \item previously only possible to tell parental relation but not cell-type; scGESTALT: combine
+        GESTALT with single-cell RNA sequencing \cite{Raj2018}; application to vertebrate brain
+\end{itemize}
+
+\textbf{DNA Typewriters}
+\begin{itemize}
+    \item All improve on GESTALT; previous methods erase information over time -> decorrelation
+    \item Newer methods more like typewriters: insert new \ac{dna} sequentially; avoid \ac{dna}
+        damage \cite{Choi2022}
+    \item CHYRON (Cell History Recording by Ordered Insertion) write random nucleotides at single
+        locus one after another - like analog recorder \cite{Loveless2021}
+    \item BASELINE; most recent work (preprint) of McKenna uses Cas12a adenine; increases stored
+        information significantly \cite{Winter2025}
+\end{itemize}
+
 \subsection{Identification via Cellular Properties}
 One could be tempted to identify each cell by its physical and internal properties.
 However, while this idea is supported by the concept of \textbf{Cellular Uniqueness} which states
