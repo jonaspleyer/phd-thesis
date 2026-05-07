@@ -1327,13 +1327,16 @@ two circles only overlap in exactly one singular point.
     \label{fig:theory-cell-lineage-as-manifold}
 \end{figure}
 
-As we have seen be the preceding examples, the encoding scheme can be interpreted as a physically
-measurable quantity which is accessible to the researcher by measurement.
-This can include intracellular properties such as specific protein concentrations which could be
-read out e.g. via tagging with \ac{gfp}~\cite{Chalfie1994},
+Using the cellular envelope as an encoding scheme for distinguishing cells, is perhabs the most
+commonly utilized technique and a fundamental principle to many methods such as spatial segmentation
+algorithms~\cite{Cutler2022,Stringer2020,Hardo2022}.
+In general, the preceding examples indicate that the encoding scheme can be interpreted as a
+physically measurable quantity which is accessible to the researcher by measurement.
+This can in principle include intracellular properties such as specific protein concentrations which
+could be read out e.g. via tagging with \ac{gfp}~\cite{Chalfie1994},
 mCherry~\cite{Campbell2002,Matz1999,Shaner2004} or HaloTag~\cite{Los2008}.
 While it is useful to utilize physically measurable quantities in order to provide a direct link to
-the biological reality, our formalism does not require this assumption.
+the biological reality, our theoretical formalism will not require this assumption.
 
 In order to formalize the presented throughts, we first note that the encoding takes values in the
 power set $\mathcal{P}(\R^k)$ which is motivated by looking at the example of using the cellular
@@ -1342,18 +1345,19 @@ $\R^3$.
 Furthermore, every biological cell is spatially bound and consists of only one single connected
 region.
 We therefore assume that the values of our encoding are compact and connected.
-This means, that we restrict ourselves to the set $\mathcal{P}_\text{\normalfont cp}(\R^k)$ which
-only contains compact and path-connected subsets of $\R^k$.
+This means, that we restrict ourselves to the set $\mathcal{P}_\text{\normalfont kp}(\R^k)$ which
+only contains (k) compact (from the german "kompakt") and (p) path-connected subsets of $\R^k$.
 To measure distances within this space, we define a metric between two sets
-$A,B\in\mathcal{P}_\text{\normalfont cp}(\R^k)$ using the Hausdorff metric~\cite{Hausdorff1914}
+$A,B\in\mathcal{P}_\text{\normalfont kp}(\R^k)$ using the Hausdorff metric~\cite{Hausdorff1914}
 \begin{equation}
     d_H(A,B) = \max \left\{
         \sup_{a\in A}\text{\normalfont dist}(a,B),
         \sup_{b\in B}\text{\normalfont dist}(b,A) \right\}
 \end{equation}
 where $d(x,X)=\sup\text{\normalfont dist}(x,X)$ denotes the supremum of the smallest distance
-between point $x$ and the set $X$ which can be simplified in this case by using the maximum since
-every set in $\mathcal{P}_\text{\normalfont cp}$ is compact and the supremum takes its value.
+between point $x$ and the set $X$ with respect to the usual euclidean metric.
+This can be simplified in this case by using the maximum since every set in
+$\mathcal{P}_\text{\normalfont kp}$ is compact and the supremum takes its value.
 
 Another important property which can be seen in the discussion surrounding the temporal evolution of
 the division displayed in Figure~\ref{fig:theory-cell-lineage-as-manifold} (C) is that the two
