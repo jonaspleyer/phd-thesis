@@ -179,6 +179,38 @@ solutions~\cite{Maka2014,Maka2023,Ulman2017,Wen2021}.
         introduced in BASELINE
 \end{itemize}
 
+\textbf{Fluorescent Tracking}
+\begin{itemize}
+    \item \ac{gfp} tagging: \ac{dna} instructions to create fluorescent protein; inherited by
+        daughter cells; demonstrated in jellyfish \cite{Chalfie1994}
+    \item Improvement: brighter+more stable \cite{Kilgard1995}
+    \item More colors: blue + cyan \cite{Heim1994}, yellow \cite{Orm1996}, mCherry and red
+        \cite{Matz1999,Shaner2004}
+    \item Alternative to genetic approach: "bathe" cells in chemicals that bind to targets: shining
+        laser on cell emits light; not inherited by daughter cells
+\end{itemize}
+
+\textbf{Nanoparticle Tracking}
+\begin{itemize}
+    \item Fluorescent proteins get destroyed when exposed too long; nanoparticles solve this
+    \item Quantum Dots $\approx\SI{2}{\nano\metre}-\SI{10}{\nano\metre}$, semiconductor crystals,
+        stick to cell membrane or cell receptors, no photobleaching, can be tracked over days, good
+        for fast-moving targets
+    \item Genetically Encoded Nanoparticles (GEMs) engineer cells which produce proteins that
+        assemble into perfect spherical nanospheres inside cytoplasm
+\end{itemize}
+
+\textbf{\textit{In-Silico} Tracking}
+\begin{itemize}
+    \item First open-source user-friendly software pipeline for biologists \cite{Carpenter2006}, no
+        coding experience required
+    \item Deep learning revolution (2015) U-Net \cite{Ronneberger2015} provides basis for basically
+        all modern segmentation tools
+    \item Multiple Tools build on U-Net \cite{VanValen2016}, TrackMate \cite{Tinevez2017}
+        Foundation Models: Cellpose \cite{Stringer2020} Cellpose + Omnipose \cite{Cutler2022}
+        3DeeCellTracker \cite{Wen2021}
+\end{itemize}
+
 \subsection{Identification via Cellular Properties}
 One could be tempted to identify each cell by its physical and internal properties.
 However, while this idea is supported by the concept of \textbf{Cellular Uniqueness} which states
