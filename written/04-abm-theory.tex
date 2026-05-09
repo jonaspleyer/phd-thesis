@@ -1477,40 +1477,32 @@ These methods can be extended to dynamically track cells over the course of time
 temporal complexity still poses substantial problems for existing
 solutions~\cite{Maka2014,Maka2023,Ulman2017,Wen2021}.
 
-\textbf{CRISPR "Flight Recorder"}
-\begin{itemize}
-    \item Give every cell a "scratchpad" \ac{dna} and \ac{crispr} machinery
-    \item Cells (stochastically) cut the \ac{dna} and repair these cuts - mistakes are made in the
-        process small insertions or deletions called "indels" (scars). They are permanent
-    \item Daughter cells inherit the same scars
-    \item daughters further write new scars onto the \ac{dna}
-    \item when \ac{dna} is sequenced the cell tree can be reconstructed
-\end{itemize}
+Moving away from techniques that measure spatial information, other forms utilize \ac{dna} together
+with the \ac{crispr} machinery to write cell-specific information into their genetic material.
+One such method is the Genome Editing of Synthetic Target Arrays for Lineage Tracing (GESTALT)
+\cite{McKenna2016} which was among the first efforts within this realm.
+It functions by providing cells with a genomic "scratchpad", named barcode, which is constantly cut
+and repaired, resulting in small defects called indels which are permanent and inherited by their
+daughter cells.
+The method was initially demonstrated on a whole zebrafish embyro.
+Successive work improved on this method by allowing researchers to obtain the information stored in
+the barcode via single-molecule \ac{rna} fluorescence hybridization (smFISH)~\cite{Frieda2016}.
+Another approach utilized single-cell \ac{rna} sequencing (scGESTALT) and was able to not only
+retrieve parental relationships between cells but also information about the respective cell
+types~\cite{Raj2018}.
+However these methods are subject to Homoplasy where after continuous modifications of the \ac{dna}
+two otherwise completely unrelated cells are suddenly identified as cousins
+\cite{SalvadorMartnez2019,Jones2020}.
+Furthermore, due to the stochastic nature of intercisions and repairs, the contained information of
+parental relationship is erased as time continues.
 
-\begin{itemize}
-    \item GESTALT (Genome Editing of Synthetic Target Arrays for Lineage Tracing);
-        First discovered in 2016 \cite{McKenna2016}; Track all cells of whole organism (zebrafish)
-    \item MEMOIR (Memory by Engineered Mutagenesis with Optical In situ Readout)
-    \item Read scratchpads without distroying tissue \cite{Frieda2016}; use single-molecule RNA
-        fluorescence hybridization (smFISH)
-    \item previously only possible to tell parental relation but not cell-type; scGESTALT: combine
-        GESTALT with single-cell RNA sequencing \cite{Raj2018}; application to vertebrate brain
-\end{itemize}
-
-\textbf{DNA Typewriters}
-\begin{itemize}
-    \item Previous methods all erase information over time -> decorrelation
-    \item Newer methods more like typewriters: insert new \ac{dna} sequentially; avoid \ac{dna}
-        damage \cite{Choi2022}
-    \item CHYRON (Cell History Recording by Ordered Insertion) write random nucleotides at single
-        locus one after another - like analog recorder \cite{Loveless2021}
-    \item MARC1 (Mouse for Actively Recording Cells 1); convert single \ac{dna} letter into without
-        breaking strand \cite{Hwang2019}
-    \item BASELINE; most recent work (preprint) of McKenna uses Cas12a adenine; increases stored
-        information significantly \cite{Winter2025}; builds on MARC1 by scaling the concepts
-        introduced in BASELINE
-\end{itemize}
-
+In more recent years, other methods have built on the same idea but who insert \ac{dna}
+sequentially~\cite{Choi2022}.
+Approaches such as Cell History Recording by Ordered Insertion (CHYRON) write random nucleotides
+at a single locus one after another~\cite{Loveless2021} while Mouse for Actively Recording Cells 1
+(MARC1) converts a single \ac{dna} letters, avoiding breaks of the strand~\cite{Hwang2019}.
+In a very recent preprint, BASELINE~\cite{Winter2025} extends this approach, utilizing the Cas12a
+adenine and increases storage capacity significantly.
 
 \subsection{Encoding \& Decoding of individual Cellular Identity}
 \begin{itemize}
