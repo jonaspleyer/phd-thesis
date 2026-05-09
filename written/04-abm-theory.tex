@@ -113,103 +113,25 @@ that discriminates between each individual entity.
 The following examples should be viewed as thought-provoking background information and motivation
 for the coming definitions.
 
-\subsection{Tracability}
+\subsection{Trackability, Traceability \&Cellular Continuity}
 Cellular systems are characterized by the fact that---leaving practical limitations aside---cells
-are tracable through time and space.
-This means that the trajectory of any cell can be followed precisely over the course of its
+are trackable individually.
+This means that the spatial trajectory of any cell can be followed precisely over the course of its
 lifetime.
-Moreover, this involves keeping track of its lineage which starts either at the initial time point
-of the experiment or when the cell is newly created, e.g. after the division of their mother cell.
+Another related concept is that of traceability which refers to the ability to reconstruct the
+history and family tree of a cell.
 These ideas tie into the concept of \textbf{Cellular Continuity} which states that any cell arises
 purely from other pre-existing cells~\cite{Mazzarello1999}.
-But this is not merely a genetic relation which is supported by the observations that new membranes
-are only formed by extending and dividing existing ones~\cite{Harold2005} and mitochondria need to
-be inherited during cell division~\cite{Westermann2010}.
+But cellular continuity is not only a genetic relation.
+For instance, new membranes are only formed by extending and dividing existing
+ones~\cite{Harold2005} and mitochondria need to be inherited during cell
+division~\cite{Westermann2010}.
 The cell's lifetime ends when it reaches a final fate such as death or division.
-Furthermore, once a cell has ceased to exist, it will not reemerge by any other mechanism.
-These conceptually simple ideas already capture important core ideas of how to identify cells.
-On the application side, the process of identifying cells in microscopic (3D) images is known as
-spatial segmentation~\cite{Cutler2022,Stringer2020,Hardo2022}.
-These methods can be extended to dynamically track cells over the course of time but the additional
-complexity still poses substantial problems for existing
-solutions~\cite{Maka2014,Maka2023,Ulman2017,Wen2021}.
-
-\subsubsection{Experimental Methods of Tracking}
-
-\textbf{Optical Diffraction Tomography}
-\begin{itemize}
-    \item First theorized by Wolf~\cite{Wolf1969} (Optical Diffraction Tomography)
-    \item First experimental proof by Fercher~\cite{Fercher1979}
-    \item Improvement on Optical Diffraction Tomography via Rytov approximation \cite{Sung2009}
-    \item Now used for live-imaging of intestinal organoids~\cite{Lee2024} and reconstruction of 3D
-        cancer tissues \cite{Park2025}; today known as Holotomography
-\end{itemize}
-
-\textbf{CRISPR "Flight Recorder"}
-\begin{itemize}
-    \item Give every cell a "scratchpad" \ac{dna} and \ac{crispr} machinery
-    \item Cells (stochastically) cut the \ac{dna} and repair these cuts - mistakes are made in the
-        process small insertions or deletions called "indels" (scars). They are permanent
-    \item Daughter cells inherit the same scars
-    \item daughters further write new scars onto the \ac{dna}
-    \item when \ac{dna} is sequenced the cell tree can be reconstructed
-\end{itemize}
-
-\begin{itemize}
-    \item GESTALT (Genome Editing of Synthetic Target Arrays for Lineage Tracing);
-        First discovered in 2016 \cite{McKenna2016}; Track all cells of whole organism (zebrafish)
-    \item MEMOIR (Memory by Engineered Mutagenesis with Optical In situ Readout)
-    \item Read scratchpads without distroying tissue \cite{Frieda2016}; use single-molecule RNA
-        fluorescence hybridization (smFISH)
-    \item previously only possible to tell parental relation but not cell-type; scGESTALT: combine
-        GESTALT with single-cell RNA sequencing \cite{Raj2018}; application to vertebrate brain
-\end{itemize}
-
-\textbf{DNA Typewriters}
-\begin{itemize}
-    \item Previous methods all erase information over time -> decorrelation
-    \item Newer methods more like typewriters: insert new \ac{dna} sequentially; avoid \ac{dna}
-        damage \cite{Choi2022}
-    \item CHYRON (Cell History Recording by Ordered Insertion) write random nucleotides at single
-        locus one after another - like analog recorder \cite{Loveless2021}
-    \item MARC1 (Mouse for Actively Recording Cells 1); convert single \ac{dna} letter into without
-        breaking strand \cite{Hwang2019}
-    \item BASELINE; most recent work (preprint) of McKenna uses Cas12a adenine; increases stored
-        information significantly \cite{Winter2025}; builds on MARC1 by scaling the concepts
-        introduced in BASELINE
-\end{itemize}
-
-\textbf{Fluorescent Tracking}
-\begin{itemize}
-    \item \ac{gfp} tagging: \ac{dna} instructions to create fluorescent protein; inherited by
-        daughter cells; demonstrated in jellyfish \cite{Chalfie1994}
-    \item Improvement: brighter+more stable \cite{Kilgard1995}
-    \item More colors: blue + cyan \cite{Heim1994}, yellow \cite{Orm1996}, mCherry and red
-        \cite{Matz1999,Shaner2004}
-    \item Alternative to genetic approach: "bathe" cells in chemicals that bind to targets: shining
-        laser on cell emits light; not inherited by daughter cells
-\end{itemize}
-
-\textbf{Nanoparticle Tracking}
-\begin{itemize}
-    \item Fluorescent proteins get destroyed when exposed too long; nanoparticles solve this
-    \item Quantum Dots $\approx\SI{2}{\nano\metre}-\SI{10}{\nano\metre}$, semiconductor crystals,
-        stick to cell membrane or cell receptors, no photobleaching, can be tracked over days, good
-        for fast-moving targets
-    \item Genetically Encoded Nanoparticles (GEMs) engineer cells which produce proteins that
-        assemble into perfect spherical nanospheres inside cytoplasm
-\end{itemize}
-
-\textbf{\textit{In-Silico} Tracking}
-\begin{itemize}
-    \item First open-source user-friendly software pipeline for biologists \cite{Carpenter2006}, no
-        coding experience required
-    \item Deep learning revolution (2015) U-Net \cite{Ronneberger2015} provides basis for basically
-        all modern segmentation tools
-    \item Multiple Tools build on U-Net \cite{VanValen2016}, TrackMate \cite{Tinevez2017}
-        Foundation Models: Cellpose \cite{Stringer2020} Cellpose + Omnipose \cite{Cutler2022}
-        3DeeCellTracker \cite{Wen2021}
-\end{itemize}
+At the risk of sounding tautological, it should be stated explicitly that once a cell has ceased to
+exist, it will not reemerge by any other mechanism although parts of it can be reused within other
+cells, i.e. via Efferocytosis of apoptotic bodies~\cite{deCathelineau2003,Poon2014,Yu2023}.
+While these ideas seem conceptually simple, they will provide the basis of how to understand the
+concept of identity of a single cell.
 
 \subsection{Identification via Cellular Properties}
 One could be tempted to identify each cell by its physical and internal properties.
@@ -1494,57 +1416,149 @@ domain.
 
 \end{definition}
 
-\subsection{Practical Strategies to construct unique Cellular Identifiers}
+\section{Cellular Identity Revisited}
+% \subsection{How to distinguish cells from each other}
+\begin{itemize}
+    \item What is being used in real experiments?
+    \item Segmentation Algorithms (spatial distinction)
+    \item Genomics?
+\end{itemize}
 
-\todo[inline]{Everything after that needs to be rewritten.}
+\subsection{The Challenge of Imaging \& Cell Tracking}
+On the practical side, the process of identifying and tracking individual cells can be achieved in a
+variety of technologically intricate ways.
+Many methods rely on a combination of imaging techniques together with an \textit{In-Silico}
+reconstruction of the individual cellular identities.
+In this realm optical microscopy~\cite{Murphy2012,Wollman2015} has been the broad foundation on
+which many methods have been developed upon.
+Modern variants include Phase-Contrast Microscopy~\cite{Zernike1942}, Confocal Laser Scanning
+Microscopy~\cite{Minsky1988} or Super-Resolution Microscopy~\cite{Hell1994}.
+While Phase-Contrast techniques are generally restricted to \ac{2d} scenarios, Super-Resolution
+methods have been extended to three dimension \cite{Huang2008,Schmidt2008} and Confocal Laser
+Scanning microscopy is inherently \ac{3d}.
 
-\begin{example}[Unique Identifier Constructions I - Global Counter]
-    \label{example:unique-identifiers-1-global-counter}
+One downside of Super-Resolution and Confocal Laser Scanning microscopy is that they require tagging
+with markers such as \ac{gfp}~\cite{Chalfie1994,Kilgard1995} which involves an additional
+preparation step and alters the genetic material of the cell.
+Over the course of the past decades, additional colors such as blue, cyan~\cite{Heim1994},
+yellow~\cite{Orm1996} mCherry and red~\cite{Matz1999,Shaner2004} have been developed, allowing
+researchers to utilize multiple tags simultaneously.
+One advantage of this tagging is that daughter cells inherit the gene which is responsible for
+producing the fluorescent protein.
+However, continued exposure of these proteins will result in their degradation (photobleaching),
+thus affecting image quality~\cite{Lichtman2005} and leading to phototoxicity~\cite{Icha2017}.
+
+Another approach is to utilize nanoparticles such as Quantum Dots~\cite{Chan1998},
+Gold~\cite{Huang2007} or superparamagnetic iron oxide~\cite{Pankhurst2003} nanoparticles.
+They are non-toxic and can be combined to utilize both functionalities~\cite{Fan2010} but one
+downside is that cell division will dilute their presence.
+
+Similarly to Confocal Laser Scanning microscopy, Optical Diffraction Tomography~\cite{Wolf1969}
+provides \ac{3d} data but measures the refractive from which images can be reconstructed.
+One significant advantage is that Optical Diffraction Tomography does not require any tagging and
+therefore leaves the inspected cells unchanged.
+It has been continuously improved since its first experimental realization~\cite{Fercher1979}, most
+notably by using an effective medium (Rytov) approximation~\cite{Sung2009} to solve the underlying
+Helmholtz-Equation~\cite{Helmholtz1860} which resulted in much higher fidelity of the resolution.
+It is now also known under Holotomography and has found applications in cases such as live-imaging
+of intestinal organoids~\cite{Lee2024} and the reconstruction of \ac{3d} cancer
+tissues~\cite{Park2025}.
+
+The preceding methods all provide various ways of obtaining spatial information of the cellular
+system.
+The task of reconstructing spatial regions corresponding to individual cells is known as spatial
+segmentation.
+This task was often carried out manually before task-specific tools~\cite{Carpenter2006} were
+developed and later succeeded by generalist deep learning approaches like
+DeepCell~\cite{VanValen2016} and TrackMate~\cite{Tinevez2017} based on U-Net~\cite{Ronneberger2015}.
+Today, all modern foundational models like 3DeeCellTracker \cite{Wen2021},
+Cellpose~\cite{Stringer2020} and its successor Omnipose~\cite{Cutler2022} rely on this architecture.
+These methods can be extended to dynamically track cells over the course of time but this additional
+temporal complexity still poses substantial problems for existing
+solutions~\cite{Maka2014,Maka2023,Ulman2017,Wen2021}.
+
+\textbf{CRISPR "Flight Recorder"}
+\begin{itemize}
+    \item Give every cell a "scratchpad" \ac{dna} and \ac{crispr} machinery
+    \item Cells (stochastically) cut the \ac{dna} and repair these cuts - mistakes are made in the
+        process small insertions or deletions called "indels" (scars). They are permanent
+    \item Daughter cells inherit the same scars
+    \item daughters further write new scars onto the \ac{dna}
+    \item when \ac{dna} is sequenced the cell tree can be reconstructed
+\end{itemize}
+
+\begin{itemize}
+    \item GESTALT (Genome Editing of Synthetic Target Arrays for Lineage Tracing);
+        First discovered in 2016 \cite{McKenna2016}; Track all cells of whole organism (zebrafish)
+    \item MEMOIR (Memory by Engineered Mutagenesis with Optical In situ Readout)
+    \item Read scratchpads without distroying tissue \cite{Frieda2016}; use single-molecule RNA
+        fluorescence hybridization (smFISH)
+    \item previously only possible to tell parental relation but not cell-type; scGESTALT: combine
+        GESTALT with single-cell RNA sequencing \cite{Raj2018}; application to vertebrate brain
+\end{itemize}
+
+\textbf{DNA Typewriters}
+\begin{itemize}
+    \item Previous methods all erase information over time -> decorrelation
+    \item Newer methods more like typewriters: insert new \ac{dna} sequentially; avoid \ac{dna}
+        damage \cite{Choi2022}
+    \item CHYRON (Cell History Recording by Ordered Insertion) write random nucleotides at single
+        locus one after another - like analog recorder \cite{Loveless2021}
+    \item MARC1 (Mouse for Actively Recording Cells 1); convert single \ac{dna} letter into without
+        breaking strand \cite{Hwang2019}
+    \item BASELINE; most recent work (preprint) of McKenna uses Cas12a adenine; increases stored
+        information significantly \cite{Winter2025}; builds on MARC1 by scaling the concepts
+        introduced in BASELINE
+\end{itemize}
+
+
+\subsection{Encoding \& Decoding of individual Cellular Identity}
+\begin{itemize}
+    \item Formalizations of preceding ideas
+    \item encoder function $\mu:\pi_2(\CS)\rightarrow X$
     \begin{itemize}
-        \item one large counter; increase whenever new cells are added via division
-        \item only some practical problems when it comes to implementation (ensure that only one
-            variable is incremented; use atomics)
-        \item not local
-        \item keep manually track of cell lineage tree/forest
+        \item $\mu(M)=\{x_\iota:c_\iota\in M\}$
+        \item $\mu(M)=\{\text{envelope}(c_\iota):c_\iota\in M\}$ where envelope is
+            $\text{envelope}(c_\iota)\subset\R^3$
+        \item $M\mapsto\rho(x)$ (mass) density (alternatively radioactive material/GFP tagging)
+        \item $M\mapsto$ possibly duplicate list of RNA sequences or something like that
     \end{itemize}
-\end{example}
+    \item decoder function $\sigma:\mathcal{P}(X)\rightarrow\{U_1,U_1,\dots\}$ where $U_i\subset X$
+        and $U_i\subset\cup_\iota\mu(c_\iota)$
+    \item Use this to display cell lineage more clearly; make examples with
+        Figure~\ref{fig:theory-cell-lineage-as-manifold}
+\end{itemize}
 
-\begin{example}[Unique Identifier Constructions II - Division History]
-    \label{example:unique-identifiers-2-division-history}
-    \begin{itemize}
-        \item give initially placed cells unique identifiers simply by numbers $0\dots N_i$
-        \item construct daughter identifiers from mother and additional counter
-        \item one word $=\text{nth}$ daughter of previous mother
-        \item $(((7,0),1),1)$ 7th (initially) placed cell; then first daughter; then 2nd daughter;
-            then 2nd daughter
-        \item basically includes complete previous history
-        \item problem: newly inserted cells (not via division) need to rely on global counter
-        \item practical challenge: as more division events come into play, the size of the
-            identifier grows considerably; bad for memory in programs
-        \item parental relationship directly encoded
-        \item like giving each cell an individual name "Sven Jorikson" $\rightarrow$ "Erik Svenson
-            Jorikson" and "Veronica Svendottir Jorikson"
-    \end{itemize}
-\end{example}
+\subsection{Interpretation of the Temporal Identity Encoding}
+\begin{itemize}
+    \item Encoding changes when a cell is considered an individual entitiy $\iota$
+    \item Divisions introduce discontinuities when only looking at a pure tree; but using the right
+        encoding, we can possibly obtain something continuous or even smooth (mass-average position
+        vs cellular envelope)
+    \item Design models with this in mind: not necessarily chase continuity or smoothness but be
+        aware of the implications
+    \item Think about if readouts depend on the chosen identity of the cell
+\begin{equation}
+    \begin{tikzpicture}[baseline=(current  bounding  box.center)]
+        \node (cs) at (0,-1) {$\CS$};
+        \node (b) at (0,1) {$\mathcal{B}$};
+        \node (x) at (3,1) {$X$};
+        \node (rn) at (6,1) {$\R^n$};
+        \node (id) at (3,-1) {$\pi_1(M)$};
+        \draw[->] (cs) -- node[below,sloped] {proj} ++ (id);
+        \draw[->] (x) -- node[above] {$\Theta$} ++ (rn);
+        \draw[->] (x) -- node[right] {$\sigma$} ++ (id);
+        \draw[->] (cs) -- node[above,sloped] {$\mu$} ++ (x);
+        \draw[->] (b) -- node[above,sloped] {measure} ++ (x);
+    \end{tikzpicture}
+\end{equation}
+    \item Often the middle of this diagram is hidden and only $\mathcal{B}\rightarrow\R^n$ and
+        $\CS\rightarrow\R^n$is investigates, leading to no individual cellular resolution
+\end{itemize}
 
-\begin{example}[Unique Identifier Constructions III - Spatial Subdivisions]
-    \label{example:unique-identifiers-3-spatial-subdivision}
-    \begin{itemize}
-        \item divide space into discrete entities: voxels
-            (is this always possible that easily?; in practice probably yes)
-        \item new cells are given the identifier of the voxel and a counter that runs per voxel and
-            is incremented whenever a new cell is added.
-            This includes division events.
-        \item fully local solution
-        \item also works well when new cells are inserted without cell division
-        \item no problem with growing word size
-        \item discretization of space needed
-        \item does not encode cell lineage
-    \end{itemize}
-\end{example}
+\pagebreak
 
-
-\section{Encoding of Cellular Identity and its practical Challenges}
+\subsection{Interpretation of the Temporal Identity Encoding}
 We will now take a closer look at how cell-lineage can be used to understand and interpret the
 strategy for assigning identifiers and what is considered to be a discrete cellular identity.
 This section also partially deals with the theoretical question of how to distinguish individual
