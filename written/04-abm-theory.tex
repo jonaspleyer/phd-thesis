@@ -6,38 +6,61 @@ still confused. But on a higher level.}
 
 \todo[inline]{insert more vertical spacing before definitions/theorems}
 
-\begin{itemize}
-    \item theoretical/mathematical treatment of \acp{abm}
-    \item characterize overarching concepts between frameworks (simulation concepts)
-    \item formulate mathematical notions to capture many (not necessarily all) \acp{abm}
-    \item discuss parameter estimation, coarse-graining and pattern formation along these ideas
-    \item "Language of \acp{abm}" (important: "A" language, not "the only one")
-    \item construct ideas from first principles; and biology
-\end{itemize}
-
-%---------------------------------------------------------------------------------------------------
-% \section{Theoretical Framework}
-% \begin{itemize}
-%     \item use to-be-released paper
-% \end{itemize}
-%
-% %---------------------------------------------------------------------------------------------------
-% \section{Parameter Estimation \& Sensitivity Analysis}
-% %---------------------------------------------------------------------------------------------------
-% \section{Coarse-Graining}
-% \begin{itemize}
-%     \item bacterial branching
-% \end{itemize}
-%
-% %---------------------------------------------------------------------------------------------------
-% \section{Pattern Formation}
-
-%---------------------------------------------------------------------------------------------------
 \section{Introduction}
 
-\subsection{Cells as the Fundamental Building Blocks of Nature}
+\textbf{Goals}
+\begin{itemize}
+    \item Develop formal notions for individual-based mathematical description of cellular systems
+        \ac{cabm}
+    \item Goal is to describe the \textbf{dynamics} of these systems
+    \item Embedd ourselves deeply within biological contexts; utilize biological intuition and
+        examples wherever possible to guide definitions
+    \item Aim for a generalist approach; Cover wide range of biological systems $\rightarrow$ we
+        will thus make use of examples from all realms of cellular biology, spanning bacteria,
+        funghi, mammalian cells and more
+    \item Try to find shared principles wherever possible; this is after all the whole idea behind
+        cell biology; but will adapt or try to explain when weaknesses in the presented formalism
+        arise
+    \item Goal is also to cover many existing \ac{cabm}; but we cannot ensure that this treatment
+        covers everything
+    \item Small goal: can we find a common "language" of \acp{cabm}? that is shared between many of
+        the existing tools? (This will probably only be "A" language and not "the" (single)
+        language)
+    \item can \acp{cabm} be considered something more fundamental than theories on larger scales
+        (i.e. \acp{pde} or \acp{ca})? $\rightarrow$ make example with coarse-graining
+\end{itemize}
+
+\textbf{Strategy}
+\begin{enumerate}
+    \item Recall some fundamental properties of cellular systems (Uniqueness, Continuity, Division,
+        Death, Fusion, etc.)
+    \item what is an individual cell?
+    \item how can we represent cellular processes such as division, death, fusion? This will give us
+        cell lineage
+    \item how can we introduce an environment and dynamics into the previous considerations?
+    \item what can we interpret and learn about what constitutes the beginning of a cellular
+        identity? how does this relate to experimental conditions? how does this help us to
+        understand how experiment and model can be matched.
+    \item how can we introduce stochastic processes into \acp{cabm}
+    \item how do \acp{cabm} compare to \acp{ca}? Are they related? Are they different? Does one
+        contain the other?
+    \item Finally some more examples of applications (coarse-graining off-lattice center-based
+        model)
+\end{enumerate}
+
+\textbf{Basic Assumptions}
+\begin{itemize}
+    \item We are on the mesoscopic scale: we can "dip" inside the cellular structure if needed but
+        we are also interested in larger scales, i.e. self-organization
+    \item our description is almost always "effective" rather than "fundamental"
+    \item individual behaviour of cells leads to collective phenomena
+    \item cells are the fundamental building block of nature
+    \item although we focus on cells, our models may still contain smaller elements such as
+        mitochondria, other organelles or large proteins
+\end{itemize}
 
 \subsection{Cellular Reproduction \& Death}
+\todo[inline]{probably remove this subsection}
 Many cellular systems are in a constant dynamic state of turnover.
 Epithelia need to balance cell division and death in order to maintain a constant size.
 This can be achieved by extrusion where a single cell is pushed out of the tissue layer in densely
@@ -52,50 +75,10 @@ These examples make it clear that the methods which we develop need to be able t
 for variable number of cellular agents.
 
 \subsection{Individual-Based Mathematical Treatment}
+\todo[inline]{merge this subsection with the preceding bullet point ideas}
 It is clear that this approach targets models on the mesoscopic scale such that not every
 fundamental effect can be taken into account.
 
-% \subsection{Overarching Principles}
-%
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=\textwidth]{figures/abm-theory/concept-figure.png}
-%     \caption[Modeling concept figure]{\todo[inline]{explain concept Figure}}
-% \end{figure}
-
-\begin{itemize}
-    \item Start listing example aspects of cellular systems
-    \item group aspects in table in (C) Cellular, (CC) Cell-Cell, (EC) Environment-Cell
-    \item Concept figure to distinction of these aspect groups
-    \item Discuss variations of these aspects on a conceptual level
-    \item Discuss underlying assumptions: spatial locality, individual-based behaviour leads to
-        collective effects
-    \item Discuss how to "throw away" certain parts of this modeling approach (i.e. uniqueness)
-\end{itemize}
-
-% TODO decide if we include this again
-% \begin{table}[h]
-%     \centering
-%     \begin{tabular}{cll}
-%         & \textbf{Modeling Aspect} & \textbf{Examples}\\
-%         \toprule
-%         (C) & Mechanics & Spherical, Rod, Rectangular, Hexagonal, Puzlle-shaped\\
-%         (C) & Intracellular Reactions & Metabolism, Gene-Regulatory Networks\\
-%         (C) & Cycle & Phases, Division, Death\\
-%         \midrule
-%         (CC) & Physical Interaction & Adhesion, Friction, Collisions\\
-%         (CC) & Contact Reactions & Gap Junctions\\
-%         \midrule
-%         (EC) & External Forces & Gravity, Gel Pressure\\
-%         (EC) & Extracellular Reactions & Diffusion, Fluid Dynamics\\
-%         \bottomrule
-%     \end{tabular}
-%     \caption[Simulation Aspects]{TODO}
-% \end{table}
-
-%---------------------------------------------------------------------------------------------------
-% \section{The Cellular Space}
-\label{subsec:cellular-space}
 This section develops a formal notion of how to describe a collection of unique cellular agents.
 To motivate our constructions, we leverage known biological behaviour as a template.
 By formulating these concepts in abstract mathematical terms, we enable ourselves to cover a wide
@@ -1278,6 +1261,43 @@ Corollary~\ref{corollary:k-ary-division} captures this reality.
 \label{section:dynamics}
 
 \subsection{A Primer on Cellular \& Environmental Processes}
+
+% TODO decide if we include this again
+% \begin{table}[h]
+%     \centering
+%     \begin{tabular}{cll}
+%         & \textbf{Modeling Aspect} & \textbf{Examples}\\
+%         \toprule
+%         (C) & Mechanics & Spherical, Rod, Rectangular, Hexagonal, Puzlle-shaped\\
+%         (C) & Intracellular Reactions & Metabolism, Gene-Regulatory Networks\\
+%         (C) & Cycle & Phases, Division, Death\\
+%         \midrule
+%         (CC) & Physical Interaction & Adhesion, Friction, Collisions\\
+%         (CC) & Contact Reactions & Gap Junctions\\
+%         \midrule
+%         (EC) & External Forces & Gravity, Gel Pressure\\
+%         (EC) & Extracellular Reactions & Diffusion, Fluid Dynamics\\
+%         \bottomrule
+%     \end{tabular}
+%     \caption[Simulation Aspects]{TODO}
+% \end{table}
+%
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=\textwidth]{figures/abm-theory/concept-figure.png}
+%     \caption[Modeling concept figure]{\todo[inline]{explain concept Figure}}
+% \end{figure}
+
+\begin{itemize}
+    \item Start listing example aspects of cellular systems
+    \item group aspects in table in (C) Cellular, (CC) Cell-Cell, (EC) Environment-Cell
+    \item Concept figure to distinction of these aspect groups
+    \item Discuss variations of these aspects on a conceptual level
+    \item Discuss underlying assumptions: spatial locality, individual-based behaviour leads to
+        collective effects
+    \item Discuss how to "throw away" certain parts of this modeling approach (i.e. uniqueness)
+\end{itemize}
+
 
 \subsubsection{Cellular Processes}
 \subsubsection{Cell-Cell Interactions}
