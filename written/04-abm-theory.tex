@@ -1662,36 +1662,43 @@ and part of our a practical reality that needs to be dealt with.
 \begin{figure}
     \centering
     \begin{tikzpicture}
-        \node (model) at (0,1.5)
+        \node (model) at (0,-4)
             {\begin{tabular}{c}
                 \textbf{Model}\\
-                \includegraphics[width=0.2\textwidth]{figures/abm-theory/177_model.pdf}\\
+                \includegraphics[width=0.2\textwidth]{figures/abm-theory/encode-decode-model.pdf}\\
                 \phantom{a}
             \end{tabular}};
-        \node (enc) at (6,0)
-            {\begin{tabular}{c}
-                \textbf{Encoding}\\
-                \includegraphics[width=0.2\textwidth]{figures/abm-theory/177_masks.pdf}\\
-                \phantom{a}
-            \end{tabular}};
-        \node (bio) at (0,-1.5)
+        \node (bio) at (0,0)
             {\begin{tabular}{c}
                 \textbf{Biology}\\
-                \includegraphics[width=0.2\textwidth]{figures/abm-theory/177_img.pdf}\\
+                \includegraphics[width=0.2\textwidth]{figures/abm-theory/encode-decode-img.pdf}\\
                 \phantom{a}
             \end{tabular}};
-        \node (identity) at (11,0)
+        \node (identity) at (6,-4)
             {\begin{tabular}{c}
                 \textbf{Identity}\\
                 \framebox(80,40){$\{\iota_1,\iota_2,\dots\}$}\\
                 \phantom{a}
             \end{tabular}};
+        \node (enc) at (6,0)
+            {\begin{tabular}{c}
+                \textbf{Encoding}\\
+                \includegraphics[width=0.2\textwidth]{figures/abm-theory/encode-decode-masks.pdf}\\
+                \phantom{a}
+            \end{tabular}};
+        \node (readout) at (11,0)
+            {\begin{tabular}{c}
+                \textbf{Readout}\\
+                \includegraphics[width=0.15\textwidth]{figures/abm-theory/encode-decode-readout.pdf}\\
+                \phantom{a}
+            \end{tabular}};
         \draw[-latex] (bio) --
             node[midway,above,sloped] {measure}
             node[midway,below,sloped] {\& compute} ++ (enc);
-        \draw[-latex] (model) -- node[midway,above,sloped] {encode $\mu$} ++ (enc);
-        \draw[-latex] (enc) -- node[above] {deocde $\sigma$} ++ (identity);
-        \draw[-latex] (model) -- (0,3.5) -- node[midway,below] {known} (11,3.5) -- (identity);
+        \draw[-latex] (model) -- node[midway,above,sloped] {encode} ++ (enc);
+        \draw[-latex] (enc) -- node[right] {deocde} ++ (identity);
+        \draw[-latex] (model) -- node[midway,below] {proj} ++ (identity);
+        \draw[-latex] (enc) -- node[above] {readout} ++ (readout);
     \end{tikzpicture}
     \caption[Relation of Model, Biological Reality, Encoding and Cellular Identity]{
 
