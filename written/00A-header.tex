@@ -68,7 +68,10 @@
     breaklines=true,
 }
 
+\DeclareFieldFormat*{titlecase}{#1}
 \addbibresource{references.bib}
+% \DeclareFieldFormat{titlecase}{#1}% do not apply sentence case to bib entries
+\renewcommand*{\bibfont}{\normalfont\small}
 
 \DeclareSIUnit\pixel{pixel}
 
