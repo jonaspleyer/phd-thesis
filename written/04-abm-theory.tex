@@ -1301,28 +1301,98 @@ Corollary~\ref{corollary:k-ary-division} captures this reality.
 % \end{figure}
 
 \begin{itemize}
-    \item Start listing example aspects of cellular systems
-    \item group aspects in table in (C) Cellular, (CC) Cell-Cell, (EC) Environment-Cell
-    \item Concept figure to distinction of these aspect groups
-    \item Discuss variations of these aspects on a conceptual level
-    \item Discuss underlying assumptions: spatial locality, individual-based behaviour leads to
-        collective effects
-    \item Discuss how to "throw away" certain parts of this modeling approach (i.e. uniqueness)
+    \item Previous chapter showed that we can classify processes into 4 categories:
+    \begin{enumerate}
+        \item (C) Cellular
+        \item (CC) Cell-Cell
+        \item (EC) Environment-Cell
+        \item (E) Environmental
+    \end{enumerate}
+    \item discuss distinctions between aspect categories; only useful tool rather than something
+        fundamental
+    \item some aspects may overlap, depending also on the level of detail; use effective ansatz
 \end{itemize}
 
+Example: More neighbors $\rightarrow$ slower growth; can be further broken down into
+\begin{itemize}
+    \item Cell secretes communicating molecule
+    \item Environment diffuses molecule
+    \item Other cells take up molecule
+\end{itemize}
 
-\subsubsection{Cellular Processes}
-\subsubsection{Cell-Cell Interactions}
-\subsubsection{Cell-Environment Interactions}
-\subsubsection{Environmental Dynamics}
+Contact inhibition in Epithelial Cells (The Hippo Signaling Pathway)
+\begin{itemize}
+    \item Multiple pathways; Hippo is main driver \cite{Zhao2007}
+    \begin{enumerate}
+        \item Cells sense neighbors through transmembrane proteins called Cadherins \cite{Kim2011}
+        \item This triggers Hippo cascade (series of phosphorylation events) and finally
+            phosphorylates YAP \cite{Hao2008}
+        \item Thus YAP is confined in plasma (cannot enter nucleus; it is otherwise responsible to
+            turn on genes for proliferation)
+    \end{enumerate}
+    \item Mechanism prevents overcrowding
+    \item Can be defect in cancer cells $\rightarrow$ cells stack on top of each other, leading to
+        solid tumors \cite{Overholtzer2006}
+    \item We can model this in 2 ways:
+    \begin{enumerate}
+        \item Full System (see above)
+        \item Reduced system (simply count number of neighbors)
+    \end{enumerate}
+\end{itemize}
 
+Discuss example inspired by paper from Mustafa Khamash \cite{Perkins2020}
+\begin{itemize}
+    \item system consists of repressor and activator
+    \item uses \ac{ecoli} TOP10 cells
+    \item "spontaneous persistent checkerboard patterns for systems of sixteen patches"
+    \item Cells are coupled who are not necessarily spatially close to each other $\rightarrow$
+        this is interesting for decomposition methods if scaled up
+    \item The dynamics can be described in two ways:
+    \begin{enumerate}
+        \item Full system: Cell-Readout-Controller+Simulation-Optogenetic Module-Cell
+        \item Reduced: Cell-Cell
+    \end{enumerate}
+\end{itemize}
+
+\subsubsection{(C) Cellular Processes}
+\begin{itemize}
+    \item Processes happening within a single cell
+    \item Can also include environmental restrictions on the model such as spatial confinement
+        within petri dish; but more commonly introduced by applying boundary conditions
+\end{itemize}
+
+\subsubsection{(CC) Cell-Cell Interactions}
+\begin{itemize}
+    \item processes where at least two cells interact with each other
+    \item can be pairwise but can also be in other capacity
+\end{itemize}
+
+\subsubsection{(EC) Environment-Cell Interactions}
+\begin{itemize}
+    \item interaction of cell with environment
+    \item Cell can change environment; environment can change cell
+\end{itemize}
+
+\subsubsection{(E) Environmental Dynamics}
 \begin{itemize}
     \item physical space; boundaries, i.e., petri dish, mother machine etc.
-    \item extracellular compounds; nutrients, proteins, salt, viruses, etc.
+    \item extracellular compounds: nutrients, proteins, salt, viruses, etc.
     \item external influences: temperature, humidity
 \end{itemize}
 
 \subsection{Formal Definitions}
+\begin{enumerate}
+    \item Motivate definition behind \ac{abm}
+    \item Define \ac{abm}; briefly discuss why this definition is sound and consequences of this
+    \item what exactly can the evolution function $\phi$ do and how to division, death \& fusion
+        come into play?
+    \item Define: cell is \textbf{alive}; \textbf{Lifetime} of a cell, \textbf{Life-Span} of a cell
+\end{enumerate}
+
+\subsection{Spatial Locality \& Decomposition}
+\subsection{Cell Competition Response to defective Hippo Pathway?}
+
+
 \begin{definition}[Dynamical System]
     A dynamical system is a tuple $(T,M,\phi)$ where $T$ is a monoid (written additively) and
     $\phi$ is a mapping
