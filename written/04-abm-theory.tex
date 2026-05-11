@@ -1045,11 +1045,11 @@ We will now show that the \ac{abm} always converges in a finite amount of iterat
 justifies the approach of investigating a single cell as starting point and running the \ac{abm}
 until completion.
 
-\begin{theorem}
+\begin{proposition}
     \ac{abm}~\ref{example:theory-simple-abm} converges in finitely many steps for any given
     initial state $c\in\mathbb{N}$ into a state where all cells have been removed.
-    \label{theorem:theory-simple-abm-converges}
-\end{theorem}
+    \label{proposition:theory-simple-abm-converges}
+\end{proposition}
 
 \begin{proof}
     We prove this theorem via induction but also explicitly discuss cases $c\leq7$.
@@ -1092,7 +1092,7 @@ until completion.
 
 Note that Example~\ref{example:theory-simple-abm} contains three distinct divisors $p\in\{5,7,11\}$.
 We want to emphasize that a single divisor will not be enough to prove
-theorem~\ref{theorem:theory-simple-abm-converges}.
+theorem~\ref{proposition:theory-simple-abm-converges}.
 This can be seen when utilizing $p=5$ and inspecting any value $6\leq c\leq10$.
 The value $c$ will be gradually increased until it reaches $c=10$ where the division results in two
 daughter cell with capacities $4$ and $6$.
