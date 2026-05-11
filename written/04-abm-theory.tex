@@ -2004,7 +2004,8 @@ considered beforehand.
 \section{Stochasticity}
 
 %---------------------------------------------------------------------------------------------------
-\section{Distinction of \aclp{abm} to \aclp{ca}}
+\section{Comparison with other Methods and Formalisms}
+\subsection{Distinction to \aclp{ca}}
 
 In the broader literate \acp{abm} are often treated within the same class as \acp{ca}.
 However this association is superficial and one of the only shared aspects is the discrete nature of
@@ -2013,9 +2014,9 @@ This subsection explores key differences between \acp{abm} and \acp{ca}.
 We illustrate these discrepancies by fully classifying elementary \acp{ca} and further study other
 variations of \acp{ca}.
 
-\subsection{Implementing Rule $110$ in an \acl{abm}}
+\subsubsection{Implementing Rule $110$ in an \acl{abm}}
 
-\subsection{Elementary \aclp{ca}}
+\subsubsection{Elementary \aclp{ca}}
 
 \begin{itemize}
     \item distinguish between lattice points and biological cells
@@ -2117,7 +2118,7 @@ We explicitly exclude other processes such as stochastic effects and spatial mov
 \begin{proof}
 \end{proof}
 
-\subsection{Other \aclp{ca}}
+\subsubsection{Other \aclp{ca}}
 
 \begin{itemize}
     \item cellular potts model; not for cells directly but rather for sections of cells
@@ -2245,6 +2246,20 @@ distinct entities.
     }
     \label{fig:conway-non-abm-transition}
 \end{figure}
+
+\subsection{Molecular Dynamics \& Particle Simulations}
+
+\begin{itemize}
+    \item this is quite similar (maybe closest)
+    \item no indistinguishability assumption possible
+    \item insertion and removal of particles only via particles themselves not by external processes
+\end{itemize}
+
+\subsection{The Fock-Space}
+
+\begin{itemize}
+    \item If related, then only for stochastic \acp{abm}
+\end{itemize}
 
 %###################################################################################################
 \section{Applications}
