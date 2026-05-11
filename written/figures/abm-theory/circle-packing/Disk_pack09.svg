@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="364px" height="364px" viewBox="-182 -182 364 364">
+	<g transform="scale(180.656296,180.656296)">
+	<!-- ri = 1 / (1 + sqrt(2*(2+sqrt(2)))  -->
+		<circle id="outercircle" cx="0" cy="0" r="1" style="fill :#BBBBBB; stroke :none;"/>
+		<g style="fill:#000000; stroke:none;">
+			<circle id="C1" cx="-0.276768" cy="-0.668178" r="0.276769"/>
+			<circle id="C2" cx="+0.276768" cy="-0.668178" r="0.276769"/>
+			<circle id="C3" cx="-0.668178" cy="-0.276768" r="0.276769"/>
+			<circle id="C4" cx="+0.668178" cy="-0.276768" r="0.276769"/>
+			<circle id="C5" cx="+0.000000" cy="+0.000000" r="0.276769"/>
+			<circle id="C6" cx="-0.668178" cy="+0.276768" r="0.276769"/>
+			<circle id="C7" cx="+0.668178" cy="+0.276768" r="0.276769"/>
+			<circle id="C8" cx="-0.276768" cy="+0.668178" r="0.276769"/>
+			<circle id="C9" cx="+0.276768" cy="+0.668178" r="0.276769"/>
+		</g>
+	</g>
+</svg>

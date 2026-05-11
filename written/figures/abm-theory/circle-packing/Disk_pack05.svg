@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="280px" height="280px" viewBox="-140 -140 280 280">
+	<g transform="scale(135.065081,135.065081)">
+		<circle id="outercircle" cx="0" cy="0" r="1" style="fill :#BBBBBB; stroke :none;"/>
+		<g style="fill:#000000; stroke:none;">
+			<circle id="C1" cx="-0.370191" cy="-0.509525" r="0.370192"/>
+			<circle id="C2" cx="+0.370191" cy="-0.509525" r="0.370192"/>
+			<circle id="C3" cx="-0.598983" cy="+0.194621" r="0.370192"/>
+			<circle id="C4" cx="+0.598983" cy="+0.194621" r="0.370192"/>
+			<circle id="C5" cx="+0.000000" cy="+0.629808" r="0.370192"/>
+		</g>
+	</g>
+</svg>
