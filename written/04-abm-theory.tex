@@ -1158,50 +1158,71 @@ the model itself and therefore need no explicit consideration when constructing 
 
 \section{Cell Lineage}
 As cells continuously reproduce and die, their lineage can be traced back over multiple generations.
-Without any cell fusion, the resulting structure is that of a tree, or more precisely a forest,
-which is the collection of multiple distinct trees.
-The following theorems formalize this notion of cellular lineage.
+We inspect the application of a single division operator
+(Definition~\ref{definition:cell-division-single}) $\Upsilon$ with dividing cell $c_\iota$ and
+inserted cells $\{c_{\iota_1},\dots,c_{\iota_n}\}$.
+We can now use this connection, pointing from the mother cell $c_\iota$ to its daughters
+$c_{\iota_i}$ to construct the edges of our tree.
+The same can be done for fusion events (Definition~\ref{definition:cell-fusion}) defined by
+constituent cells $\{c_{\iota_1},\dots,c_{\iota_n}\}$ and the fused cell $c_\iota$ but the direction
+of connection changes.
+This approach suggests to utilize the identifiers $\iota$ as vertices for the tree.
+However, it is useful to supply them with additional information in the form of a value
+$q\in\{0,1\}$ which symbolizes if the respective cell has been removed $q=0$, either due to a
+consuming event such as division or fusion or purely due to cell removal, or if it is still alive
+$q=1$.
+Consequently, one vertex within the tree/graph is defined by
+$(q,\iota)\in\{0,1\}\times I\cup\pi_1(M)$.
+The application of a removal operation (Definition~\ref{definition:cell-removal}) $\delta$ marks the
+respective identifier as removed $q=0$ and insertion
+(Definition~\ref{definition:cell-insertion}) $\Gamma$ inserts new vertices
+$(1,\iota_1),\dots,(1,\iota_n)$.
+
+We can see that without any cell fusion, the resulting structure is that of a tree, or more
+precisely a forest, which is the collection of multiple disjoint trees.
+Including fusion events will result in a directed graph.
+The following theorem formalize this notion of cellular lineage.
 
 \begin{theorem}[Cell Lineage]
     Given an initial state $(I_p,\{c_\iota\})\in\CS$ of one cell, an arbitrary combination of
-    applications of division and death functions creates a tree where the vertices are the
-    identifiers of cells and the edges are the mother-daughter relationship.
-    This statement can be extended to general initial states $(I_p,M)$ which will result in a
-    forest.
-    If fusion events are considered in addition, the forest needs to be generalized to a collection
-    of undirected graphs.
+    applications of division and removal operations creates a vertex-labeled tree where the vertices
+    are the identifiers of cells with labels $0,1$ indicating if they correspond to living cells,
+    and the edges are defined as described above.
+    When extended to general initial states $(I_p,M)$ or when including insertion operations, the
+    result will be a forest.
+    Including fusion events, requires further generalization to a vertex-labeled directed graph
+    $G=(V,E)$.
 
-    We call the collection of graphs holding every identifier the \textbf{Cell Lineage} and all
-    paths from a single vertex upwards against the direction of the gaph to the root an
-    \textbf{ancestry of a single cell}.
-    We might also refer to this as a lineage of a single cell.
+    We call this graph the \textbf{Cell Lineage} and all paths from a single vertex upwards against
+    the direction of the gaph to the root an \textbf{ancestry} or \textbf{lineage} of a single cell.
     \label{theorem:cell-lineage}
 \end{theorem}
 
 \begin{proof}
-    A graph is a pair $(V,E)$ where $V$ is a set of vertices and $E$ a set of unordered pairs
-    $\{v_1,v_2\}$ called edges.
-    The vertices are all identifiers of cells $V=I_p\cup\pi_1(M)$ and the edges
-    $\{\iota_1,\iota_2\}$ are determined by division events via
-    $\gamma(c_{\iota_1})=(\dots,c_{\iota_2},\dots)$.
-    We prove this statement via induction.
-    It is enough to show that an arbitrary combination of division and death functions to a single
-    cell produces one tree.
-    This result can then be generalized to an arbitrary collection of cells.
-    For $n=1$ we observe that a death function will terminate the tree, immediately while a
-    division function of any mode will result in at least one new connected vertex.
-    By property (5) of Definition~\ref{definition:cell-division-single}, we know that all
-    identifiers are unique.
-    In the induction step $n\rightarrow n+1$, we may assume that a tree exists and that the
-    division and death operations are applied to its leaves.
-    Any death process, terminates the vertex into a leaf while a division operation will again
-    result in new vertices with new identifiers.
+    Let $G$ be a tree with vertices $V=\{\iota_i:i=0\dots m\}$, labels $l:V\rightarrow\{0,1\}$ and
+    edges $E$.
+    Applying a removal operation to $\iota$ will only result in a label change of a single vertex
+    $l(\iota)=0$, leaving the reamining labels and tree invariant.
+    Meanwhile a division operation with mode $s$ will have one mother cell $\iota$ and $n-s$
+    daughter cells $c_{\iota_i}$ where $i\in\{s,\dots,n\}$ and $\iota_i\notin \pi_2(V)$.
     Property (4) and (5) of Definition~\ref{definition:cell-division-single} enforce that the new
-    identifiers have not been used before and therefore represent new vertices.
+    identifiers $\iota_{1+s},\dots,\iota_n$ have not been used and therefore represent new vertices.
+    The new edges will therefore connect a vertex $\iota$ with newly inserted vertices, thus only
+    extending the tree.
+    Furthermore, if the division mode is consuming, i.e. $s=0$, the new label function is defined by
+    $\bar{l}(\iota)=0$ and $\bar{l}=l$ everywhere else.
+    The generalization to a collection trees with disjoint identifiers is straightforward which
+    includes insertion operations.
 
-    When including fusion events, any vertex given by an identifier $\iota$ may have formed due to
-    fusion which means that it has two ore more parent vertices which will result in a collection
-    of graphs.
+    Utilizing the previous result, we can generalize this to include fusion operations.
+    Given an existing forest $G$ which was produced by an arbitrary initial state and a series of
+    division, removal and insertion operations, we can now apply a fusion operation fusing the
+    constituent cells $\iota_{1+s}\dots\iota_n$ into $\iota$ where $s=0,1$ is the fusion mode.
+    The new edges are determined as described above.
+    Furthermore, if $s=0$, together with property (4) of Definition~\ref{definition:cell-fusion},
+    the identifier $\iota$ of the fused cell will be added to the set of vertices.
+    The new labels will be adapted for all consumed constituent cells $\bar{l}(\iota_{1+s})=0$ and
+    kept identical $\bar{l}=l$ for the remaining identifiers.
 \end{proof}
 
 \begin{corollary}
