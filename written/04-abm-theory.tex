@@ -1297,6 +1297,56 @@ Corollary~\ref{corollary:k-ary-division} captures this reality.
     \label{corollary:k-ary-division}
 \end{corollary}
 
+One could be tempted to think that having obtained the cell lineage
+(Theorem~\ref{theorem:cell-lineage}), one can rediscover the type and order of topological cellular
+processes that lead to this graph.
+However this is generally not true which can be seen easily when inspecting divisions of mode $s=1$.
+Consider two distinct division events which produce one new cell each and are both applied to the
+identical mother cell $c_\iota$.
+The result will be a tree with one parent node and two daughter nodes as presented in
+Figure~\ref{fig:cell-lineage-misleading-graphs} (A).
+The individual cells are denoted by a value $q=0,1$ symbolizing if these cells are still alive or
+have been removed either due to a consuming division operation $s=0$ or due to cell removal.
+Here it is unknown which of the two division events has ocurred before the others.
+However this example still would lead to two possible scenarios of dynamics which are correct since
+in both cases the mother cell is not consumed $s=1$.
+
+Another example is how a tree that could be valid can be formed from processes which have been
+applied incorrectly.
+Consider the graph presented in Figure~\ref{fig:cell-lineage-misleading-graphs} (B) where the mother
+cell has been removed.
+From this graph we have at two possible biologically valid variants: The mother cell can divide via
+a consuming mode $s=0$, thus producing two daughter cells, or it can produce two daughter cells via
+non-consuming mode $s=1$ and be removed afterwards, i.e. due to cell death.
+This shows that the cell lineage alone is in general not able to recover the precise order and type
+of topological cellular processes.
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[
+        level distance=1cm,
+        level 1/.style={sibling distance=1.2cm},
+        edge from parent/.style={draw,-latex},
+    ]
+        \node[] at (-1,0.25) {\textbf{A}};
+        \node[circle, draw] {$1$}
+        child {node[circle, draw] {$1$}}
+        child {node[circle, draw] {$1$}};
+
+        \node[] at (4-1,0.25) {\textbf{B}};
+        \node[circle, draw] at (4,0) {$0$}
+        child {node[circle, draw] {$1$}}
+        child {node[circle, draw] {$1$}};
+    \end{tikzpicture}
+    \caption[]{
+        (A) A mother cell dividing via $s=1$ (non-consuming) mode producing two daughter cells.
+        (B) A mother cell which has produced two daughter cells and is not alive anymore.
+        This graph can arise from a $s=0$ division or two $s=1$ division followed by a removal (i.e.
+        via cell death).
+    }
+    \label{fig:cell-lineage-misleading-graphs}
+\end{figure}
+
 %---------------------------------------------------------------------------------------------------
 \section{Environment \& Dynamics}
 \label{section:dynamics}
