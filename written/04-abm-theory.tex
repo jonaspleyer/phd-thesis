@@ -950,13 +950,14 @@ rather external and therfore also not triggered by the biological constituents o
 Definition~\ref{definition:cell-insertion} formalizes these principles.
 
 \begin{definition}[Cell Insertion]
-    A mapping $\Gamma:\CS\rightarrow\CS$ is called a insertion function if for its input and output
-    $\Gamma((I_p,M))=J_p,N$ the previously used identifiers match $I_p=J_p$ and
+    A mapping $\Gamma:\sqcup_{n\geq2}C^n\times\CS\rightarrow\CS$ is called a insertion function if
+    for its input and output $\Gamma((c^1,\dots,c^n),(I_p,M))=J_p,N$ the previously used
+    identifiers match $I_p=J_p$ and
     \begin{equation}
         N = M\cup\{c_{\iota_1},\dots,c_{\iota_n}\}
     \end{equation}
-    where $c_{\iota_1},\dots,c_{\iota_n}\notin I_p\cup\pi_1(M)$ where $\pi_1$ is the projection on
-    the first coordinate.
+    with $c^i=c_{\iota_i}$ and where $\iota_1,\dots,\iota_n\notin I_p\cup\pi_1(M)$ where
+    $\pi_1$ is the projection on the first coordinate.
     \label{definition:cell-insertion}
 \end{definition}
 
