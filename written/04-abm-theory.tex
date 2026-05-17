@@ -1644,23 +1644,51 @@ corollary.
     $U\times(\CS\times E$).
 \end{corollary}
 
+We can now combine Definitions \ref{definition:non-topological-evolution-function} and
+\ref{definition:topological-evolution-function} to define a \ac{cabm}.
+
 \begin{definition}[\acl{cabm}]
     Let $\CS(I,C)$ be the cellular space of the index set $I$ and cellular configuration space $C$
-    and let $E$ be a set called the enrivonmental state space.
+    and let $\EV$ be a set called the enrivonmental state space.
     Furthermore let $(T,+)$ be an additive monoid and $U\subset T$.
-
-    We call the tuple $(T,\CS(I,C)\times\EV,\phi)$
-    \begin{equation}
-        \phi:U\times\CS\times\EV\rightarrow\CS\times\EV
-    \end{equation}
-    with
+    A \acl{cabm} is a tuple $(T,\CS(I,C)\times\EV,\phi)$ where the evolution function function
+    $\phi:U\times\CS\times\EV\rightarrow\CS\times\EV$ can be decomposed via
     \begin{equation}
         \phi_t =
             \psi_{t_0}\circ\prod\limits_{i>0}\tilde{\varphi}_i\circ\psi_{t_i}
+        \label{eq:cabm-evolution-function}
     \end{equation}
-    where $\sum_i t_i=t$ and $\psi$ is a non-topological evoluction function and $\varphi_i$ is a
+    with $\sum_i t_i=t$.
+    Here $\psi$ is a non-topological evoluction function and $\varphi_i$ is a
     topological evolution function with $\bar{\varphi}_i((I,M),e)=(\varphi(I,M),e)$.
+    \label{definition:cabm}
 \end{definition}
+
+We can interpret the definition of $\phi$ as having the dynamics of $\psi$ which is repeatedly
+interrupted by topological evolution functions $\varphi_i$ which change the cellular topology which
+operate instantanous in time.
+This furthermore exemplifies that any dynamics leading up to the cellular process need to be
+incorporated within the non-topological evolution function $\psi$.
+Because $\phi$ is not purely made up of evolution functions $\psi_{t_i}$,
+Definition~\ref{definition:cabm} does not directly constitute a dynamical system.
+We can assign the operations of the topological evolution functions $\Phi_i$ either to their
+preceding $i-1$ or following dynamics $i$ to obtain a dynamical system.
+We will later deal with this question in Proposition~\ref{proposition:cabm-are-dynamical-systems}.
+
+However, utilizing the decomposition of $\phi$ via equation~\ref{eq:cabm-evolution-function} within
+this proposition poses the question if this particular choice of concatenated mappings is unique or
+if $\phi$ can be represented differently.
+This even trickles down to the ordering of cellular processes within a single topological evolution
+function $\Phi_i$.
+The following proposition deals with this question.
+
+\begin{proposition}[Soundness of Definition~\ref{definition:cabm}]
+    \todo[inline]{what do we say here?}
+\end{proposition}
+
+Another observation regarding Definition~\ref{definition:cabm} is that similarly to the Definition
+of topological evolution function any countable number of concatenations of evolution functions are
+allowed.
 
 \begin{itemize}
     \item This definition treats the topological cellular processes as instantanous in time
