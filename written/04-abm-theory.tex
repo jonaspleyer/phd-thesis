@@ -1598,15 +1598,45 @@ the definition of our \ac{cabm}.
     \label{definition:non-topological-evolution-function}
 \end{definition}
 
-\begin{itemize}
-    \item keeps cellular state intact
-    \item only changes values of cells $c\in C$ and environment $e\in E$
-    \item often described by \acp{ode} or \acp{pde} or discrete steps or couplings of many things
-    \item $\psi$ on $\CS$ is a dynamical system
-    \item $\psi$ can depend on identifiers
-    \item best practice: do not depend on identifiers directly; rather only depend on relations
-        between identifiers
-\end{itemize}
+Definition~\ref{definition:non-topological-evolution-function} is responsible for driving all
+non-topological dynamics of our \ac{cabm}.
+We have previously discussed how to classify these dynamics and given an extensive range of examples
+(see chapter~\ref{chapter:overaching-aspects-elongated-bacteria} and
+subsection~\ref{subsection:dynamics-primer-cellular-environmental-processes}).
+Definition~\ref{definition:non-topological-evolution-function} is therefore chosen as general as any
+regular dynamical system (compare Definition~\ref{definition:dynamical-system-category-theory})
+such that any of these types of dynamics can be described without any restrictions on the underlying
+cellular representation or types of interaction.
+Although $\psi_t$ can depend on the cellular identifiers themselves via the cellular state, many
+systems do not require this information and factorize via
+\begin{center}
+    \begin{tikzcd}[row sep=huge, column sep=huge]
+        \CS\times\EV
+            \arrow{r}{\pi_2\times\text{id}}
+            \arrow{rd}{\psi}
+            &(\sqcup_{n\geq 2}C^n)\times\EV \arrow{d}{\bar{\psi}}\\
+        & \CS\times\EV
+    \end{tikzcd}
+\end{center}
+where $\text{id}$ is the identity map, $\pi_2$ is the projection onto the second component and
+$\bar{\psi}$ is the reduced non-topological evolution function which only depends on the values of
+the respective cells.
+While some applications might require knowledge about the particular identifier of the cells, most
+non-engineered systems will only depend on the relation of identifiers which link mother to daughter
+and constituent to fused cells.
+This will be discussed in more detail later in this section.
+The fact that $\psi_t$ captures the overall dynamics of the \ac{cabm} is stated in the following
+corollary.
+
+% \begin{itemize}
+%     \item keeps cellular state intact
+%     \item only changes values of cells $c\in C$ and environment $e\in E$
+%     \item often described by \acp{ode} or \acp{pde} or discrete steps or couplings of many things
+%     \item $\psi$ on $\CS$ is a dynamical system
+%     \item $\psi$ can depend on identifiers
+%     \item best practice: do not depend on identifiers directly; rather only depend on relations
+%         between identifiers
+% \end{itemize}
 
 \begin{corollary}
     A non-topological evolution function as defined in (see
