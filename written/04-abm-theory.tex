@@ -1471,10 +1471,11 @@ Discuss example inspired by paper from Mustafa Khamash \cite{Perkins2020}
 \end{itemize}
 
 \subsection{Formal Definitions}
-We will firstly recall the definition of a dynamical system in a very abstract form, utilizing only
-abstract category-theoretic structures~\cite{MacLane1978}.
-We will analyze this Definition and define a \ac{cabm} as a special case of dynamical systems,
-obeying restrictions on its dynamics that we have motivated throughout the preceding sections.
+In our persuit to formally state what a \ac{cabm} is, we will first recall the definition of a
+dynamical system in a very abstract form, utilizing only abstract category-theoretic
+structures~\cite{MacLane1978}.
+We will then analyze this Definition and define a \ac{cabm} analogously, by enforcing certain
+restrictions on its dynamics that we have motivated throughout the preceding sections.
 
 \begin{definition}[Dynamical System]
     A dynamical system is a tuple $(T,X,\phi)$ where $T$ is a monoid (written additively) and
@@ -1491,67 +1492,47 @@ obeying restrictions on its dynamics that we have motivated throughout the prece
 \end{definition}
 
 Definition~\ref{definition:dynamical-system-category-theory} states that in order to define what a
-\ac{cabm} is, we need to define its state space $X$ and specify how to describe its dynamics $\phi$.
+\ac{cabm} is, we need to provide a state space $X$ and describe its dynamics $\phi$.
 On one hand, we want to permit enough flexibility such that we are able to describe a large variety
 of cellular dynamics and therefore be able to analyze a wide range of cellular systems.
-On the other hand, we aim to restrict the dynamics in such a way that we are able to resolve all
+On the other hand, we aim to restrict the system in such a way that we are able to resolve all
 topological cellular processes within the dynamics of our system.
-
 In the persuit of finding the full abstract state space $X$ together with its dynamics $\phi$
 multiple contenders can be considered.
+
 At first thought one could imagine that the cell lineage graph could be utilized in this regard.
 One state would then be given by particular graph and any dynamics $\phi$ on this set of graphs will
-map one state (graph) to another graph.
-Our hope is, that we do not need to heavily restrict the dynamics $\phi$ as the definition of this
-state space is enough to provide the necessary restrictions on the allowed dynamics.
+map one state (graph) to another (graph).
+Our hope is, that we do not need to heavily restrict the dynamics $\phi$ as the structure provided
+by the state space containing all possible cell lineages is enough to provide the necessary
+restrictions on the allowed dynamics.
 However, we have already discussed (see end of Section~\ref{section:cell-lineage}) that the same
 cell lineage graph can be constructed via different dynamics $\phi$.
 Therefore, the graph alone is not enough to properly resolve the topological cellular processes of
 our system and we would have to further restrict $\phi$.
-While such an attempt could possibly be made to work, we will now present an alternative approach.
+In particular one fundamental difficulty was pointed out earlier where two successive division via
+mode $s=1$ cannot be temporally resolved from the information contained in the cell lineage.
+While an attempt to extend the cell lineage graph with more information could yield a working
+prototype, we will now present an alternative approach.
 
 We have previously defined the cellular space $\CS$ (Definition~\ref{def:cellular-space}) where its
 name already heavily implies its future purpose.
 This space carries all currently alive cells as well as all cellular identifiers that have been used
 within our model previously.
-
-We have shown how topological cellular processes can be applied to this space and therefore change
-the overall cellular configuration.
-
-Consider the case of cellular division via $s=0$ (consuming) mode: The daughter cells
-$c_{\iota_1},c_{\iota_2}$ will be related to their mother cell $c_\iota$.
-Our goal is to resolve this process, i.e. to capture a snapshot of the mother cell and a snapshot
-which includes the daughter cells.
-We want to ensure this by restricting the dynamics $\phi$ in such a way that it can be decomposed
-into multiple topological cellular processes and other forms of dynamics that do not alter the
-overall cellular configuration.
-
-
-
-
-For our dynamics, this means that $\phi_s(x_0)$ must contain $\iota$ and the state of a later time
-point $\phi_t(x_0)$ must contain the cells $\iota_1,\iota_2$.
-Note that this definition does not make any statement about the actual value $c\in C$ associated
-with any cell but only about the identifiers.
-
-
-To be able to resolve these processes, we can restrict $phi$ in such a way that there exist two
-distinct time points $t,s$ such that the 
-
-
-
-As motivated by the preceding subsection, the environment can play a crucial part in the dynamics of
-a cellular system.
-In order to permit a wide variety of environments, we simply utilize an abstract set $\EV$ as the
-state space of the environmental configuration.
-We will include this in the overall state space $X$ of our \ac{cabm}.
-
-For the remainder of this section, $(T,+)$ will be a monoid and $\CS(I,C)$ will be the cellular
-space of the index set $I$ and cellular configuration space $C$.
+We have also defined how topological cellular processes can be applied to this space and therefore
+change the overall cellular configuration.
+In order to esure that individual topological cellular processes can be resolved, we aim to provide
+a richer structure to the evolution function $\phi$.
+In particular, we will distinguish topological and non-topological evolution functions which either
+modfiy the topology of the cellular state or leave it intact, thus merely acting on the values of
+cells and the environment.
+In this way, we can combine non-topological and topological processes to obtain the complete
+dynamics $\phi$ of our system.
 
 \begin{definition}[Topological Evolution Function]
     A topological evolution function $\varphi:\CS\rightarrow\CS$ is the
     concatenation of a countable number of topological cellular processes $\Phi_i:\CS\rightarrow\CS$
+    with $(I_p,M)\mapsto\varphi((I_p,M))$
     \begin{equation}
         \varphi = \prod\limits_i \Phi_i
     \end{equation}
@@ -1570,18 +1551,42 @@ space of the index set $I$ and cellular configuration space $C$.
         \item (Insertion) There exist $c^1,\dots,c^n$ such that
             $\Phi((I_p,M))=\Gamma((c^1,\dots,c^n),(I_p,M))$
     \end{enumerate}
+    Let $J_i\subset\pi_1(M)$ be the set of identifiers associated with the topological cellular
+    process $\Phi_i$ (dividing cell/removed cell/fusing cells/empty for insertion).
+    We further require that $J_i\cap J_j=\emptyset$ for all $i\neq j$.
     \label{definition:topological-evolution-function}
 \end{definition}
 
-\begin{itemize}
-    \item all quantities like $\gamma,\iota,\xi$ etc. depend on $i$ implicitly; they therefore
-        depend on the ordering
-    \item say that we will later talk about notation of this to include other formal stuff as well
-    \item therefore, definition~\ref{definition:topological-evolution-function} is not fully
-        complete
-    \item in practice: mostly finite concatenation (finitely many cells); but for theoretical
-        purposes: allow countable; needed i.e. for Rule 110, i.e. Turing completeness
-\end{itemize}
+We note that Definition~\ref{definition:topological-evolution-function} ensures that all identifiers
+utilized within these processes do not overlap $J_i\cap J_j=\emptyset$ for $i\neq j$.
+This ensures that every currently alive cell is only utilized exactly once by any one topological
+cellular process $\Phi_i$.
+Furthermore the utilized identifiers $\cup_i J_i\subset\pi_1(M)$ which ensures that none of the
+resulting cells is immediately affected by another topological cellular process.
+For example the daughter cells which have been the result of a particular topological cellular
+process $\Phi_i$ will not be affected by another topological cellular process such as removal
+$\Phi_j$ within the same topological evolution function.
+
+In principle, the quantities such as division functions and identifiers will depend on the
+particular process $\Phi_i$ and therefore depend on $i$, i.e.
+$\Phi_i((I_p,M)=\Gamma(\gamma_i,\iota_i,(I_p,M))$.
+In practice, the division functions are almost always identical across the dynamics of the system,
+depending only on the cellular properties $c\in C$ and the identifiers are provided by criteria such
+as the division criterion (see Definition~\ref{definition:cell-division-criterion}).
+We have therefore opted to implicitly state this dependence in the notation of
+Definition~\ref{definition:topological-evolution-function} for readability and visual clarity.
+
+Another interesting property is that Definition~\ref{definition:topological-evolution-function}
+does in principle permit infinite numbers of cellular processes $\Phi_i$.
+While this may not be relevant for practical applications, it can be exploited in theoretical
+scenarios such as to show Turing completeness as we will see later (see
+Section~\ref{subsubsection:abm-theory-distinction-to-cellular-automata}).
+
+As motivated by the preceding subsection, the environment can play a crucial role in the dynamics of
+a cellular system.
+In order to permit a wide variety of environments, we simply utilize an abstract set $\EV$ as the
+state space of the environmental configuration which will be included in the overall state space of
+the definition of our \ac{cabm}.
 
 \begin{definition}[Non-topological Evolution Function]
     Let $(T,+)$ be a monoid with $U\subset T$ and $\CS(I,C)$ the cellular space of the index set $I$
