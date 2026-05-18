@@ -1527,28 +1527,28 @@ dynamics $\phi$ of our system.
 
 \begin{definition}[Topological Evolution Function]
     A topological evolution function $\varphi:\CS\rightarrow\CS$ is the
-    concatenation of a countable number of topological cellular processes $\Phi_i:\CS\rightarrow\CS$
+    concatenation of a countable number of topological cellular processes $\Phi_j:\CS\rightarrow\CS$
     with $(I_p,M)\mapsto\varphi((I_p,M))$
     \begin{equation}
-        \varphi = \prod\limits_i \Phi_i
+        \varphi = \prod\limits_j \Phi_j
     \end{equation}
     as defined in Definition~\ref{definition:topological-cellular-process}.
     We say that a topological evolution function permits a certain topological process if
-    any $\Phi_i$ can be that process.
-    This means that for every $i$, $\Phi_i$ is defined by one of the following criteria
+    any $\Phi_j$ can be that process.
+    This means that for every $i$, $\Phi_j$ is defined by one of the following criteria
     \begin{enumerate}
         \item (Division) There exists a division function $\gamma$ and identifier $\iota\in M$ such
-            that $\Phi_i((I_p,M)) = \Upsilon(\gamma,\iota,(I_p,M))$
+            that $\Phi_j((I_p,M)) = \Upsilon(\gamma,\iota,(I_p,M))$
         \item (Removal) There exists an identifier $\iota\in M$ such that
-            $\Phi_i((I_p,M))=\delta(\iota,(I_p,M))$
+            $\Phi_j((I_p,M))=\delta(\iota,(I_p,M))$
         \item (Fusion) There exists a fusion function $\xi$ and identifiers
             $\iota_1,\dots,\iota_n\in M$ such that
-            $\Phi_i((I_p,M))=\Xi(\xi,(\iota_1,\dots,\iota_n),(I_p,M))$
+            $\Phi_j((I_p,M))=\Xi(\xi,(\iota_1,\dots,\iota_n),(I_p,M))$
         \item (Insertion) There exist $c^1,\dots,c^n$ such that
             $\Phi((I_p,M))=\Gamma((c^1,\dots,c^n),(I_p,M))$
     \end{enumerate}
     Let $J_i\subset\pi_1(M)$ be the set of identifiers associated with the topological cellular
-    process $\Phi_i$ (dividing cell/removed cell/fusing cells/empty for insertion).
+    process $\Phi_j$ (dividing cell/removed cell/fusing cells/empty for insertion).
     We further require that $J_i\cap J_j=\emptyset$ for all $i\neq j$.
     \label{definition:topological-evolution-function}
 \end{definition}
@@ -1556,16 +1556,16 @@ dynamics $\phi$ of our system.
 We note that Definition~\ref{definition:topological-evolution-function} ensures that all identifiers
 utilized within these processes do not overlap $J_i\cap J_j=\emptyset$ for $i\neq j$.
 This ensures that every currently alive cell is only utilized exactly once by any one topological
-cellular process $\Phi_i$.
+cellular process $\Phi_j$.
 Furthermore the utilized identifiers $\cup_i J_i\subset\pi_1(M)$ which ensures that none of the
 resulting cells is immediately affected by another topological cellular process.
 For example the daughter cells which have been the result of a particular topological cellular
-process $\Phi_i$ will not be affected by another topological cellular process such as removal
+process $\Phi_j$ will not be affected by another topological cellular process such as removal
 $\Phi_j$ within the same topological evolution function.
 
 In principle, the quantities such as division functions and identifiers will depend on the
-particular process $\Phi_i$ and therefore depend on $i$, i.e.
-$\Phi_i((I_p,M)=\Gamma(\gamma_i,\iota_i,(I_p,M))$.
+particular process $\Phi_j$ and therefore depend on $i$, i.e.
+$\Phi_j((I_p,M)=\Gamma(\gamma_i,\iota_i,(I_p,M))$.
 In practice, the division functions are almost always identical across the dynamics of the system,
 depending only on the cellular properties $c\in C$ and the identifiers are provided by criteria such
 as the division criterion (see Definition~\ref{definition:cell-division-criterion}).
@@ -1573,7 +1573,7 @@ We have therefore opted to implicitly state this dependence in the notation of
 Definition~\ref{definition:topological-evolution-function} for readability and visual clarity.
 
 Another interesting property is that Definition~\ref{definition:topological-evolution-function}
-does in principle permit infinite numbers of cellular processes $\Phi_i$.
+does in principle permit infinite numbers of cellular processes $\Phi_j$.
 While this may not be relevant for practical applications, it can be exploited in theoretical
 scenarios such as to show Turing completeness as we will see later (see
 Section~\ref{subsubsection:abm-theory-distinction-to-cellular-automata}).
