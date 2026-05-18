@@ -1,0 +1,125 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{amsmath,amssymb}
+\usepackage{amsfonts}
+
+\usetikzlibrary{arrows.meta, positioning, calc, decorations.pathmorphing}
+
+\begin{document}
+\begin{tikzpicture}[
+    node distance=1.2cm,
+    every node/.style={font=\small},
+    interaction/.style={decoration={snake, amplitude=.2mm, segment length=1.2mm}, decorate, thin, black},
+    cell/.style={circle, draw, fill=white, inner sep=0pt, font=\tiny},
+    snapshot/.style={draw, rounded corners, minimum height=1.6cm, minimum width=2.6cm}
+]
+
+    % Time axis
+    \draw[thick, ->, >=Stealth] (-0.5,0) -- (12.5,0) node[right] {$t$};
+    \foreach \x in {0, 2.5, 5, 7.5, 10} {
+        \draw[thick] (\x, 0.1) -- (\x, -0.1);
+    }
+
+    % Flow/Jump labels
+    \node[above=2pt] at (1.25, 0) {$\psi_{t_1}$};
+    \node[above=2pt] at (5, 0) {$\psi_{t_2}$};
+    \node[above=2pt] at (8.75, 0) {$\psi_{t_3}$};
+    \node[above=5pt, font=\large\bfseries] at (2.5, 0) {$\tilde{\varphi}_1$};
+    \node[above=5pt, font=\large\bfseries] at (7.5, 0) {$\tilde{\varphi}_2$};
+
+    % Macro for mesh with fixed geometry but evolving intensity
+    % #1: intensity base (e.g., 2, 15, 35)
+    \newcommand{\drawmesh}[1]{
+        \begin{scope}
+            \clip[rounded corners] (-1.3,-0.8) rectangle (1.3,0.8);
+            \foreach \i [evaluate=\i as \nexti using int(\i+1)] in {0,...,3} {
+                \foreach \j [evaluate=\j as \nextj using int(\j+1)] in {0,...,2} {
+                    % 1. Determine local vertex coordinates with fixed seed for geometry
+                    % Vertex A (i, j)
+                    \pgfmathsetseed{\i*17 + \j*31}
+                    \pgfmathsetmacro{\offxa}{(\i > 0 && \i < 4) ? (rnd*0.2 - 0.15) : 0}
+                    \pgfmathsetmacro{\offya}{(\j > 0 && \j < 3) ? (rnd*0.2 - 0.15) : 0}
+                    \coordinate (PA) at ({\i*0.65 - 1.3 + \offxa}, {\j*0.533 - 0.8 + \offya});
+
+                    % Vertex B (nexti, j)
+                    \pgfmathsetseed{\nexti*17 + \j*31}
+                    \pgfmathsetmacro{\offxb}{(\nexti > 0 && \nexti < 4) ? (rnd*0.2 - 0.15) : 0}
+                    \pgfmathsetmacro{\offyb}{(\j > 0 && \j < 3) ? (rnd*0.2 - 0.15) : 0}
+                    \coordinate (PB) at ({\nexti*0.65 - 1.3 + \offxb}, {\j*0.533 - 0.8 + \offyb});
+
+                    % Vertex C (i, nextj)
+                    \pgfmathsetseed{\i*17 + \nextj*31}
+                    \pgfmathsetmacro{\offxc}{(\i > 0 && \i < 4) ? (rnd*0.2 - 0.15) : 0}
+                    \pgfmathsetmacro{\offyc}{(\nextj > 0 && \nextj < 3) ? (rnd*0.2 - 0.15) : 0}
+                    \coordinate (PC) at ({\i*0.65 - 1.3 + \offxc}, {\nextj*0.533 - 0.8 + \offyc});
+
+                    % Vertex D (nexti, nextj)
+                    \pgfmathsetseed{\nexti*17 + \nextj*31}
+                    \pgfmathsetmacro{\offxd}{(\nexti > 0 && \nexti < 4) ? (rnd*0.2 - 0.15) : 0}
+                    \pgfmathsetmacro{\offyd}{(\nextj > 0 && \nextj < 3) ? (rnd*0.2 - 0.15) : 0}
+                    \coordinate (PD) at ({\nexti*0.65 - 1.3 + \offxd}, {\nextj*0.533 - 0.8 + \offyd});
+
+                    % 2. Determine shading with sparse, non-adjacent activation
+                    \pgfmathsetseed{\i*97 + \j*101} % Fixed seed for selection
+                    \pgfmathsetmacro{\valA}{rnd}
+                    \pgfmathsetmacro{\valB}{rnd}
+
+                    % Pattern to ensure no shared edges:
+                    % Only allow A if (i+j) is even, only allow B if (i+j) is odd.
+                    % This prevents horizontal/vertical/diagonal adjacency between active triangles.
+                    \pgfmathsetmacro{\isAllowedA}{mod(\i+\j, 2) == 0 ? 1 : 0}
+                    \pgfmathsetmacro{\isAllowedB}{mod(\i+\j, 2) == 1 ? 1 : 0}
+
+                    \pgfmathsetmacro{\threshold}{0.25} 
+                    \pgfmathsetmacro{\activeShade}{#1 + 5}
+                    \pgfmathsetmacro{\baseShade}{2}
+
+                    \pgfmathsetmacro{\fillA}{(\valA < \threshold && \isAllowedA > 0.5) ? \activeShade : \baseShade}
+                    \pgfmathsetmacro{\fillB}{(\valB < \threshold && \isAllowedB > 0.5) ? \activeShade : \baseShade}
+
+                    % Consistent dark stroke for all triangles
+                    \pgfmathsetmacro{\strokeShade}{40}
+
+                    \fill[gray!\fillA] (PA) -- (PB) -- (PC) -- cycle;
+                    \draw[very thin, black!\strokeShade] (PA) -- (PB) -- (PC) -- cycle;
+
+                    \fill[gray!\fillB] (PB) -- (PD) -- (PC) -- cycle;
+                    \draw[very thin, black!\strokeShade] (PB) -- (PD) -- (PC) -- cycle;
+                }
+            }
+        \end{scope}
+        \draw[rounded corners] (-1.3,-0.8) rectangle (1.3,0.8);
+    }
+
+    % Snapshot 1
+    \begin{scope}[shift={(0,1.8)}]
+        \drawmesh{2}
+        \node[cell, minimum size=0.85cm] at (0,0) {$\iota_1$};
+        \node[above=0.8cm] at (0,0) {$\phi_0(x_0)$};
+    \end{scope}
+
+    % Snapshot 2
+    \begin{scope}[shift={(5,1.8)}]
+        \drawmesh{15}
+        \node[cell, minimum size=1.1cm] at (-0.5,0.1) (c2_2) {$\iota_2$};
+        \node[cell, minimum size=0.5cm] at (0.6,-0.2) (c2_3) {$\iota_3$};
+        \draw[interaction] (c2_2) -- (c2_3);
+        \node[above=0.8cm] at (0,0) {$\phi_{t_1 + \epsilon}(x_0)$};
+    \end{scope}
+
+    % Snapshot 3
+    \begin{scope}[shift={(10,1.8)}]
+        \drawmesh{35}
+        \node[cell, minimum size=0.6cm] at (-0.7,0.3) (c3_4) {$\iota_4$};
+        \node[cell, minimum size=0.6cm] at (-0.3,-0.4) (c3_5) {$\iota_5$};
+        \node[cell, minimum size=0.85cm] at (0.7,0.1) (c3_3) {$\iota_3$};
+
+        \draw[interaction] (c3_4) -- (c3_5);
+        \draw[interaction] (c3_4) -- (c3_3);
+        \draw[interaction] (c3_5) -- (c3_3);
+        \node[above=0.8cm] at (0,0) {$\phi_t(x_0)$};
+    \end{scope}
+
+    \node[below=10pt] at (5,0) {\footnotesize $\phi_t = \psi_{t_3} \circ \tilde{\varphi}_2 \circ \psi_{t_2} \circ \tilde{\varphi}_1 \circ \psi_{t_1}$};
+
+\end{tikzpicture}
+\end{document}
