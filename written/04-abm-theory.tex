@@ -1608,18 +1608,9 @@ regular dynamical system (compare Definition~\ref{definition:dynamical-system-ca
 such that any of these types of dynamics can be described without any restrictions on the underlying
 cellular representation or types of interaction.
 Although $\psi_t$ can depend on the cellular identifiers themselves via the cellular state, many
-systems do not require this information and factorize via
-\begin{center}
-    \begin{tikzcd}[row sep=huge, column sep=huge]
-        \CS\times\EV
-            \arrow{r}{\pi_2\times\text{id}}
-            \arrow{rd}{\psi}
-            &(\sqcup_{n\geq 2}C^n)\times\EV \arrow{d}{\bar{\psi}}\\
-        & \CS\times\EV
-    \end{tikzcd}
-\end{center}
-where $\text{id}$ is the identity map, $\pi_2$ is the projection onto the second component and
-$\bar{\psi}$ is the reduced non-topological evolution function which only depends on the values of
+systems do not require this information and have non-topological evolution functions $\psi_t$ which
+only depend on the value $c$ of the given cells.
+
 the respective cells.
 While some applications might require knowledge about the particular identifier of the cells, most
 non-engineered systems will only depend on the relation of identifiers which link mother to daughter
