@@ -14,11 +14,11 @@ still confused. But on a higher level.}
     \item Develop formal notions for individual-based mathematical description of cellular systems
         \ac{cabm}
     \item Goal is to describe the \textbf{dynamics} of these systems
-    \item Embedd ourselves deeply within biological contexts; utilize biological intuition and
+    \item Embed ourselves deeply within biological contexts; utilize biological intuition and
         examples wherever possible to guide definitions
     \item Aim for a generalist approach; Cover wide range of biological systems $\rightarrow$ we
         will thus make use of examples from all realms of cellular biology, spanning bacteria,
-        funghi, mammalian cells and more
+        fungi, mammalian cells and more
     \item Try to find shared principles wherever possible; this is after all the whole idea behind
         cell biology; but will adapt or try to explain when weaknesses in the presented formalism
         arise
@@ -27,7 +27,7 @@ still confused. But on a higher level.}
     \item Small goal: can we find a common "language" of \acp{cabm}? that is shared between many of
         the existing tools? (This will probably only be "A" language and not "the" (single)
         language)
-    \item can \acp{cabm} be considered something more fundamental than theories on larger scales
+    \item Can \acp{cabm} be considered something more fundamental than theories on larger scales
         (i.e. \acp{pde} or \acp{ca})? $\rightarrow$ make example with coarse-graining
 \end{itemize}
 
@@ -35,17 +35,17 @@ still confused. But on a higher level.}
 \begin{enumerate}
     \item Recall some fundamental properties of cellular systems (Uniqueness, Continuity, Division,
         Death, Fusion, etc.)
-    \item what is an individual cell?
-    \item how can we represent cellular processes such as division, death, fusion? This will give us
+    \item What is an individual cell?
+    \item How can we represent cellular processes such as division, death, fusion? This will give us
         cell lineage
-    \item how can we introduce an environment and dynamics into the previous considerations?
+    \item How can we introduce an environment and dynamics into the previous considerations?
     \item Discuss underlying assumptions: spatial locality, individual-based behaviour leads to
         collective effects
-    \item what can we interpret and learn about what constitutes the beginning of a cellular
-        identity? how does this relate to experimental conditions? how does this help us to
+    \item What can we interpret and learn about what constitutes the beginning of a cellular
+        identity? How does this relate to experimental conditions? How does this help us to
         understand how experiment and model can be matched.
-    \item how can we introduce stochastic processes into \acp{cabm}
-    \item how do \acp{cabm} compare to \acp{ca}? Are they related? Are they different? Does one
+    \item How can we introduce stochastic processes into \acp{cabm}
+    \item How do \acp{cabm} compare to \acp{ca}? Are they related? Are they different? Does one
         contain the other?
     \item Finally some more examples of applications (coarse-graining off-lattice center-based
         model) ("throw away" uniqueness)
@@ -69,7 +69,7 @@ Epithelia need to balance cell division and death in order to maintain a constan
 This can be achieved by extrusion where a single cell is pushed out of the tissue layer in densely
 crowded areas~\cite{Eisenhoffer2012}.
 Once the cell leaves the confinement, apoptosis is triggered.
-Another mechanism is via cell competition where neighboring cells inform each other aobut their
+Another mechanism is via cell competition where neighboring cells inform each other about their
 metabolic activity and growth and lower performing cells are then instructed to
 die~\cite{Amoyel2014}.
 Precisely timed cell death is also observed in pattern formation processes such as the formation of
@@ -114,8 +114,8 @@ ones~\cite{Harold2005} and mitochondria need to be inherited during cell
 division~\cite{Westermann2010}.
 The cell's lifetime ends when it reaches a final fate such as death or division.
 At the risk of sounding tautological, it should be stated explicitly that once a cell has ceased to
-exist, it will not reemerge by any other mechanism although parts of it can be reused within other
-cells, i.e. via Efferocytosis of apoptotic bodies~\cite{deCathelineau2003,Poon2014,Yu2023}.
+exist, it will not re-emerge by any other mechanism although parts of it can be reused within other
+cells, i.e., via efferocytosis of apoptotic bodies~\cite{deCathelineau2003,Poon2014,Yu2023}.
 While these ideas seem conceptually simple, they will provide the basis of how to understand the
 concept of identity of a single cell.
 
@@ -134,7 +134,7 @@ We assume that a cell is defined by its position on a lattice grid $\mathbb{Z}$ 
 form of discrete internal state.
 The dynamics of the system are irrelevant for our considerations but we assume that multiple cells
 can occupy the same position.
-If two cells with matching internal states sit at the same location, they can not be
+If two cells with matching internal states sit at the same location, they cannot be
 distinguished from each other if no additional properties of both cells are tracked.
 One could be tempted to interpret this within the scope of the principle of indistinguishable
 particles which is employed across statistical physics often attributed to Dirac~\cite{Dirac1926}.
@@ -159,12 +159,12 @@ in the space of our observable quantity.
 We set out to link experimental cell states to states produced by our model but assume that the
 chosen metric only involves physical cellular properties such as the position of the cell or some
 form of readout e.g. by tagging with \ac{gfp}~\cite{Chalfie1994}.
-In general, we can not assume that the model output and experimental results will match identically,
+In general, we cannot assume that the model output and experimental results will match identically,
 but rather be within some given margin of error.
 We now consider the case where two cells $c_{m,1},c_{m,2}$ in the model output are approximately
 equally close to the experimental state of a particular cell $c_e$ under this chosen metric, i.e.
 $d(c_{m,1},c_e)\approx d(c_{m,2},c_e)$.
-Without any additional input, we can not tell if $c_{m,1}$ or $c_{m,2}$ of the model output
+Without any additional input, we cannot tell if $c_{m,1}$ or $c_{m,2}$ of the model output
 corresponds to $c_e$ within the experiment.
 Going one step further; even if the obtained distance values would exhibit a clear discrepancy, the
 link between model and experimental reality could be flawed if simply the closest cell is also
@@ -199,7 +199,7 @@ shows the clear need for another method of cellular identification.
 %     \label{}
 % \end{figure}
 
-\subsection{Persistance through Cellular History}
+\subsection{Persistence through Cellular History}
 In a final thought experiment we omit any spatial considerations or concepts of closeness.
 Consider a system of two distinct cell species $A$ and $B$ where both types are able to divide but
 in addition $A$ can differentiate into $B$.
@@ -265,9 +265,9 @@ interpretation.
 The preceding thought exercises would be resolved by assigning a unique identifier to each new
 cellular entity which is not only unique at any given time point but throughout the whole
 observed time interval.
-This means in particular that even if a cell is removed from the simulation that no newcoming cell
-will reuse any preexisting identifier.
-Identifiers can not only be used to distinguish between agents but also to keep track of
+This means in particular that even if a cell is removed from the simulation that no new cell
+will reuse any pre-existing identifier.
+Identifiers cannot only be used to distinguish between agents but also to keep track of
 parental relationships between the cells.
 The idea of cellular identification being closely tied to their history is further made clear when
 listing cellular relations as a family tree.
@@ -305,7 +305,7 @@ result in an invalid parental state.
     \end{tikzpicture}
     \caption[Cellular history example tree]{
         A forest containing an example history of two parent cells $p_1,p_2$.
-        Arbitrary cells can not be interchanged freely since this might introduce incorrect
+        Arbitrary cells cannot be interchanged freely since this might introduce incorrect
         configurations into mother-daughter relationships.
         For example, the two cousin-cells $gc_{212}$ and $gc_{221}$ would have different
         grandparent-cells if $c_{12}$ and $c_{21}$ would be interchanged.
@@ -316,7 +316,7 @@ result in an invalid parental state.
 \section{The Cellular Space}
 \label{subsec:cellular-space}
 The considerations of the preceding section exemplify the need to uniquely label and track cells
-throughout their life-time.
+throughout their lifetime.
 This can be achieved by assigning unique identifiers to each cell, which enables us to properly
 trace them.
 
@@ -352,7 +352,7 @@ $M\subset Pot(I\times C)$.
     Let $I$ be a set of identifiers and $C$ be the cellular configuration space.
     We call a set of cells $(I_p,M)\in Pot(I)\times Pot(I\times C)$ a cellular state if
     \begin{enumerate}
-        \item Every cell has a unique identifer $\#\pi_1(M)=\#M$.
+        \item Every cell has a unique identifier $\#\pi_1(M)=\#M$.
         \item Identifiers have not been used previously $I_p\cap\pi_1(M)=\emptyset$
     \end{enumerate}
     where $\pi$ is the projection on the first component.
@@ -364,7 +364,7 @@ Their explicit choice can depend on the respective system in question and will b
 (see \todo{ref}).
 
 Definition~\ref{def:cellular-state} ensures that a cellular state is valid in the sense that
-uniqueness of cells is ensured throughout their life-time.
+uniqueness of cells is ensured throughout their lifetime.
 However it does not allow us to describe any dynamical processes for the temporal evolution from one
 cellular state into another.
 Mapping one cellular state onto another, requires us to define the \textit{Cellular Space} on which
@@ -398,7 +398,7 @@ Using any choice of such identifiers would circumvent the described problems of 
 thought experiments and establish a direct link between cells in the model and
 the experiment without relying on complex comparison metrics.
 
-While these thoughts are puristic in nature, they set the stage for the comming theoretical
+While these thoughts are puristic in nature, they set the stage for the coming theoretical
 considerations.
 Chapter~\ref{chapter:bacterial-rods} utilizes both properties; the uniqueness and
 the parental relationships of the identifiers to construct metrics that can be used to estimate
@@ -417,7 +417,7 @@ To continue our investigation of uniqueness, we now want to turn our attention t
 cell division and cell death that lead to changes in the cellular state which require updating the
 tracked indices.
 Definition~\ref{def:cellular-space} of the cellular space allows us to treat a variable number of
-cells simultanously.
+cells simultaneously.
 However, we have so far not discussed how one particular cellular state $(I_p,M)$ can be mapped onto
 another $(J_p,N)$ by events such as cell division or death.
 
@@ -427,7 +427,7 @@ These will shape the following definitions and guide the overall throught proces
 
 \subsection{A Primer on Cellular Reproduction, Death \& Fusion}
 \label{subsec:a-primer-on-cellular-processes}
-On the subcellular level, these processes ocurr over extended periods of time.
+On the subcellular level, these processes occur over extended periods of time.
 In contrast, our \ac{abm} approach represents cells as discrete entities with well-defined division
 and death timings which could be seen as one of its biggest conceptual weaknesses.
 
@@ -439,8 +439,8 @@ the bridge between two daughter cells is cut.
 However it was shown that human HeLa and mouse BALB/c-3T3 cells are already in $G_1$ state at this
 time point~\cite{Gershony2014} meaning the cell cycle of the daughter cells has already started.
 This emphasizes the point that division is a process on smaller time scales and not inherently
-instantanous.
-\acp{abm} usually operate on the mesoscopic scale in which it is the researcher's task to asses
+instantaneous.
+\acp{abm} usually operate on the mesoscopic scale in which it is the researcher's task to assess
 which level of detail to utilize and which notion of division time is appropriate within the given
 context.
 Therefore, these processes should be captured by a corresponding dynamical description leading up to
@@ -448,7 +448,7 @@ the time point in question (see section~\ref{section:dynamics}) or be omitted if
 
 \paragraph{Division} via meiosis, mitosis or binary fission are among the most common types of
 cellular reproduction~\cite{Biov2014,Ilowiecki1981,von1835resp}.
-These process lead to the end of the mother's life and mark the beginning of the life the daughter
+These process lead to the end of the mother's life and mark the beginning of the life of the daughter
 cells.
 We can therefore represent this as a mapping of one mother cell which is split into two new daughter
 cells as displayed in Figure~\ref{fig:theory-division-basic}.
@@ -459,8 +459,8 @@ introduce variations and asymmetries.
 Examples are the division of \ac{ecoli}~\cite{Sezonov2007} via binary fission, sporulation in yeasts
 such as \textit{Schizosaccharomyces japonicus}~\cite{Neiman2011,Tanaka1982} and mitosis in Hek293
 embryonic kidney cells~\cite{Molla2017}.
-Internal budding is a process where to daughter buds form within a mother cell
-and ultimately it before separating into two distinct cells.
+Internal budding is a process where two daughter buds form within a mother cell
+and ultimately replace it before separating into two distinct cells.
 It is observed in parasites such as \textit{Toxoplasma gondii}~\cite{Smyth1994} and can also be
 described by the same mapping.
 Notice that these examples include sexual and asexual reproduction.
@@ -477,7 +477,7 @@ Notice that these examples include sexual and asexual reproduction.
     \end{tikzpicture}
     \caption[Cellular division with two new unique daughter cells]{
         The mother cell $m$ is split into two daughter cells $d_1,d_2$ which are treated as new
-        unique entities respecively.
+        unique entities respectively.
     }
     \label{fig:theory-division-basic}
 \end{figure}
@@ -496,8 +496,8 @@ arbitrary amount of cells $n$, not just $n=2$.
 also known as \textit{budding yeast} or \textit{Baker's yeast}.
 It is an eukaryotic model organism mostly relevant in molecular cell biology which reproduces
 asymmetrically, by forming a bud on the envelope of the mother cell that separates into a new
-daugher cell~\cite{Feldmann2010}
-This behavior is similar to the asymmetric division process of stem cells~\cite{BhavsarJog2017}.
+daughter cell~\cite{Feldmann2010}
+This behaviour is similar to the asymmetric division process of stem cells~\cite{BhavsarJog2017}.
 
 In this example, the mother cell can be assumed to not be replaced by two daughter cells but rather
 maintained throughout the processes.
@@ -525,8 +525,8 @@ fusion~\cite{Merlini2013} or sporulation~\cite{Neiman2005}.
     \label{fig:theory-asymmetric-reproduction}
 \end{figure}
 
-\paragraph{Multipolar budding} describes a process where multiple budding cites develop
-simultanously at a single mother cell.
+\paragraph{Multipolar budding} describes a process where multiple budding sites develop
+simultaneously at a single mother cell.
 It has been observed in \textit{Paracoccidioides brasiliensis}~\cite{Almeida2009,Carbonell1967}
 but can also be induced in budding yeast by increasing the abundance of polarity proteins within the
 cell~\cite{Chiou2021} or by a complete rewiring of the feedback loop~\cite{Howell2009}.
@@ -534,7 +534,7 @@ In order to capture this phenomenon, we need to extend the right-hand side of
 Figure~\ref{fig:theory-asymmetric-reproduction} from a single daughter cell $d$ to multiple daughter
 cells $d_1,\dots,d_n$ in a similar fashion as done before.
 
-\paragraph{Cellular Death} can ocurr in various ways such as apoptosis (programmed cell
+\paragraph{Cellular Death} can occur in various ways such as apoptosis (programmed cell
 death) \cite{Kerr1972,BOHM2003,Green2010,Raff1998}, via autophagy~\cite{Licheva2025,Galluzzi2017} or
 necrosis~\cite{Gerschenson2001,Fink2005} where the latter can also be regulated by genetic
 pathways~\cite{Berghe2014}.
@@ -547,9 +547,9 @@ compensate the loss of density~\cite{Fan2008}.
 While mechanisms such as autophagy usually suppress apoptosis~\cite{Marshall2018,Boya2005}, an
 extreme form of autophagy can trigger a type of cell death called autosis~\cite{Liu2013}.
 These processes need to be accounted for in the dynamics of the respective system.
-We are now again only interested in the instantanous time point at which the cellular entitiy, i.e.
+We are now again only interested in the instantaneous time point at which the cellular entity, i.e.
 agent is removed.
-Figure~\ref{fig:theory-cell-death} shows the underwhelming process one a single cell that ceases to
+Figure~\ref{fig:theory-cell-death} shows the underwhelming process on a single cell that ceases to
 exist.
 
 \begin{figure}[ht]
@@ -576,7 +576,7 @@ of the sperm and egg into a single-celled zygote~\cite{Cobb2012,Neaves2017,Prima
 Fusion can also be observed in the formation of skeletal muscle fibers which was initially believed
 to be an artifact of lab-grown cells but was later replicated \textit{in Vivo}~\cite{Mintz1967}.
 Using the \textit{Drosophila} model organism, it could be shown that myoblast fusion is asymmetrical
-and ocurrs between distinct classes of cells where one cell acts as a "Founder cell"
+and occurs between distinct classess of cells where one cell acts as a "Founder cell"
 while the remaining partners mainly contribute bulk mass~\cite{Bate1990,Bour2000}.
 Another example is the mammalian placenta whose outer tissue layer consists of
 syncytiotrophoblasts with multiple nuclei~\cite{Midgley1963,Omata2013,Huppertz2011}.
@@ -591,12 +591,12 @@ Fusing two cells can therefore be viewed as either removing all involved cells a
 completely new one or removing all apart from one cell and adjusting the state of the remaining one.
 This process is displayed schematically in Figure~\ref{fig:theory-cell-fusion}.
 
-Another intriguing exmample can be found in the immune system where macrophages are responsible for
+Another intriguing example can be found in the immune system where macrophages are responsible for
 various cleanup processes such as the digestion of pathogens or the removal of cell
 residue~\cite{Metchnikoff1892,Rather1970}.
 These white blood cells can aggregate around a common target, adhere to each other and finally merge
 fuse with each other simultaneously~\cite{Vignery2005,Helming2008}.
-Similarly, the repair of muscle fibers ocurrs via a pool of stem cells called "Sattelite Cells"
+Similarly, the repair of muscle fibers occurs via a pool of stem cells called "Sattelite Cells"
 which can be recruited over a very narrow time interval in large quantities~\cite{Abmayr2012}.
 This shows that Figure~\ref{fig:theory-cell-fusion} (A) and (B) need to be extended to capture
 more than two input cells.
@@ -607,9 +607,9 @@ However other multi-nucleated cells such as Hepatocytes, that were also formed b
 are able to repurpose their nuclei within the new daughter cells when undergoing cell
 division~\cite{Duncan2010}.
 Instead of retaining multiple nuclei, they can also combine within the cell during the fusion
-process which was shown to ocurr spontaneously between cells of the same type but different strains
+process which was shown to occur spontaneously between cells of the same type but different strains
 in mouse cancer cells~\cite{Barski1960,Barski1961} and even between different species such as human
-HeLa and mouse Ehrlich ascites cells~\cite{Harris1965}.
+HeLa and mouse Ehrlich assites cells~\cite{Harris1965}.
 It was also shown that fully-differentiated mouse tail-tip fibroblasts can be reprogrammed by fusing
 them with an embryonic stem cell~\cite{Takahashi2006} after which the cells are able to undergo
 stable mitosis again indefinitely.
@@ -635,7 +635,7 @@ does not generally have to be.
         \draw[-] (7,-0.25) -- (8,1);
     \end{tikzpicture}
     \caption[Cellular Fusion]{
-        Cells $c_1$ and $c_2$ fuse to form a completely new cellular entitiy $c_3$.
+        Cells $c_1$ and $c_2$ fuse to form a completely new cellular entity $c_3$.
         The cell $c_3$ is therefore related to $c_1$ and $c_2$ but not due to division.
     }
     \label{fig:theory-cell-fusion}
@@ -651,7 +651,7 @@ machines~\cite{Wang2010Robust} in which bacteria can be kept in a state of conti
 growth~\cite{Yang2018,Kaiser2018} while excess cells are sucked away by fluidic
 forces~\cite{Grnberger2014}.
 However, when studying other systems such as the varying modes of cancer migration~\cite{Friedl2003}
-or swarming of \textit{Paenibacillus}~\cite{Ingham2008}, this puristic notion can not be upheld and
+or swarming of \textit{Paenibacillus}~\cite{Ingham2008}, this puristic notion cannot be upheld and
 traceability of cells begins to get messy.
 
 One common technique to avoid the challenges of inspecting a subslice of a larger biological system
@@ -669,7 +669,7 @@ often by forming biofilms, before the predator is introduced into the system~\ci
 
 \subsection{Formalizing Cellular Reproductive \& Death Processes}
 \label{subsec:theory-formalizing-cellular-reproduction}
-We now turn our attention to the question of how to mathemtically capture the previously discussed
+We now turn our attention to the question of how to mathematically capture the previously discussed
 cellular processes.
 Each of the presented examples can be viewed as a combination of removal of a cell, insertion of
 new cells and modification of existing ones which all depend on the current state of the related
@@ -685,7 +685,7 @@ $(c_1,c_2,\dots)$ which live in a product of the form $C^n$ where $n\geq 2$.
 However, the amount of newly created cells $n$ is variable and therefore the extended map takes
 values in the disjoint union $\sqcup_{n\geq 2}C^n$.
 The disjoint union ensures that the mapping takes values in exactly one of the $C^n$ and can be
-formalized via $\sqcup_{n\geq 2}C^n = \cup_{n\geq 2}(n,C^n)$.
+formali.e., via $\sqcup_{n\geq 2}C^n = \cup_{n\geq 2}(n,C^n)$.
 
 As explained earlier, other processes such as budding will not remove the mother cell but instead
 modify it and additionally insert a new daughter cell at the division time point.
@@ -845,14 +845,14 @@ $\bar{\gamma}(c)=1$ or not $\bar{\gamma}(c)=0$.
     \label{definition:cell-division-criterion}
 \end{definition}
 
-Another important process is cell death which ocurrs over a time span, similarly to cell division.
+Another important process is cell death which occurs over a time span, similarly to cell division.
 As discussed before, cell-death comes in various forms which can lead to differences in interactions
 of the dying cells with their environment.
 The dynamics of the processes leading up to the death event such as cell-cell signalling need to be
 accounted for within the dynamics of the model (see Section~\ref{section:dynamics}).
-We again now focus on the time point at which the cellular entitiy is considered to no longer exist
+We again now focus on the time point at which the cellular entity is considered to no longer exist
 and therefore removed from the model.
-Later we will slightly extend this definition in order to account for processes that ocurr right at
+Later we will slightly extend this definition in order to account for processes that occur right at
 the time of death such as the release of intracellular compounds~\cite{Kono2008,Chen2010}.
 This requires us to introduce the notion of the environment of the cell which is able to take up the
 released compounds.
@@ -860,7 +860,7 @@ released compounds.
 As discussed earlier, the removal of a cell does not have to be the result of a death event but
 could also be due to the cell leaving the inspected spatial region (subslice) of interest which is
 common in mother machines.
-Definition~\ref{definition:cell-removal} captures the instant at which the cellular entitiy is
+Definition~\ref{definition:cell-removal} captures the instant at which the cellular entity is
 removed.
 
 \begin{definition}[Cell Removal]
@@ -904,7 +904,7 @@ This can be formalized by the following definition.
     the consuming and $s=1$ the accretive mode of fusion (compare
     Definition~\ref{definition:cell-division-single}).
     We use the same convention where the first cell is kept in the accretive mode $s=1$.
-    Futhermore the map
+    Furthermore the map
     \begin{equation}
         \Xi:\{\xi:\sqcup_{n\geq2}C^n\rightarrow\{0,1\}\times C\}
             \times \sqcup_{n\geq2}I^n
@@ -942,7 +942,7 @@ We therefore only need to include a method for insertion.
 This type of insertion should be viewed as cells who are entering the observed subslice by methods
 such as their own movement or due to explicit experimental intervenience.
 We therefore treat cell insertion as a process that is not inherent to the biological reality but
-rather external and therfore also not triggered by the biological constituents of the system.
+rather external and therefore also not triggered by the biological constituents of the system.
 Definition~\ref{definition:cell-insertion} formalizes these principles.
 
 \begin{definition}[Cell Insertion]
@@ -963,7 +963,7 @@ removal, fusion or insertion, we introduce an umbrella term for them.
 \begin{definition}[Topological Cellular Processes]
     We call any division, removal, fusion or insertion operation a
     topological cellular process.
-    \label{definition:topological-cellular-proces}
+    \label{definition:topological-cellular-process}
 \end{definition}
 
 \todo[inline]{check text afterwards; make use of new "Topological cellular processes" term}
@@ -994,7 +994,7 @@ to \ref{example:unique-identifiers-3-spatial-subdivision}.
         \end{cases}
         \label{eq:theory-simple-abm-division-criterion}
     \end{equation}
-    which indicates when a division should ocurr and specify the division function
+    which indicates when a division should occur and specify the division function
     $\gamma:C\rightarrow C\times C$ using the short-hand notation previously introduced in
     subsection~\ref{subsec:theory-formalizing-cellular-reproduction}.
     It is given by
@@ -1081,8 +1081,8 @@ until completion.
     This operation takes finitely many steps due to the finiteness of the divisors $5,7$ and $11$.
     Furthermore, when performing the division function $\gamma$, the resulting daughter cells will
     have capacity values less than $c$.
-    To prove the last statement, we exaime the largest possible capacity value produced by the
-    division function $\gamma$ which is given by the divison
+    To prove the last statement, we examine the largest possible capacity value produced by the
+    division function $\gamma$ which is given by the division
     $\tilde{c}\rightarrow(\dots,3\tilde{c}/5)$.
     With $\tilde{c}=c+n$, we require $3(c+n)/5 < c$ which is equivalent to $3n/2 < c$.
     Using $n<5$, we can infer that this condition is always true for $8\leq c$.
@@ -1205,7 +1205,7 @@ The following theorem formalize this notion of cellular lineage.
     $G=(V,E)$.
 
     We call this graph the \textbf{Cell Lineage} and all paths from a single vertex upwards against
-    the direction of the gaph to the root an \textbf{ancestry} or \textbf{lineage} of a single cell.
+    the direction of the graph to the root an \textbf{ancestry} or \textbf{lineage} of a single cell.
     \label{theorem:cell-lineage}
 \end{theorem}
 
@@ -1213,7 +1213,7 @@ The following theorem formalize this notion of cellular lineage.
     Let $G$ be a tree with vertices $V=\{\iota_i:i=0\dots m\}$, labels $l:V\rightarrow\{0,1\}$ and
     edges $E$.
     Applying a removal operation to $\iota$ will only result in a label change of a single vertex
-    $l(\iota)=0$, leaving the reamining labels and tree invariant.
+    $l(\iota)=0$, leaving the remaining labels and tree invariant.
     Meanwhile a division operation with mode $s$ will have one mother cell $\iota$ and $n-s$
     daughter cells $c_{\iota_i}$ where $i\in\{s,\dots,n\}$ and $\iota_i\notin \pi_2(V)$.
     Property (4) and (5) of Definition~\ref{definition:cell-division-single} enforce that the new
@@ -1278,7 +1278,7 @@ Corollary~\ref{corollary:extend-cell-lineage} not only shows that any existing c
 further developed by cellular processes but also that two cell lineages can amend one another if
 they are compatible which means that cells with same identifiers need to be located exclusively at
 the end of one graph and at the beginning of the other.
-In the case of no cell fusion, this statement means that any forest can be exteneded at one leaf
+In the case of no cell fusion, this statement means that any forest can be extended at one leaf
 with a tree that holds the identifier of this particular leaf as its root.
 
 The previous observations have been independent of the division and fusion mode, which could in
@@ -1308,7 +1308,7 @@ The result will be a tree with one parent node and two daughter nodes as present
 Figure~\ref{fig:cell-lineage-misleading-graphs} (A).
 The individual cells are denoted by a value $q=0,1$ symbolizing if these cells are still alive or
 have been removed either due to a consuming division operation $s=0$ or due to cell removal.
-Here it is unknown which of the two division events has ocurred before the others.
+Here it is unknown which of the two division events has occured before the others.
 However this example still would lead to two possible scenarios of dynamics which are correct since
 in both cases the mother cell is not consumed $s=1$.
 
@@ -1366,7 +1366,7 @@ It should therefore only be interpreted as an observable of the underlying dynam
 %     \begin{tabularx}{\textwidth}{clX}
 %         &\textbf{Category} & \textbf{Examples}\\
 %         \toprule
-%         (C) & Cellular & Cell Shape (Spherical, Rod, Rectangular, Hexagonal, Puzlle-shaped)
+%         (C) & Cellular & Cell Shape (Spherical, Rod, Rectangular, Hexagonal, Puzzle-shaped)
 %             Intracellular Reactions, Metabolism, Gene-Regulatory Networks Cell Cycle, Division,
 %             Death\\
 %         (CC) & Cell-Cell & Physical Interactions (Adhesion, Friction, Collisions) Contact Reactions
@@ -1467,7 +1467,7 @@ Discuss example inspired by paper from Mustafa Khamash \cite{Perkins2020}
 \end{itemize}
 
 \subsection{Formal Definitions}
-In our persuit to formally state what a \ac{cabm} is, we will first recall the definition of a
+In our pursuit to formally state what a \ac{cabm} is, we will first recall the definition of a
 dynamical system in a very abstract form, utilizing only abstract category-theoretic
 structures~\cite{MacLane1978}.
 We will then analyze this Definition and define a \ac{cabm} analogously, by enforcing certain
@@ -1493,7 +1493,7 @@ On one hand, we want to permit enough flexibility such that we are able to descr
 of cellular dynamics and therefore be able to analyze a wide range of cellular systems.
 On the other hand, we aim to restrict the system in such a way that we are able to resolve all
 topological cellular processes within the dynamics of our system.
-In the persuit of finding the full abstract state space $X$ together with its dynamics $\phi$
+In the pursuit of finding the full abstract state space $X$ together with its dynamics $\phi$
 multiple contenders can be considered.
 
 At first thought one could imagine that the cell lineage graph could be utilized in this regard.
@@ -1520,7 +1520,7 @@ change the overall cellular configuration.
 In order to esure that individual topological cellular processes can be resolved, we aim to provide
 a richer structure to the evolution function $\phi$.
 In particular, we will distinguish topological and non-topological evolution functions which either
-modfiy the topology of the cellular state or leave it intact, thus merely acting on the values of
+modify the topology of the cellular state or leave it intact, thus merely acting on the values of
 cells and the environment.
 In this way, we can combine non-topological and topological processes to obtain the complete
 dynamics $\phi$ of our system.
@@ -1532,7 +1532,7 @@ dynamics $\phi$ of our system.
     \begin{equation}
         \varphi = \prod\limits_i \Phi_i
     \end{equation}
-    as defined in Definition~\ref{definition:topological-cellular-proces}.
+    as defined in Definition~\ref{definition:topological-cellular-process}.
     We say that a topological evolution function permits a certain topological process if
     any $\Phi_i$ can be that process.
     This means that for every $i$, $\Phi_i$ is defined by one of the following criteria
@@ -1649,7 +1649,7 @@ We can now combine Definitions \ref{definition:non-topological-evolution-functio
 
 \begin{definition}[\acl{cabm}]
     Let $\CS(I,C)$ be the cellular space of the index set $I$ and cellular configuration space $C$
-    and let $\EV$ be a set called the enrivonmental state space.
+    and let $\EV$ be a set called the environmental state space.
     Furthermore let $(T,+)$ be an additive monoid and $U\subset T$.
     A \acl{cabm} is a tuple $(T,\CS(I,C)\times\EV,\phi)$ where the evolution function function
     $\phi:U\times\CS\times\EV\rightarrow\CS\times\EV$ can be decomposed via
@@ -1659,14 +1659,14 @@ We can now combine Definitions \ref{definition:non-topological-evolution-functio
         \label{eq:cabm-evolution-function}
     \end{equation}
     with $\sum_i t_i=t$.
-    Here $\psi$ is a non-topological evoluction function and $\varphi_i$ is a
+    Here $\psi$ is a non-topological evolution function and $\varphi_i$ is a
     topological evolution function with $\bar{\varphi}_i((I,M),e)=(\varphi(I,M),e)$.
     \label{definition:cabm}
 \end{definition}
 
 We can interpret the definition of $\phi$ as having the dynamics of $\psi$ which is repeatedly
 interrupted by topological evolution functions $\varphi_i$ which change the cellular topology which
-operate instantanous in time.
+operate instantaneous in time.
 This furthermore exemplifies that any dynamics leading up to the cellular process need to be
 incorporated within the non-topological evolution function $\psi$.
 Because $\phi$ is not purely made up of evolution functions $\psi_{t_i}$,
@@ -1691,14 +1691,15 @@ of topological evolution function any countable number of concatenations of evol
 allowed.
 
 \begin{itemize}
-    \item This definition treats the topological cellular processes as instantanous in time
+    \item This definition treats the topological cellular processes as instantaneous in time
     \item It furthermore shows that the dynamics of the processes should be accounted for in the
         dynamics defined by $\psi$
 \end{itemize}
 
 \begin{proposition}
     If the non-topological evolution function $\psi$ only depends on the (parental) relationships
-    between identifiers, the system is invariant under reordering of the $\Phi_{i_j}$ within every
+    between identifiers and topological cellular processes are activated by their respective
+    criteria, then the system is invariant under reordering of the $\Phi_{i_j}$ within every
     individual $\varphi_i$.
     \todo[inline]{define more precisely what is meant with "invariant": indices at end are
     different; graph structure will be the same}
@@ -1968,7 +1969,7 @@ adenine and increases storage capacity significantly.
 
 \subsection{Interpretation of the Temporal Identity Encoding}
 \begin{itemize}
-    \item Encoding changes when a cell is considered an individual entitiy $\iota$
+    \item Encoding changes when a cell is considered an individual entity $\iota$
     \item Divisions introduce discontinuities when only looking at a pure tree; but using the right
         encoding, we can possibly obtain something continuous or even smooth (mass-average position
         vs cellular envelope)
@@ -2093,7 +2094,7 @@ The two resulting cylinders will overlap exactly at the two bases closest to eac
 These overlaps should not be interpreted as two cells that partially share a spatial region but
 rather as a consequence of our model and encoding choice.
 But they are still relevant since they might surface in numerical results and imaging techniques.
-This motivates the approach to not merely treat them as an artifact but rather a common occurence
+This motivate the approach to not merely treat them as an artifact but rather a common occurence
 and part of our a practical reality that needs to be dealt with.
 
 \begin{figure}
@@ -2212,7 +2213,7 @@ The following example illustrates this point.
     continuous in $t$.
 \end{example}
 
-When a division event ocurrs at time $t_d$, the average position of the daughter cells will not be
+When a division event occurs at time $t_d$, the average position of the daughter cells will not be
 identical to its parent, which leads to a discontinuity in the graph $G$.
 This means that the relation
 \begin{equation}
@@ -2420,7 +2421,7 @@ We explicitly exclude other processes such as stochastic effects and spatial mov
     These considerations reduce the total number of possible rules to $2^5=32$.
 
     \begin{itemize}
-        \item Show for all Wolfram Rules that most of them can not be cell-based models
+        \item Show for all Wolfram Rules that most of them cannot be cell-based models
         \item Consider migration as an additional rule instead of just division and death
         \item Formal question: given an initial state $x_0$ and final state $x_1$ does a combination
             of cell-based rules exist which produces this state?
@@ -2547,12 +2548,12 @@ Is it possible to describe a single transition $L^n_{ij}\rightarrow L^{n+1}_{ij}
 of finitely many cellular division and death processes?
 In general: No.
 This is made clear by considering the example of Figure~\ref{fig:conway-non-abm-transition}.
-The transition shown can not be described by any combination of division and death under the
+The transition shown cannot be described by any combination of division and death under the
 consideration that cell-death can only act on currently alive cells.
 In principle, this conundrum could be lifted when performing the division and death process in
 different steps but this would change the outcome and behaviour of the system.
 Similarly, other \acp{ca} such as the Cellular Potts Model~\cite{Graner1992} or Rule
-184~\cite{Krug1988} can not
+184~\cite{Krug1988} cannot
 directly be translated into an \ac{cabm}.
 This shows that even the fundamental choices in the design of \acp{cabm} already present interesting
 restrictions and \acp{ca} should in general not be treated as special cases of \acp{cabm} but as
@@ -2584,7 +2585,7 @@ distinct entities.
         \node at (1.5+5,1.5) {1};
     \end{tikzpicture}
     \caption{
-        This transition in Conways Game of Life can not be described by any combination of
+        This transition in Conways Game of Life cannot be described by any combination of
         cell-division and death.
         The cell in the middle which is being created by rule 4 is new and must thus be created by
         the division mechanism in our \ac{abm}.
@@ -2684,7 +2685,7 @@ distinct entities.
 \begin{itemize}
     \item Consider the space $X$ which contains cell masks encoded by colors (maybe even
         3D possibly).
-    \item we want to asses if the constructed mapping $d:X\times X\rightarrow X, d(x,y)$
+    \item we want to assess if the constructed mapping $d:X\times X\rightarrow X, d(x,y)$
         is a metric.
         \begin{enumerate}
             \item Distance to itself is zero: $d(x,x)=0$ \checkmark
@@ -2699,7 +2700,7 @@ distinct entities.
                 Then this means that there is at least one pixel where the color value
                 for $x,y$ are not matching but they are matching both for $x,z$ and $y,z$.
                 This is equivalent to the fact that the associated color value of $z$ is
-                the parent cell of $x$ and $y$ and can not be true since the parent index
+                the parent cell of $x$ and $y$ and cannot be true since the parent index
                 was removed.
         \end{enumerate}
     \item Therefore this is a true metric considering the restructions to $p(t)$ above.
@@ -2845,7 +2846,7 @@ describes the rate of change of the volume of a single cell.
 This growth term is coupled to the presence of intracellular concentrations
 $\textbf{v}:I\rightarrow\R^n$.
 Intracellular processes are expressed in equation~\eqref{eq:intracellular-reactions} via
-$\textbf{h}_i(\textbf{v}_c, V_c)$ which also encompasses any growth-related changes.
+$\textbf{h}_i(\textbf{v}_c, V_c)$ which also encompassess any growth-related changes.
 We also model the dynamics of extracellular concentrations
 (equation~\eqref{eq:extracellular-reactions})
 $\textbf{w}:I\times\mathcal{D}\rightarrow\R^m$ which are distributed over the domain
@@ -3041,7 +3042,7 @@ In addition we again assume fast exchange and obtain the equations
 %
 %
 \subsubsection{Case 4: Something Else}
-Although the equations governing the \ac{abm} can not be derived directly from a higher
+Although the equations governing the \ac{abm} cannot be derived directly from a higher
 conceptual viewpoint, we are still able to motivate them and explain their individual components.
 To this end, we consider the total energy stored in the system to be constant.
 It is made up of the environment's energy and the energy stored within the cells, either
@@ -3107,7 +3108,7 @@ extracellular nutrients $R_e$ leads to
     \label{eq:supplement-abm-derivation-reactions-fin-2}
 \end{alignat}
 For the diffusive term $D\Delta R_e$, we assume Neumann boundary conditions such that no
-extracellular nutrients $R_e$ are lost or gained via this process.
+extracellular nutrients $R_e$ are lost or gai.e., via this process.
 \begin{equation}
     \int\limits_D \Delta R_e(x) \text{dVol} = \int\limits_{\partial D} \nabla
     R_e(x)\text{d\textbf{A}}= 0
@@ -3140,7 +3141,7 @@ depleted and the conversion factor which turns nutrients into cellular volume re
 \pagebreak
 \subsubsection{Case 5: Pool Model Considerations}
 \label{sec:supplement-abm-derivation}
-The equations governing the dynamics of the \ac{abm} can not be directly derived from
+The equations governing the dynamics of the \ac{abm} cannot be directly derived from
 higher principles but can still aim to motivate them as best as possible.
 Our model consists of individual cells with volume $V_c$ and extracellular nutrients
 $R_e(x)$ which are spatially distributed.
