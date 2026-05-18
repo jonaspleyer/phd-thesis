@@ -23,8 +23,8 @@
     \node[above=2pt] at (1.25, 0) {$\psi_{t_1}$};
     \node[above=2pt] at (5, 0) {$\psi_{t_2}$};
     \node[above=2pt] at (8.75, 0) {$\psi_{t_3}$};
-    \node[above=5pt, font=\large\bfseries] at (2.5, 0) {$\tilde{\varphi}_1$};
-    \node[above=5pt, font=\large\bfseries] at (7.5, 0) {$\tilde{\varphi}_2$};
+    \node[above=5pt, font=\large\bfseries] at (2.5, 0) {$\bar{\varphi}_1$};
+    \node[above=5pt, font=\large\bfseries] at (7.5, 0) {$\bar{\varphi}_2$};
 
     % Macro for mesh with fixed geometry but evolving intensity
     % #1: intensity base (e.g., 2, 15, 35)
@@ -119,7 +119,7 @@
         \node[above=0.8cm] at (0,0) {$\phi_t(x_0)$};
     \end{scope}
 
-    \node[below=10pt] at (5,0) {\footnotesize $\phi_t = \psi_{t_3} \circ \tilde{\varphi}_2 \circ \psi_{t_2} \circ \tilde{\varphi}_1 \circ \psi_{t_1}$};
+    \node[below=10pt] at (5,0) {\footnotesize $\phi_t = \psi_{t_3} \circ \bar{\varphi}_2 \circ \psi_{t_2} \circ \bar{\varphi}_1 \circ \psi_{t_1}$};
 
 \end{tikzpicture}
 \end{document}
