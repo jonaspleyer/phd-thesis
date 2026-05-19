@@ -1523,8 +1523,10 @@ restrictions on its dynamics that we have motivated throughout the preceding sec
     \end{equation}
     where $U\subset T$ and $\phi$ satisfies
     \begin{align}
-        \phi(0,x) &= x\\
+        \phi(0,x) &= x
+        \label{eq:dynamical-system-evolution-function-1}\\
         \phi(t_2, \phi(t_1, x)) &= \phi(t_2+t_1,x).
+        \label{eq:dynamical-system-evolution-function-2}
     \end{align}
     \label{definition:dynamical-system-category-theory}
 \end{definition}
@@ -1742,6 +1744,7 @@ The following proposition deals with this question.
     Definition~\ref{definition:cabm} such that it is unique up to reorderings of individual
     topological cellular processes within a single topological evolution function $\bar{\varphi}_i$
     if assignment of identifiers is invariant under this reordering.
+    \label{proposition:cabm-time-evolution-is-unique}
 \end{proposition}
 
 \begin{proof}
