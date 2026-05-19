@@ -987,6 +987,7 @@ to and not their values.
     this state in varying order.
     Changing the order in which the $\Phi_j$ are applied to their corresponding cells $S_j$ can only
     lead to differences in assigned identifiers.
+    \label{proposition:changing-order-of-topological-cellular-processes}
 \end{proposition}
 
 \begin{proof}
@@ -1734,14 +1735,26 @@ function $\Phi_i$.
 The following proposition deals with this question.
 
 \begin{proposition}[The decomposition of $\phi$ is almost unique]
-    The decomposition of the evolution function $\phi$ in Definition~\ref{definition:cabm}
-    is unique up to reorderings of individual topological cellular processes within a single
-    topological evolution function $\bar{\varphi}_i$ if assignment of identifiers is invariant under
-    this reordering.
+    We can reduce the decomposition of the evolution function $\phi$ in
+    Definition~\ref{definition:cabm} such that it is unique up to reorderings of individual
+    topological cellular processes within a single topological evolution function $\bar{\varphi}_i$
+    if assignment of identifiers is invariant under this reordering.
+\end{proposition}
+
+\begin{proof}
     If any topological evolution function $\bar{\varphi}_i$ contains not a single topological
     cellular process, we can reduce $\phi$ by combining $\psi_{t_{i-1}}$ with $\psi_{t_i}$ via
     equation~\eqref{equation:non-topological-evolution-function-concatenation}.
-\end{proposition}
+    We can therefore assume without loss of generality that $\phi$ has been reduced this way and
+    such that every $\bar{\varphi}_i$ contains at least one topological cellular process.
+    This means that every topological evolution function $\bar{\varphi}_i$ modifies the cellular
+    state and this implies that all time intervals $t_i$ must be unique.
+    Otherwise two representations of $\phi$ will lead to differing values at identical time points.
+    We are therefore left with possible re-arrangements of the topological cellular processes
+    $\Phi_{i,j}$ within a single $\varphi_i$.
+    The rest follows directly from
+    Proposition~\ref{proposition:changing-order-of-topological-cellular-processes}.
+\end{proof}
 
 Another observation regarding Definition~\ref{definition:cabm} is that similarly to the Definition
 of topological evolution function any countable number of concatenations of evolution functions are
