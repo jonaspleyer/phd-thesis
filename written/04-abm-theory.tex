@@ -798,6 +798,7 @@ aim to provide a clear picture of the coming definitions.
     For any identifiers $\kappa\in K\subset\pi_1(M)$ of living cells, the successive application of
     the division operator $\Upsilon$ with possibly varying division functions $\gamma_\kappa$ can
     only lead to differences in the identifiers of the daughter cells.
+    \label{proposition:commute-cell-division-operators}
 \end{proposition}
 \begin{proof}
     This is a consequence of the preceding corollary and the fact that identifiers of mother cells
@@ -970,6 +971,41 @@ removal, fusion or insertion, we introduce an umbrella term for them.
     topological cellular process.
     \label{definition:topological-cellular-process}
 \end{definition}
+
+Similarly to Proposition~\ref{proposition:commute-cell-division-operators} which applies only to
+cell division, we can investigate if various topological cellular processes can be interchanged
+when applying them to the same cellular state $(I_p,M)$.
+We can also later see how various choices of how to construct cellular identifiers $\iota$ can
+impact this statement (see Examples \ref{example:unique-identifiers-1-global-counter} to
+\ref{example:unique-identifiers-3-spatial-subdivision}).
+This means that the order of these operations at most changes the way in which cells are referred
+to and not their values.
+
+\begin{proposition}
+    Let $(I_p,M)$ be a cellular state and $\Phi_j$ a collection of topological cellular processes
+    that are applied to cells $S_j\subset\pi_1(M)$ where $S_j\cap S_k=\emptyset$ for $j\neq k$ of
+    this state in varying order.
+    Changing the order in which the $\Phi_j$ are applied to their corresponding cells $S_j$ can only
+    lead to differences in assigned identifiers.
+\end{proposition}
+
+\begin{proof}
+    We first note that the condition $S_j\neq\cap S_k=\emptyset$ for $j\neq k$ ensures that each
+    cell is only utilized exactly once within a single topological cellular process $\Phi_j$.
+    It follows that the removal operator $\delta$ is commutable with every other operator
+    $\Upsilon,\Xi,\Gamma$ since $\delta$ does not change the total collection of identifiers
+    $I_p\cup\pi_1(M)$ within the system which is used by the other operators for assigning new
+    identifiers to the inserted cells.
+    We can restrict ourselves to two operators $\Phi_{j_0}$ and $\Phi_{j_1}$.
+    In any case, i.e. Division/Fusion/Insertion at least one cell will be removed or inserted into
+    the cellular state.
+    This means a change to the total collection of identifiers within the system.
+    With $\Phi_{j_0}(I_p,M)=(I_p^0,M^0)$, we can see that the new identifiers $I_p^0\cup\pi_1(M^0)$
+    has changed and was increased by at least one identifier.
+    The application of the next cellular topological process $\Phi_{j_1}$ will still be performed on
+    a set of cells $S_{j_1}$ which has been left untouched by $\Phi_{j_0}$ but might produce
+    different identifiers compared to if the same operation was applied to $(I_p,M)$ itself.
+\end{proof}
 
 \todo[inline]{check text afterwards; make use of new "Topological cellular processes" term}
 
