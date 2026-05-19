@@ -1791,14 +1791,37 @@ systems.
 \begin{proof}
     We need to prove all requirements in
     Definition~\ref{definition:dynamical-system-category-theory}.
-    Firstly, $(T,+)$ is a monoid and $\phi:U\times X\rightarrow X$ where $X=\CS\times\EV$ and
-    therefore $\phi$ has the correct structure.
+    Firstly, $(T,+)$ is a monoid and $\phi:U\times X\rightarrow X$ where $X=\CS\times\EV$ with
+    $U\subset T$ and therefore $\phi$ has the correct structure.
+    We can utilize the result from proposition~\ref{proposition:cabm-time-evolution-is-unique} which
+    provides us with a unique representation of $\phi_t$.
     If $t_0\neq0$, equation~\eqref{equation:non-topological-evolution-function-concatenation-2}
     proves $\phi_0(x)=x$.
     Otherwise the topological evolution function $\bar{\varphi}_1$ is evaluated even before the
-    first non-topological evolution function $\psi_{t_1}$
-
-    \eqref{equation:non-topological-evolution-function-concatenation-2}
+    first non-trivial non-topological evolution function $\psi_{t_1}$ which will lead to a mismatch
+    for equation~\eqref{eq:dynamical-system-evolution-function-1}, i.e.
+    $\phi_0(x)=\bar{\varphi}_1(x)\neq x$.
+    Next, we aim to prove equation~\eqref{eq:dynamical-system-evolution-function-2}.
+    Let $s_1,s_2\in U$.
+    By definition~\ref{definition:cabm}, we can decompose $\phi_{s_{1/2}}$ into combinations of
+    non-topological and topological evolution functions
+    \begin{align}
+        \phi_{s_1} = \psi_{t_{1,0}}\circ\prod\limits_{i_1}\bar{\varphi}_{i_1}\circ\psi_{t_{i_1}}\\
+        \phi_{s_2} = \psi_{t_{2,0}}\circ\prod\limits_{i_2}\bar{\varphi}_{i_2}\circ\psi_{t_{i_2}}
+    \end{align}
+    which can then be concatenated
+    \begin{equation}
+        \phi_{s_1}\circ\phi_{s_2} =
+            \psi_{t_{1,0}}\circ\prod\limits_{i_1}\bar{\varphi}_{i_1}\circ\psi_{t_{i_1}}
+            \circ
+            \psi_{t_{2,0}}\circ\prod\limits_{i_2}\bar{\varphi}_{i_2}\circ\psi_{t_{i_2}}
+    \end{equation}
+    by joining the last non-topological evolution function of
+    $\phi_{s_1}$ and $\psi_{t_{2,0}}$ via
+    equation~\eqref{equation:non-topological-evolution-function-concatenation-1}.
+    The resulting function is a decomposition of $\phi_{s_1}\circ\phi_{s_2}$ and the decomposed time
+    values sum up to $s_1+s_2$.
+    It is therefore the unique decomposition of $\phi_{s_1+s_2}$.
 \end{proof}
 
 
