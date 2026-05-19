@@ -9,7 +9,7 @@
     node distance=1.2cm,
     every node/.style={font=\small},
     interaction/.style={decoration={snake, amplitude=.2mm, segment length=1.2mm}, decorate, thin, black},
-    cell/.style={circle, draw, fill=white, inner sep=0pt, font=\tiny},
+    cell/.style={circle, draw, thick, fill=white, inner sep=0pt, font=\tiny},
     snapshot/.style={draw, rounded corners, minimum height=1.6cm, minimum width=2.6cm}
 ]
 
@@ -406,7 +406,7 @@
 
     % Snapshot 2
     \begin{scope}[shift={(5,1.8)}]
-        \drawmesh{15}
+        \drawmesh{20}
         \node[cell, minimum size=1.1cm] at (-0.5,0.1) (c2_2) {$\iota_2$};
         \node[cell, minimum size=0.5cm] at (0.6,-0.2) (c2_3) {$\iota_3$};
         \draw[interaction] (c2_2) -- (c2_3);
@@ -415,7 +415,7 @@
 
     % Snapshot 3
     \begin{scope}[shift={(10,1.8)}]
-        \drawmesh{35}
+        \drawmesh{40}
         \node[cell, minimum size=0.6cm] at (-0.7,0.3) (c3_4) {$\iota_4$};
         \node[cell, minimum size=0.6cm] at (-0.3,-0.4) (c3_5) {$\iota_5$};
         \node[cell, minimum size=0.85cm] at (0.7,0.1) (c3_3) {$\iota_3$};
