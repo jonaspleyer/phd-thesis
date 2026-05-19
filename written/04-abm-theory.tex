@@ -1849,26 +1849,23 @@ systems.
         $\Phi_{i_j}$ within the $\varphi_i$
 \end{itemize}
 
-\begin{definition}
+\begin{definition}[Lifetime of a cell]
     Given an initial state $x_0\in\CS\times\EV$, we say that a cell $c$ with identifier $\iota$ is
     \textbf{alive} at point $t$ if $c_\iota\in\pi_2(\pi_1(\phi_t(x)))$ where $\pi_i$ is the
     projection onto the $i$th component.
-    \label{definition:cabm}
-\end{definition}
-
-\begin{definition}[Lifetime of a cell]
-    \label{definition:cellular-lifetime}
-    Given an identifier $\iota\in I$ to an initial state $x$ of an \ac{abm}, we define the
-    \textbf{Life-Span} of $\iota$ which is the set of all time-points for which the cell is alive
+    We define the \textbf{Life-Span} of $\iota$ which is the set of all time-points for which the
+    cell is alive
     \begin{equation}
         T_\iota=\{t\in T: c_\iota \text{ is alive}\}.
     \end{equation}
-    Let $\mu$ be a measure on $T$ with respect to some $\sigma$-algebra.
-    If the life-span is measurable, we define the \textbf{Lifetime} with respect to this measure via
+    Let $\mu$ be a measure on $T$ such that the life-span is measurable with the underlying
+    $\sigma$-algebra.
+    We define the \textbf{Lifetime} with respect to this measure via
     \begin{equation}
-        t_\iota:=\mu\left(T_\iota\right).
+        \tau(\iota):=\mu\left(T_\iota\right).
     \end{equation}
     In practial examples, $\mu$ will be given by the Lebesgue measure.
+    \label{definition:cellular-lifetime}
 \end{definition}
 
 \begin{proposition}
