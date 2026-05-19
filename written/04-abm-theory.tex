@@ -1812,16 +1812,18 @@ systems.
     which can then be concatenated
     \begin{equation}
         \phi_{s_1}\circ\phi_{s_2} =
-            \psi_{t_{1,0}}\circ\prod\limits_{i_1}\bar{\varphi}_{i_1}\circ\psi_{t_{i_1}}
+            \psi_{t_{1,0}}\circ\left(\prod\limits_{i_1}\bar{\varphi}_{i_1}\circ\psi_{t_{i_1}}\right)
             \circ
-            \psi_{t_{2,0}}\circ\prod\limits_{i_2}\bar{\varphi}_{i_2}\circ\psi_{t_{i_2}}
+            \psi_{t_{2,0}}\circ\left(\prod\limits_{i_2}\bar{\varphi}_{i_2}\circ\psi_{t_{i_2}}\right)
     \end{equation}
-    by joining the last non-topological evolution function of
-    $\phi_{s_1}$ and $\psi_{t_{2,0}}$ via
+    and further reduced by joining the last non-topological evolution function of $\phi_{s_1}$ with
+    $\psi_{t_{2,0}}$ via
     equation~\eqref{equation:non-topological-evolution-function-concatenation-1}.
-    The resulting function is a decomposition of $\phi_{s_1}\circ\phi_{s_2}$ and the decomposed time
-    values sum up to $s_1+s_2$.
-    It is therefore the unique decomposition of $\phi_{s_1+s_2}$.
+    If these times are all zero, we have to reduce it further by combining the last and first
+    topological evolution functions of $\phi_{s_1}$ and $\phi_{s_2}$ respectively.
+    The resulting function evolution function is a unique decomposition of
+    $\phi_{s_1}\circ\phi_{s_2}$ and the decomposed time values sum up to $s_1+s_2$ and therefore
+    $\phi_{s_1}\circ\phi_{s_2}=\phi_{s_1+s_2}$.
 \end{proof}
 
 
