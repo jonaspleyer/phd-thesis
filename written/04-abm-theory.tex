@@ -1763,7 +1763,41 @@ The following proposition deals with this question.
     Proposition~\ref{proposition:changing-order-of-topological-cellular-processes}.
 \end{proof}
 
-\begin{proposition}
+With this proposition, we have proven the soundness of Definition~\ref{definition:cabm}.
+Another question which we hinted at earlier is if \acp{cabm} can be understood as dynamical systems.
+In general, the value of $\phi_t$ at any time point needs to be uniquely determined within any
+dynamical system (compare Definition~\ref{definition:dynamical-system-category-theory}).
+While this evolution function can in general be non-continuous even when $t\in\R$, the decomposition
+provided in equation~\eqref{eq:cabm-evolution-function} leaves some ambiguity about how to interpret
+the role of the interleaving topological evolution functions $\bar{\varphi}_i$.
+One hand they could be considered an extension to their preceding dynamics $\psi_{t_{i-1}}$ or on
+the other hand, the initial operation for the following dynamics $\psi_{t_i}$.
+The following proposition shows that either choice will let us interpret \acp{cabm} as dynamical
+systems.
+
+\begin{proposition}[\acp{cabm} are Dynamical Systems]
+    \acp{cabm} are dynamical systems if the topological evolution functions $\bar{\varphi}_i$ are
+    either assigned to the end of their preceding dynamics $\psi_{i-1}$ or to the beginning of their
+    following dynamics $\psi_i$.
+    The former is only possible if $t_0\neq0$.
+    \label{proposition:cabm-are-dynamical-systems}
+\end{proposition}
+
+\begin{proof}
+    We need to prove all requirements in
+    Definition~\ref{definition:dynamical-system-category-theory}.
+    Firstly, $(T,+)$ is a monoid and $\phi:U\times X\rightarrow X$ where $X=\CS\times\EV$ and
+    therefore $\phi$ has the correct structure.
+    If $t_0\neq0$, equation~\eqref{equation:non-topological-evolution-function-concatenation-2}
+    proves $\phi_0(x)=x$.
+    Otherwise the topological evolution function $\bar{\varphi}_1$ is evaluated even before the
+    first non-topological evolution function $\psi_{t_1}$
+
+    \eqref{equation:non-topological-evolution-function-concatenation-2}
+\end{proof}
+
+
+\begin{proposition}[Invariance of Dynamics]
     If the non-topological evolution function $\psi$ only depends on the (parental) relationships
     between identifiers and topological cellular processes are activated by their respective
     criteria, then the system is invariant under reordering of the $\Phi_{i_j}$ within every
