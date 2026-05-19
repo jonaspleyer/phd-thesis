@@ -794,34 +794,33 @@ So far, we have only applied the division function $\gamma$ to a single cell of 
 In order to apply multiple division operators successively, we first state two observations that
 aim to provide a clear picture of the coming definitions.
 
-\todo[inline]{remove or rework this lemma. we probably need to extend it to include all topological
-cellular processes. also it is probably incomplete}
-\begin{lemma}
+\begin{proposition}
     For any identifiers $\kappa\in K\subset\pi_1(M)$ of living cells, the successive application of
     the division operator $\Upsilon$ with possibly varying division functions $\gamma_\kappa$ can
     only lead to differences in the identifiers of the daughter cells.
-\end{lemma}
+\end{proposition}
 \begin{proof}
     This is a consequence of the preceding corollary and the fact that identifiers of mother cells
     either get removed or persist.
-    Since the identifiers of mother cells $\kappa\in K$ will be removed, the resulting sets of
-    previously assigned identifiers $J_p$ will be identical.
-    In the case where two orders of divisions $\kappa_{i_l},\kappa_{j_l}$ also lead to the same set
-    of new identifiers
+    It is enough to investigate two successive operations of the division operator $\Upsilon$ to a
+    cellular state $(I_p,M)\in\CS$
     \begin{align}
-        \begin{split}
-            (J_p,L_i) &= \Upsilon(\gamma_{\kappa_{i_0}},\kappa_{i_0},
-            \Upsilon(\gamma_{\kappa_{i_1}},k_i,\dots))\\
-            (J_p,L_j) &= \Upsilon(\gamma_{\kappa_{j_0}},\kappa_{j_0},
-            \Upsilon(\gamma_{\kappa_{j_1}},k_j,\dots))\\
-            L_i &= L_j
-            \label{eq:theory-reorder-division-operators}
-        \end{split}
+        (J_{p,0},N_0) &= \Upsilon(\gamma_0, \kappa_0, \Upsilon(\gamma_1, \kappa_1, S))
+        \label{eq:division-commutate-identifier-change-1}\\
+        (J_{p,1},N_1) &= \Upsilon(\gamma_1, \kappa_1, \Upsilon(\gamma_0, \kappa_0, S)).
+        \label{eq:division-commutate-identifier-change-2}
     \end{align}
-    they can be mapped onto each other via an isomorphism between two sets of identical cardinality.
-    However Definition~\ref{definition:cell-division-single} does not generally require that the
-    reordering property of Equation~\ref{eq:theory-reorder-division-operators} holds true in all
-    cases.
+    Since the identifiers of mother cells $\kappa_i$ will be removed, the resulting sets of
+    previously assigned identifiers will be identical $J_{p,0}=J_{p,1}$.
+    Let us denote the daughter cells via $\gamma_0(c_{\kappa_0})=(c_{0,1},\dots,c_{0,n})$ and
+    $\gamma_1(c_{\kappa_1})=(c_{1,1},\dots,c_{1,m})$.
+    In both cases presented by equations~\eqref{eq:division-commutate-identifier-change-1} and
+    \eqref{eq:division-commutate-identifier-change-2}, the values of all daughter cells will be
+    inserted into $M,N$ respectively.
+    Since the new states $(J_{p,i},N_i)$ differ to the old one only by the possible removal of the
+    mother and insertions of the daughter cells, we can find a bijection
+    $\mu:N_0\backslash M\rightarrow N_1\backslash M$ which links these cells to each other.
+    For $\mu(\iota_0,c)=(\bar{\iota},\bar{c})$, we have $c=\bar{c}$ which proves the proposition.
 \end{proof}
 
 With these two statements, we have shown what we have already previously discussed.
