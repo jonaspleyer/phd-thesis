@@ -938,6 +938,7 @@ analogous function signatures if binary fusion is the only relevant case.
     A fusion criterion is a map $\bar{\xi}:\sqcup_{n\geq 2}C^n\rightarrow\{0,1\}$ which determines
     if the cells in its domain are fused by the fusion operator of
     Definition~\ref{definition:cell-fusion}.
+    \label{definition:cell-fusion-criterion}
 \end{definition}
 
 Finally, we also need to consider other forms of cellular insertion and removal as discussed
@@ -1821,8 +1822,9 @@ systems.
     equation~\eqref{equation:non-topological-evolution-function-concatenation-1}.
     If these times are all zero, we have to reduce it further by combining the last and first
     topological evolution functions of $\phi_{s_1}$ and $\phi_{s_2}$ respectively.
-    The resulting function evolution function is a unique decomposition of
-    $\phi_{s_1}\circ\phi_{s_2}$ and the decomposed time values sum up to $s_1+s_2$ and therefore
+    The resulting evolution function is a reduced decomposition of $\phi_{s_1}\circ\phi_{s_2}$ and
+    the decomposed time values sum up to $s_1+s_2$ and with
+    Proposition~\ref{proposition:cabm-time-evolution-is-unique}, we can infer that
     $\phi_{s_1}\circ\phi_{s_2}=\phi_{s_1+s_2}$.
 \end{proof}
 
