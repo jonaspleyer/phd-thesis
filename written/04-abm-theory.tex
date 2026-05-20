@@ -1828,6 +1828,45 @@ systems.
     $\phi_{s_1}\circ\phi_{s_2}=\phi_{s_1+s_2}$.
 \end{proof}
 
+Reordering the individual topological cellular processes $\Phi_{i,j}$ within a single topological
+evolution function $\varphi_i$ can lead to differences in identifiers as
+Theorem~\ref{proposition:changing-order-of-topological-cellular-processes} has shown.
+However, we aim to lift this restriction in some part for \acp{cabm} where the topological cellular
+processes are activated by their corresponding criteria (see Definitions
+\ref{definition:cell-division-criterion}, \ref{definition:cell-removal-criterion},
+\ref{definition:cell-fusion-criterion}).
+This means that the topological cellular process is only activated by the value of the cells
+themselves and independent of its identifiers.
+However, various simulation techniques may utilize different schemes on how to apply these criteria.
+For example, PhysiCell~\cite{Ghaffarizadeh2018} employs $3$ distinct discrete time steps
+$\Delta t_k\in\R$ for different types of processes in order to efficiently simulate multi-scale
+phenomena.
+This means that the criterion for a particular topological process may be true for time points
+$t_{i-1}<t<t_i$ preceding to the point $t_i$ at which the corresponding topological cellular process
+is actually performed by the simulation framework.
+Let $c_\iota(t)$ be the value of the cell with identifier $\iota$ at every time point $t\in U$ and
+\begin{equation}
+    Q_\iota = \{t\in U:
+        \bar{\gamma}(c_\iota(t))
+        +\bar{\delta}(c_\iota(t))
+        +\bar{\xi}(c_\iota(t),\dots)>0
+    \}
+\end{equation}
+be the set of time points for which at least one criterion is valid.
+Here, $\bar{\gamma},\bar{\delta},\bar{\xi}$ are the various criteria for division, removal and
+fusion respectively and the omitted arguments of the fusion criterion suggest any distinct living
+cells $c_{\iota_i}\in M$.
+We can then express that requirement that the criterion determines the time point of evaluation of
+the topological process as a mapping
+\begin{equation}
+    \sigma:\mathcal{P}(U)\rightarrow U.
+\end{equation}
+In this way, the criteria determine the time point $\sigma(Q_\iota)$ for every cell $c_\iota$.
+
+In addition to the preceding idea, we also require that the dynamics $\psi_t$ do not explicitly
+depend on the identifiers of the cells themselves but rather only on the relations between
+identifiers, e.g. cell $\iota$ is mother to cell $\bar{\iota}$ or other forms of ancenstry.
+The following proposition formalizes these thoughts.
 
 \begin{proposition}[Invariance of Dynamics]
     If the non-topological evolution function $\psi$ only depends on the (parental) relationships
@@ -1846,12 +1885,6 @@ systems.
     conditions as the preceding proposition.
     \todo[inline]{make this mathematically sound}
 \end{corollary}
-
-\begin{itemize}
-    \item due to the properties of topological cellular processes, if only dependant on relation of
-        identifiers (i.e. parent-daughter); then dynamics are independent of ordering of
-        $\Phi_{i_j}$ within the $\varphi_i$
-\end{itemize}
 
 \begin{definition}[Lifetime of a cell]
     Given an initial state $x_0\in\CS\times\EV$, we say that a cell $c$ with identifier $\iota$ is
