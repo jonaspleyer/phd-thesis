@@ -1921,56 +1921,7 @@ The following proposition formalizes these thoughts.
 \end{proof}
 
 \subsection{Spatial Locality \& Decomposition}
-\subsection{Cell Competition Response to defective Hippo Pathway?}
-
-
-\begin{definition}[Dynamical System]
-    A dynamical system is a tuple $(T,M,\phi)$ where $T$ is a monoid (written additively) and
-    $\phi$ is a mapping
-    \begin{equation}
-        \phi : U\subset(T\times M) \rightarrow M
-    \end{equation}
-    with $\pi_2(U) = M$ where $\pi_2$ is the projection on the second coordinate and $\phi$
-    satisfies
-    \begin{align}
-        \phi(0,m) &= m\\
-        \phi(t_2, \phi(t_1, m)) &= \phi(t_2+t_1,m).
-    \end{align}
-\end{definition}
-
-We often write $\phi(t,m) = \phi_t(m)$.
-The dynamics of \acp{abm} are governed by agents and their interactions with each other and the
-environment.
-Thus we define our dynamical system to be of this shape.
-
-\begin{definition}
-    An \ac{abm} is a dynamical system which consists of a Cellular Space $\CS$ and an environment
-    $\EV$.
-    \begin{equation}
-        M = \CS\times\EV
-    \end{equation}
-    Given an initial state $x_0$, we say that a cell $c$ with index $\iota$ is alive at point $t$ if
-    $c_\iota\in\pi_1(\phi_t(x))$.
-\end{definition}
-
-It is of importance to consider the environment as an integral part of the
-dynamical system such that
-interactions of the agents with it can permanently alter its constitution.
-In this way, extracellular constituents can interact and change and even the overall spatial
-configuration of the environment could be subject to dynamics.
-Furthermore, we do not require that the monoid $T$ is a subset of the real numbers in order to allow
-for discrete dynamical systems.
-Furthermore, for simplicity we omit any Stochasticity from our system \todo{Can we fix this?}.
-Practical applications which implement numerical routines should rely on pseudo-random number
-generators which will produce deterministic results when given an initial seed.
-By treating this initial seed as part of the initial values of our system, we are able to describe
-pseudo-stochastic processes within a deterministic framework.
-
-\todo{Define our dynamical system more precisely. What does it mean to be an index?
-$\iota\in\phi_t$}
-
-\subsection{Spatial Locality}
-\label{section:spatial-decomposition}
+\label{section:spatial-locality-decomposition}
 We assume that the physical domain $D$ can be split into smaller subdomains
 $\bigcup_{i\in I}S_i=D$ which are pairwise disjoint.
 We will later require that any dynamics can be calculated by considering cellular agents inside a
@@ -2020,6 +1971,57 @@ domain.
 \begin{definition}[Decomposition]
 
 \end{definition}
+
+\subsection{Practical Strategies to construct unique Cellular Identifiers}
+
+\todo[inline]{Everything after that needs to be rewritten.}
+
+\begin{example}[Unique Identifier Constructions I - Global Counter]
+    \label{example:unique-identifiers-1-global-counter}
+    \begin{itemize}
+        \item one large counter; increase whenever new cells are added via division
+        \item only some practical problems when it comes to implementation (ensure that only one
+            variable is incremented; use atomics)
+        \item not local
+        \item keep manually track of cell lineage tree/forest
+    \end{itemize}
+\end{example}
+
+\begin{example}[Unique Identifier Constructions II - Division History]
+    \label{example:unique-identifiers-2-division-history}
+    \begin{itemize}
+        \item give initially placed cells unique identifiers simply by numbers $0\dots N_i$
+        \item construct daughter identifiers from mother and additional counter
+        \item one word $=\text{nth}$ daughter of previous mother
+        \item $(((7,0),1),1)$ 7th (initially) placed cell; then first daughter; then 2nd daughter;
+            then 2nd daughter
+        \item basically includes complete previous history
+        \item problem: newly inserted cells (not via division) need to rely on global counter
+        \item practical challenge: as more division events come into play, the size of the
+            identifier grows considerably; bad for memory in programs
+        \item parental relationship directly encoded
+        \item like giving each cell an individual name "Sven Jorikson" $\rightarrow$ "Erik Svenson
+            Jorikson" and "Veronica Svendottir Jorikson"
+    \end{itemize}
+\end{example}
+
+\begin{example}[Unique Identifier Constructions III - Spatial Subdivisions]
+    \label{example:unique-identifiers-3-spatial-subdivision}
+    \begin{itemize}
+        \item divide space into discrete entities: voxels
+            (is this always possible that easily?; in practice probably yes)
+        \item new cells are given the identifier of the voxel and a counter that runs per voxel and
+            is incremented whenever a new cell is added.
+            This includes division events.
+        \item fully local solution
+        \item also works well when new cells are inserted without cell division
+        \item no problem with growing word size
+        \item discretization of space needed
+        \item does not encode cell lineage
+    \end{itemize}
+\end{example}
+
+\subsection{Cell Competition Response to defective Hippo Pathway?}
 
 \section{Cellular Identity Revisited}
 \subsection{The Challenge of Imaging \& Cell Tracking}
@@ -2452,55 +2454,6 @@ weakness of the \ac{abm} approach as also discussed previously.
 When choosing a particular embedding and thus a particular notion of cellular identification, the
 implications of this choice on the interpretation of the represented biological model, should be
 considered beforehand.
-
-\subsection{Practical Strategies to construct unique Cellular Identifiers}
-
-\todo[inline]{Everything after that needs to be rewritten.}
-
-\begin{example}[Unique Identifier Constructions I - Global Counter]
-    \label{example:unique-identifiers-1-global-counter}
-    \begin{itemize}
-        \item one large counter; increase whenever new cells are added via division
-        \item only some practical problems when it comes to implementation (ensure that only one
-            variable is incremented; use atomics)
-        \item not local
-        \item keep manually track of cell lineage tree/forest
-    \end{itemize}
-\end{example}
-
-\begin{example}[Unique Identifier Constructions II - Division History]
-    \label{example:unique-identifiers-2-division-history}
-    \begin{itemize}
-        \item give initially placed cells unique identifiers simply by numbers $0\dots N_i$
-        \item construct daughter identifiers from mother and additional counter
-        \item one word $=\text{nth}$ daughter of previous mother
-        \item $(((7,0),1),1)$ 7th (initially) placed cell; then first daughter; then 2nd daughter;
-            then 2nd daughter
-        \item basically includes complete previous history
-        \item problem: newly inserted cells (not via division) need to rely on global counter
-        \item practical challenge: as more division events come into play, the size of the
-            identifier grows considerably; bad for memory in programs
-        \item parental relationship directly encoded
-        \item like giving each cell an individual name "Sven Jorikson" $\rightarrow$ "Erik Svenson
-            Jorikson" and "Veronica Svendottir Jorikson"
-    \end{itemize}
-\end{example}
-
-\begin{example}[Unique Identifier Constructions III - Spatial Subdivisions]
-    \label{example:unique-identifiers-3-spatial-subdivision}
-    \begin{itemize}
-        \item divide space into discrete entities: voxels
-            (is this always possible that easily?; in practice probably yes)
-        \item new cells are given the identifier of the voxel and a counter that runs per voxel and
-            is incremented whenever a new cell is added.
-            This includes division events.
-        \item fully local solution
-        \item also works well when new cells are inserted without cell division
-        \item no problem with growing word size
-        \item discretization of space needed
-        \item does not encode cell lineage
-    \end{itemize}
-\end{example}
 
 %---------------------------------------------------------------------------------------------------
 \section{Stochasticity}
