@@ -707,12 +707,12 @@ The final result is a division map of the form
 with two distinct interpretations that need to be taken into account when mapping one cellular
 state $(I_p,M)$ onto another.
 In order to apply the single-division function to a particular cell, we introduce an operator
-$\Upsilon$ which utilizes the division function $\gamma$ and applies it to a particular cell
+$\Gamma$ which utilizes the division function $\gamma$ and applies it to a particular cell
 $c_\iota$ defined by the identifier $\iota\in M$.
 
-The cell-specific functionality is encoded within $\gamma$ and thus $\Upsilon$ should solely
+The cell-specific functionality is encoded within $\gamma$ and thus $\Gamma$ should solely
 manage administrative tasks such as the creation and removal of unique new identifiers of the cells.
-Therefore, $\Upsilon$ can be defined abstractly without the particular knowledge of $\gamma$ and is
+Therefore, $\Gamma$ can be defined abstractly without the particular knowledge of $\gamma$ and is
 specific to the respective simulation framework rather than to the model itself.
 It will depend on the choice of identifiers $\iota\in I$ but the overall dynamics of the system
 must be invariant under the particular choice of utilized identifiers $I$.
@@ -747,12 +747,12 @@ able to utilize it by applying $\tilde{\gamma}$ within the respective simulation
     mode of division.
     This definition formalizes criteria under which the map
     \begin{equation}
-        \Upsilon:\{\gamma:C\rightarrow
+        \Gamma:\{\gamma:C\rightarrow
         \{0,1\}\times\sqcup_{n\geq 2}C^n\}\times I\times\CS\rightarrow\CS
     \end{equation}
     is called a \textbf{Division Operator}.
     We call its input $(I_p,M)\in\CS$ the initial state with $c_\iota\in M$ indicating the mother
-    cell and $(J_p,N)=\Upsilon(\gamma,\iota,(I_p,M))$ the final state.
+    cell and $(J_p,N)=\Gamma(\gamma,\iota,(I_p,M))$ the final state.
     \begin{enumerate}
         \item (Removal) Exactly one cell is removed $M\backslash N=\{c_\iota\}$ if
             the mother cell is replaced $\gamma(c_\iota)_0=0$ during the division.
@@ -773,7 +773,7 @@ able to utilize it by applying $\tilde{\gamma}$ within the respective simulation
         \item (Uniqueness) New cells have new identifiers:
             $\iota_{1+s},\dots,\iota_n\notin J_p\cup\pi_1(M)$.
     \end{enumerate}
-    In the case when $i\notin\pi_1(M)$, we require $\Upsilon(\gamma,i,(I_p,M))=(I_p,M)$.
+    In the case when $i\notin\pi_1(M)$, we require $\Gamma(\gamma,i,(I_p,M))=(I_p,M)$.
     \label{definition:cell-division-single}
 \end{definition}
 
@@ -796,19 +796,19 @@ aim to provide a clear picture of the coming definitions.
 
 \begin{proposition}
     For any identifiers $\kappa\in K\subset\pi_1(M)$ of living cells, the successive application of
-    the division operator $\Upsilon$ with possibly varying division functions $\gamma_\kappa$ can
+    the division operator $\Gamma$ with possibly varying division functions $\gamma_\kappa$ can
     only lead to differences in the identifiers of the daughter cells.
     \label{proposition:commute-cell-division-operators}
 \end{proposition}
 \begin{proof}
     This is a consequence of the preceding corollary and the fact that identifiers of mother cells
     either get removed or persist.
-    It is enough to investigate two successive operations of the division operator $\Upsilon$ to a
+    It is enough to investigate two successive operations of the division operator $\Gamma$ to a
     cellular state $(I_p,M)\in\CS$
     \begin{align}
-        (J_{p,0},N_0) &= \Upsilon(\gamma_0, \kappa_0, \Upsilon(\gamma_1, \kappa_1, S))
+        (J_{p,0},N_0) &= \Gamma(\gamma_0, \kappa_0, \Gamma(\gamma_1, \kappa_1, S))
         \label{eq:division-commutate-identifier-change-1}\\
-        (J_{p,1},N_1) &= \Upsilon(\gamma_1, \kappa_1, \Upsilon(\gamma_0, \kappa_0, S)).
+        (J_{p,1},N_1) &= \Gamma(\gamma_1, \kappa_1, \Gamma(\gamma_0, \kappa_0, S)).
         \label{eq:division-commutate-identifier-change-2}
     \end{align}
     Since the identifiers of mother cells $\kappa_i$ will be removed, the resulting sets of
@@ -953,8 +953,8 @@ rather external and therefore also not triggered by the biological constituents 
 Definition~\ref{definition:cell-insertion} formalizes these principles.
 
 \begin{definition}[Cell Insertion]
-    A mapping $\Gamma:\sqcup_{n\geq2}C^n\times\CS\rightarrow\CS$ is called a insertion function if
-    for its input and output $\Gamma((c^1,\dots,c^n),(I_p,M))=J_p,N$ the previously used
+    A mapping $\Upsilon:\sqcup_{n\geq2}C^n\times\CS\rightarrow\CS$ is called a insertion function if
+    for its input and output $\Upsilon((c^1,\dots,c^n),(I_p,M))=J_p,N$ the previously used
     identifiers match $I_p=J_p$ and
     \begin{equation}
         N = M\cup\{c_{\iota_1},\dots,c_{\iota_n}\}
@@ -995,7 +995,7 @@ to and not their values.
     We first note that the condition $S_j\neq\cap S_k=\emptyset$ for $j\neq k$ ensures that each
     cell is only utilized exactly once within a single topological cellular process $\Phi_j$.
     It follows that the removal operator $\delta$ is commutable with every other operator
-    $\Upsilon,\Xi,\Gamma$ since $\delta$ does not change the total collection of identifiers
+    $\Gamma,\Xi,\Upsilon$ since $\delta$ does not change the total collection of identifiers
     $I_p\cup\pi_1(M)$ within the system which is used by the other operators for assigning new
     identifiers to the inserted cells.
     We can restrict ourselves to two operators $\Phi_{j_0}$ and $\Phi_{j_1}$.
@@ -1073,7 +1073,7 @@ to \ref{example:unique-identifiers-3-spatial-subdivision}.
             \begin{algorithmic}[1]
                 \For{$c_\iota\in\CS$}
                 \If{$\bar{\gamma}(c_\iota)$}
-                \State $\CS \gets \Upsilon(\gamma,\iota,\CS)$
+                \State $\CS \gets \Gamma(\gamma,\iota,\CS)$
                 \Comment{Perform Division}
                 \ElsIf{$\bar{\delta}(c_\iota)$}
                 \State $\CS \gets \delta(\iota, \CS)$
@@ -1204,7 +1204,7 @@ Overall, the definition of this \ac{abm} shows how the previously established no
 construct \acp{abm}.
 In particular, we did not yet utilize an explicit representation of identifiers $\iota\in I$ but
 rather only utilized their parental relation to each other.
-Furthermore, we also did not specify the division function $\Upsilon$ acting on the cellular space
+Furthermore, we also did not specify the division function $\Gamma$ acting on the cellular space
 $\CS$.
 As we will see later, these properties can be attributed to the modeling framework rather than to
 the model itself and therefore need no explicit consideration when constructing the \ac{abm}.
@@ -1213,7 +1213,7 @@ the model itself and therefore need no explicit consideration when constructing 
 \label{section:cell-lineage}
 As cells continuously reproduce and die, their lineage can be traced back over multiple generations.
 We inspect the application of a single division operator
-(Definition~\ref{definition:cell-division-single}) $\Upsilon$ with dividing cell $c_\iota$ and
+(Definition~\ref{definition:cell-division-single}) $\Gamma$ with dividing cell $c_\iota$ and
 inserted cells $\{c_{\iota_1},\dots,c_{\iota_n}\}$.
 We can now use this connection, pointing from the mother cell $c_\iota$ to its daughters
 $c_{\iota_i}$ to construct the edges of our tree.
@@ -1229,7 +1229,7 @@ Consequently, one vertex within the tree/graph is defined by
 $(q,\iota)\in\{0,1\}\times I\cup\pi_1(M)$.
 The application of a removal operation (Definition~\ref{definition:cell-removal}) $\delta$ marks the
 respective identifier as removed $q=0$ and insertion
-(Definition~\ref{definition:cell-insertion}) $\Gamma$ inserts new vertices
+(Definition~\ref{definition:cell-insertion}) $\Upsilon$ inserts new vertices
 $(1,\iota_1),\dots,(1,\iota_n)$.
 
 We can see that without any cell fusion, the resulting structure is that of a tree, or more
@@ -1583,14 +1583,14 @@ dynamics $\phi$ of our system.
     This means that for every $i$, $\Phi_j$ is defined by one of the following criteria
     \begin{enumerate}
         \item (Division) There exists a division function $\gamma$ and identifier $\iota\in M$ such
-            that $\Phi_j((I_p,M)) = \Upsilon(\gamma,\iota,(I_p,M))$
+            that $\Phi_j((I_p,M)) = \Gamma(\gamma,\iota,(I_p,M))$
         \item (Removal) There exists an identifier $\iota\in M$ such that
             $\Phi_j((I_p,M))=\delta(\iota,(I_p,M))$
         \item (Fusion) There exists a fusion function $\xi$ and identifiers
             $\iota_1,\dots,\iota_n\in M$ such that
             $\Phi_j((I_p,M))=\Xi(\xi,(\iota_1,\dots,\iota_n),(I_p,M))$
         \item (Insertion) There exist $c^1,\dots,c^n$ such that
-            $\Phi((I_p,M))=\Gamma((c^1,\dots,c^n),(I_p,M))$
+            $\Phi((I_p,M))=\Upsilon((c^1,\dots,c^n),(I_p,M))$
     \end{enumerate}
     Let $J_i\subset\pi_1(M)$ be the set of identifiers associated with the topological cellular
     process $\Phi_j$ (dividing cell/removed cell/fusing cells/empty for insertion).
@@ -1610,7 +1610,7 @@ $\Phi_j$ within the same topological evolution function.
 
 In principle, the quantities such as division functions and identifiers will depend on the
 particular process $\Phi_j$ and therefore depend on $i$, i.e.
-$\Phi_j((I_p,M)=\Gamma(\gamma_i,\iota_i,(I_p,M))$.
+$\Phi_j((I_p,M)=\Upsilon(\gamma_i,\iota_i,(I_p,M))$.
 In practice, the division functions are almost always identical across the dynamics of the system,
 depending only on the cellular properties $c\in C$ and the identifiers are provided by criteria such
 as the division criterion (see Definition~\ref{definition:cell-division-criterion}).
@@ -1643,8 +1643,8 @@ the definition of our \ac{cabm}.
         \psi_0(x,e)&=(x,e)
         \label{equation:non-topological-evolution-function-concatenation-2}
     \end{align}
-    for every $t,s\in L(x)$ with $t+s\in L(x)$ with $L(x)=\{t\in T:(t,x)\in U\}$ and where we used
-    the notation $\psi(t,x,e)=\psi_t(x,e)$.
+    for every $t,s\in L(x,e)$ with $t+s\in L(x,e)$ with $L(x)=\{t\in T:(t,x,e)\in U\}$ and where we
+    used the notation $\psi(t,x,e)=\psi_t(x,e)$.
     \label{definition:non-topological-evolution-function}
 \end{definition}
 
