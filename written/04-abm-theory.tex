@@ -1687,6 +1687,8 @@ corollary.
 
 We can now combine Definitions \ref{definition:non-topological-evolution-function} and
 \ref{definition:topological-evolution-function} to define what a \ac{cabm} is.
+We will use the notation $\bigcomp_{j=1}^nf_j=f_n\circ\dots\circ f_1$ to denote the concatenation of
+maps $f_j$.
 
 \begin{definition}[\acl{cabm}]
     Let $\CS(I,C)$ be the cellular space of the index set $I$ and cellular configuration space $C$
@@ -1696,7 +1698,7 @@ We can now combine Definitions \ref{definition:non-topological-evolution-functio
     $\phi:U\rightarrow\CS\times\EV$ (with $U\subset T\times\CS\times\EV$) can be decomposed for
     every $(t,x,e)\in U$ via
     \begin{equation}
-        \phi_t(x,e) = \left(\psi_{t_0}\circ\prod\limits_i\bar{\varphi}_i\circ\psi_{t_i}\right)(x,e)
+        \phi_t(x,e) = \left(\bigcomp_{i=1}^n\psi_{t_i}\circ\bar{\varphi}_i\right) \circ \psi_{t_0}
         \label{eq:cabm-evolution-function}
     \end{equation}
     with $\sum_i t_i=t$.
@@ -1808,29 +1810,30 @@ systems.
     for equation~\eqref{eq:dynamical-system-evolution-function-1}, i.e.
     $\phi_0(x)=\bar{\varphi}_1(x)\neq x$.
     Next, we aim to prove equation~\eqref{eq:dynamical-system-evolution-function-2}.
-    Let $s_1,s_2\in U$.
+    Let $s_1,s_2\in L(x,e)$.
     By definition~\ref{definition:cabm}, we can decompose $\phi_{s_{1/2}}$ into combinations of
     non-topological and topological evolution functions
     \begin{align}
-        \phi_{s_1} = \psi_{t_{1,0}}\circ\prod\limits_{i_1}\bar{\varphi}_{i_1}\circ\psi_{t_{i_1}}\\
-        \phi_{s_2} = \psi_{t_{2,0}}\circ\prod\limits_{i_2}\bar{\varphi}_{i_2}\circ\psi_{t_{i_2}}
+        \phi_{s_1} = \left(\bigcomp\limits_{i=1}^{n_1}\psi_{t_{1,i}}\circ\bar{\varphi}_{1,i}\right)\circ\psi_{t_{1,0}}\\
+        \phi_{s_2} = \left(\bigcomp\limits_{j=1}^{n_2}\psi_{t_{2,j}}\circ\bar{\varphi}_{2,j}\right)\circ\psi_{t_{2,0}}
     \end{align}
-    which can then be concatenated
+    where the decomposition of $\phi_{s_2}$ depends on the final state $\phi_{s_1}(x)$.
+    These can now be concatenated
     \begin{equation}
-        \phi_{s_1}\circ\phi_{s_2} =
-            \psi_{t_{1,0}}\circ\left(\prod\limits_{i_1}\bar{\varphi}_{i_1}\circ\psi_{t_{i_1}}\right)
+        \phi_{s_2}\circ\phi_{s_1} =
+            \left(\bigcomp_{j=1}^{n_2}\psi_{t_{2,j}}\circ\bar{\varphi}_{2,j}\right)\circ\psi_{t_{2,0}}
             \circ
-            \psi_{t_{2,0}}\circ\left(\prod\limits_{i_2}\bar{\varphi}_{i_2}\circ\psi_{t_{i_2}}\right)
+            \left(\bigcomp_{i=1}^{n_1}\psi_{t_{1,i}}\circ\bar{\varphi}_{1,i}\right)\circ\psi_{t_{1,0}}\\
     \end{equation}
-    and further reduced by joining the last non-topological evolution function of $\phi_{s_1}$ with
-    $\psi_{t_{2,0}}$ via
+    and further reduced by joining the last non-topological evolution function $\psi_{t_{1,n_1}}$ of
+    $\phi_{s_1}$ with $\psi_{t_{2,0}}$ via
     equation~\eqref{equation:non-topological-evolution-function-concatenation-1}.
-    If these times are all zero, we have to reduce it further by combining the last and first
+    If the times are all zero, we have to reduce it further by combining the last and first
     topological evolution functions of $\phi_{s_1}$ and $\phi_{s_2}$ respectively.
-    The resulting evolution function is a reduced decomposition of $\phi_{s_1}\circ\phi_{s_2}$ and
-    the decomposed time values sum up to $s_1+s_2$ and with
+    The resulting evolution function is a reduced decomposition of $\phi_{s_2}\circ\phi_{s_1}$ and
+    the decomposed time values sum up to $s_2+s_1$ and with
     Proposition~\ref{proposition:cabm-time-evolution-is-unique}, we can infer that
-    $\phi_{s_1}\circ\phi_{s_2}=\phi_{s_1+s_2}$.
+    $\phi_{s_2}\circ\phi_{s_1}=\phi_{s_2+s_1}$.
 \end{proof}
 
 Reordering the individual topological cellular processes $\Phi_{i,j}$ within a single topological
