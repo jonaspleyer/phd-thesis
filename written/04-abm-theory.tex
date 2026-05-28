@@ -1695,17 +1695,18 @@ We can now combine Definitions \ref{definition:non-topological-evolution-functio
 \begin{definition}[\acl{cabm}]
     Let $\CS(I,C)$ be the cellular space of the index set $I$ and cellular configuration space $C$
     and let $\EV$ be a set called the environmental state space.
-    Furthermore let $(T,+,<)$ be a strictly partially ordered, additive monoid.
-    A \acl{cabm} is a tuple $(T,\CS(I,C)\times\EV,\phi)$ where the evolution function function
-    $\phi:U\rightarrow\CS\times\EV$ (with $U\subset T\times\CS\times\EV$) can be decomposed for
-    every $(t,x,e)\in U$ via
+    Furthermore let $(T,+,<)$ be a strictly totally ordered, additive monoid.
+    A \acl{cabm} is a tuple $(T,\CS(I,C)\times\EV,\phi)$ with an evolution function
+    $\phi:U\rightarrow\CS\times\EV$ (with $U\subset T\times\CS\times\EV$) where
+    $\pi_{2,3}(U)=\CS\times\EV$ and non-topological evolution function $\psi$.
+    In addition, for every $(x,e)\in\CS\times\EV$ there exist a set of topological evolution
+    functions $\varphi_i$ and times $t_i$ such that we can decompose the evolution function for
+    every $t\in\pi_1(U)$ via
     \begin{equation}
         \phi_t(x,e) = \left(\bigcomp_{i=1}^n\psi_{t_i}\circ\bar{\varphi}_i\right) \circ \psi_{t_0}
         \label{eq:cabm-evolution-function}
     \end{equation}
-    with $\sum_i t_i=t$ and $t_i>0$ for $0<i\leq n$.
-    Here $\psi$ is a non-topological evolution function and $\varphi_i$ is a
-    topological evolution function with $\bar{\varphi}_i((I,M),e)=(\varphi(I,M),e)$.
+    with $\sum_i t_i=t$ and $t_i>0$ for $0<i<n$ and $\bar{\varphi}_i((I,M),e)=(\varphi(I,M),e)$.
     \label{definition:cabm}
 \end{definition}
 
