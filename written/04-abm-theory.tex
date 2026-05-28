@@ -1755,32 +1755,24 @@ function $\Phi_i$.
 The following proposition deals with this question.
 
 \begin{proposition}[The decomposition of $\phi$ is almost unique]
-    We can reduce the decomposition of the evolution function $\phi$ in
-    Definition~\ref{definition:cabm} such that it is unique up to reorderings of individual
-    topological cellular processes within a single topological evolution function $\bar{\varphi}_i$
-    if assignment of identifiers is invariant under this reordering.
+    Given a fixed state $(x,e)\in U$, the decomposition of $\phi$ in
+    equation~\eqref{eq:cabm-evolution-function} of Definition~\ref{definition:cabm} can be reduced
+    to a unique representation.
     \label{proposition:cabm-time-evolution-is-unique}
 \end{proposition}
 
 \begin{proof}
+    Let
+    \begin{equation}
+        \phi_t(x,e) =\left(\bigcomp_{i=1}^n\psi_{t_i}\circ\bar{\varphi}_i\right)\circ\psi_{t_0}
+    \end{equation}
+    be the decomposition of $\phi_t$.
+    By definition, the topological evolution functions $\varphi_i$ and times $t_i$ are unique for a
+    fixed state $(x,e)\in\CS\times\EV$.
     If any topological evolution function $\bar{\varphi}_i$ contains not a single topological
     cellular process, we can reduce $\phi$ by combining $\psi_{t_{i-1}}$ with $\psi_{t_i}$ via
     equation~\eqref{equation:non-topological-evolution-function-concatenation-1}.
-    Furthermore if any time $t_i=0$, we can simply omit this non-topological evolution function
-    $\psi_i$ due to equation~\eqref{equation:non-topological-evolution-function-concatenation-2}
-    and combine the preceding and following non-topological evolution functions
-    $\bar{\varphi}_{i-1}$ and $\bar{\varphi}_i$.
-    This is only possible for the intermediary non-topological evolution functions, not for the
-    initial and final ones.
-    We can therefore assume without loss of generality that $\phi$ has been reduced this way and
-    such that every $\bar{\varphi}_i$ contains at least one topological cellular process.
-    This means that every topological evolution function $\bar{\varphi}_i$ modifies the cellular
-    state and this implies that all time intervals $t_i$ must be unique.
-    Otherwise two representations of $\phi$ will lead to differing values at identical time points.
-    We are therefore left with possible re-arrangements of the topological cellular processes
-    $\Phi_{i,j}$ within a single $\varphi_i$.
-    The rest follows directly from
-    Proposition~\ref{proposition:changing-order-of-topological-cellular-processes}.
+    The cases where $t_0=0$ or $t_n=0$ still uniquely determine the decomposition.
 \end{proof}
 
 With this proposition, we have proven the soundness of Definition~\ref{definition:cabm}.
