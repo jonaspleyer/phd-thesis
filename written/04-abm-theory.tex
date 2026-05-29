@@ -1255,25 +1255,41 @@ $(1,\iota_1),\dots,(1,\iota_n)$.
 
 We can see that without any cell fusion, the resulting structure is that of a tree, or more
 precisely a forest, which is the collection of multiple disjoint trees.
-Including fusion events will result in a directed graph.
+Including fusion events will result in a directed graph and previously distinct trees can now be
+merged at certain vertices.
 The following theorem formalize this notion of cellular lineage.
 
 \begin{theorem}[Cell Lineage]
     Given an initial state $(I_p,\{c_\iota\})\in\CS$ of one cell, an arbitrary combination of
-    applications of division and removal operations creates a vertex-labeled tree where the vertices
-    are the identifiers of cells with labels $0,1$ indicating if they correspond to living cells,
-    and the edges are defined as described above.
-    When extended to general initial states $(I_p,M)$ or when including insertion operations, the
-    result will be a forest.
-    Including fusion events, requires further generalization to a vertex-labeled directed graph
-    $G=(V,E)$.
+    applications topological cellular processes $\varphi = \Phi_n\circ\dots\circ\Phi_1$ creates a
+    directed, totally-labeled graph where the vertices
+    $V=\{(q(\iota),\iota):\iota\in I_p\cup M\}$ are the identifiers of cells with labels
+    \begin{equation}
+        q(\iota) = \begin{cases}
+            (0,\iota) & \text{\normalfont if } \iota\in I_p\\
+            (1,\iota) & \text{\normalfont if } \iota\in M
+        \end{cases}
+    \end{equation}
+    which indicate if the corresponding cell is alive or has been removed.
+    The edges are defined by the topological cellular processes $\Phi_i$ and their genus
+    $p\in\{1,\dots,4\}$ (see Definition~\ref{definition:topological-cellular-process})
+    Let $J_i$ be the involved identifiers of the process and $K_j$ the newly inserted ones.
+    We require that $J_i\cap J_k=\emptyset$ for every $i\neq k$, meaning each cell is only invovled
+    in a single cellular process.
+    Then the labelled, directed edges created by one topological cellular process are defined by
+    $E_j=\{(\iota_1,\iota_2,p):\iota_1\in J_j,\iota_2\in K_j\}$.
+    The total set of edges is the union $E=\cup_j E_j$.
 
-    We call this graph the \textbf{Cell Lineage} and all paths from a single vertex upwards against
-    the direction of the graph to the root an \textbf{ancestry} or \textbf{lineage} of a single cell.
+    This structure will reduce to a forest (collection of disjoint trees) when permitting only
+    removal, division and insertion processes.
+    We call this graph the \textbf{Cell Lineage} and a path from a single vertex upwards against
+    the direction of the graph to the root an \textbf{ancestry} or \textbf{lineage} of a single
+    cell.
     \label{theorem:cell-lineage}
 \end{theorem}
 
 \begin{proof}
+    \todo[inline]{rework this proof with new definitions!}
     Let $G$ be a tree with vertices $V=\{\iota_i:i=0\dots m\}$, labels $l:V\rightarrow\{0,1\}$ and
     edges $E$.
     Applying a removal operation to $\iota$ will only result in a label change of a single vertex
@@ -1301,6 +1317,7 @@ The following theorem formalize this notion of cellular lineage.
 \end{proof}
 
 \begin{corollary}
+    \todo[inline]{pobably remove this}
     Furthermore the structure of Theorem~\ref{theorem:cell-lineage} can be endowed with an ordering
     by pointing from progenitor cells to their progenies (mother to daughter and constituent to
     fused) cell as defined by the cell division (see
