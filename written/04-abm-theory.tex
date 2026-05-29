@@ -1258,6 +1258,10 @@ precisely a forest, which is the collection of multiple disjoint trees.
 Including fusion events will result in a directed graph and previously distinct trees can now be
 merged at certain vertices.
 The following theorem formalize this notion of cellular lineage.
+We will make use of the notation $\bigcomp_{j=1}^nf_j=f_n\circ\dots\circ f_1$ to denote the
+concatenation of maps $f_j$ which can be easily extended to arbitrary subsets of $\mathbb{N}$.
+We will not discuss the implications of performing concatenations of infinite cardinality but rather
+simply require that they are well-defined.
 
 \begin{theorem}[Cell Lineage]
     Given an initial state $(I_p,\{c_\iota\})\in\CS$ of one cell, an arbitrary combination of
@@ -1624,8 +1628,6 @@ dynamics $\phi$ of our system.
     \label{definition:topological-evolution-function}
 \end{definition}
 
-Here, we used the notation $\bigcomp_{j=1}^nf_j=f_n\circ\dots\circ f_1$ to denote the concatenation
-of maps $f_j$ which can be easily extended to arbitrary subsets of $\mathbb{N}$.
 We will not discuss the implications of performing concatenations of infinite cardinality but rather
 simply require that they are well-defined.
 We note that Definition~\ref{definition:topological-evolution-function} ensures that all identifiers
