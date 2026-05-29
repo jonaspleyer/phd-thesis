@@ -969,9 +969,28 @@ removal, fusion or insertion, we introduce an umbrella term for them.
 
 \begin{definition}[Topological Cellular Processes]
     We call any division, removal, fusion or insertion operation a
-    topological cellular process.
+    topological cellular process $\Phi:\CS\rightarrow\CS$ if any of the following criteria hold:
+    \begin{enumerate}
+        \item (Division) There exists a division function $\gamma$ and identifier $\iota\in M$ such
+            that $\Phi((I_p,M)) = \Gamma(\gamma,\iota,(I_p,M))$ and $J=\{\iota\}$
+        \item (Removal) There exists an identifier $\iota\in M$ such that
+            $\Phi((I_p,M))=\delta(\iota,(I_p,M))$ and $J=\{\iota\}$
+        \item (Fusion) There exists a fusion function $\xi$ and identifiers
+            $\iota_1,\dots,\iota_n\in M$ such that
+            $\Phi((I_p,M))=\Xi(\xi,(\iota_1,\dots,\iota_n),(I_p,M))$ and $J=\{\iota_1,\dots,\iota_n\}$
+        \item (Insertion) There exist $c^1,\dots,c^n$ such that
+            $\Phi((I_p,M))=\Upsilon((c^1,\dots,c^n),(I_p,M))$ and $J=\emptyset$
+    \end{enumerate}
+    We call $J\subset\pi_1(M)$ the set of involved identifiers and the enumerating number the
+    \textbf{Genus} of the cellular topological process.
     \label{definition:topological-cellular-process}
 \end{definition}
+
+Note that these cases are disjoint, meaning no topological cellular process can be by any other
+process.
+This can be seen directly when comparing the cardinality of involved identifiers $J$ with newly
+produced identifiers $(J_p,N)=\Phi(I_p,M)$ given by $J_p\backslash I_p$ and
+$\pi_1(N)\backslash\pi_1(M)$.
 
 Similarly to Proposition~\ref{proposition:commute-cell-division-operators} which applies only to
 cell division, we can investigate if various topological cellular processes can be interchanged
