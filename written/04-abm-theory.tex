@@ -1853,26 +1853,116 @@ For example, PhysiCell~\cite{Ghaffarizadeh2018} employs $3$ distinct discrete ti
 $\Delta t_k\in\R$ for different types of processes in order to efficiently simulate multi-scale
 phenomena.
 This means that the criterion for a particular topological process may be true for time points
-$t_{i-1}<t<t_i$ preceding to the point $t_i$ at which the corresponding topological cellular process
-is actually performed by the simulation framework.
+preceding the point $t_i$ at which the corresponding topological cellular process is actually
+executed by the simulation framework.
+Typically, these criteria will be checked continuously and the respective topological cellular
+processes will only be executed if triggered by its respective criterion.
+However, other approaches can be envisioned where the time of the cellular process can be
+anticipated similarly to Dynamic Collision Detection~\cite{Mirtich2000,Wang2022} which anticipates
+collision of two objects by extrapolating their trajectories.
+
+\pagebreak
+
+\textbf{Define what it means that $\psi$ only depends on the cell lineage}
+\begin{enumerate}
+    \item Redefine cell lineage for \acp{cabm}
+    \item Use graph isomorphism to say that something is invariant under change of identifiers
+\end{enumerate}
+
+\begin{lemma}[Cell Lineage for \acp{cabm}]
+    A \ac{cabm} naturally produces a cell lineage graph as defined in
+    Theorem~\ref{theorem:cell-lineage}.
+    Given an initial state $x_0=((I_p,M),e)$, we write $G=G(x_0,\phi_t)=G(I_p,M,e,\phi_t)$ for
+    $\phi:U\rightarrow\CS\times\EV$ and $(t,(I_p,M),e)\in U$.
+\end{lemma}
+\begin{proof}
+    We can interpret every instance of $\psi_{t_i}$ as a mapping to new initial values with
+    unchanged identifiers.
+    As previously shown in Lemma~\ref{lemma:extend-cell-lineage}, this allows us to extend the cell
+    lineage of Theorem~\ref{theorem:cell-lineage} to such cases.
+\end{proof}
+
+\begin{definition}
+    Let $x_0=((I_p,M),e)$ be an initial state and $(t,(I_p,M),e)\in U$ with final state
+    $x_1=((J_p,N),f)=\phi_t(x_0)$.
+    Furthermore let $\sigma:G(I_p,M,e,\phi_t)\rightarrow G(I_p,M,e,\phi_t)$ be a graph isomorphism.
+    We can define $\tilde{\sigma}:\CS\times\EV\rightarrow\CS\times\EV$ by applying $\sigma$ only to
+    the identifiers $I_p\cup\pi_1(M)$ via
+    $((I_p,M),e)\mapsto((\sigma(I_p),\{c_{\sigma(\iota)}:c_\iota\in M\}),e)$.
+
+    We say that a non-topological evolution function $\psi:\tilde{U}\rightarrow\CS\times\EV$ is
+    independent of the choice of identifiers if for every graph isomorphism $\sigma$, the condition
+    \begin{equation}
+        \tilde{\sigma}(\psi_s(x_1)) = \psi_s(\tilde{\sigma}(x_1)
+    \end{equation}
+    holds for every $(s,(J_p,N),f)\in\tilde{U}$.
+\end{definition}
+
+\begin{definition}[Cell Insertion Criterion]
+    A cell insertion criterion is a map $\upsilon:U\rightarrow\{0,1\}$ which is invariant under
+    graph isomorphisms of the cell lineage.
+    \begin{equation}
+        \upsilon(\tilde{\sigma}(t,(I_p,M),e))=\upsilon(t,(I_p,M),e)
+    \end{equation}
+\end{definition}
+
+\begin{definition}[Criterion-induced Topological Cellular Processes]
+    Define how the topological evolution function $\varphi_i$ can be constructed from a time
+    interval $t_i$ and the criteria
+    \begin{enumerate}
+        \item Define set $Q$ and possibly mapping which produces $\tilde{Q}(t_i,x_{i-1})$ which
+            contains information about all criteria
+        \item postulate that there is another map $\mu(Q)=\varphi_i$
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}[Invariance of Dynamics under Cell-Lineage Isomorphisms]
+    postulate theorem: If we construct identifiers as above and if $\psi$ is invariant under graph
+    isomorphisms of the cell lineage then the overall dynamics are invariant under graph
+    isomorphisms of the cell lineage
+\end{proposition}
+\begin{proof}
+    Look at individual steps of decomposition of $\phi_t$.
+    Then we can simply write
+    \begin{equation}
+        x_1=(\varphi\circ\psi_t)(x_0).
+    \end{equation}
+    since we have a map $\tilde{Q}$ which can generate the top. ev. funct. $\varphi$ via
+    $\mu(\tilde{Q}(t))=\varphi_i$, we only need to show that
+    \begin{equation}
+        \tilde{Q}(t,\tilde{\sigma}(x_0)) = \tilde{\sigma}(\tilde{Q}(t,x_0))
+    \end{equation}
+    where $\sigma$ is the graph isomorphism of the cell lineage and $\tilde{\sigma}$ is then simply
+    applied only to the identifiers of cells and $I_p$.
+    But this is true since $\tilde{Q}$ only depends on the criteria.
+    \textbf{this last step needs to be analyzed more carefully}
+\end{proof}
+
+\pagebreak
 Let $c_\iota(t)$ be the value of the cell with identifier $\iota$ at every time point $t\in U$ and
 \begin{equation}
-    Q_\iota = \{t\in U:
-        \bar{\gamma}(c_\iota(t))
-        +\bar{\delta}(c_\iota(t))
-        +\bar{\xi}(c_\iota(t),\dots)>0
+    Q_\iota = \{t\in U:\text{any criterion is valid}
+        % \bar{\gamma}(c_\iota(t))
+        % +\bar{\delta}(c_\iota(t))
+        % +\bar{\xi}(\dots,c_\iota(t),\dots)>0
     \}
+    \label{eq:set-of-valid-criteria}
 \end{equation}
 be the set of time points for which at least one criterion is valid.
-Here, $\bar{\gamma},\bar{\delta},\bar{\xi}$ are the various criteria for division, removal and
-fusion respectively and the omitted arguments of the fusion criterion suggest any distinct living
-cells $c_{\iota_i}\in M$.
-We can then express that requirement that the criterion determines the time point of evaluation of
+% Here, $\bar{\gamma},\bar{\delta},\bar{\xi}$ are the various criteria for division, removal and
+% fusion respectively and the omitted arguments of the fusion criterion suggest any distinct living
+% cells $c_{\iota_i}\in M$.
+% If the underlying \ac{cabm} does not include any of the corresponding types of topological cellular
+% processes (division, fusion, removal), the respective summand should simply be omitted.
+If the underlying \ac{cabm} does not include a particular class of topological cellular processes,
+it's respective criterion should not be considered in $Q_\iota$.
+We can now express that requirement that the criterion determines the time point of evaluation of
 the topological process as a mapping
 \begin{equation}
-    \sigma:\mathcal{P}(U)\rightarrow U.
+    \sigma:\mathcal{P}(U)\rightarrow U
 \end{equation}
-In this way, the criteria determine the time point $\sigma(Q_\iota)$ for every cell $c_\iota$.
+where the value $\sigma(Q_\iota)$ is the time point at which the topological cellular process will
+be evaluated.
 
 In addition to the preceding idea, we also require that the dynamics $\psi_t$ do not explicitly
 depend on the identifiers of the cells themselves but rather only on the relations between
