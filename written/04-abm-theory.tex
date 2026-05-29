@@ -1264,8 +1264,8 @@ We will not discuss the implications of performing concatenations of infinite ca
 simply require that they are well-defined.
 
 \begin{theorem}[Cell Lineage]
-    Given an initial state $(I_p,\{c_\iota\})\in\CS$ of one cell, an arbitrary combination of
-    applications topological cellular processes $\varphi = \Phi_n\circ\dots\circ\Phi_1$ creates a
+    Given an initial state $(I_p,M)\in\CS$ of one cell, an arbitrary combination of
+    applications topological cellular processes $\varphi = \bigcomp_j\Phi_j$ creates a
     directed, totally-labeled graph where the vertices
     $V=\{(q(\iota),\iota):\iota\in I_p\cup M\}$ are the identifiers of cells with labels
     \begin{equation}
@@ -1275,91 +1275,67 @@ simply require that they are well-defined.
         \end{cases}
     \end{equation}
     which indicate if the corresponding cell is alive or has been removed.
-    The edges are defined by the topological cellular processes $\Phi_i$ and their genus
+    The edges are defined by the topological cellular processes $\Phi_j$ and their genus
     $p\in\{1,\dots,4\}$ (see Definition~\ref{definition:topological-cellular-process})
     Let $J_i$ be the involved identifiers of the process and $K_j$ the newly inserted ones.
-    We require that $J_i\cap J_k=\emptyset$ for every $i\neq k$, meaning each cell is only invovled
+    We require that $J_j\cap J_k=\emptyset$ for every $j\neq k$, meaning each cell is only invovled
     in a single cellular process.
     Then the labelled, directed edges created by one topological cellular process are defined by
     $E_j=\{(\iota_1,\iota_2,p):\iota_1\in J_j,\iota_2\in K_j\}$.
     The total set of edges is the union $E=\cup_j E_j$.
 
-    This structure will reduce to a forest (collection of disjoint trees) when permitting only
-    removal, division and insertion processes.
-    We call this graph the \textbf{Cell Lineage} and a path from a single vertex upwards against
-    the direction of the graph to the root an \textbf{ancestry} or \textbf{lineage} of a single
-    cell.
+    The graph $G(I_p,M,\varphi)=(V,E)$ will reduce to a forest (collection of disjoint trees) when
+    permitting only removal, division and insertion processes.
+    We $G$ the \textbf{Cell Lineage} and a path from a single vertex upwards against the direction
+    of the graph an \textbf{ancestry} or \textbf{lineage} of a single cell.
     \label{theorem:cell-lineage}
 \end{theorem}
 
 \begin{proof}
-    \todo[inline]{rework this proof with new definitions!}
-    Let $G$ be a tree with vertices $V=\{\iota_i:i=0\dots m\}$, labels $l:V\rightarrow\{0,1\}$ and
-    edges $E$.
-    Applying a removal operation to $\iota$ will only result in a label change of a single vertex
-    $l(\iota)=0$, leaving the remaining labels and tree invariant.
-    Meanwhile a division operation with mode $s$ will have one mother cell $\iota$ and $n-s$
-    daughter cells $c_{\iota_i}$ where $i\in\{s,\dots,n\}$ and $\iota_i\notin \pi_2(V)$.
-    Property (4) and (5) of Definition~\ref{definition:cell-division-single} enforce that the new
-    identifiers $\iota_{1+s},\dots,\iota_n$ have not been used and therefore represent new vertices.
-    The new edges will therefore connect a vertex $\iota$ with newly inserted vertices, thus only
-    extending the tree.
-    Furthermore, if the division mode is consuming, i.e. $s=0$, the new label function is defined by
-    $\bar{l}(\iota)=0$ and $\bar{l}=l$ everywhere else.
-    The generalization to a collection trees with disjoint identifiers is straightforward which
-    includes insertion operations.
+    The definition of $G(I_p,M,\varphi)=(V,E)$ already satisfies the requirements for a graph
+    structure.
+    We observe that the set $E_j$ for every topological cellular process has either at most one
+    starting vertex or exactly one final vertex, i.e. $\#J_j\leq1$ or $\#K_j=1$.
+    In the case where $\Phi_j$ contains no fusion functions, we have $\#J_j=1$ and the edges point
+    to only newly inserted identifiers.
+    This means that any existing vertex can not be pointed at and therefore the graph $G$ reduces to
+    a vertex-labelled and edge-labelled tree.
 
-    Utilizing the previous result, we can generalize this to include fusion operations.
-    Given an existing forest $G$ which was produced by an arbitrary initial state and a series of
-    division, removal and insertion operations, we can now apply a fusion operation fusing the
-    constituent cells $\iota_{1+s}\dots\iota_n$ into $\iota$ where $s=0,1$ is the fusion mode.
-    The new edges are determined as described above.
-    Furthermore, if $s=0$, together with property (4) of Definition~\ref{definition:cell-fusion},
-    the identifier $\iota$ of the fused cell will be added to the set of vertices.
-    The new labels will be adapted for all consumed constituent cells $\bar{l}(\iota_{1+s})=0$ and
-    kept identical $\bar{l}=l$ for the remaining identifiers.
+    The theorem holds in particular true for infinite concatenations of topological cellular
+    processes $\Phi_j$.
+    Any topological process $\Phi_j$ will only extend the graph and possibly change existing vertex
+    labels.
+    However once any vertex has label $q(\iota)=0$, it will remain untouched by any following
+    topological cellular process.
+    Therefore, the graph $G=(V,E)$ is well-defined even in this case.
 \end{proof}
-
-\begin{corollary}
-    \todo[inline]{pobably remove this}
-    Furthermore the structure of Theorem~\ref{theorem:cell-lineage} can be endowed with an ordering
-    by pointing from progenitor cells to their progenies (mother to daughter and constituent to
-    fused) cell as defined by the cell division (see
-    Definition~\ref{definition:cell-division-single}) and fusion operators (see
-    Definition~\ref{definition:cell-fusion}).
-    These connections are of distinct type (division/fusion), which results in a labeled polytree
-    (labeled directed tree) without fusion events or a labeled directed graph when including fusion
-    events.
-\end{corollary}
 
 The principle of cellular continuity states that every living cell was produced by other living
 cells.
 We can observe that this fact is compatible with our definitions via the following corollary.
 It states that any cellular lineage can be extended by applying more division and death functions to
 it.
-\begin{corollary}
-    Given a cellular space $\CS$ and an existing forest which was the result of division and death
-    functions, additional applications of division and death functions will only extend the forest.
-
-    Including fusion events, any existing graph can be extended by the aforementioned procedure to
-    yield a new graph.
-    \label{corollary:extend-cell-lineage}
-\end{corollary}
+\begin{lemma}
+    Given an existing Cell Lineage graph $G=(V,E)$ and an initial state $(I_p,M)$ such that
+    $I_p=\{\iota:(0,\iota)\in V\}$ and $\pi_1(M)=\{\iota:(1,\iota)\in V\}$, we can extend $G$ by
+    applying more topological cellular processes $\Phi_i$ to $(I_p,M)$.
+    We will still refer to this graph as a cell lineage.
+    \label{lemma:extend-cell-lineage}
+\end{lemma}
 
 \begin{proof}
     Theorem~\ref{theorem:cell-lineage} has shown that applications of division and death functions
-    to an arbitrary initial state $(I_p,M)$ lead to a forest.
-    We take the leaves of the existing tree as initial state $M$, apply
-    Theorem~\ref{theorem:cell-lineage} and extend the existing tree at the leaves.
-
-    Including fusion events, may require to connect two graphs at more than one identifier.
-    Furthermore it may also permit to combine more than two graphs, i.e. when one graph per two
-    constituent cells is present and one graph of the resulting fused cell.
-    Under the premise that the individual identifiers of each graph are distinct, these graphs are
-    only adjoined at their outer vertices, thus creating a new graph again.
+    to an arbitrary initial state $(I_p,M)$ will result in a graph structure $G=(V,E)$.
+    The graph is independent of the values of cells $c_\iota\in C$.
+    When treating the new initial state $(I_p,M)$ as the basis of a new graph, the repeated
+    application of topological cellular processes $\Phi_i$ leads to a second cell lineage
+    $\tilde{G}=(\tilde{V},\tilde{E})$.
+    Since any topological process $\Phi$ on $(I_p,M)$ can not involve previously removed identifiers
+    $(0,\iota)\in V$, we know that $\pi_2(V)\cap\pi_2(\tilde{V})=\pi_1(M)$.
+    Therefore, we can use $\tilde{V}$ to extend $V$.
 \end{proof}
 
-Corollary~\ref{corollary:extend-cell-lineage} not only shows that any existing cell lineage can be
+Lemma~\ref{lemma:extend-cell-lineage} not only shows that any existing cell lineage can be
 further developed by cellular processes but also that two cell lineages can amend one another if
 they are compatible which means that cells with same identifiers need to be located exclusively at
 the end of one graph and at the beginning of the other.
@@ -1375,11 +1351,13 @@ $k$-ary nature, meaning it always produces $k$ daughter cells.
 Corollary~\ref{corollary:k-ary-division} captures this reality.
 
 \begin{corollary}[$k$-ary and Binary Cell Division]
-    In the case where the division function is of $k$-ary nature, i.e.
-    $\eta:C\rightarrow C^k\subset\cup_{n\in\mathbb{N}}C^n$, theorem~\ref{theorem:cell-lineage}
-    retains a $k$-ary tree for division mode $s=0$ and a $k-1$-ary tree for division mode $s=1$.
+    Arbitrary applications of topological cellular processes $\Phi_j$ without fusion functions where
+    the division function $\gamma$ is of $k$-ary nature, i.e.
+    $\gamma:C\rightarrow C^k\subset\cup_{n\in\mathbb{N}}C^n$ lead to a $k$-ary tree for division
+    mode $s=0$ and a $k-1$-ary tree for division mode $s=1$ in the cell lineage of
+    theorem~\ref{theorem:cell-lineage}.
     The most common biological reality is the binary case with mode $s=0$, i.e. replacement of the
-    mother cell.
+    mother cell such as mitosis.
     \label{corollary:k-ary-division}
 \end{corollary}
 
