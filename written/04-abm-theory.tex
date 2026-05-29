@@ -981,13 +981,15 @@ removal, fusion or insertion, we introduce an umbrella term for them.
         \item (Insertion) There exist $c^1,\dots,c^n$ such that
             $\Phi((I_p,M))=\Upsilon((c^1,\dots,c^n),(I_p,M))$ and $J=\emptyset$
     \end{enumerate}
-    We call $J\subset\pi_1(M)$ the set of involved identifiers and the enumerating number the
-    \textbf{Genus} of the cellular topological process.
+    Let $(\tilde{I}_p,\tilde{M})=\Phi(I_p,M)$.
+    We call $J\subset\pi_1(M)$ the set of involved identifiers,
+    $K=\pi_1(\tilde{M})\backslash\pi_1(M)$ the set of inserted identifiers and the enumerating
+    number the \textbf{Genus} of the cellular topological process.
     \label{definition:topological-cellular-process}
 \end{definition}
 
-Note that these cases are disjoint, meaning no topological cellular process can be by any other
-process.
+Note that these cases are disjoint, meaning no topological cellular process can be masked by the
+operation of any other topological cellular process.
 This can be seen directly when comparing the cardinality of involved identifiers $J$ with newly
 produced identifiers $(J_p,N)=\Phi(I_p,M)$ given by $J_p\backslash I_p$ and
 $\pi_1(N)\backslash\pi_1(M)$.
@@ -1003,7 +1005,7 @@ to and not their values.
 
 \begin{proposition}
     Let $(I_p,M)$ be a cellular state and $\Phi_j$ a collection of topological cellular processes
-    that are applied to cells $S_j\subset\pi_1(M)$ where $S_j\cap S_k=\emptyset$ for $j\neq k$ of
+    that are applied to cells $J_j\subset\pi_1(M)$ where $J_j\cap J_k=\emptyset$ for $j\neq k$ of
     this state in varying order.
     Changing the order in which the $\Phi_j$ are applied to their corresponding cells $S_j$ can only
     lead to differences in assigned identifiers.
@@ -1011,7 +1013,7 @@ to and not their values.
 \end{proposition}
 
 \begin{proof}
-    We first note that the condition $S_j\neq\cap S_k=\emptyset$ for $j\neq k$ ensures that each
+    We first note that the condition $J_j\neq\cap J_k=\emptyset$ for $j\neq k$ ensures that each
     cell is only utilized exactly once within a single topological cellular process $\Phi_j$.
     It follows that the removal operator $\delta$ is commutable with every other operator
     $\Gamma,\Xi,\Upsilon$ since $\delta$ does not change the total collection of identifiers
