@@ -383,6 +383,9 @@ all dynamics are described as the collection of all cellular states.
     index $\iota$ is taken with respect to all living cells $\iota\in \pi_1(M)$.
 \end{definition}
 
+\todo[inline]{we could include a short discussion about bijections from one cellular space into
+another or even only in itself. This can be interpreted as relabelling of identifiers.}
+
 We have now defined a structure which can capture snapshots of a variable amount of unique cellular
 agents but are still missing any notion of dynamics.
 While processes such as movement of the cells or physical interactions can change the individual
@@ -687,6 +690,8 @@ values in the disjoint union $\sqcup_{n\geq 2}C^n$.
 The disjoint union ensures that the mapping takes values in exactly one of the $C^n$ and can be
 formalized, via $\sqcup_{n\geq 2}C^n = \cup_{n\geq 2}(n,C^n)$.
 
+\todo[inline]{make this criterion invariant under reorderings (use symmetry group)}
+
 As explained earlier, other processes such as budding will not remove the mother cell but instead
 modify it and additionally insert a new daughter cell at the division time point.
 In its most simple form this can also be captured by another map $C\rightarrow C\times C$ where
@@ -899,6 +904,9 @@ As previously discussed, fusion can be viewed as keeping one constituent cell pe
 aggregating additional cells or fusing cells into a cell defined by a new identity (see
 Figure~\ref{fig:theory-cell-fusion}).
 This can be formalized by the following definition.
+
+\todo[inline]{We will have to rework this. The base space being defined by $C^n$ will probably not
+work.}
 
 \begin{definition}[Cell Fusion]
     We call a map $\xi:\sqcup_{n\geq 2}C^n\rightarrow \{0,1\}\times C$ a fusion function with
@@ -1309,6 +1317,11 @@ simply require that they are well-defined.
     topological cellular process.
     Therefore, the graph $G=(V,E)$ is well-defined even in this case.
 \end{proof}
+
+\begin{itemize}
+    \item Whitney graph isomorphism theorem~\cite{Whitney1932}: All cell lineages are isomorphic to
+        their line graphs since the complete graph $K_3$ can not be created by cellular processes
+\end{itemize}
 
 The principle of cellular continuity states that every living cell was produced by other living
 cells.
