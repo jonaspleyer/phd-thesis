@@ -1852,6 +1852,32 @@ systems.
     $\phi_{s_2}\circ\phi_{s_1}=\phi_{s_2+s_1}$.
 \end{proof}
 
+We have previously shown that the application of multiple topological cellular processes leads to
+a structure identified as the cell lineage graph (see Theorem~\ref{theorem:cell-lineage}).
+This theorem can be readily extended to the dynamics of \acp{cabm} (see
+Definition~\ref{definition:cabm}).
+In the definition of $\phi$, the dynamics of the non-topological evolution function $\psi$ are
+interrupted at various time points by topological evolution functions which contain topological
+cellular processes.
+The following lemma makes use of previous results and shows that we can interpret the dynamics
+$\psi$ as a mapping to new initial values before continuing to apply topological cellular processes.
+We are therefore able to extend the definition of cell lineage for \acp{cabm}.
+
+\begin{lemma}[Cell Lineage for \acp{cabm}]
+    The dynamics of a \ac{cabm} for a particular initial state $x_0=((I_p,M),e)$ naturally produce a
+    cell lineage graph as defined in Theorem~\ref{theorem:cell-lineage}.
+    We write $G=G(x_0,\phi_t)=G(I_p,M,e,\phi_t)$ for
+    $\phi:U\rightarrow\CS\times\EV$ and $(t,(I_p,M),e)\in U$.
+    \label{lemma:cell-lineage-for-cabms}
+\end{lemma}
+\begin{proof}
+    We can interpret every instance of $\psi_{t_i}$ as a mapping to new initial values with
+    unchanged identifiers.
+    As previously shown in Lemma~\ref{lemma:extend-cell-lineage}, this allows us to extend the cell
+    lineage of Theorem~\ref{theorem:cell-lineage} directly to such cases.
+\end{proof}
+
+\subsubsection{Invariance of Dynamics with respect to the Choice of Identifiers}
 Reordering the individual topological cellular processes $\Phi_{i,j}$ within a single topological
 evolution function $\varphi_i$ can lead to differences in identifiers as
 Theorem~\ref{proposition:changing-order-of-topological-cellular-processes} has shown.
@@ -1882,18 +1908,6 @@ collision of two objects by extrapolating their trajectories.
     \item Use graph isomorphism to say that something is invariant under change of identifiers
 \end{enumerate}
 
-\begin{lemma}[Cell Lineage for \acp{cabm}]
-    A \ac{cabm} naturally produces a cell lineage graph as defined in
-    Theorem~\ref{theorem:cell-lineage}.
-    Given an initial state $x_0=((I_p,M),e)$, we write $G=G(x_0,\phi_t)=G(I_p,M,e,\phi_t)$ for
-    $\phi:U\rightarrow\CS\times\EV$ and $(t,(I_p,M),e)\in U$.
-\end{lemma}
-\begin{proof}
-    We can interpret every instance of $\psi_{t_i}$ as a mapping to new initial values with
-    unchanged identifiers.
-    As previously shown in Lemma~\ref{lemma:extend-cell-lineage}, this allows us to extend the cell
-    lineage of Theorem~\ref{theorem:cell-lineage} to such cases.
-\end{proof}
 
 \begin{definition}
     Let $x_0=((I_p,M),e)$ be an initial state and $(t,(I_p,M),e)\in U$ with final state
