@@ -1878,6 +1878,24 @@ We are therefore able to extend the definition of cell lineage for \acp{cabm}.
 \end{proof}
 
 \subsection{Dealing with Unique Identifiers - Construction \& Invariance}
+
+\begin{itemize}
+    \item So far we have talked abstractly about identifiers. Now we show how to construct them.
+    \item The provided examples are commonly used examples of how to construct identifiers
+    \item Each has strengths and a weaknesses in theory and implementation. We will discuss this.
+\end{itemize}
+
+\begin{itemize}
+    \item Identifiers take up a lot of work in theoretical foundations; but not really in
+        applications later on
+    \item One can ask if the results depend on the choice of identifiers.
+        We can provide a theorem that shows in which scenario the dynamics of $\phi$ do not depend
+        on this particular choice
+    \item We first define what it means to not depend on the choice of identifiers
+    \item Then we use criteria (division, removal, etc.) to prove a theorem that states that under
+        certain conditions, the dynamics are invariant of the chosen identifiers
+\end{itemize}
+
 \subsubsection{Practical Strategies to construct unique Cellular Identifiers}
 
 \begin{example}[Unique Identifier Constructions I - Global Counter]
