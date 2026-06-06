@@ -1958,8 +1958,29 @@ We are therefore able to extend the definition of cell lineage for \acp{cabm}.
 \end{example}
 
 \subsubsection{Invariance of Dynamics with respect to the Choice of Identifiers}
-Reordering the individual topological cellular processes $\Phi_{i,j}$ within a single topological
-evolution function $\varphi_i$ can lead to differences in identifiers as
+\begin{itemize}
+    \item Identifiers take up a lot of work in theoretical foundations; but not really in
+        applications later on
+    \item One can ask if the results depend on the choice of identifiers.
+        We can provide a theorem that shows in which scenario the dynamics of $\phi$ do not depend
+        on this particular choice
+    \item We first define what it means to not depend on the choice of identifiers
+    \item Then we use criteria (division, removal, etc.) to prove a theorem that states that under
+        certain conditions, the dynamics are invariant of the chosen identifiers
+\end{itemize}
+
+The unique identifiers $\iota\in I$ are essential for this work to distinguish individual biological
+cells from each other.
+On the most fundamental level, every naturally-ocurring biological system will be independent of the
+choice of identifiers.
+However, specifically engineered systems or phenomenological models which utilize parental
+relationships to other cells may still require information about these identifiers.
+As we have now seen there are many variants of how to assign unique identifiers to individual cells.
+This naturally poses the question under which conditions the resulting dynamics $\phi$ of the
+\ac{cabm} is independent with respect to the choice of identifiers.
+We will now systematically establish the necessary notation and prerequisites to finalize a theorem
+that deals with this question.
+
 Theorem~\ref{proposition:changing-order-of-topological-cellular-processes} has shown.
 However, we aim to lift this restriction in some part for \acp{cabm} where the topological cellular
 processes are activated by their corresponding criteria (see Definitions
