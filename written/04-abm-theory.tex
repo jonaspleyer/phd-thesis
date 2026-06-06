@@ -396,7 +396,7 @@ In general, it has to be noted that the explicit type of representation of the c
 $I$ is irrelevant as long as they adhere to the discussed principles.
 This leaves open various choices of how to define them which will be discussed later in
 Example~\ref{example:unique-identifiers-1-global-counter} to
-\ref{example:unique-identifiers-3-spatial-subdivision}.
+\ref{example:unique-identifiers-5-spatial-subdivision}.
 Using any choice of such identifiers would circumvent the described problems of the previous
 thought experiments and establish a direct link between cells in the model and
 the experiment without relying on complex comparison metrics.
@@ -1007,7 +1007,7 @@ cell division, we can investigate if various topological cellular processes can 
 when applying them to the same cellular state $(I_p,M)$.
 We can also later see how various choices of how to construct cellular identifiers $\iota$ can
 impact this statement (see Examples \ref{example:unique-identifiers-1-global-counter} to
-\ref{example:unique-identifiers-3-spatial-subdivision}).
+\ref{example:unique-identifiers-5-spatial-subdivision}).
 This means that the order of these operations at most changes the way in which cells are referred
 to and not their values.
 
@@ -1049,7 +1049,7 @@ simply \ac{abm} can be constructed using the previously introduced notions.
 For this example, we will not discuss the explicit construction of the unique identifiers
 $\iota\in I$ but simply assume that we can utilize them in the way defined.
 Their construction is discussed later in Examples~\ref{example:unique-identifiers-1-global-counter}
-to \ref{example:unique-identifiers-3-spatial-subdivision}.
+to \ref{example:unique-identifiers-5-spatial-subdivision}.
 
 \begin{example}[Cells with capacity]
     \normalfont
@@ -1899,7 +1899,6 @@ We are therefore able to extend the definition of cell lineage for \acp{cabm}.
 \subsubsection{Practical Strategies to construct unique Cellular Identifiers}
 
 \begin{example}[Unique Identifier Constructions I - Global Counter]
-    \label{example:unique-identifiers-1-global-counter}
     \begin{itemize}
         \item one large counter; increase whenever new cells are added via division
         \item only some practical problems when it comes to implementation (ensure that only one
@@ -1907,10 +1906,10 @@ We are therefore able to extend the definition of cell lineage for \acp{cabm}.
         \item not local
         \item keep manually track of cell lineage tree/forest
     \end{itemize}
+    \label{example:unique-identifiers-1-global-counter}
 \end{example}
 
 \begin{example}[Unique Identifier Constructions II - Division History]
-    \label{example:unique-identifiers-2-division-history}
     \begin{itemize}
         \item give initially placed cells unique identifiers simply by numbers $0\dots N_i$
         \item construct daughter identifiers from mother and additional counter
@@ -1928,7 +1927,6 @@ We are therefore able to extend the definition of cell lineage for \acp{cabm}.
 \end{example}
 
 \begin{example}[Unique Identifier Constructions III - Spatial Subdivisions]
-    \label{example:unique-identifiers-3-spatial-subdivision}
     \begin{itemize}
         \item divide space into discrete entities: voxels
             (is this always possible that easily?; in practice probably yes)
@@ -1956,6 +1954,7 @@ We are therefore able to extend the definition of cell lineage for \acp{cabm}.
             \url{https://en.wikipedia.org/wiki/Universally_unique_identifier}
         \item this is only approximate; but duplication does not ocurr in practice (near zero prob)
     \end{itemize}
+    \label{example:unique-identifiers-5-spatial-subdivision}
 \end{example}
 
 \subsubsection{Invariance of Dynamics with respect to the Choice of Identifiers}
