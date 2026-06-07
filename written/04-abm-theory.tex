@@ -1961,36 +1961,107 @@ discuss their advantages and shortcomings in this regard.
 \end{example}
 
 \subsubsection{Invariance of Dynamics with respect to the Choice of Identifiers}
-\begin{itemize}
-    \item Identifiers take up a lot of work in theoretical foundations; but not really in
-        applications later on
-    \item One can ask if the results depend on the choice of identifiers.
-        We can provide a theorem that shows in which scenario the dynamics of $\phi$ do not depend
-        on this particular choice
-    \item We first define what it means to not depend on the choice of identifiers
-    \item Then we use criteria (division, removal, etc.) to prove a theorem that states that under
-        certain conditions, the dynamics are invariant of the chosen identifiers
-\end{itemize}
-
-The unique identifiers $\iota\in I$ are essential for this work to distinguish individual biological
-cells from each other.
-On the most fundamental level, every naturally-ocurring biological system will be independent of the
-choice of identifiers.
-However, specifically engineered systems or phenomenological models which utilize parental
-relationships to other cells may still require information about these identifiers.
 As we have now seen there are many variants of how to assign unique identifiers to individual cells.
 This naturally poses the question under which conditions the resulting dynamics $\phi$ of the
 \ac{cabm} is independent with respect to the choice of identifiers.
 We will now systematically establish the necessary notation and prerequisites to finalize a theorem
 that deals with this question.
 
+Our strategy to tackle this question starts with the question of what it means for the dynamics
+given by the non-topological evolution function $\psi$ to be independent of the choice of
+identifiers.
+In the next step, we will investigate the role of the topological evolution functions $\varphi_i$.
+We have already observed that reordering the individual topological cellular processes $\Phi_{i,j}$
+within a single topological evolution function $\varphi_i$ can lead to differences in identifiers as
 Theorem~\ref{proposition:changing-order-of-topological-cellular-processes} has shown.
-However, we aim to lift this restriction in some part for \acp{cabm} where the topological cellular
-processes are activated by their corresponding criteria (see Definitions
+While the topological cellular processes do not depend on the identifiers themselves, we need to
+define at which time point their effect is evaluated.
+We have previously introduced corresponding criteria (see Definitions
 \ref{definition:cell-division-criterion}, \ref{definition:cell-removal-criterion},
-\ref{definition:cell-fusion-criterion}).
-This means that the topological cellular process is only activated by the value of the cells
-themselves and independent of its identifiers.
+\ref{definition:cell-fusion-criterion}) which will now be used to indicate when their respective
+topological cellular process takes effect.
+The result is that the topological cellular process are only activated by the value of the cells
+themselves.
+We will then combine these considerations to finally show that the overall dynamics of $\phi$ are
+independent of the choice of identifiers
+
+\todo[inline]{possibly adjust this notation later}
+For the remainder of this section, we will utilize a shared notation in order to avoid unnecessary
+duplication.
+Let $(T,\CS(I,C),\EV,\phi)$ be a \ac{cabm} with an initial state $x_0=((I_p,M),e)$ where
+$(t,(I_p,M),e)\in U$ and with final state $x=((J_p,N),f)=\phi_t(x_0)$.
+
+For any bijection $\sigma:\tilde{I}\subset I\rightarrow\tilde{J}\subset J$, we introduce a
+short-hand notation for applying $\sigma$ only to the identifiers
+$\iota\in\tilde{I}=I_p\cup\pi_1(M)$.
+This action of $\sigma$ is given by
+\begin{align}
+    \sigma\cdot ((I_p,M),e) &= (\sigma\cdot(I_p,M),e)\\
+    \sigma\cdot (I_p,M) &= (\sigma(I_p),\sigma\cdot M)\\
+    \sigma\cdot M &= \{(\sigma(\iota),c):(\iota,c)\in M\}
+\end{align}
+and yields another valid cellular state in $\CS(J,C)$.
+
+Furthermore we will write $\psi_I:U_I\rightarrow\CS(I,C)\times\EV$ for a family of non-topological
+evolution functions where $U_I\subset T\times\CS(I,C)\times\EV$ and $U_J=\sigma\cdot U_I$.
+Let $x=((I_p,M),e)$ be a state with $(s,(I_p,M),e)\in U_I$.
+We will often write $(s,x)=(s,(I_p,M),e)$ in slight abuse of notation.
+
+\begin{definition}
+    We say that a family of non-topological evolution functions is equivariant with respect to the
+    choice of identifiers if for every bijection $\sigma:\tilde{I}=I_p\cup\pi_1(M)\subset
+    I\rightarrow\tilde{J}\subset J$, the relation
+    \begin{equation}
+        \sigma\cdot(\psi_{I,s}(x)) = \psi_{J,s}(\sigma\cdot x)
+        \label{eq:dynamics-inependent-of-choice-of-identifiers}
+    \end{equation}
+    holds for every $(s,x)\in U_I$.
+    \label{definition:equivariant-non-topological-evolution-function}
+\end{definition}
+
+Note that Definition~\ref{definition:equivariant-non-topological-evolution-function} in particular
+requires that $\psi_I$ is fixed while $\sigma$ can be chosen arbitrarily.
+This means that in the case where $\tilde{I},\tilde{J}\subset I$, that
+equation~\eqref{eq:dynamics-inependent-of-choice-of-identifiers} which can be rewritten as
+\begin{equation}
+    \psi_{I,s}(x) = \sigma^{-1}\cdot\psi_{I,s}(\sigma\cdot x)
+\end{equation}
+has to be true for all $\sigma$.
+
+Furthermore, the definition does also not require that there exists a bijection between $I$ and $J$.
+It merely requires a bijection between the utilized set of existing identifiers $\tilde{I}$ and
+$\tilde{J}$.
+This may be necessary in situations where one index sets such as $\Z$ (see
+Example~\ref{example:unique-identifiers-1-global-counter}) is countable while another
+such as $\R$ (see Example~\ref{example:unique-identifiers-4-spatial-position}) is not but
+identifiers can still be mapped from one to another for any subsets of identical cardinatlity.
+
+Our goal is to utilize the various criteria to define when topological cellular processes are
+invoked.
+However, so far we have not defined a cell insertion criterion.
+This is due to the fact that purely adding new cells into the \ac{cabm}, can not rely on the
+properties of the inserted cells alone but may also depend on the time value $t\in T$ or the current
+state of the environment $e\in\EV$.
+We therefore need to establish a criterion that analyzes values of the whole state $(t,(I_p,M),e)$.
+However, since all previously introduced criteria do not involve any identifiers, we aim to
+establish the same for the cell insertion criterion.
+The following definition formalizes this.
+
+\begin{definition}[Cell Insertion Criterion]
+    We call a family of maps $\upsilon_I:U_I\rightarrow\{0,1\}$ a cell insertion criterion if for
+    every bijection $\sigma:I_p\cup\pi_1(M)\rightarrow\tilde{J}\subset J$ the equation
+    \begin{equation}
+        \upsilon_{J,t}(\sigma\cdot x) = \upsilon_{I,t}(x)
+    \end{equation}
+    holds.
+    We will refer to this as invariance with respect ot the choice of identifiers.
+\end{definition}
+
+
+
+\pagebreak
+\todo[inline]{use this text later}
+
 However, various simulation techniques may utilize different schemes on how to apply these criteria.
 For example, PhysiCell~\cite{Ghaffarizadeh2018} employs $3$ distinct discrete time steps
 $\Delta t_k\in\R$ for different types of processes in order to efficiently simulate multi-scale
