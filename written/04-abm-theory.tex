@@ -396,7 +396,7 @@ In general, it has to be noted that the explicit type of representation of the c
 $I$ is irrelevant as long as they adhere to the discussed principles.
 This leaves open various choices of how to define them which will be discussed later in
 Example~\ref{example:unique-identifiers-1-global-counter} to
-\ref{example:unique-identifiers-5-spatial-subdivision}.
+\ref{example:unique-identifiers-5-uuids}.
 Using any choice of such identifiers would circumvent the described problems of the previous
 thought experiments and establish a direct link between cells in the model and
 the experiment without relying on complex comparison metrics.
@@ -1007,7 +1007,7 @@ cell division, we can investigate if various topological cellular processes can 
 when applying them to the same cellular state $(I_p,M)$.
 We can also later see how various choices of how to construct cellular identifiers $\iota$ can
 impact this statement (see Examples \ref{example:unique-identifiers-1-global-counter} to
-\ref{example:unique-identifiers-5-spatial-subdivision}).
+\ref{example:unique-identifiers-5-uuids}).
 This means that the order of these operations at most changes the way in which cells are referred
 to and not their values.
 
@@ -1049,7 +1049,7 @@ simply \ac{abm} can be constructed using the previously introduced notions.
 For this example, we will not discuss the explicit construction of the unique identifiers
 $\iota\in I$ but simply assume that we can utilize them in the way defined.
 Their construction is discussed later in Examples~\ref{example:unique-identifiers-1-global-counter}
-to \ref{example:unique-identifiers-5-spatial-subdivision}.
+to \ref{example:unique-identifiers-5-uuids}.
 
 \begin{example}[Cells with capacity]
     \normalfont
@@ -1948,6 +1948,7 @@ discuss their advantages and shortcomings in this regard.
         \item take spatial position $x\in\R^3$ and time $t\in T$ as variables.
         \item This requires that no two cells can have the same position $x\in\R^3$.
     \end{itemize}
+    \label{example:unique-identifiers-4-spatial-position}
 \end{example}
 
 \begin{example}[UUIDs]
@@ -1956,7 +1957,7 @@ discuss their advantages and shortcomings in this regard.
             \url{https://en.wikipedia.org/wiki/Universally_unique_identifier}
         \item this is only approximate; but duplication does not ocurr in practice (near zero prob)
     \end{itemize}
-    \label{example:unique-identifiers-5-spatial-subdivision}
+    \label{example:unique-identifiers-5-uuids}
 \end{example}
 
 \subsubsection{Invariance of Dynamics with respect to the Choice of Identifiers}
