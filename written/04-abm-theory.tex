@@ -1878,25 +1878,27 @@ We are therefore able to extend the definition of cell lineage for \acp{cabm}.
 \end{proof}
 
 \subsection{Dealing with Unique Identifiers - Construction \& Invariance}
-
-\begin{itemize}
-    \item So far we have talked abstractly about identifiers. Now we show how to construct them.
-    \item The provided examples are commonly used examples of how to construct identifiers
-    \item Each has strengths and a weaknesses in theory and implementation. We will discuss this.
-\end{itemize}
-
-\begin{itemize}
-    \item Identifiers take up a lot of work in theoretical foundations; but not really in
-        applications later on
-    \item One can ask if the results depend on the choice of identifiers.
-        We can provide a theorem that shows in which scenario the dynamics of $\phi$ do not depend
-        on this particular choice
-    \item We first define what it means to not depend on the choice of identifiers
-    \item Then we use criteria (division, removal, etc.) to prove a theorem that states that under
-        certain conditions, the dynamics are invariant of the chosen identifiers
-\end{itemize}
+So far we have talked only abstractly about the utilized identifiers $\iota\in I$ which distinguish
+idnividual cells from each other and allow us to trace the lineage (see
+Theorem~\ref{theorem:cell-lineage}) of individual cells.
+This subsection deals with two questions: Which strategies can be used to assign unique identifiers
+when topological cellular processes are evaluated?
+Can we find conditions under which the dynamics $\phi$ of a \ac{cabm} are invariant of the
+particular choice of identifiers?
 
 \subsubsection{Practical Strategies to construct unique Cellular Identifiers}
+The unique identifiers $\iota\in I$ are essential in allowing us to distinguish individual
+biological cells from each other.
+On one hand, specifically engineered systems or phenomenological models which utilize parental
+relationships to other cells require information about these identifiers.
+However, on the other hand, every naturally-ocurring cellular system can be broken down into smaller
+sub-molecular constituents where the notion of unique identifiers can not be justified anymore.
+This justifies the inherent assumption that the particular form of identifiers is not canonical but
+rather a choice of the underlying model.
+We will now present various examples that showcase how identifiers can be defined and utilized by
+topological cellular processes.
+Since any such choice is mainly relevant for numerical implementations of a \ac{cabm}, we will
+discuss their advantages and shortcomings in this regard.
 
 \begin{example}[Unique Identifier Constructions I - Global Counter]
     \begin{itemize}
