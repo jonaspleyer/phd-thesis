@@ -2061,6 +2061,150 @@ The following definition formalizes this.
 In practice, one does not define a whole family of maps $\upsilon_I$ but rather only one $\upsilon$
 which can then be used implicitly.
 
+\begin{corollary}
+    Let $\upsilon:U\rightarrow\{0,1\}$ be a cell insertion criterion.
+    We can define a family of maps $\upsilon_I:U_I\rightarrow\{0,1\}$ such that
+    \begin{align}
+        \upsilon_{J,t}(\sigma\cdot x) &= \upsilon_{I,t}(x)
+        \label{eq:corollary-cell-insertion-criterion}\\
+        \upsilon_{I,t}(x) &= \upsilon_t(x)
+    \end{align}
+    for every bijection $\sigma:\tilde{I}\rightarrow\tilde{J}\subset J$.
+    Here we have written $\upsilon_J(t,x)=\upsilon_{J,t}(x)$ again by slight abuse of notation.
+\end{corollary}
+\begin{proof}
+    We have given the map $\upsilon$ and we need to define the family of maps $\upsilon_I$ such that
+    equation~\eqref{eq:corollary-cell-insertion-criterion} holds.
+    Given another index set $J$, we define the subsets where a bijection to $\tilde{I}$ exists as
+    $B=\{V\subset J:V\cong\tilde{I}\}$.
+    For every subset $V\in B$ we can fix one particular bijection $\sigma_V:\tilde{I}\rightarrow V$.
+    Given a state $x=((I_p,M),e)$, we identify $V(x)=I_p\cup\pi_1(M)$ and then define the map
+    $\upsilon_J$ via
+    \begin{equation}
+        \upsilon_J(x) = \upsilon(\sigma^{-1}_V\cdot x).
+    \end{equation}
+    We now pick another bijection $\alpha:V\rightarrow W\subset K$ to a different index set $K$
+    which results in
+    \begin{align}
+        \upsilon_K(\alpha\cdot x) &= \upsilon(\sigma^{-1}_W\cdot\alpha\cdot x)
+    \end{align}
+\end{proof}
+
+\begin{itemize}
+    \item motivate how these criteria are used in practice
+    \item often times simulation "overshoot"; they do not stop when one criterion fires but instead
+        complete a certain time interval (i.e. multi-scale processes)
+    \item $\mu$ needs to do a few things:
+    \begin{enumerate}
+        \item Determine time $t_i$
+        \item Resolve conflicts
+        \item Create set of involved identifiers $J_j$ where $J_i\cap J_j=\emptyset$ for $i\neq j$
+            together with corresponding topological cellular process
+        \item determine order of these TCPs
+    \end{enumerate}
+    \item discuss if this is possible for countably many TCPs or even more?
+\end{itemize}
+
+\begin{definition}[Topological Cellular Processes determined by Criteria]
+    We say that topological cellular processes are determined by their criteria if for every
+    $(t,x_i)\in U$ there exists a $s\in T$ with $(s,x_i)\in U$ such that with $Q(s,x)=\dots$, we
+    have a map $\mu(Q(s,x_i))=(t_i,\varphi_i)$ such that
+    \begin{equation}
+        \phi_t = \left(\bigcomp_i^n\psi_{t_i}\circ\bar{\varphi}_i\right)\circ\psi_{t_0}
+    \end{equation}
+    \todo[inline]{look at proof below. we need the property that everything stays the same when
+    changing identifiers except for identifier change (obviously)}
+\end{definition}
+
+\begin{theorem}[Identifier-Independent Dynamics]
+    Let $(T,\CS,\EV,\phi)$ be a \ac{cabm} with a non-topological evolution function $\psi$ which is
+    equivariant with respect to the identifiers and where the topological cellular processes
+    $\varphi_i$ are determined by their criteria.
+    Then the evolution function $\phi$ is itself equivariant with respect to the identifiers.
+    \begin{equation}
+        \phi_t(\sigma\cdot x) = \sigma\cdot\phi_t(x)
+        \label{eq:evolution-function-invariance-of-identifiers}
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    We can show this statement via induction.
+    The case $n=0$ is clear since then $\phi_t=\psi_t$.
+    For the induction step $n\rightarrow n+1$, we have an evolution function of the form
+    \begin{equation}
+        \phi_t = \psi_{t_{n+1}}\circ\bar{\varphi}_{n+1}\circ
+            \left(\bigcomp^n_{i=1}\psi_{t_i}\circ\bar{\varphi}_i\right)\circ\psi_{t_0}
+    \end{equation}
+    where the second part $(\bigcomp_{i=1}^n\psi_{t_i}\circ\bar{\varphi}_i)\circ\psi_{t_0}$ is known
+    to obey equation~\eqref{eq:evolution-function-invariance-of-identifiers} with a particular
+    $\sigma_n$.
+    Since we already know that $\psi$ is equivariant with respect to the identifiers, we
+    are left to prove relation~\eqref{eq:evolution-function-invariance-of-identifiers}
+    only for $\varphi_{n+1}$.
+    To do this, we need to extend the action of $\sigma_n$ to also act on the newly introduced
+    identifiers by $\varphi_{n+1}$.
+
+    We begin by observing that the set $Q(s,x)$ changes under $x\mapsto\sigma_n\cdot x$ as
+    $Q(s,\sigma_n\cdot x)=\sigma_n\cdot Q(s,x)$ where we have used the previously expanded notation
+    of $\sigma_n$ acting on $Q(s,x)$.
+    This observation is due to the fact that the criteria for division, removal and fusion are
+    independent of any identifiers and the insertion criterion was chosen such that it is invariant.
+    This means that only the identifiers to which the particular value of cells are assigned changes
+    which is equivalent to $Q(s,\sigma_n\cdot x)=\sigma_n\cdot Q(s,x)$.
+
+    As previously defined, the topological evolution function $\varphi_{n+1}$ is determined via
+    $\mu(Q)=(t_{n+1},\varphi_{n+1})$.
+    In this step, we will extend $\sigma_n$ to operate on identifiers which are introduced by
+    $\varphi_{n+1}$.
+    Since $\varphi_{n+1}$ is a topological evolution function, we can write
+    \begin{equation}
+        \varphi_{n+1} = \bigcomp_j\Phi_j
+    \end{equation}
+    where $\Phi_j$ are the topological cellular processes and $J_j$ are the respective involved
+    identifiers where $J_i\cap J_j=\emptyset$ for $i\neq j$.
+    We denote the set of all involved identifiers by $J=\cup_j J_j$.
+    By definition, $\sigma_n$ can act on this set.
+    We can define $\sigma_{n+1}$ by looking at the result of the individual topological cellular
+    processes.
+    For a single topological cellular process, we have a set of involved identifiers $J_j$ and we
+    can define the set of new identifiers with $((I_p,M),e)=x_n$ via
+    \begin{align}
+        (I_p^j,M^j) &= \left(\bigcomp_{k=1}^j\Phi_k\right)(x_n)\\
+        K_j &:= I_p^j\cup\pi_1(M^j)\backslash\left(I_p^{j-1}\cup\pi_1(M^{j-1})\right)
+    \end{align}
+    for all $j\geq 1$ and $(I^0_p,M^0)=(I_p,M)$.
+    Here, the concatenation ranges over all topological cellular processes ocurring before $\Phi_j$.
+    By definition $K_j\cap K_i=\emptyset$ for $i\neq j$.
+
+    Suppose now that $x_n=\sigma\cdot y_n$.
+    Utilizing $y_n=((J_p,N),e)$, we look at the sets
+    \begin{align}
+        (\tilde{I}_p^l,\tilde{M}^l) &= \left(\bigcomp_{k=1}^l\tilde{\Phi}_k\right)(y_n)\\
+        O_l &:= \tilde{I}_p^l\cup\pi_1(\tilde{M}^l)\backslash
+            \left(\tilde{I}_p^{l-1}\cup\pi_1(\tilde{M}^{l-1})\right)
+    \end{align}
+    for $l\geq1$ and again setting $(J_p^0,N^0)=(J_p,N)$.
+    The sets of involved identifiers $J_j=\sigma(\tilde{J}_j)$ can be mapped onto each other.
+    Together with the definition of the resolver $\mu$, we know that every topological cellular
+    process $\Phi_j$ has a corresponding process $\tilde{\Phi}_l$ such that there is an isomorphism
+    $\alpha_{j,l}:K_j\rightarrow O_l$ and where the corresponding values of cells match, i.e.
+    $M^j\ni(\iota,c_1)$ and $(\alpha_{j,l}(\iota),c_2)\in\tilde{M}^l$ such that $c_1=c_2$.
+    With this bijection $\alpha_{j,l}$, we can extend $\sigma_n$ successively to the pairwise
+    disjoint sets $K_j$ and $O_l$ and will cover all newly inserted identifiers with this approach.
+    Written out, we define the next stage of the bijection $\sigma_{n+1}$ via
+    \begin{equation}
+        \sigma_{n+1}(\iota) =
+        \begin{cases}
+            \sigma_n(\iota) &\text{\normalfont if } \iota\in\tilde{I}_p\cup\pi_1(\tilde{M})\\
+            \alpha_{j,l}(\iota) &\text{\normalfont if } \iota\in O_l
+        \end{cases}
+    \end{equation}
+    where the cases cover the entire domain spanned by the newly inserted identifiers $O_l$ and the
+    previously existing ones $\tilde{I}_p\cup\pi_1(\tilde{M})$ which are also all pariwise disjoint
+    by definition.
+
+    This means that the total effect of the topological evolution function $\varphi_{n+1}$ is given
+    by $\varphi_{n+1}(\sigma\cdot y_n)=\sigma\cdot\varphi_{n+1}(y_n)$
+\end{proof}
 
 \pagebreak
 \todo[inline]{use this text later}
