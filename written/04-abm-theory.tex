@@ -2049,15 +2049,17 @@ establish the same for the cell insertion criterion.
 The following definition formalizes this.
 
 \begin{definition}[Cell Insertion Criterion]
-    We call a family of maps $\upsilon_I:U_I\rightarrow\{0,1\}$ a cell insertion criterion if for
-    every bijection $\sigma:I_p\cup\pi_1(M)\rightarrow\tilde{J}\subset J$ the equation
+    We call a map $\upsilon:U\rightarrow\{0,1\}$ a cell insertion criterion if for
+    every map $\sigma:\tilde{I}\rightarrow I$ which is a bijection on its image, the equation
     \begin{equation}
-        \upsilon_{J,t}(\sigma\cdot x) = \upsilon_{I,t}(x)
+        \upsilon_t(\sigma\cdot x) = \upsilon_t(x)
     \end{equation}
     holds.
     We will refer to this as invariance with respect ot the choice of identifiers.
 \end{definition}
 
+In practice, one does not define a whole family of maps $\upsilon_I$ but rather only one $\upsilon$
+which can then be used implicitly.
 
 
 \pagebreak
