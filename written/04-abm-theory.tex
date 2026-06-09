@@ -2117,13 +2117,24 @@ which can then be used implicitly.
     \item discuss if this is possible for countably many TCPs or even more?
 \end{itemize}
 
-Given an initial state $x_0\in U$, we define
-\begin{equation}
-    x_{i+1} = \bar{\varphi}_i\circ\psi_{t_{i-1}}(x_i)
-    \label{eq:evolution-function-iterative-definition}
-\end{equation}
-iteratively.
-In this way, we can fully reconstruct the effect of the evolution function $\phi$ of our \ac{cabm}.
+When looking at practical applications, the various criteria are often applied in a similar fashion.
+Most often, the underlying numerical simulation engine will utilize a finite time step $\Delta t$ to
+advance the overall state of the \ac{cabm}.
+Regardless of if this step is fixed or variable, most \acp{cabm} check the corresponding criteria
+for every cell after this step and perform the corresponding cellular process at this instant.
+In this approach it, any criterion that is activated will be active after some time point in the
+interval $[t,t+\Delta t]$.
+However, the simulation "overshoots", running the dynamics until $t+\Delta t$.
+Therefore the time point where the criterion triggers initially may not be the time point when the
+corresponding topological cellular process is evaluated.
+Furthermore, many \acp{cabm} utilize multi-scale methods where distinct components of the model are
+solved on differing time steps $\Delta t_k$.
+If topological cellular processes are evaluated on larger time steps than other dynamics, there may
+be scenarios where criteria are active for multiple time steps, which can be interpreted as whole
+intervals in a non-discrete approach, before their topological cellular process is evaluated.
+Finally, one could also envision a situation in which multiple criteria trigger within the interval
+$[t,t+\Delta t]$, or possibly simultaneously.
+While this is rare in practice, our theoretical framework must be able to resolve such conflicts.
 
 Our goal is to utilize the criteria of the respective topological cellular processes to determine
 which particular process is performed at which time point.
@@ -2131,10 +2142,16 @@ To do this, we must first analyze the dynamics over some time $s$ and evaluate t
 this time interval.
 We gather this information and then determine how to construct the topologival evolution function
 $\varphi_{i+1}$ and after which time interval $t_{i+1}$ it will be executed.
-In this way, we are able to construct equation~\eqref{eq:evolution-function-iterative-definition}.
+In this way, we are able to construct the evolution function $\phi$ step by step.
 
-Given an initial state $x_i=((I_{p,i},M_i),e_i)$ and some time interval $s\in T$, we can evolve this
-state by applying $\psi$ to it without adding or removing any cells.
+We first observe that the evolution function $\phi$ of our \ac{cabm} can be constructed iteratively.
+Given an initial state $x_0\in U$, we define
+\begin{equation}
+    x_{i+1} = \bar{\varphi}_i\circ\psi_{t_{i-1}}(x_i)
+\end{equation}
+iteratively.
+Given such an initial state $x_i=((I_{p,i},M_i),e_i)$ and some time interval $s\in T$, we can evolve
+this state by applying $\psi$ to it without adding or removing any cells.
 Therefore, every cell can be treated as depending on the relative time value of this interval, i.e.
 $h\mapsto c_\iota(h)$.
 To determine the effect of the criteria, we define the set
@@ -2145,7 +2162,6 @@ To determine the effect of the criteria, we define the set
             \cup&\{(3,h,\{\iota_1,\dots,\iota_n\}):\bar{\xi}(\iota_1(h),\dots,\iota_n(h))=1\}\\
             \cup&\{(4,h):\upsilon(\psi_h(x_i))=1\}
     \end{split}
-    \label{eq:criterion-driven-TCPs-helper-set}
 \end{align}
 which is the union of configurations where a criterion is valid for time points $0<h\leq s$.
 Our goal is to utilize this set to determine two things: The time interval $t_{i+1}$ after which the
