@@ -2102,21 +2102,6 @@ which can then be used implicitly.
     which completes the proof.
 \end{proof}
 
-\begin{itemize}
-    \item motivate how these criteria are used in practice
-    \item often times simulation "overshoot"; they do not stop when one criterion fires but instead
-        complete a certain time interval (i.e. multi-scale processes)
-    \item $\mu$ needs to do a few things:
-    \begin{enumerate}
-        \item Determine time $t_i$
-        \item Resolve conflicts
-        \item Create set of involved identifiers $J_j$ where $J_i\cap J_j=\emptyset$ for $i\neq j$
-            together with corresponding topological cellular process
-        \item determine order of these TCPs
-    \end{enumerate}
-    \item discuss if this is possible for countably many TCPs or even more?
-\end{itemize}
-
 When looking at practical applications, the various criteria are often applied in a similar fashion.
 Most often, the underlying numerical simulation engine will utilize a finite time step $\Delta t$ to
 advance the overall state of the \ac{cabm}.
