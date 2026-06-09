@@ -2077,17 +2077,29 @@ which can then be used implicitly.
     equation~\eqref{eq:corollary-cell-insertion-criterion} holds.
     Given another index set $J$, we define the subsets where a bijection to $\tilde{I}$ exists as
     $B=\{V\subset J:V\cong\tilde{I}\}$.
-    For every subset $V\in B$ we can fix one particular bijection $\sigma_V:\tilde{I}\rightarrow V$.
-    Given a state $x=((I_p,M),e)$, we identify $V(x)=I_p\cup\pi_1(M)$ and then define the map
-    $\upsilon_J$ via
+    For every subset $V\in B$ we can fix one particular bijection $\alpha_V:\tilde{I}\rightarrow V$.
+    Given a state $y=((J_p,N),e)\in\CS(J,C)\times\EV$, we identify $V(x)=J_p\cup\pi_1(N)$ and then
+    define the map $\upsilon_{J,t}$ via
     \begin{equation}
-        \upsilon_J(x) = \upsilon(\sigma^{-1}_V\cdot x).
+        \upsilon_{J,t}(y) = \upsilon_t(\alpha^{-1}_V\cdot y).
     \end{equation}
-    We now pick another bijection $\alpha:V\rightarrow W\subset K$ to a different index set $K$
-    which results in
-    \begin{align}
-        \upsilon_K(\alpha\cdot x) &= \upsilon(\sigma^{-1}_W\cdot\alpha\cdot x)
-    \end{align}
+    This definition is independent of the particular bijection $\alpha_V$ that we chose, since
+    $\upsilon_t$ is invariant under arbitrary bijections.
+    Therefore, this defines a map on all $x\in\CS(J,C)\times\EV$ where $V(x)\cong\tilde{I}$.
+    Furthermore, we define $\upsilon_{I,t}(x)=\upsilon_t(x)$.
+    It remains to show that equation~\eqref{eq:corollary-cell-insertion-criterion} holds for this
+    construction.
+    Given any bijection $\sigma:\tilde{I}\rightarrow\tilde{J}\subset J$, we have
+    \begin{equation}
+        \upsilon_{J,t}(\sigma\cdot x) = \upsilon_t(\sigma\cdot\alpha_V^{-1}\cdot x)
+    \end{equation}
+    where $\sigma:\tilde{I}\rightarrow V$ and $\alpha_V:\tilde{I}\rightarrow V$ are both bijections.
+    Therefore, $\sigma\cdot\alpha^{-1}_V$ is a bijection on $\tilde{I}$ itself and since
+    $\upsilon_t$ is invariant under these transformations, we have
+    \begin{equation}
+        \upsilon_t(\sigma\cdot\alpha_V^{-1}\cdot x) = \upsilon_t(x) = \upsilon_{I,t}(x)
+    \end{equation}
+    which completes the proof.
 \end{proof}
 
 \begin{itemize}
