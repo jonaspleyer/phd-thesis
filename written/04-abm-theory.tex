@@ -2135,8 +2135,8 @@ In this way, we are able to construct equation~\eqref{eq:evolution-function-iter
 
 Given an initial state $x_i=((I_{p,i},M_i),e_i)$ and some time interval $s\in T$, we can evolve this
 state by applying $\psi$ to it without adding or removing any cells.
-Therefore, every cell can be treated as depending on the time value of this interval, i.e.
-$c_\iota(h)$.
+Therefore, every cell can be treated as depending on the relative time value of this interval, i.e.
+$h\mapsto c_\iota(h)$.
 To determine the effect of the criteria, we define the set
 \begin{align}
     \begin{split}
@@ -2159,8 +2159,8 @@ In order to formalize this, we introduce a new map
     \mu(Q(s,x_i))=\varphi_i
 \end{equation}
 which produces the topological evolution function directly.
-Any bijection which acts on the identifiers may at most introduce reorderings of the topological
-cellular processes within the $\varphi_i$.
+We require that any bijection which acts on the identifiers may at most introduce reorderings of the
+topological cellular processes within the $\varphi_i$.
 Therefore, given the topological evolution functions defined by
 \begin{align}
     \mu(Q(s,x_i)) &= \bigcomp_j\Phi_{i,j}
@@ -2172,28 +2172,34 @@ we can find a bijection $\beta$ such that $\Phi_{i,j}$ and $\bar{\Phi}_{i,\beta(
 up to the action of $\sigma$ on the involved identifiers, i.e.
 $\bar{J}_{\beta(j)}=\sigma(J_j)$ where $J_j$ and $\bar{J}_{\beta(j)}$ are the sets of involved
 identifiers for $\Phi_{i,j}$ and $\bar{\Phi}_{i,\beta(j)}$ respectively.
+
 We utilize the previously introduced notations to formalize these ideas in the following definition.
+In addition to these notations, we introduce the set $\mathcal{Q}=\{Q(s,x_i):(s,x_i)\in U\}$ where
+$U$ is the domain of the evolution function $\phi$ and the set of topological evolution functions
+$\mathcal{P}=\{\varphi:\CS\rightarrow\CS:\varphi\text{ is topological evolution function}\}$.
 
 \begin{definition}[Topological Cellular Processes determined by Criteria]
-    Let $x_i$ and $Q(s,x_i)$ be defined by
-    equations~\eqref{eq:evolution-function-iterative-definition} and
-    \eqref{eq:criterion-driven-TCPs-helper-set} respectively.
-    We denote the set $\mathcal{Q}=\{Q(s,x_i):(s,x_i)\in U\}$ where
-    $\phi:U\rightarrow\CS\times\EV$ and the set of all topological evolution functions
-    $\mathcal{P}=\{\varphi:\CS\rightarrow\CS:\varphi\text{ is topological evolution function}\}$.
     We say that the topological cellular processes are determined by their respective criteria if
-    there exists a map $\mu:\mathcal{Q}\rightarrow\mathcal{P}$ that permits a bijection $\beta$
-    between the indices of topological cellular processes such that their sets of involved
-    identifiers obey $\bar{J}_{\beta(j)}=\sigma(J_j)$ and they are otherwise identical (see
-    equations~\eqref{eq:resolver-property-1} and \eqref{eq:resolver-property-2} and following).
+    the following conditions are met.
+    There exists a map, named the \textbf{resolver}
+    $\mu:\mathcal{Q}\rightarrow T\times\mathcal{P}$ such that for every $x_i$ there is a $s\in T$
+    such that $(t_i,\varphi_i)=\mu(Q(s,x_i))$ where $\varphi_i$ is the $i$th topological evolution
+    function and $t_i$ is the time interval of the $i$th non-topological evolution function of
+    $\phi$.
+    Furthermore, we require that $\mu$ behaves as described above under remappings of identifiers
+    via $\sigma$.
+    \label{definition:criterion-determined-topological-processes}
 \end{definition}
 
-Note that we have not required that the order of topological cellular processes will be identical
-in equations~\eqref{eq:resolver-property-1} and \eqref{eq:resolver-property-2}.
+Note that Definition~\ref{definition:criterion-determined-topological-processes} does not require
+that the order of the matching topological cellular processes $\Phi_{i,j}$ and
+$\bar{\Phi}_{i,\beta(j)}$ of equations~\eqref{eq:resolver-property-1} and
+\eqref{eq:resolver-property-2} needs to be identical.
 In practice, cells might be stored in hashmaps that sort cells by the values of their identifiers.
-This means that any remapping of identifiers might change the order in which the individual
-topological cellular processes are evaluated which is here picked up by the reordering bijection
-$\beta$.
+When iterating over these datastructures, the value of the identifier can determine the order in
+which cellular processes are evaluated.
+This means that any remapping of identifiers might change this order which is here picked up by the
+reordering bijection $\beta$.
 
 \begin{theorem}[Identifier-Independent Dynamics]
     Let $(T,\CS,\EV,\phi)$ be a \ac{cabm} with a non-topological evolution function $\psi$ which is
