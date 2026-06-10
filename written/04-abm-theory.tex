@@ -1905,10 +1905,10 @@ In almost all practial examples, $\mu$ will be given by the Lebesgue measure.
 
 \subsection{Dealing with Unique Identifiers - Construction \& Invariance}
 So far we have talked only abstractly about the utilized identifiers $\iota\in I$ which distinguish
-idnividual cells from each other and allow us to trace the lineage (see
+individual cells from each other and allow us to trace the lineage (see
 Theorem~\ref{theorem:cell-lineage}) of individual cells.
 This subsection deals with two questions: Which strategies can be used to assign unique identifiers
-when topological cellular processes are evaluated?
+when topological cellular processes insert new cells?
 Can we find conditions under which the dynamics $\phi$ of a \ac{cabm} are invariant of the
 particular choice of identifiers?
 
@@ -1920,22 +1920,54 @@ relationships to other cells require information about these identifiers.
 However, on the other hand, every naturally-ocurring cellular system can be broken down into smaller
 sub-molecular constituents where the notion of unique identifiers can not be justified anymore.
 This justifies the inherent assumption that the particular form of identifiers is not canonical but
-rather a choice of the underlying model.
-We will now present various examples that showcase how identifiers can be defined and utilized by
+rather a choice of the underlying simulation framework and not part of the biological model.
+Definition~\ref{definition:topological-cellular-process} tells us that new identifiers are required
+when new cells are inserted either via division, fusion or direct insertion.
+We will now present various strategies of how identifiers can be defined and utilized by
 topological cellular processes.
-Since any such choice is mainly relevant for numerical implementations of a \ac{cabm}, we will
-discuss their advantages and shortcomings in this regard.
+Since the particular form of identifiers is mainly relevant for numerical implementations of a
+\ac{cabm}, we will discuss their advantages and shortcomings in this regard.
+
+The first question that one might ask is if the notion of identifiers can be circumvented by a
+simplified approach when storing them within an ordered list.
+We will show that this approach naturally leads to our first form of unique identifiers.
+Storing cells within a list, is mathematically equivalent to consider a vector of cells
+$x=(c_1,\dots,c_n)\in C^n$.
+Let us now assume that a particular cell at position $j$ is removed by the corresponding topological
+cellular process.
+The question is now how to modify the vector $x$ going forward.
+If we simply omit the $j$th element, i.e. $x\mapsto y=(c_1,\dots,c_{j-1},c_{j+1},\dots,c_n)$, we are
+left with a problem.
+If we want to trace any cell $j+k$ (with $k\geq0$) before and after the topological cellular
+process, we need to account for the change of index when removing $j$.
+If we track every topological cellular process and their order, we are able to reconstruct the
+indices to trace every cell.
+But clearly, this scheme is cumbersome to put it lightly.
+Furthermore it is philosophically misleading to assign varying indices to the same physical entity
+depending on the particular time at which it is observed.
+To resolve this overly simplified approach, our first example utilizes a global counter which
+increments whenever a new cell is inserted.
 
 \begin{example}[Unique Identifier Constructions I - Global Counter]
-    \begin{itemize}
-        \item one large counter; increase whenever new cells are added via division
-        \item only some practical problems when it comes to implementation (ensure that only one
-            variable is incremented; use atomics)
-        \item not local
-        \item keep manually track of cell lineage tree/forest
-    \end{itemize}
+    We define the index set $I=\N$ to be the natural numbers.
+    Let $((I_p,M),e)\in U$ be a cellular state.
+    Clearly this approach requires that the total amount of cells is finite for every time point.
+    We utilize the convention $I_p\cup\pi_1(M)=[0,n]$ where $n$ is incidentally the total number of
+    utilized identifiers.
+    Whenever a set of $k$ new cells is inserted, the next highest counters $n+1,\dots,n+k$ are
+    utilized as their new identifiers.
     \label{example:unique-identifiers-1-global-counter}
 \end{example}
+
+Example~\ref{example:unique-identifiers-1-global-counter} is arguably the most simple way of
+defining unique identifiers which has many advantages.
+It is a lightweight solution, requiring only one counter $i\in\N$ per cell which is an important
+consideration when assigning identifiers in large quantities.
+However, when implementing this counter, any numerical simulation that takes advantage of multiple
+concurrent threads will have to take great care that the global counter is only accessed by one
+thread at a certain time.
+Such safeguards may introduce locks where one thread can prohibit others from continuing to perform
+their tasks, thus decreasing overall computational efficiency.
 
 \begin{example}[Unique Identifier Constructions II - Division History]
     \begin{itemize}
