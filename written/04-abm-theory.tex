@@ -1871,6 +1871,8 @@ We are therefore able to extend the definition of cell lineage for \acp{cabm}.
     lineage of Theorem~\ref{theorem:cell-lineage} directly to such cases.
 \end{proof}
 
+Now that we have introduced the dynamics of a \ac{cabm}, we can also define the lifetime of a cell.
+
 \begin{definition}[Lifetime of a cell]
     Given an initial state $x_0\in\CS\times\EV$, we say that a cell $c_\iota$ is
     \textbf{alive} at time $t$ if for $((I_p^t,M^t),e^t)=\phi_t(x_0)$ we have $c_\iota\in M^t$.
@@ -1887,12 +1889,13 @@ We are therefore able to extend the definition of cell lineage for \acp{cabm}.
 \end{definition}
 
 In almost all practial examples, $\mu$ will be given by the Lebesgue measure.
+The following proposition will show that the life-span is a contiguous set of elements.
+We can therefore interpret the lifetime as the length of this set.
 
 \begin{proposition}
     If $T$ is a path-connected topological space, then $T_\iota$ is also path-connected which
     justifies the name "Life-Span" for $T_\iota$.
 \end{proposition}
-
 \begin{proof}
     Let $t<s\in T_\iota$ arbitrary.
     We pick a path $\gamma:[0,1]\rightarrow T$ from $t$ to $s$.
