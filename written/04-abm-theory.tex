@@ -1971,25 +1971,59 @@ consideration when assigning identifiers in large quantities.
 However, when implementing this counter, any numerical simulation that takes advantage of multiple
 concurrent threads will have to take great care that the global counter is only accessed by one
 thread at a certain time.
-Such safeguards may introduce locks where one thread can prohibit others from continuing to perform
-their tasks, thus decreasing overall computational efficiency.
+These dependencies will introduce locks~\cite{Herlihy1991} where only one thread can modify the
+global counter at a time, thus prohibiting others from continuing to perform their
+tasks, which can significantly decrease overall computational efficiency~\cite{Plimpton1995}.
 
 \begin{example}[Unique Identifier Constructions II - Division History]
-    \begin{itemize}
-        \item give initially placed cells unique identifiers simply by numbers $0\dots N_i$
-        \item construct daughter identifiers from mother and additional counter
-        \item one word $=\text{nth}$ daughter of previous mother
-        \item $(((7,0),1),1)$ 7th (initially) placed cell; then first daughter; then 2nd daughter;
-            then 2nd daughter
-        \item basically includes complete previous history
-        \item problem: newly inserted cells (not via division) need to rely on global counter
-        \item practical challenge: as more division events come into play, the size of the
-            identifier grows considerably; bad for memory in programs
-        \item parental relationship directly encoded
-        \item like giving each cell an individual name "Sven Jorikson" $\rightarrow$ "Erik Svenson
-            Jorikson" and "Veronica Svendottir Jorikson"
-    \end{itemize}
+    The previous strategy can be altered in order to mitigate global thread locking.
+    To achieve this, we still implement a global counter and assign a natural number $(i)\in\N$ in
+    the form of a $1$-tuple to every cell which exists initially.
+    When new cells are inserted via division or fusion, we define their new identifiers as the tuple
+    $(\iota_1,\dots,\iota_{n_i},k)$ where $\iota=(\iota_1,\dots,\iota_{i_n})$ is the parent
+    identifier and $k\in\N$ is a counter for every newly inserted cell $c_k$.
+    For fusion events with $s=0$ we can utilize any parent identifier.
+    To make this mapping deterministic, we choose the parent with the lowest initial value
+    $\iota_1$.
+    For general cell insertion we fall back to the global counter and define the identifier as the
+    $1$-tuple $(n+1)$ where $n=\max(I_p\cup\pi_1(M))$ was the last value of the global counter.
+    % \begin{itemize}
+    %     \item give initially placed cells unique identifiers simply by numbers $0\dots N_i$
+    %     \item construct daughter identifiers from mother and additional counter
+    %     \item one word $=\text{nth}$ daughter of previous mother
+    %     \item $(((7,0),1),1)$ 7th (initially) placed cell; then first daughter; then 2nd daughter;
+    %         then 2nd daughter
+    %     \item basically includes complete previous history
+    %     \item problem: newly inserted cells (not via division) need to rely on global counter
+    %     \item practical challenge: as more division events come into play, the size of the
+    %         identifier grows considerably; bad for memory in programs
+    %     \item parental relationship directly encoded
+    %     \item like giving each cell an individual name "Sven Jorikson" $\rightarrow$ "Erik Svenson
+    %         Jorikson" and "Veronica Svendottir Jorikson"
+    % \end{itemize}
+    \label{example:unique-identifiers-2-inherit-names}
 \end{example}
+
+Example~\ref{example:unique-identifiers-2-inherit-names} can be interpreted as a variation of
+patronymy or matronymy which describes the principle where the children inherit their parent's first
+names as surname~\cite{2016OxfordNaming}.
+However in this example, one would have to inherit all previous names, not only the first name.
+
+One clear disadvantage of this approach is that the size of the identifier grows with every new
+generation of cells.
+In terms of memory layout of our numerical simulation this means that every identifier allocates a
+continuously growing amount of memory which will result in overall decreased computational
+performance.
+
+Our next example utilizes a spatial subdivision of the physical environment to assign unique
+identifiers to each cell.
+The space is subdivided into voxels which then each hold a local counter that is incremented
+similarly to Example~\ref{example:unique-identifiers-1-global-counter}.
+The process of subdividing the space is also known as a domain decomposition which can be applied in
+the case where the interaction range of the agents is short~\cite{Brown2011}.
+It's main advantage is a significant increase in computational performance (see
+Section~\ref{section:scaling-with-problem-size}) and many existing frameworks implement some variant
+of that.
 
 \begin{example}[Unique Identifier Constructions III - Spatial Subdivisions]
     \begin{itemize}
