@@ -26,14 +26,14 @@ jobs:
           python -m venv .venv
           source .venv/bin/activate
           pip install colorama
-          make -C ${{ env.dir }} zip
+          make -C ${{ env.dir }} 04-abm-theory
         shell: bash
 
       - name: Upload pdf as artifact
         uses: actions/upload-artifact@v4
         with:
           name: archive.zip
-          path: ${{ env.dir }}/archive.zip
+          path: ${{ env.dir }}/temp.pdf
 
   release_pdf:
     name: Release PDF
