@@ -1925,8 +1925,10 @@ Definition~\ref{definition:topological-cellular-process} tells us that new ident
 when new cells are inserted either via division, fusion or direct insertion.
 We will now present various strategies of how identifiers can be defined and utilized by
 topological cellular processes.
-Since the particular form of identifiers is mainly relevant for numerical implementations of a
-\ac{cabm}, we will discuss their advantages and shortcomings in this regard.
+In practice, the particular choice of identifiers will have a significant impact on the
+computational efficiency of our numerical solvers since every calculation that involves a cellular
+agent will necessarily also involve its assigned identifer.
+We will therefore discuss advantages and shortcomings with this point of view.
 
 The first question that one might ask is if the notion of identifiers can be circumvented by a
 simplified approach when storing them within an ordered list.
