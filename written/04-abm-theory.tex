@@ -2045,6 +2045,7 @@ of that.
     In practice, the value $n_l$ is not calculated when a new identifier is constructed but rather
     stored permanently.
     This process is identical for division, fusion and insertion processes.
+    \label{example:unique-identifiers-3-spatial-subdivisions}
 \end{example}
 
 This approach has many advantages.
@@ -2080,14 +2081,32 @@ Furthermore, floating point operations are only approximatively associative.
 In essence, these types are built for numerical approximation instead of classification which make
 them unsuitable as identifiers.
 
+Our last example is known under the term \ac{uuid} \cite{Leach2005,Davis2024}.
+These are $128$-bit identifiers which are generated from various sources such as timestamps,
+counters or cryptographically secure pseudo \acp{rng}.
+When generating \acp{uuid} across multiple threads, it is important to choose a strategy which
+eliminates the risk of generating duplicates.
+\acp{rng} provide a suitable candidate in this regard but need to be properly initialized.
+The number of identifiers that needs to be generated for a $50\%$ chance of identifier
+collision~\cite{Mathis1991} is $n\approx 2.71\times 10^{18}$ which makes them unique for practical
+purposes.
+
 \begin{example}[Unique Identifier Constructions IV - UUIDs]
-    \begin{itemize}
-        \item look at definition at wikipedia:
-            \url{https://en.wikipedia.org/wiki/Universally_unique_identifier}
-        \item this is only approximate; but duplication does not ocurr in practice (near zero prob)
-    \end{itemize}
-    \label{example:unique-identifiers-5-uuids}
+    If the computational load of the \ac{cabm} is distributed across multiple concurrent threads,
+    we initialize an equal number of independent cryptographically secure \acp{rng}.
+    Each thread utilizes its designated \ac{rng} to asynchronously generate new \acp{uuid} which
+    minimizes the risk for identifier collisions.
+    A detailed specification of the internals of \acp{uuid} is provided by \parencite{Davis2024}.
+    \label{example:unique-identifiers-4-uuids}
 \end{example}
+
+\acp{uuid} are stored as $128$ bit integers which has the same memory footprint as two $64$-bit
+counters such as utilized by Example~\ref{example:unique-identifiers-3-spatial-subdivisions} if
+$l\in\N$.
+One downside is that the assignment of identifiers can differ between two simulation runs of the
+exact identical system.
+This depends on the \ac{rng} initialization strategy but may be a significant practical challenge
+when dealing with simulations where a single cell is tracked by its particular identifier.
 
 \subsubsection{Invariance of Dynamics with respect to the Choice of Identifiers}
 As we have now seen there are many variants of how to assign unique identifiers to individual cells.
