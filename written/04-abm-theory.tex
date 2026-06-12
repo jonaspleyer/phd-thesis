@@ -2027,7 +2027,7 @@ Section~\ref{section:scaling-with-problem-size}) and many existing frameworks im
 of that.
 
 \begin{example}[Unique Identifier Constructions III - Spatial Subdivisions]
-    Let $K\subset\R^d$ be a connected, closed subset and $\cup_{l\in L}K_l=K$ be a covering
+    Let $K\subset\R^d$ be a subset and $\cup_{l\in L}K_l=K$ be a covering
     of $K$ together with a map
     \begin{equation}
         \mu:C\rightarrow L
@@ -2067,15 +2067,20 @@ can overlap as long as $\mu$ can be constructed as above.
 When choosing $K$ as the covering of itself, this approach trivially reduces to a global counter
 as given by Example~\ref{example:unique-identifiers-1-global-counter}.
 
-\begin{example}[Spatial Position]
-    \begin{itemize}
-        \item take spatial position $x\in\R^3$ and time $t\in T$ as variables.
-        \item This requires that no two cells can have the same position $x\in\R^3$.
-    \end{itemize}
-    \label{example:unique-identifiers-4-spatial-position}
-\end{example}
+One could also envision an approach where instead of utilizing a subdivision $K_l$ of the space, we
+take the position of any cell $x\in\R^d$ together with the time of insertion $t$ directly as the
+new unique identifier, i.e. $\bar{\iota}=(t,x)$.
+In theory this could be a valid approach if the underlying model can guarantee that no two cells can
+occupy the same position $x$ at the same time $t$.
+However, using floating-point numbers as identifiers is fundamentally flawed since these introduce
+special values~\cite{IEEE754-1985,IEEE754-2008} such as negative zero $-0$ and Not-a-Number
+$\texttt{NaN}$ which violate mathematical reflexivity $\texttt{NaN}\neq\texttt{NaN}$
+\cite{Goldberg1991}.
+Furthermore, floating point operations are only approximatively associative.
+In essence, these types are built for numerical approximation instead of classification which make
+them unsuitable as identifiers.
 
-\begin{example}[UUIDs]
+\begin{example}[Unique Identifier Constructions IV - UUIDs]
     \begin{itemize}
         \item look at definition at wikipedia:
             \url{https://en.wikipedia.org/wiki/Universally_unique_identifier}
