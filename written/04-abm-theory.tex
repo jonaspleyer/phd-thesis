@@ -2020,25 +2020,52 @@ identifiers to each cell.
 The space is subdivided into voxels which then each hold a local counter that is incremented
 similarly to Example~\ref{example:unique-identifiers-1-global-counter}.
 The process of subdividing the space is also known as a domain decomposition which can be applied in
-the case where the interaction range of the agents is short~\cite{Brown2011}.
+the case where the interaction range of the agents is short~\cite{Brown2011} (see
+Section~\ref{section:spatial-locality-decomposition}).
 It's main advantage is a significant increase in computational performance (see
 Section~\ref{section:scaling-with-problem-size}) and many existing frameworks implement some variant
 of that.
 
 \begin{example}[Unique Identifier Constructions III - Spatial Subdivisions]
-    \begin{itemize}
-        \item divide space into discrete entities: voxels
-            (is this always possible that easily?; in practice probably yes)
-        \item new cells are given the identifier of the voxel and a counter that runs per voxel and
-            is incremented whenever a new cell is added.
-            This includes division events.
-        \item fully local solution
-        \item also works well when new cells are inserted without cell division
-        \item no problem with growing word size
-        \item discretization of space needed
-        \item does not encode cell lineage
-    \end{itemize}
+    Let $K\subset\R^d$ be a connected, closed subset and $\cup_{l\in L}K_l=K$ be a covering
+    of $K$ together with a map
+    \begin{equation}
+        \mu:C\rightarrow L
+    \end{equation}
+    which therefore assigns one unique voxel $K_l$ to each cell $c\in C$.
+    We can now define an identifier $\iota=(l,n_l)$ as consisting of a counter $n_l\in\N$ and the
+    index $l\in L$ of the particular voxel $K_l$ where the cell was inserted.
+    When inserting multiple new cells, we have to pick a particular order.
+    For every new cell $c$, we assign an identifier $\bar{\iota}$ by incrementing the counter
+    $n_l=\max(\{k:(l,k)\in I_p\cup\pi_1(M))$ via
+    \begin{equation}
+        \bar{\iota} = (l,n_l+1)
+    \end{equation}
+    which is determined by $\mu(c)=l$.
+    In practice, the value $n_l$ is not calculated when a new identifier is constructed but rather
+    stored permanently.
+    This process is identical for division, fusion and insertion processes.
 \end{example}
+
+This approach has many advantages.
+It is a fully local scheme which does not require any knowledge about the state of the system at
+other spatial locations and is therefore straightforward to parallelize without any hidden costs as
+long as the covering sets are chosen accordingly.
+In particular, it is also directly applicable for fusion and insertion topological cellular
+processes.
+And the total memory to is given by the size of one counter $n_l\in\N$ and the voxel index $l$ and
+which usually has a similar memory footprint as $n_l$.
+It is therefore only slightly larger than the most simple approach (see
+Example~\ref{example:unique-identifiers-1-global-counter}).
+
+The downsides of this approach are that it requires a spatial subdivision of the total space as
+discussed earlier.
+Furthermore, the particular identifiers $\iota=(l,n)$ do not contain any information about the cell
+lineage or their relation to other identifiers.
+Note that the $K_l$ are often chosen convex, connected and pariwise disjoint but in principle they
+can overlap as long as $\mu$ can be constructed as above.
+When choosing $K$ as the covering of itself, this approach trivially reduces to a global counter
+as given by Example~\ref{example:unique-identifiers-1-global-counter}.
 
 \begin{example}[Spatial Position]
     \begin{itemize}
