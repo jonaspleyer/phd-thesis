@@ -905,22 +905,27 @@ aggregating additional cells or fusing cells into a cell defined by a new identi
 Figure~\ref{fig:theory-cell-fusion}).
 This can be formalized by the following definition.
 
-\todo[inline]{We will have to rework this. The base space being defined by $C^n$ will probably not
-work.}
-
 \begin{definition}[Cell Fusion]
-    We call a map $\xi:\sqcup_{n\geq 2}C^n\rightarrow \{0,1\}\times C$ a fusion function with
-    $\xi((c^1,\dots,c^n))=(s, \bar{c})$ where we call $s$ the \textbf{Mode of Fusion} where $s=0$ is
-    the consuming and $s=1$ the accretive mode of fusion (compare
-    Definition~\ref{definition:cell-division-single}).
-    We use the same convention where the first cell is kept in the accretive mode $s=1$.
-    Furthermore the map
+    We call a map $\xi:\sqcup_{n\geq 2}C^n\rightarrow \{0,1\}\times C$ a fusion function if
+    with $\xi((c^1,\dots,c^n))=(s,\bar{c})$, the relation
     \begin{equation}
-        \Xi:\{\xi:\sqcup_{n\geq2}C^n\rightarrow\{0,1\}\times C\}
-            \times \sqcup_{n\geq2}I^n
-            \times\CS\rightarrow\CS
+        \xi((c^1,\dots,c^n))=
+        \begin{cases}
+            \xi((c^{\sigma(1)},c^{\sigma(2)},\dots,c^{\sigma(n)})) &s=0\\
+            \xi((c^{1\phantom{\sigma()}},c^{\sigma(2)},\dots,c^{\sigma(n)})) &s=1
+        \end{cases}
+        \label{eq:definition-cell-fusion-permutation}
     \end{equation}
-    is called a \textbf{Fusion Operator} if for $(J_p,N)=\Xi((\iota_1,\dots,\iota_n), (I_p,M))$
+    holds for all permutations $\sigma$ of $\{1+s,\dots,n\}$.
+    We call $s$ the \textbf{Mode of Fusion} where $s=0$ is the consuming and $s=1$ the accretive
+    mode of fusion (compare Definition~\ref{definition:cell-division-single}).
+    We use the same convention where the first cell is kept in the accretive mode $s=1$.
+    Let $\mathcal{F}$ be the set of fusion functions of $C$.
+    The map
+    \begin{equation}
+        \Xi:\mathcal{F}\times \sqcup_{n\geq2}I^n\times\CS\rightarrow\CS
+    \end{equation}
+    is called a \textbf{Fusion Operator} if for $(J_p,N)=\Xi(\xi,(\iota_1,\dots,\iota_n), (I_p,M))$
     the following conditions hold:
     \begin{enumerate}
         \item (Removal) The removed cells are given by
@@ -938,6 +943,8 @@ work.}
     \label{definition:cell-fusion}
 \end{definition}
 
+Equation~\eqref{eq:definition-cell-fusion-permutation} enforces that each cell which is removed
+within the process is treated equally.
 Similarly to the division function (see Definition~\ref{definition:cell-division-single}), we
 utilize a notation convention where we can specify the fusion via $\xi:C\times C\rightarrow C$ or
 analogous function signatures if binary fusion is the only relevant case.
