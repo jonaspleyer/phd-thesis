@@ -371,7 +371,6 @@ Mapping one cellular state onto another, requires us to define the \textit{Cellu
 all dynamics are described as the collection of all cellular states.
 
 \begin{definition}[Cellular Space]
-    \label{def:cellular-space}
     The cellular space $\CS(I, C)$ of an index set $I$ and cellular configuration space $C$
     is given by
     \begin{equation}
@@ -381,10 +380,15 @@ all dynamics are described as the collection of all cellular states.
     given context.
     We also write $c_\iota:=(\iota,c)$ and introduce a simplified notation $c_\iota\in\CS$ where the
     index $\iota$ is taken with respect to all living cells $\iota\in \pi_1(M)$.
+    \label{def:cellular-space}
 \end{definition}
 
-\todo[inline]{we could include a short discussion about bijections from one cellular space into
-another or even only in itself. This can be interpreted as relabelling of identifiers.}
+Definition~\ref{def:cellular-space} allows us to remap the utilized identifiers $I_p\cup\pi_1(M)$
+onto a different set via $\tilde{I}\subset I$ via a bijection $\sigma$.
+This will still be a valid cellular state.
+Furthermore, any bijection $I_p\cup\pi_1(M)\rightarrow\tilde{J}\subset J$ to another index set $J$
+will yield yet another valid cellular state in $\CS(J,C)$.
+These operations can be interpreted as relabelling of the cells.
 
 We have now defined a structure which can capture snapshots of a variable amount of unique cellular
 agents but are still missing any notion of dynamics.
