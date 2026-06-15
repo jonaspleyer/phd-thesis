@@ -747,19 +747,17 @@ $\tilde{\gamma}(c)_0=\gamma(c)=s$.
 This means whenever a division function $\gamma:C\rightarrow C\times C$ is presented, we will be
 able to utilize it by applying $\tilde{\gamma}$ within the respective simulation framework.
 
-\todo[inline]{use partial functions here and ff.}
-
 \begin{definition}[Single Cell Division]
     We call a map $\gamma:C\rightarrow \{0,1\}\times\sqcup_{n\geq 2}C^n$ a division function
     with output $\gamma(c_\iota) = (s,(c^1,\dots,c^n))$ where we call the variable $s$ the (binary)
     \textbf{Mode of Division} and refer to $s=0$ as the consuming mode and $s=1$ as the progenitive
     mode of division.
-    This definition formalizes criteria under which the map
+    We denote the set of division functions with $\mathcal{G}$ and call the partial function
     \begin{equation}
-        \Gamma:\{\gamma:C\rightarrow
-        \{0,1\}\times\sqcup_{n\geq 2}C^n\}\times I\times\CS\rightarrow\CS
+        \Gamma:\mathcal{G}\times I\times\CS\rightharpoonup\CS
     \end{equation}
-    is called a \textbf{Division Operator}.
+    a \textbf{Division Operator} with domain
+    $\text{\normalfont dom}(\Gamma)=\{(\gamma,\iota,(I_p,M)):\iota\in\pi_1(M)\}$.
     We call its input $(I_p,M)\in\CS$ the initial state with $c_\iota\in M$ indicating the mother
     cell and $(J_p,N)=\Gamma(\gamma,\iota,(I_p,M))$ the final state.
     \begin{enumerate}
@@ -782,7 +780,6 @@ able to utilize it by applying $\tilde{\gamma}$ within the respective simulation
         \item (Uniqueness) New cells have new identifiers:
             $\iota_{1+s},\dots,\iota_n\notin J_p\cup\pi_1(M)$.
     \end{enumerate}
-    In the case when $i\notin\pi_1(M)$, we require $\Gamma(\gamma,i,(I_p,M))=(I_p,M)$.
     \label{definition:cell-division-single}
 \end{definition}
 
@@ -875,14 +872,11 @@ Definition~\ref{definition:cell-removal} captures the instant at which the cellu
 removed.
 
 \begin{definition}[Cell Removal]
-    We define the removal function $\delta:I\times\CS\rightarrow\CS$ via
+    We define the removal function $\delta:I\times\CS\rightharpoonup\CS$ as a partial function
     \begin{equation}
-        \delta(\iota, (I_p,M))=
-        \begin{cases}
-            (I_p\cup\{\iota\},M\backslash\{c_\iota\}) &\text{if } \iota\in\pi_1(M)\\
-            (I_p,M) &\text{else}
-        \end{cases}.
+        \delta(\iota, (I_p,M))=(I_p\cup\{\iota\},M\backslash\{c_\iota\})
     \end{equation}
+    with $\text{\normalfont dom}(\delta)=\{(\iota,(I_p,M)):\iota\in\pi_1(M)\}$.
     Due to condition (2) of Definition~\ref{def:cellular-state}, the union $I_p\cup\{\iota\}$ is
     disjoint by definition.
     \label{definition:cell-removal}
@@ -925,10 +919,12 @@ This can be formalized by the following definition.
     mode of fusion (compare Definition~\ref{definition:cell-division-single}).
     We use the same convention where the first cell is kept in the accretive mode $s=1$.
     Let $\mathcal{F}$ be the set of fusion functions of $C$.
-    The map
+    The partial function
     \begin{equation}
-        \Xi:\mathcal{F}\times \sqcup_{n\geq2}I^n\times\CS\rightarrow\CS
+        \Xi:\mathcal{F}\times \sqcup_{n\geq2}I^n\times\CS\rightharpoonup\CS
     \end{equation}
+    with
+    $\text{\normalfont dom}(\Xi)=\{(\gamma,(\iota_1,\dots,\iota_n),(I_p,M)):\iota_i\in\pi_1(M)\}$
     is called a \textbf{Fusion Operator} if for $(J_p,N)=\Xi(\xi,(\iota_1,\dots,\iota_n), (I_p,M))$
     the following conditions hold:
     \begin{enumerate}
