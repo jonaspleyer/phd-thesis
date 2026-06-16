@@ -2031,6 +2031,9 @@ generation of cells.
 In terms of memory layout of our numerical simulation this means that every identifier allocates a
 continuously growing amount of memory which will result in overall decreased computational
 performance.
+Furthermore without the topological cellular process of insertion, this scheme is invariant under
+reordering of the involved topological cellular processes, meaning it always produces the exact same
+identifiers.
 
 Our next example utilizes a spatial subdivision of the physical environment to assign unique
 identifiers to each cell.
