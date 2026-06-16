@@ -1049,10 +1049,11 @@ investigate a first simple example which only utilizes cell division, death and 
 for every individual cell.
 The following example is not based on any particular biological reality but rather shows how a
 simply \ac{abm} can be constructed using the previously introduced notions.
-For this example, we will not discuss the explicit construction of the unique identifiers
-$\iota\in I$ but simply assume that we can utilize them in the way defined.
-Their construction is discussed later in Examples~\ref{example:unique-identifiers-1-global-counter}
-to \ref{example:unique-identifiers-4-uuids}.
+This example uses a variant of Example~\ref{example:unique-identifiers-2-inherit-names}, which can
+be simplified in the case of binary division with mode $s=0$, as the strategy to assign unique
+identifiers $\iota\in I$ to the individual cells.
+For now, it will be enough to assume that these identifiers can be constructed without worrying
+about their particular values.
 
 \begin{example}[Cells with capacity]
     \normalfont
@@ -1104,10 +1105,10 @@ to \ref{example:unique-identifiers-4-uuids}.
             \label{algorithm:simple-abm-main-loop}
             \begin{algorithmic}[1]
                 \For{$c_\iota\in\CS$}
-                \If{$\bar{\gamma}(c_\iota)$}
+                \If{$\bar{\gamma}(c_\iota)=1$}
                 \State $\CS \gets \Gamma(\gamma,\iota,\CS)$
                 \Comment{Perform Division}
-                \ElsIf{$\bar{\delta}(c_\iota)$}
+                \ElsIf{$\bar{\delta}(c_\iota)=1$}
                 \State $\CS \gets \delta(\iota, \CS)$
                 \Comment{Remove Cell}
                 \Else
@@ -1126,8 +1127,20 @@ properties.
 Since the \ac{abm} of Example~\ref{example:theory-simple-abm} does not contain any interactions
 between distinct agents, it suffices to analyze a single agent which is initialized with a given
 capacity.
-Furthermore, this also means that the order of iteration of cells in
-algorithm~\ref{algorithm:simple-abm-main-loop} does not influence the obtained results.
+Due to the utilized scheme to assign identifiers, the order of iteration of cells in
+Algorithm~\ref{algorithm:simple-abm-main-loop} does not influence the obtained results.
+Since the individual if-clauses of Algorithm~\ref{algorithm:simple-abm-main-loop} are pairwise
+disjoint, we can interpret one step as two overall operations $\varphi:\CS\rightarrow\CS$ and
+$\psi:\CS\rightarrow\CS$:
+First, perform the topological cellular processes of division and removal (death) for all matching
+cells denoted by $\varphi$.
+And secondly apply the update $c_\iota\mapsto c_\iota+1$ for cells which are not under these
+criteria denoted by $\psi$.
+We have therefore separated the topological cellular processes, which are bundled in $\varphi$, from
+the dynamics $\psi$ that only modifies the values of the cells.
+This will later be the basis for defining the dynamics of any \ac{cabm} (see
+Section~\ref{section:dynamics}).
+
 We will now show that the \ac{abm} always converges in a finite amount of iteration steps which
 justifies the approach of investigating a single cell as starting point and running the \ac{abm}
 until completion.
