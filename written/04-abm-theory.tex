@@ -377,7 +377,7 @@ all dynamics are described as the collection of all cellular states.
     \end{equation}
     We choose a simplified notation $\CS = \CS(I, C)$ whenever the dependencies are clear from the
     given context.
-    We also write $c_\iota:=(\iota,c)$ and introduce a simplified notation $c_\iota\in\CS$ where the
+    We also write $c_\iota=(\iota,c)$ and introduce a simplified notation $c_\iota\in\CS$ where the
     index $\iota$ is taken with respect to all living cells $\iota\in \pi_1(M)$.
     \label{def:cellular-space}
 \end{definition}
@@ -1898,7 +1898,7 @@ Now that we have introduced the dynamics of a \ac{cabm}, we can also define the 
     Let $\mu$ be a measure on $T$ such that the life-span is measurable with the underlying
     $\sigma$-algebra.
     We define the \textbf{Lifetime} with respect to this measure via
-    $\tau(\iota):=\mu\left(T_\iota\right)$.
+    $\tau(\iota)=\mu\left(T_\iota\right)$.
     \label{definition:cellular-lifetime}
 \end{definition}
 
@@ -2428,7 +2428,7 @@ reordering bijection $\beta$.
     can define the set of new identifiers with $((I_p,M),e)=x_n$ via
     \begin{align}
         (I_p^j,M^j) &= \left(\bigcomp_{k=1}^j\Phi_k\right)(x_n)\\
-        K_j &:= I_p^j\cup\pi_1(M^j)\backslash\left(I_p^{j-1}\cup\pi_1(M^{j-1})\right)
+        K_j &= I_p^j\cup\pi_1(M^j)\backslash\left(I_p^{j-1}\cup\pi_1(M^{j-1})\right)
     \end{align}
     for all $j\geq 1$ and $(I^0_p,M^0)=(I_p,M)$.
     Here, the concatenation ranges over all topological cellular processes ocurring before $\Phi_j$.
@@ -2438,7 +2438,7 @@ reordering bijection $\beta$.
     Utilizing $y_n=((J_p,N),e)$, we look at the sets
     \begin{align}
         (\tilde{I}_p^l,\tilde{M}^l) &= \left(\bigcomp_{k=1}^l\tilde{\Phi}_k\right)(y_n)\\
-        O_l &:= \tilde{I}_p^l\cup\pi_1(\tilde{M}^l)\backslash
+        O_l &= \tilde{I}_p^l\cup\pi_1(\tilde{M}^l)\backslash
             \left(\tilde{I}_p^{l-1}\cup\pi_1(\tilde{M}^{l-1})\right)
     \end{align}
     for $l\geq1$ and again setting $(J_p^0,N^0)=(J_p,N)$.
@@ -2490,7 +2490,7 @@ Therefore, we must first develop the notion of being a \textbf{neighbor}.
     In general, for any discrete space $\mathbb{Z}^n$, we consider the Moore neighborhood $U(x)$ for
     any point $x\in\mathbb{Z}^n$ to be
     \begin{equation}
-        U(x) := \{y\in\mathbb{Z}^n:\max\limits_{i\in\{1..n\}}|x_i-y_i|=1\}.
+        U(x) = \{y\in\mathbb{Z}^n:\max\limits_{i\in\{1..n\}}|x_i-y_i|=1\}.
     \end{equation}
     This definition ensures that at least one component of the value $y$ is not identical to the
     point in question $x$.
@@ -2507,7 +2507,7 @@ definition while the second can be more useful in a theoretical context.
     It is clear that $||$ is symmetric.\\
     $2) \Rightarrow 1)$ Let $||$ be a symmetric relation on $I$.
     We define the function $\eta:I\rightarrow Pot(I)$ via
-    $\eta(i):=\{j\in I \text{ such that } i||j\}$.
+    $\eta(i)=\{j\in I \text{ such that } i||j\}$.
     If $j\in\eta(i)$ then $i||j \Leftrightarrow j||i$ and thus $i\in\eta(j)$.
 \end{proof}
 
@@ -3103,7 +3103,7 @@ $\mathscr{C}$ and the physical domain $D$ in which they live ie. $M=\mathscr{C}\
     index.
     This means a single state is described by a mapping $L:\mathbb{Z}^2\rightarrow\{0,1\}$ and the
     evolution function of this dynamical system acts on the space of these maps
-    $X:=\{L:\mathbb{Z}^2\rightarrow\{0,1\}\}$
+    $X=\{L:\mathbb{Z}^2\rightarrow\{0,1\}\}$
     \begin{equation}
         \phi:U\subset(\mathbb{N}\times X) \rightarrow X
     \end{equation}
