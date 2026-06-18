@@ -872,80 +872,80 @@ inheritance from one generation to the next but only a stochastic distribution o
 which the new value is drawn (see supplement).
 
 \section{Methods \& Challenges}
-\subsection{AI Assisted Model Development}
-\subsubsection{Strategy}
-\begin{itemize}
-    \item LLMs can not determine underlying models (see pendulum)
-    \item LLMs can only infer and extrapolate
-    \item View human language as translation\\ Biology $\leftrightarrow$ biological functions
-        $\leftrightarrow$ human language $\leftrightarrow$ building blocks $\leftrightarrow$ model
-    \item LLMs are uniquely positioned; good at using text-based input, easily accessible
-\end{itemize}
-
-\subsubsection{Classification Results}
-\begin{itemize}
-    \item Problem: Map existing biological system to computational one
-    \item Possible solution: Use Aspects (as defined earlier) as intermediate representation
-    \item Investigate if AI can map biological systems to these aspects such that corresponding
-        simulations can be constructed
-    \item assess this at the example of 5-10 biological systems (which have possibly already been
-        targeted computationally), compare this to the expected results, Which prompts lead
-        to the desired effect? Can it identify everything correctly? Where is manual intervention
-        required?
-    \item Results may be influences by personal bias, all details with weighting and decision-making
-        process in supplement $\Rightarrow$ comment every output for every investigated paper
-\end{itemize}
-
-\begin{table}[H]
-    \newcounter{aspect2}
-    \setcounter{aspect2}{1}
-    \newcommand{\aspc}{(\arabic{aspect2}\refstepcounter{aspect2})}
-    \centering
-    \def\arraystretch{1.3}
-    \begin{tabular}{c l c c c c c c}
-        & Aspect & Correct & ChatGPT & Google Gemini & Grok & Claude & Llama?\\
-        \toprule
-        &\multicolumn{2}{l}{\textbf{(C) Cellular}}\\
-        \midrule
-        \aspc & Shape & 2-3-0-1 & 2-2-1-1 & ..\\
-        \aspc & Growth\\
-        \aspc & Movement\\
-        \aspc & Reactions\\
-        \aspc & Division\\
-        \aspc & Differentiation\\
-        \aspc & Death\\
-        &\multicolumn{3}{l}{\textbf{(CC) Cell-Cell Interactions}}\\
-        \midrule
-        \aspc & Short-Range Physical\\
-        \aspc & Long-Range Physical\\
-        \aspc & Contact Reactions\\
-        \aspc & Neighbor Response\\
-        &\multicolumn{3}{l}{\textbf{(EC) Environment-Cell Interactions}}\\
-        \midrule
-        \aspc & Exchange of Compounds\\
-        \aspc & Taxi/Sensing\\
-        \aspc & External Forces\\
-        \aspc & Surface Interactions\\
-        &\multicolumn{3}{l}{\textbf{(E) Environment}}\\
-        \midrule
-        \aspc & Extracellular Processes\\
-        \aspc & Physical Configuarion\\
-        &\multicolumn{3}{l}{\textbf{(O) Others}}\\
-        \midrule
-        \aspc & Experimental Intervenience\\
-        \midrule
-        &Total Score & 25-13-0-0 & 24-12-4-2 & 22-13-2-3 &\\
-        \bottomrule
-    \end{tabular}
-    \caption{
-        Overview of identified simulation aspects by different LLMs.
-        The listed values are true positive, true negative, false positive and false negative for
-        each LLM and each listed aspect.
-        Finally, the total sum for each LLM is compared against the defined total possible score
-        which is void of any false positives or false negatives.
-    }
-    \label{tabular:ai-paper-classification}
-\end{table}
+% \subsection{AI Assisted Model Development}
+% \subsubsection{Strategy}
+% \begin{itemize}
+%     \item LLMs can not determine underlying models (see pendulum)
+%     \item LLMs can only infer and extrapolate
+%     \item View human language as translation\\ Biology $\leftrightarrow$ biological functions
+%         $\leftrightarrow$ human language $\leftrightarrow$ building blocks $\leftrightarrow$ model
+%     \item LLMs are uniquely positioned; good at using text-based input, easily accessible
+% \end{itemize}
+% 
+% \subsubsection{Classification Results}
+% \begin{itemize}
+%     \item Problem: Map existing biological system to computational one
+%     \item Possible solution: Use Aspects (as defined earlier) as intermediate representation
+%     \item Investigate if AI can map biological systems to these aspects such that corresponding
+%         simulations can be constructed
+%     \item assess this at the example of 5-10 biological systems (which have possibly already been
+%         targeted computationally), compare this to the expected results, Which prompts lead
+%         to the desired effect? Can it identify everything correctly? Where is manual intervention
+%         required?
+%     \item Results may be influences by personal bias, all details with weighting and decision-making
+%         process in supplement $\Rightarrow$ comment every output for every investigated paper
+% \end{itemize}
+% 
+% \begin{table}[H]
+%     \newcounter{aspect2}
+%     \setcounter{aspect2}{1}
+%     \newcommand{\aspc}{(\arabic{aspect2}\refstepcounter{aspect2})}
+%     \centering
+%     \def\arraystretch{1.3}
+%     \begin{tabular}{c l c c c c c c}
+%         & Aspect & Correct & ChatGPT & Google Gemini & Grok & Claude & Llama?\\
+%         \toprule
+%         &\multicolumn{2}{l}{\textbf{(C) Cellular}}\\
+%         \midrule
+%         \aspc & Shape & 2-3-0-1 & 2-2-1-1 & ..\\
+%         \aspc & Growth\\
+%         \aspc & Movement\\
+%         \aspc & Reactions\\
+%         \aspc & Division\\
+%         \aspc & Differentiation\\
+%         \aspc & Death\\
+%         &\multicolumn{3}{l}{\textbf{(CC) Cell-Cell Interactions}}\\
+%         \midrule
+%         \aspc & Short-Range Physical\\
+%         \aspc & Long-Range Physical\\
+%         \aspc & Contact Reactions\\
+%         \aspc & Neighbor Response\\
+%         &\multicolumn{3}{l}{\textbf{(EC) Environment-Cell Interactions}}\\
+%         \midrule
+%         \aspc & Exchange of Compounds\\
+%         \aspc & Taxi/Sensing\\
+%         \aspc & External Forces\\
+%         \aspc & Surface Interactions\\
+%         &\multicolumn{3}{l}{\textbf{(E) Environment}}\\
+%         \midrule
+%         \aspc & Extracellular Processes\\
+%         \aspc & Physical Configuarion\\
+%         &\multicolumn{3}{l}{\textbf{(O) Others}}\\
+%         \midrule
+%         \aspc & Experimental Intervenience\\
+%         \midrule
+%         &Total Score & 25-13-0-0 & 24-12-4-2 & 22-13-2-3 &\\
+%         \bottomrule
+%     \end{tabular}
+%     \caption{
+%         Overview of identified simulation aspects by different LLMs.
+%         The listed values are true positive, true negative, false positive and false negative for
+%         each LLM and each listed aspect.
+%         Finally, the total sum for each LLM is compared against the defined total possible score
+%         which is void of any false positives or false negatives.
+%     }
+%     \label{tabular:ai-paper-classification}
+% \end{table}
 
 \subsection{Bridging Experiment and Simulations}
 \paragraph{Strategies for comparing simulation with data}
