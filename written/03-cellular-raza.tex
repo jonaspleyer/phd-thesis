@@ -124,6 +124,33 @@ Ideas from game development: https://www.youtube.com/watch?v=wo84LFzx5nI
         specific threads, minimize communication)
 \end{itemize}
 
+\begin{itemize}
+    \item interactions are local between cells; mostly blocked on long ranges by environment
+    \item processes within environment are also mostly local: diffusion, fluid mechanics, even
+        particle interactions (collisions etc.)
+    \item most long-range interactions are slow and still inherently local: molecular signalling
+        i.e. diffusion
+    \item others are fast but still local
+    \begin{enumerate}
+        \item bioelectric waves in bacterial biofilms \cite{Prindle2015}
+        \item mechanical signalling nitella chara \cite{Shimmen1997}
+    \end{enumerate}
+    \item only rare cases where interactions are of long range: "Galvanotaxis driven by
+        Transepithelial Potential during Wound Healing" \cite{duBoisReymond1843,Zhao2006}
+    \item we can leverage this to more efficiently perform numerical computations to obtain the
+        dynamics of \ac{cabm} $\rightarrow$ domain decomposition
+    \item split apart physical space and treat every subdomain as individual systems: get boundary
+        conditions from adjoining (neighboring) subdomains
+    \item other names for domain decomposition: FETI (Finite Element Tearing and Interconnecting),
+        Spatial Partitioning, Mesh Partitioning
+\end{itemize}
+
+\textbf{Technicalities}
+\begin{itemize}
+    \item topological cellular processes are local more or less by definition
+    \item split apart dynamics $\psi$
+\end{itemize}
+
 %...................................................................................................
 \subsection{Algorithm \& Code Generation}
 \begin{itemize}
