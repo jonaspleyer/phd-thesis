@@ -2233,8 +2233,10 @@ The following definition formalizes this.
 
 In practice, one does not define a whole family of maps $\upsilon_I$ but rather only one $\upsilon$
 which can then be used implicitly.
+The following lemma allows justifies this approach and shows that we can generalize $\upsilon$ to
+any set of identifiers.
 
-\begin{corollary}
+\begin{lemma}
     Let $\upsilon:U\rightarrow\{0,1\}$ be a cell insertion criterion.
     We can define a family of maps $\upsilon_I:U_I\rightarrow\{0,1\}$ such that
     \begin{align}
@@ -2244,7 +2246,7 @@ which can then be used implicitly.
     \end{align}
     for every bijection $\sigma:\tilde{I}\rightarrow\tilde{J}\subset J$.
     Here we have written $\upsilon_J(t,x)=\upsilon_{J,t}(x)$ again by slight abuse of notation.
-\end{corollary}
+\end{lemma}
 \begin{proof}
     We have given the map $\upsilon$ and we need to define the family of maps $\upsilon_I$ such that
     equation~\eqref{eq:corollary-cell-insertion-criterion} holds.
