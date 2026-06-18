@@ -2590,8 +2590,76 @@ approximations to the former.
 % 
 % \end{definition}
 
+\todo[inline]{rewrite everything after that}
 
-\subsection{Cell Competition Response to defective Hippo Pathway?}
+%---------------------------------------------------------------------------------------------------
+\section{Stochasticity}
+\label{section:stochasticity}
+The goal of this section is to investigate how the preceding definitions can be written when
+incorporating random processes which will require fundamental changes to the underlying model.
+In particular we will not ask the question of origin of randomness within these biological systems
+but instead consider our \ac{cabm} as an effective model which simply utilizes these concepts to
+construct a model that is able to properly describe the observed reality.
+The stochastic formulation of \acp{cabm} includes the deterministic one as an edge case.
+
+\textbf{Real Examples of Stochastic Processes in Biology}
+\begin{itemize}
+    \item stochastic gene expression \cite{McAdams1997,Elowitz2002}
+    \item brownian motion inside cells and outside (diffusion) \cite{Peskin1993,Svoboda1993}
+    \item microtubule dynamic instabiltiy \cite{Mitchison1984,Hill1984}
+    \item ion channel gating \cite{NEHER1976,Colquhoun1981}
+\end{itemize}
+
+\begin{definition}[Metric Dynamical System]
+    Let $(\Omega,\mathcal{F},\mathbb{P})$ be a probability space.
+
+    Define $\theta_t:\Omega\rightarrow\Omega$ for all $t\in T$ so that
+    \begin{enumerate}
+        \item $(t,\omega)\mapsto\theta_t(\omega)$ is measurable
+        \item $\theta_0$ is the identity on $\Omega$
+        \item $\theta_{t+s}=\theta_t\circ\theta_s$
+        \item $\mathbb{P}(\theta^{-1}(A))=\mathbb{P}(A)$ for all $A\in\mathcal{F}$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Stochastic Dynamical System]
+    Let $(X,\mathcal{B})$ be a measurable space (state space).
+    A stochastic dynamical system over a metric dynamical system
+    $(\Omega,\mathcal{F},\mathbb{P},\theta)$ is a mapping
+    \begin{equation}
+        \phi:T\times\Omega\times X\rightarrow X
+    \end{equation}
+    which satisfies the following conditions for almost all $\omega\in\Omega$:
+    \begin{enumerate}
+        \item $\phi(t+s,\omega,x)=\phi(t,\theta_s(\omega),\phi(s,\omega,x))$
+        \item $\phi(0,\omega,x)=x$ for all $x\in X$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Random Topological Cellular Process]
+    
+\end{definition}
+
+\todo[inline]{what does that mean for the criteria?}
+
+\begin{definition}[Random Topological Evolution Function]
+    
+\end{definition}
+
+\begin{definition}[Random Non-topological Evolution Function]
+    
+\end{definition}
+
+\begin{definition}[Stochastic \acl{cabm}]
+    
+\end{definition}
+
+\begin{itemize}
+    \item what does this mean for cell lineage?
+    \item how can we generalize Theorem~\ref{theorem:identifier-independent-dynamics}?
+    \item how is ensured that a valid cellular state is kept at every point in time?
+        How is this challenging when including random dynamics here?
+\end{itemize}
 
 \section{Cellular Identity Revisited}
 \subsection{The Challenge of Imaging \& Cell Tracking}
@@ -3024,9 +3092,6 @@ weakness of the \ac{abm} approach as also discussed previously.
 When choosing a particular embedding and thus a particular notion of cellular identification, the
 implications of this choice on the interpretation of the represented biological model, should be
 considered beforehand.
-
-%---------------------------------------------------------------------------------------------------
-\section{Stochasticity}
 
 %---------------------------------------------------------------------------------------------------
 \section{Comparison with other Methods and Formalisms}
