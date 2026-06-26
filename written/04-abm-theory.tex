@@ -2619,7 +2619,14 @@ The stochastic formulation of \acp{cabm} includes the deterministic one as an ed
     \item ion channel gating \cite{NEHER1976,Colquhoun1981}
 \end{itemize}
 
-\subsection{Extending \aclp{cabm} with Stochastic Processes}
+\subsection{Stochastic Dynamics in \aclp{cabm}}
+To find a suitable formalization that can faithfully include stochastic processes, we first recall
+the most general definitions that are required to build a random dynamical system.
+Definition~\ref{definition:metric-dynamical-system} describes how the noise of the system evolves
+over time which is a conceptually new object that has no previously discussed analogue.
+It is used in Definition~\ref{definition:stochastic-dynamical-system} to provide a general
+description for the dynamics of a stochastic dynamical system.
+
 \begin{definition}[Metric Dynamical System]
     Let $(\Omega,\mathcal{F},\mathbb{P})$ be a probability space.
 
@@ -2629,8 +2636,17 @@ The stochastic formulation of \acp{cabm} includes the deterministic one as an ed
         \item $\theta_0$ is the identity on $\Omega$
         \item $\theta_{t+s}=\theta_t\circ\theta_s$
         \item $\mathbb{P}(\theta^{-1}(A))=\mathbb{P}(A)$ for all $A\in\mathcal{F}$
+            \label{definition:metric-dynamical-system-preserve-prob}
     \end{enumerate}
+    \label{definition:metric-dynamical-system}
 \end{definition}
+
+When inspecting the definition of a dynamical system
+(\ref{definition:dynamical-system-category-theory}), we see that any state $x$ can be evolved by
+time $t$ successively, by applying the evolution function $\phi$ multiple times.
+When extending this notion to stochastic dynamical systems, the noise $\omega\in\Omega$ also
+undergoes a temporal evolution which is described by $\theta_t$.
+This is a fundamental concept in the following definition of stochastic dynamical systems.
 
 \begin{definition}[Stochastic Dynamical System]
     Let $(X,\mathcal{B})$ be a measurable space (state space).
@@ -2642,27 +2658,99 @@ The stochastic formulation of \acp{cabm} includes the deterministic one as an ed
     which satisfies the following conditions for almost all $\omega\in\Omega$:
     \begin{enumerate}
         \item $\phi(t+s,\omega,x)=\phi(t,\theta_s(\omega),\phi(s,\omega,x))$
+            \label{definition:stochastic-dynamical-system-condition-1}
         \item $\phi(0,\omega,x)=x$ for all $x\in X$
     \end{enumerate}
+    \label{definition:stochastic-dynamical-system}
 \end{definition}
 
-\begin{definition}[Random Topological Cellular Process]
-    
+Our goal is to utilize these concepts to extend Definition~\ref{definition:cabm} with stochastic
+processes.
+The evolution function $\varphi$ of a \ac{cabm} consists of concatenations of non-topological
+$\psi$ and topological evolution functions $\varphi_i$ which again consist of topological cellular
+processes $\Phi_{i,j}$.
+The definition of non-topological evolution functions $\psi_t$
+(see Definition~\ref{definition:non-topological-evolution-function}) can be extended without much
+work.
+
+\begin{definition}[Stochastic Non-Topological Evolution Function]
+    We call a map $\psi:U\subset T\times\Omega\times\CS\times\EV\rightarrow\CS\times\EV$ a
+    stochastic non-topological evolution function if the map $\psi(\cdot,\omega,\cdot,\cdot)$ is a
+    topological evolution function and
+    \begin{equation}
+        \psi_{t+s}(\omega,x)=\psi_t(\theta_s(\omega),\psi_s(x))
+    \end{equation}
+    for every $\omega\in\Omega$.
 \end{definition}
 
-\todo[inline]{what does that mean for the criteria?}
+However, the same can not be done as easily for the topological dynamics since their action is
+interpreted to be applied instantaneously (see
+Definition~\ref{definition:topological-cellular-process}) and would therefore not be compatible with
+a temporal evolution driven by $\theta$.
 
-\begin{definition}[Random Topological Evolution Function]
-    
+To capture the stochastic nature of topological cellular processes, we extend their definition to
+$\Phi_{i,j}:\Omega\times\CS\rightarrow\CS$ such that $\Phi_{i,j}$ additionally takes values in
+$\Omega$.
+With this choice, we assume that the noise $\omega$ at the time point at which the topological
+cellular process $\Phi$ is evaluated contains the necessary relevant information and does not alter
+the noise profile.
+In particular, this assumption does not interfere with the cocycle property
+\eqref{definition:stochastic-dynamical-system-condition-1} of
+Definition~\ref{definition:stochastic-dynamical-system} and
+condition \eqref{definition:metric-dynamical-system-preserve-prob} of
+Definition~\ref{definition:metric-dynamical-system}.
+Most importantly, this will directly allow us to generalize
+Proposition~\ref{proposition:cabm-are-dynamical-systems} to the stochastic case without additional
+work.
+We capture these ideas in the following definition.
+
+\begin{definition}[Stochastic Topological Dynamics]
+    A stochastic topological cellular process is a map
+    $\Phi:\Omega\times\CS\rightarrow\CS$ where for every $\omega\in\Omega$, the map
+    $\Phi(\omega,\cdot):\CS\rightarrow\CS$ is a topological cellular process for all
+    $A\in\mathcal{F}$ and $x\in\CS$.
+
+    A stochastic topological evolution function $\varphi:\CS\times\Omega\rightarrow\CS$
+    is the countable concatenation of topological cellular processes
+    $\Phi_j:\Omega\times\CS\rightarrow\CS$
+    \begin{equation}
+        \varphi = \bigcomp_j\Phi_j
+    \end{equation}
+    such that $\varphi(\omega,\cdot)$ is a topological evolution function for all $\omega\in\Omega$.
 \end{definition}
 
-\begin{definition}[Random Non-topological Evolution Function]
-    
-\end{definition}
+We are now ready to define a stochastic \ac{cabm} which is built from the preceding definitions.
 
 \begin{definition}[Stochastic \acl{cabm}]
-    
+    We reuse existing notions of Definition~\ref{definition:cabm}.
+    A stochastic \acl{cabm} is a tuple $(\omega,T,\CS(I,C),\EV)$ with an evolution function
+    $\phi:U\subset T\times\Omega\times\CS\times\EV\rightarrow\CS\times\EV$ where
+    $\pi_{3,4}(U)=\CS\times\EV$ and stochastic non-topological evolution function $\psi$.
+    For every $\omega\in\pi_2(U)$, there exists a set of stochastic topological evolution functions
+    $\varphi_i$ and times $t_i$ such that we can decompose the evolution function for every
+    $t\in\pi_1(U)$ via
+    \begin{equation}
+        \phi_t(\omega,x,e)=
+            \left(\bigcomp_{i=1}^n\psi_{t_i}\circ\bar{\varphi}_i\right)\circ\psi_{t_0}
+    \end{equation}
+    with $\sum_i t_i=t$ and $t_i>0$ for $0<i<n$ and
+    $\bar{\varphi}_i((I_p,M),e)=(\varphi((I_p,M)),e)$.
+    \label{definition:stochastic-cabm}
 \end{definition}
+
+In particular, Definition~\ref{definition:stochastic-cabm} implies that the individual timings
+$t_i$, and the overall decomposition of $\phi$ depends on the chosen noise $\omega\in\Omega$.
+
+\todo[inline]{stopped working here last time}
+
+Having discussed the necessary extensions to topological and non-topological evolution functions, we
+are now in a position to investigate their concatenations.
+This will again be the basis to define the dynamics of our \ac{cabm} (see
+Definition~\ref{definition:cabm}).
+To this end, we look at the map
+\begin{equation}
+    \varphi_t(\omega,x)=\left(\psi_{t_1}\circ\varphi_1\circ\psi_{t_0}\right)(\omega,x)
+\end{equation}
 
 \begin{itemize}
     \item what does this mean for cell lineage?
