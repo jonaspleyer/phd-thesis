@@ -2739,25 +2739,39 @@ We are now ready to define a stochastic \ac{cabm} which is built from the preced
 \end{definition}
 
 In particular, Definition~\ref{definition:stochastic-cabm} implies that the individual timings
-$t_i$, and the overall decomposition of $\phi$ depends on the chosen noise $\omega\in\Omega$.
+$t_i$, and the overall decomposition of $\phi$ depends on the chosen noise realization
+$\omega\in\Omega$ and
+thus Proposition~\ref{proposition:cabm-time-evolution-is-unique} naturally generalizes to stochastic
+\acp{cabm}.
+In general Definition~\ref{definition:stochastic-cabm} implies, that we obtain a fully deterministic
+\ac{cabm} when fixing the noise realization $\omega\in\Omega$ of a stochastic \ac{cabm}.
+From this observation, we directly see that a valid cellular state is maintained at every time and
+that every change in the currently alive cells is only the result of a topological cellular process.
+Furthermore this means that all results from the previous section naturally generalize to a
+stochastic version when fixing the noise realization $\omega$ and consequently, the derived
+properties are of stochastic nature, i.e. depend on $\omega$.
+This includes results such as the cell lineage (Theorem~\ref{theorem:cell-lineage} and
+Lemma~\ref{lemma:cell-lineage-for-cabms}), the lifetime of a cell
+(Definition~\ref{definition:cellular-lifetime}) and even the relation of stochastic \acp{cabm} to
+stochastic dynamical systems (Theorem~\ref{proposition:cabm-are-dynamical-systems}).
 
-\todo[inline]{stopped working here last time}
-
-Having discussed the necessary extensions to topological and non-topological evolution functions, we
-are now in a position to investigate their concatenations.
-This will again be the basis to define the dynamics of our \ac{cabm} (see
-Definition~\ref{definition:cabm}).
-To this end, we look at the map
-\begin{equation}
-    \varphi_t(\omega,x)=\left(\psi_{t_1}\circ\varphi_1\circ\psi_{t_0}\right)(\omega,x)
-\end{equation}
-
-\begin{itemize}
-    \item what does this mean for cell lineage?
-    \item how can we generalize Theorem~\ref{theorem:identifier-independent-dynamics}?
-    \item how is ensured that a valid cellular state is kept at every point in time?
-        How is this challenging when including random dynamics here?
-\end{itemize}
+However, one result that requires closer inspection is the identifier-independent dynamics
+(Theorem~\ref{theorem:identifier-independent-dynamics}).
+Here, we need to investigate how the various criteria for division, removal, fusion and insertion
+should be adjusted in the stochastic case and if such an approach is even feasible.
+When the criteria are not inherently stochastic, as discussed earlier, we can naturally generalize
+Theorem~\ref{theorem:identifier-independent-dynamics} for fixed $\omega$.
+Therefore we now consider the case there the criteria are also of stochastic nature, i.e. directly
+depend on the noise realization $\omega$.
+This carries forward to the previously defined set $Q(s,x_i,\omega)$ which is then mapped to a time
+value and topological evolution function by the resolver $\mu$ as described in
+Definition~\ref{definition:criterion-determined-topological-processes}.
+Although the set $Q(s,x_i,\omega)$ does already depend on $\omega$, we can further also allow $\mu$
+to depend on it as well, i.e. $\mu:\mathcal{Q}\times\Omega\rightarrow T\times\mathcal{P}$.
+Under all these considerations, the previously established proofs and ideas carry through when
+initially fixing $\omega\in\Omega$ and we can obtain the same result as
+Theorem~\ref{theorem:identifier-independent-dynamics} in the stochastic case where the bijection
+$\sigma$ now implicitly depends on $\omega$.
 
 \section{Cellular Identity Revisited}
 \subsection{The Challenge of Imaging \& Cell Tracking}
