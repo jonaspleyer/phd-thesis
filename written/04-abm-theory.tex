@@ -2681,7 +2681,7 @@ work.
     \begin{equation}
         \psi_{t+s}(\omega,x)=\psi_t(\theta_s(\omega),\psi_s(x))
     \end{equation}
-    for every $\omega\in\Omega$.
+    for almost every $\omega\in\Omega$.
 \end{definition}
 
 However, the same can not be done as easily for the topological dynamics since their action is
@@ -2707,7 +2707,7 @@ We capture these ideas in the following definition.
 
 \begin{definition}[Stochastic Topological Dynamics]
     A stochastic topological cellular process is a map
-    $\Phi:\Omega\times\CS\rightarrow\CS$ where for every $\omega\in\Omega$, the map
+    $\Phi:\Omega\times\CS\rightarrow\CS$ where for almost every $\omega\in\Omega$, the map
     $\Phi(\omega,\cdot):\CS\rightarrow\CS$ is a topological cellular process.
 
     A stochastic topological evolution function $\varphi:\CS\times\Omega\rightarrow\CS$
@@ -2716,7 +2716,8 @@ We capture these ideas in the following definition.
     \begin{equation}
         \varphi = \bigcomp_j\Phi_j
     \end{equation}
-    such that $\varphi(\omega,\cdot)$ is a topological evolution function for all $\omega\in\Omega$.
+    such that $\varphi(\omega,\cdot)$ is a topological evolution function for almost all
+    $\omega\in\Omega$.
 \end{definition}
 
 We are now ready to define a stochastic \ac{cabm} which is built from the preceding definitions.
@@ -2726,9 +2727,9 @@ We are now ready to define a stochastic \ac{cabm} which is built from the preced
     A stochastic \acl{cabm} is a tuple $(\omega,T,\CS(I,C),\EV)$ with an evolution function
     $\phi:U\subset T\times\Omega\times\CS\times\EV\rightarrow\CS\times\EV$ where
     $\pi_{3,4}(U)=\CS\times\EV$ and stochastic non-topological evolution function $\psi$.
-    For every $\omega\in\pi_2(U)$, there exists a set of stochastic topological evolution functions
-    $\varphi_i$ and times $t_i$ such that we can decompose the evolution function for every
-    $t\in\pi_1(U)$ via
+    For almost all $\omega\in\pi_2(U)$, there exists a set of stochastic topological evolution
+    functions $\varphi_i$ and times $t_i$ such that we can decompose the evolution function for
+    every $t\in\pi_1(U)$ via
     \begin{equation}
         \phi_t(\omega,x,e)=
             \left(\bigcomp_{i=1}^n\psi_{t_i}\circ\bar{\varphi}_i\right)\circ\psi_{t_0}
