@@ -2684,12 +2684,18 @@ This process is only survived by $<1\%$ of cells~\cite{BastidaRuiz2016,Hass2021,
 means that highly prolific cancerous cells that are able to invade the tissue are a mere result of
 low probability in large quantities.
 
-\begin{itemize}
-    \item stochastic gene expression \cite{McAdams1997,Elowitz2002}
-    \item brownian motion inside cells and outside (diffusion) \cite{Peskin1993,Svoboda1993}
-    \item microtubule dynamic instabiltiy \cite{Mitchison1984,Hill1984}
-    \item ion channel gating \cite{NEHER1976,Colquhoun1981}
-\end{itemize}
+As we have seen in the previous results, stochastic phenomena ocurr at all types of dynamics that we
+have so far defined.
+Systems such as pure brownian motion can be mapped to a fully deterministic many-particle system of
+colliding objects~\cite{Einstein1905}, thus allowing us to perfectly trace the origin of noise.
+On the other hand, models often require effective descriptions for computational efficacy and
+arguable lower number of parameters.
+Furthermore, as can be seen from the brownian motion example, deterministic versions would require
+an extremely large number of initial values which are practically not measurable.
+Finally, the utilized scales (physical size and duration) can play an important role in determining
+if a stochastic component can be reduced, i.e. by using a description on averages of this quantity.
+It is therefore necessary and useful to treat every topological and non-topological cellular process
+as one that is able to contain stochastic elements.
 
 \subsection{Stochastic Dynamics in \aclp{cabm}}
 To find a suitable formalization that can faithfully include stochastic processes, we first recall
