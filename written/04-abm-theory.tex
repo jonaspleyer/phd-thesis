@@ -2960,6 +2960,35 @@ In a very recent preprint, BASELINE~\cite{Winter2025} extends this approach, uti
 adenine and increases storage capacity significantly.
 
 \subsection{Encoding \& Decoding of individual Cellular Identity}
+We are now going to investigate how the preceding section can be understood when aiming to estimate
+the parameters of a \ac{cabm}.
+To this end, we generally assume that parameters are individual, i.e. different on a per-cell level.
+While behaviour such as the type of growth (e.g. linear, exponential) may be shared among cells, the
+particular rate with which they grow may be unique to each cell.
+This concept can be generalized to other entities such as the \acp{grn} which is often modeled by
+\acp{ode}.
+We explicitly note that we are not only talking about cellular heterogeneity as a distribution of
+parameters which misses the points made in the previous section.
+This idea is about directly linking \textit{in-silico} agents $c_\iota$ with experimentally observed
+cells on a per-cell basis.
+It is the most general form of comparing individual-based \acp{cabm} with biological results and can
+be reduced to more common approaches such as the previously mentioned statistical heterogeneic
+(distribution of parameters) or simple bulk-based ones.
+
+The per-cell resolution is built into the \ac{cabm} by definition of the cellular space (see
+Definition~\ref{def:cellular-space}).
+Therefore, we need to worry only about how to decode these cellular identities from the experimental
+biological reality and how to obtain the desirable readout.
+We will utilize the notions established in the preceding sections.
+Withtin our theoretical considerations, the biological reality will be denoted by an entity
+$b\in\mathcal{B}$ which contains all biological information of the system at a single time point
+which does not necessarily need to be accessible via measurement.
+To compare any state $(I_p,M)\in\CS$ with a snapshot $b\in\mathcal{B}$, we will utilize an
+intermediate representation $x\in X$ from which we are able to reconstruct the cellular identities.
+We also require that the readout $\Theta$ of the system that we are interested in can be calculated
+from the same intermediate representation $x\in X$.
+This leads us to the following graph.
+
 \begin{itemize}
     \item Formalizations of preceding ideas
     \item encoder function $\mu:\pi_2(\CS)\rightarrow X$
