@@ -2989,6 +2989,79 @@ We also require that the readout $\Theta$ of the system that we are interested i
 from the same intermediate representation $x\in X$.
 This leads us to the following graph.
 
+\begin{equation}
+    \begin{tikzpicture}[baseline=(current  bounding  box.center)]
+        \node (cs) at (0,-1) {$\CS$};
+        \node (b) at (0,1) {$\mathcal{B}$};
+        \node (x) at (3,1) {$X$};
+        \node (rn) at (6,1) {$\R^n$};
+        \node (id) at (3,-1) {$\sqcup_n C^n$};
+        \draw[->] (cs) -- node[below,sloped] {proj} ++ (id);
+        \draw[->] (x) -- node[above] {$\Theta$} ++ (rn);
+        \draw[->] (x) -- node[right] {$\sigma$} ++ (id);
+        \draw[->] (cs) -- node[above,sloped] {$\mu$} ++ (x);
+        \draw[->] (b) -- node[above,sloped] {measure} ++ (x);
+    \end{tikzpicture}
+    \label{graph:cellular-identity-encode-decode-measure}
+\end{equation}
+
+Within this framework, the actual biological reality $\mathcal{B}$ will not be utilized by itself
+and instead only the experimentally measured quantity $x\in X$ is used which is only realistic,
+considering that no measurement will ever be able to fully capture its whole extent.
+The maps $\mu:\CS\rightarrow X$ and $\sigma:X\rightarrow\sqcup_n C^n$ are encoder and decoder of the
+cellular identity and $\Theta:X\rightarrow\R^n$ is the previously mentioned readout.
+Figure~\ref{fig:theory-cell-lineage-segmentation} depicts the same idea, utilizing a more visual
+approach of the abstract mathematical variant of
+Graph~\eqref{graph:cellular-identity-encode-decode-measure}.
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \node (model) at (0,-4)
+            {\begin{tabular}{c}
+                \textbf{Model}\\
+                \includegraphics[width=0.2\textwidth]{figures/abm-theory/encode-decode-model.pdf}\\
+                \phantom{a}
+            \end{tabular}};
+        \node (bio) at (0,0)
+            {\begin{tabular}{c}
+                \textbf{Biology}\\
+                \includegraphics[width=0.2\textwidth]{figures/abm-theory/encode-decode-img.pdf}\\
+                \phantom{a}
+            \end{tabular}};
+        \node (identity) at (6,-4)
+            {\begin{tabular}{c}
+                \textbf{Cells}\\
+                \framebox(80,40){$(c_1,c_2,\dots)$}\\
+                \phantom{a}
+            \end{tabular}};
+        \node (enc) at (6,0)
+            {\begin{tabular}{c}
+                \textbf{Encoding}\\
+                \includegraphics[width=0.2\textwidth]{figures/abm-theory/encode-decode-masks.pdf}\\
+                \phantom{a}
+            \end{tabular}};
+        \node (readout) at (11,0)
+            {\begin{tabular}{c}
+                \textbf{Readout}\\
+                \includegraphics[width=0.15\textwidth]{figures/abm-theory/encode-decode-readout.pdf}\\
+                \phantom{a}
+            \end{tabular}};
+        \draw[-latex] (bio) --
+            node[midway,above,sloped] {measure}
+            node[midway,below,sloped] {\& compute} ++ (enc);
+        \draw[-latex] (model) -- node[midway,above,sloped] {encode} ++ (enc);
+        \draw[-latex] ([yshift=1em]enc.south) -- node[right] {decode} ++ (identity);
+        \draw[-latex] (model) -- node[midway,below] {proj} ++ (identity);
+        \draw[-latex] (enc) -- node[above] {readout} ++ (readout);
+    \end{tikzpicture}
+    \caption[Relation of Model, Biological Reality, Encoding and Cellular Identity]{
+
+    }
+    \todo[inline]{make this figure more clear: what is the purpose?}
+    \label{fig:theory-cell-lineage-segmentation}
+\end{figure}
+
 \begin{itemize}
     \item Formalizations of preceding ideas
     \item encoder function $\mu:\pi_2(\CS)\rightarrow X$
