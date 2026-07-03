@@ -2937,7 +2937,8 @@ This task was often carried out manually before task-specific tools~\cite{Carpen
 developed and later succeeded by generalist deep learning approaches like
 DeepCell~\cite{VanValen2016} and TrackMate~\cite{Tinevez2017} based on U-Net~\cite{Ronneberger2015}.
 Today, all modern foundational models like 3DeeCellTracker \cite{Wen2021},
-Cellpose~\cite{Stringer2020} and its successor Omnipose~\cite{Cutler2022} rely on this architecture.
+Cellpose~\cite{Stringer2020}, its successor Omnipose~\cite{Cutler2022} and others~\cite{Hardo2022}
+rely on this architecture.
 These methods can be extended to dynamically track cells over the course of time but this additional
 temporal complexity still poses substantial problems for existing
 solutions~\cite{Maka2014,Maka2023,Ulman2017,Wen2021}.
@@ -3139,69 +3140,36 @@ properties of interest are contained.
 This will ensure that it can be properly constructed from the \ac{cabm} and remains experimentally
 measurable.
 
-
-\begin{itemize}
-    \item Formalizations of preceding ideas
-    \item encoder function $\mu:\pi_2(\CS)\rightarrow X$
-    \begin{itemize}
-        \item $\mu(M)=\{x_\iota:c_\iota\in M\}$
-        \item $\mu(M)=\{\text{envelope}(c_\iota):c_\iota\in M\}$ where envelope is
-            $\text{envelope}(c_\iota)\subset\R^3$
-        \item $M\mapsto\rho(x)$ (mass) density (alternatively radioactive material/GFP tagging)
-        \item $M\mapsto$ possibly duplicate list of RNA sequences or something like that
-    \end{itemize}
-    \item decoder function $\sigma:\mathcal{P}(X)\rightarrow\{U_1,U_1,\dots\}$ where $U_i\subset X$
-        and $U_i\subset\cup_\iota\mu(c_\iota)$
-    \item Use this to display cell lineage more clearly; make examples with
-        Figure~\ref{fig:theory-cell-lineage-as-manifold}
-\end{itemize}
-
 \subsection{Interpretation of the Temporal Identity Encoding}
-\begin{itemize}
-    \item Encoding changes when a cell is considered an individual entity $\iota$
-    \item Divisions introduce discontinuities when only looking at a pure tree; but using the right
-        encoding, we can possibly obtain something continuous or even smooth (mass-average position
-        vs cellular envelope)
-    \item Design models with this in mind: not necessarily chase continuity or smoothness but be
-        aware of the implications
-    \item Think about if readouts depend on the chosen identity of the cell
-    \item Often the middle of this diagram is hidden and only $\mathcal{B}\rightarrow\R^n$ and
-        $\CS\rightarrow\R^n$is investigates, leading to no individual cellular resolution
-\end{itemize}
-
-\pagebreak
-
 We will now take a closer look at how cell-lineage can be used to understand and interpret the
 strategy for assigning identifiers and what is considered to be a discrete cellular identity.
-This section also partially deals with the theoretical question of how to distinguish individual
-cells from each other when presented with extracted information of the system in question.
-A common task is, given a microscopic image of cells, to find the individual segments that belong to
-their respective cells.
-A subset of the information contained in each cell---in this case their spatial envelope---is enough
-to identify the cells and distinguish them from each other.
-To formalize these ideas, we will think of the cellular envelope as an encoding scheme which can be
-generalized beyond this introductory example and of the segmentation task as a decoding operation
-which is able to identify individual cells but not necessarily obtain deeper information about them.
-
-We first note that the lineage of cells is often displayed as a tree or more generally a graph,
-gradually moving downwards along the y-axis, incrementing with each successive division (fusion)
-event as done in Figure~\ref{fig:theory-thought-experiment-3}.
+As we have seen, the cell-lineage (see Theorem~\ref{theorem:cell-lineage}) can be interpreted as a
+graph which is often displayed without temporal notion by simply listing cellular states and their
+topological transitions from one to another, as done in
+Figure~\ref{fig:theory-thought-experiment-3}.
 However, one downside of this representation is that it hides information such as the timings of the
 division events or during which time point a cell is alive.
 This information can be added when displaying the cell lineage as done in
 Figure~\ref{fig:theory-simple-abm-analysis} (D) where horizontal lines indicate discrete iteration
-steps of the system.
+steps of the system that now enable us to see when the division process ocurrs and when a particular
+cell is alive.
 But even this representation can be further enriched, as done in
 Figure~\ref{fig:theory-cell-lineage-as-manifold}.
 Subfigure (A) shows the cell lineage displayed as a graph purely informed by division events while
-(B) includes temporal information and maps each cell to its spatial envelope at a particular point
-in time.
+(B) includes temporal information and maps each cell to two distinct encodings, where the outer can
+be thought of as its spatial envelope and the inner might represent an intracellular readout.
 Subfigure (C) shows the temporal evolution of one cell division event.
 The spatial envelope of one cell is given by \ac{2d} circle which splits into two overlapping
 circles as the division continues.
-They gradually move away from each other before finally separating.
+They gradually move away from each other before finally separating via events such as the previously
+discussed cytokinetic abcission.
 The time point at which the division criterion is active $\bar{\gamma}=1$ is the moment where the
-two circles only overlap in exactly one singular point.
+two circles only overlap in exactly one singular point which marks the exact time point that the two
+cells are considered separate entities.
+Subfigure (D) extends this idea from spherical cells to cylindrical ones which do not simply overlap
+in a singular point but rather in a disk.
+Subfigures (C,D) show that the cellular envelope as an identity encoding can prove challenging when
+aiming to separate two daughter cells shortly after the division event.
 
 \begin{figure}
     \centering
@@ -3223,204 +3191,41 @@ two circles only overlap in exactly one singular point.
     \label{fig:theory-cell-lineage-as-manifold}
 \end{figure}
 
-Using the cellular envelope as an encoding scheme for distinguishing cells, is perhabs the most
-commonly utilized technique and a fundamental principle to many methods such as spatial segmentation
-algorithms~\cite{Cutler2022,Stringer2020,Hardo2022}.
-In general, the preceding examples indicate that the encoding scheme can be interpreted as a
-physically measurable quantity which is accessible to the researcher by measurement.
-This can in principle include intracellular properties such as specific protein concentrations which
-could be read out e.g. via tagging with \ac{gfp}~\cite{Chalfie1994},
-mCherry~\cite{Campbell2002,Matz1999,Shaner2004} or HaloTag~\cite{Los2008}.
-While it is useful to utilize physically measurable quantities in order to provide a direct link to
-the biological reality, our theoretical formalism will not require this assumption.
+The cellular envelope can be interpreted as a density function $\rho:\R^d\rightarrow\{0,1\}$ which
+only maps to binary outputs (with $d=2,3$), indicating if the particular space is occupied by a cell
+or not.
+It is then the task of the segmentation tool (see Subsection~\ref{subsubsec:imaging-tracking}) to
+segment these regions into the individual cells.
+But we can also extend the definition of $\rho:\R^d\rightarrow[0,1]$ to a general density measure
+which could measure properties such as mass density obtained via quantitative phase
+imaging~\cite{BARER1952,DAVIES1952} or \ac{gfp} density (i.e. via confocal microscopy).
+In this case, the individual cells could be thought of as basins within the landscape defined by
+$\rho$.
+Therefore, the cellular identity is encoded in the density $\rho$ itself and the decoder map
+$\sigma$ needs to obtain the unique identifiers (basins) from it.
+This links directly to the mathematical subdiscipline of Morse theory~\cite{Morse1934,Milnor1963},
+which also provides the theoretical foundation for some segmentation
+tools~\cite{Robins2011,Banerjee2020}.
+It also justifies the notion of "topological" cellular processes and "non-topological" dynamics
+(see Definition \ref{definition:topological-cellular-process} \&
+\ref{definition:non-topological-evolution-function}).
 
-In order to formalize the presented throughts, we first note that the encoding takes values in the
-power set $\mathcal{P}(\R^k)$ which is motivated by looking at the example of using the cellular
-envelope as done in Figure~\ref{fig:theory-cell-lineage-as-manifold} (C) which is a subset of
-$\R^3$.
-Furthermore, every biological cell is spatially bound and consists of only one single connected
-region.
-We therefore assume that the values of our encoding are compact and connected.
-This means, that we restrict ourselves to the set $\mathcal{P}_\text{\normalfont kp}(\R^k)$ which
-only contains (k) compact (from the german "kompakt") and (p) path-connected subsets of $\R^k$.
-To measure distances within this space, we define a metric between two sets
-$A,B\in\mathcal{P}_\text{\normalfont kp}(\R^k)$ using the Hausdorff metric~\cite{Hausdorff1914}
-\begin{equation}
-    d_H(A,B) = \max \left\{
-        \sup_{a\in A}\text{\normalfont dist}(a,B),
-        \sup_{b\in B}\text{\normalfont dist}(b,A) \right\}
-\end{equation}
-where $d(x,X)=\sup\text{\normalfont dist}(x,X)$ denotes the supremum of the smallest distance
-between point $x$ and the set $X$ with respect to the usual euclidean metric.
-This can be simplified in this case by using the maximum since every set in
-$\mathcal{P}_\text{\normalfont kp}$ is compact and the supremum takes its value.
+Another intriguing aspect is that we can begin to see that \acp{cabm} may not be the most general
+mathematical framework that can be used to study individual cellular entities.
+Looking directly at Figure~\ref{fig:theory-cell-lineage-as-manifold} (B,C), we notice that every
+slice at a certain time-point is a topological space where the various connected components
+resemble one individual cell.
+Speaking more generally, we could argue that a \ac{cabm} could be reinterpreted as a
+temporally-parametrized topological space where the overall shape of the infinitesimally successive
+topological space is determined by the underlying dynamics of the \ac{cabm}.
+If we could find a formulation that leverages these concepts but remains sufficiently useful in
+describing biological reality, we would not have to deal with the tedious questions of unique
+identifiers and the question of what constitutes a cellular identity.
+Instead, any cellular identity would be given by certain topological properties (i.e. connected
+subsets, betti numbers, fundamental group, etc.).
+It remains an open question how this could be formalized rigorously.
 
-Another important property which can be seen in the discussion surrounding the temporal evolution of
-the division displayed in Figure~\ref{fig:theory-cell-lineage-as-manifold} (C) is that the two
-daughter cells produced by $\gamma$ are overlapping in a single point and are not entirely disjoint
-right at the division event.
-While this particular intersection is only a singular point, it may be more complex in other
-scenarios.
-Consider Figure~\ref{fig:theory-cell-lineage-as-manifold} (D) where the cellular envelope of the
-underlying model is that of a cylinder which grows along its axis of elongation and divides into two
-new cylindrically-shaped cells.
-The two resulting cylinders will overlap exactly at the two bases closest to each other.
-These overlaps should not be interpreted as two cells that partially share a spatial region but
-rather as a consequence of our model and encoding choice.
-But they are still relevant since they might surface in numerical results and imaging techniques.
-This motivate the approach to not merely treat them as an artifact but rather a common occurence
-and part of our a practical reality that needs to be dealt with.
-
-\begin{figure}
-    \centering
-    \begin{tikzpicture}
-        \node (model) at (0,-4)
-            {\begin{tabular}{c}
-                \textbf{Model}\\
-                \includegraphics[width=0.2\textwidth]{figures/abm-theory/encode-decode-model.pdf}\\
-                \phantom{a}
-            \end{tabular}};
-        \node (bio) at (0,0)
-            {\begin{tabular}{c}
-                \textbf{Biology}\\
-                \includegraphics[width=0.2\textwidth]{figures/abm-theory/encode-decode-img.pdf}\\
-                \phantom{a}
-            \end{tabular}};
-        \node (identity) at (6,-4)
-            {\begin{tabular}{c}
-                \textbf{Identity}\\
-                \framebox(80,40){$\{\iota_1,\iota_2,\dots\}$}\\
-                \phantom{a}
-            \end{tabular}};
-        \node (enc) at (6,0)
-            {\begin{tabular}{c}
-                \textbf{Encoding}\\
-                \includegraphics[width=0.2\textwidth]{figures/abm-theory/encode-decode-masks.pdf}\\
-                \phantom{a}
-            \end{tabular}};
-        \node (readout) at (11,0)
-            {\begin{tabular}{c}
-                \textbf{Readout}\\
-                \includegraphics[width=0.15\textwidth]{figures/abm-theory/encode-decode-readout.pdf}\\
-                \phantom{a}
-            \end{tabular}};
-        \draw[-latex] (bio) --
-            node[midway,above,sloped] {measure}
-            node[midway,below,sloped] {\& compute} ++ (enc);
-        \draw[-latex] (model) -- node[midway,above,sloped] {encode} ++ (enc);
-        \draw[-latex] (enc) -- node[right] {deocde} ++ (identity);
-        \draw[-latex] (model) -- node[midway,below] {proj} ++ (identity);
-        \draw[-latex] (enc) -- node[above] {readout} ++ (readout);
-    \end{tikzpicture}
-    \caption[Relation of Model, Biological Reality, Encoding and Cellular Identity]{
-
-    }
-    \todo[inline]{make this figure more clear: what is the purpose?}
-    \label{fig:theory-cell-lineage-segmentation}
-\end{figure}
-
-In order to identify individual cells from a particular encoding, we can define a decoding map
-$\sigma$ which aims to reobtain the original identities of cells from a collection of encodings.
-If a single encoding is takes values in $\mathcal{P}_\text{\normalfont kp}(\R^k)$, then a
-combination of encodings for a countable number of cells is the union of countably many elements of
-$K_i\in\mathcal{P}_\text{\normalfont kp}(\R^k)$.
-A finite union of sets $K_i$ may not be connected anymore and a countable amount may not be bound
-anymore.
-We therefore need to generalize the domain of the decoder to
-$\mathcal{P}_\text{\normalfont c}(\R^k)$ which only contains (c) closed sets.
-
-
-We therefore define the decoder to map 
-
-$\sigma:\mathcal{P}(\R^k)\rightarrow
-\mathcal{P}\left(\mathcal{P}_\text{\normalfont kp}(\R^k)^\mathbb{N}\right)$
-which is
-able to take any subset of $\R^k$ and identify distinct cells from it.
-With these considerations we can now formailze the encoding of a cell.
-This combination of encoding and decoding should not be understood in terms of a full reconstruction
-of the provided input information but is rather tied to the 
-
-\begin{definition}[Encoding \& Decoding of Cellular Identity]
-    We call a continuous map $\mu:C\rightarrow\mathcal{P}_\text{\normalfont kp}(\R^k)$ an
-    \textbf{identity encoding} and a map
-    $\sigma:\mathcal{P}\rightarrow\sqcup_{n\in\mathbb{N}}\{0,\dots,n\}\sqcup\mathbb{N}$ an
-    \textbf{identity decoding}.
-\end{definition}
-
-The encoding of a cell can be interpreted as
-
-\begin{definition}[Decoding of identity]
-    For any division $\gamma$ or fusion $\zeta$ let $c_{\iota_1},\dots,c_{\iota_n}$ be the
-    initial and $c_{\bar{\iota}_1},\dots,c_{\bar{\iota}_m}$ the final cells of these operations.
-    \todo[inline]{correct the intersection part.}
-    If the encodings of initial and final cells are pairwise disjoint, i.e.
-    $\mu(c_{\iota_i})\cap\mu(c_{\iota_j}) = \emptyset$ and
-    $\mu(c_{\bar{\iota}_i})\cap\mu(c_{\bar{\iota}_j}) = \emptyset$ for every $i\neq j$, then we call
-    $\mu$ \textbf{separable}.
-\end{definition}
-
-Any encoding $\mu$, can be used to embed the cell lineage in $\R^{d+1}$ via its graph
-\begin{equation}
-    G=\{(\cup_{c_\iota}\mu(c_\iota(t),t)|c_\iota(t)\text{ is alive at }t\}\hookrightarrow\R^{d+1}
-    \label{eq:cell-lineage-graph-encoding}
-\end{equation}
-where we are using the notion of a cell being alive at a particular point in time $t$ that will be
-introduced later on (see Definition~\ref{definition:cellular-lifetime}).
-
-We turn our attention to investigate the implications of this representation.
-It is in genral not straightforward to make any generalized statements about the nature of $G$
-without assuming any particular example.
-If the encoding $\mu(c_\iota(t))$ has a particular structure, such as that of a $n$-manifold, it
-does not necessarily mean that the graph $G$ retains a similar structure such as a $n+1$ manifold.
-The following example illustrates this point.
-
-\begin{example}[Spatially mass-averaged position encoding]
-    We assume that every cell is a physical entity in space $\R^k$ with an (Lebesuge) integrable
-    mass density function $\rho:\R^k\rightarrow\R$.
-    Then we define the sptatiall mass-averaged position of the cell via
-    \begin{equation}
-        \mu(c_\iota(t))=\bar{x}_\iota(t)=\int\rho(x)(t)x_\iota(t)\text{\normalfont dx}\in\R^k
-    \end{equation}
-    where we used a simplified notation since the set $\mu(c_\iota(t))$ only consists of one element
-    and therefore $\mu(c_\iota(t))\in\R^k$.
-    We generally assume that this position function $x_\iota(t)$ is well defined and at least
-    continuous in $t$.
-\end{example}
-
-When a division event occurs at time $t_d$, the average position of the daughter cells will not be
-identical to its parent, which leads to a discontinuity in the graph $G$.
-This means that the relation
-\begin{equation}
-    \limsup_{t\rightarrow t_d} \mu(c_\iota(t))=
-        \liminf_{t\rightarrow t_d}\bigcup_i\mu(c_{\iota_i}(t))
-\end{equation}
-will not be obeyed.
-Here $c_{\iota_i}$ are the daughter cells of $c_\iota$ and $\liminf,\limsup$ are the set-theoretic
-limits.
-However, despite this discontinuity at the division time point, the spatially mass-averaged position
-encoding is frequently utilized.
-
-
-\begin{example}[Spatial cell-envelope encoding]
-    We again assume that any cell
-\end{example}
-
-Even in simple examples where $\mu(c_\iota)$ can be given by a circle for each time point, the
-resulting structure of $G$ will only be a continuous manifold, not even differentiable which is
-displayed in Figure~\ref{fig:theory-cell-lineage-as-manifold} (C).
-
-
-
-
-
-
-However, for all times between division or fusion events, we retain the structure of a $1$-manifold
-if the produced coordinats $x_\iota(t)$ are spatially distinct, meaning
-$x_\iota(t)\neq x_{\bar{\iota}}(t)$ for $\iota\neq\bar{\iota}$.
-
-If at any time, between fusion events
-
-\todo[inline]{correct all of this. these are not embeddings!}
+\pagebreak
 
 We now turn to investigate transitions between division and fusion events of the graph defined by
 Equation~\ref{eq:cell-lineage-graph-encoding}.
