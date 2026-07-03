@@ -3095,6 +3095,23 @@ image from the Cellpose dataset~\cite{Stringer2020} as visual.
     \label{fig:theory-cell-lineage-segmentation}
 \end{figure}
 
+A proper combination of encoder $\mu$ and decoder $\sigma$ will ensure that the identifiers which
+are produced by the decoder $\sigma$ can be mapped onto the living cells $(\cdot,M)\in\CS$.
+This is captured in the following definition.
+
+\begin{definition}[Encoding \& Decoding of Cellular Identity]
+    We call a continuous map $\mu:\CS\times\EV\rightarrow X$ and an \textbf{identity encoding} and
+    the map $\sigma:X\rightarrow\mathcal{P}(I)$ an \textbf{identity decoding} if for every
+    $((I_p,M),e)\in\CS\times\EV$ there exists a bijection
+    $\alpha_x:\sigma(\mu((I_p,M),e))\rightarrow\rightarrow\pi_1(M)$ such that
+    \begin{equation}
+        (\alpha_x\circ\sigma\circ\mu)(x) = \pi_1(M).
+    \end{equation}
+\end{definition}
+
+Note that this definition assumes that $\alpha$ is obtainable and exact, although dependent on the
+particular state $((I_p,M),e)$ which is a strong assumption and as we have explained earlier (see
+Subsection~\ref{subsubsec:imaging-tracking}, see Cell Tracking).
 
 \begin{itemize}
     \item Formalizations of preceding ideas
