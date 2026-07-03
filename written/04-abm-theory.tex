@@ -3112,6 +3112,33 @@ This is captured in the following definition.
 Note that this definition assumes that $\alpha$ is obtainable and exact, although dependent on the
 particular state $((I_p,M),e)$ which is a strong assumption and as we have explained earlier (see
 Subsection~\ref{subsubsec:imaging-tracking}, see Cell Tracking).
+Furthermore, this definition does not take into account the temporal evolution of the \ac{cabm}
+which will further introduce additional complexity.
+
+When interpreting Figure~\ref{fig:theory-cell-lineage-segmentation} in light of this definition, the
+biological reality (upper left) is measured by an imaging technique and then segmented using the
+Cellpose~\cite{Stringer2020} algorithm.
+Figure~\ref{fig:theory-cell-lineage-segmentation} is in part misleading in this respect since the
+biological reality (upper left) is not merely a microscopic image but contains information about
+every property such as every single molecule of the whole system.
+One could also make an effort to utilize the presented microscopic image (upper left) as an encoding
+itself.
+However, this would significantly complicate the encoding process $\mu:\CS\times\EV\rightarrow X$
+when starting at the \ac{cabm} and is therefore not considered useful.
+
+On the other side, the \ac{cabm} can be used to generate a \ac{2d} snapshot from the individual
+cells, using their sizes and locations and coloring individual regions accordingly.
+The encoding can then be trivially reduced to a new set of identifiers by accumulating all unique
+color values that describe the individual entities of the cells.
+Although the presented encoding of Figure~\ref{fig:theory-cell-lineage-segmentation} (upper right)
+only relies on the physical shape of the cells, this could be enriched by more information, e.g.
+\ac{gfp}-tagged readouts of intracellular properties unique to the individual cells.
+
+In general, the encoding should be chosen minimal enough that the cellular identity and other
+properties of interest are contained.
+This will ensure that it can be properly constructed from the \ac{cabm} and remains experimentally
+measurable.
+
 
 \begin{itemize}
     \item Formalizations of preceding ideas
