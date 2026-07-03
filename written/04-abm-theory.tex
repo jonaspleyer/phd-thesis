@@ -2969,7 +2969,41 @@ at a single locus one after another~\cite{Loveless2021} while Mouse for Actively
 In a very recent preprint, BASELINE~\cite{Winter2025} extends this approach, utilizing the Cas12a
 adenine and increases storage capacity significantly.
 
+\subsubsection{Further Biological Insights}
+The study of \citet{Gershony2014} utilized a coexpression of \ac{gfp} with the "human Cdt1 degron
+fused to monomeric Kusabira­Orange 2 (mKO2)" which peaks at $G_1$.
+It therefore allowed us to directly compare the physical connectedness of the two cells in question
+with their internal states, given by their \acp{grn}.
+
+In another example, the midbody, which is a "singular organelle, formed between daughter cells
+during cytokinesis"~\cite{Kuo2011} has been shown to be inherited asymmetrically by only one
+daughter cell.
+While we have previously established the concept of asymmtric cell division via the $s=1$ mode of
+our division (see Definition~\ref{definition:cell-division-single}), this poses the question if such
+a process falls within these bounds and if not, when the lives of the daughters begin during the
+process of inheritance~\cite{Chen2013}.
+
+Baker's yeast divides asymmetrically and is known to produce the transcription factor Ace2 which
+specifically localizes around the daughter cell~\cite{ColmanLerner2001}.
+However despite this arguably clear marker, which is measurable, it is still ambiguous as to when
+exactly the daughter cell should be considered a separate entity: First nuclear appearance of Ace2,
+particular level of asymmetric localization or when the respective gene is transcribed?
+
+When investigating Myoblast formation via fusion, the particular time point at which the constituent
+cells cease to exist and the newly formed fused cell begins its life can be defined more precisely.
+It is given by the time point of the fusion pore formation which opens the physical barrier between
+the cells~\cite{Sens2010,Kim2015}.
+
 \subsection{Encoding \& Decoding of individual Cellular Identity}
+The preceding section has shown the diverse set of experimental techniques which are utilized to
+distinguish individual cells from each other.
+Many of them rely on spatial information such as \ac{2d} or \ac{3d} imaging while others utilize
+purely intracellular properties.
+It has also highlighted many biological issues that prevent us from utilizing a single shared notion
+of what consitutes an individual cell.
+Instead, such a notion requires a particular choice which we denote as an "encoding" of the cellular
+identity and we require it to be experimentally measurable in order to be a useful choice.
+
 We are now going to investigate how the preceding section can be understood when aiming to estimate
 the parameters of a \ac{cabm}.
 To this end, we generally assume that parameters are individual, i.e. different on a per-cell level.
