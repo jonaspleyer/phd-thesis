@@ -3031,16 +3031,15 @@ To compare any state $(I_p,M)\in\CS$ with a snapshot $b\in\mathcal{B}$, we will 
 intermediate representation $x\in X$ from which we are able to reconstruct the cellular identities.
 We also require that the readout $\Theta$ of the system that we are interested in can be calculated
 from the same intermediate representation $x\in X$.
-This leads us to the following graph.
-
+This leads us to the following graph
 \begin{equation}
     \begin{tikzpicture}[baseline=(current  bounding  box.center)]
-        \node (cs) at (0,-1) {$\CS$};
+        \node (cs) at (0,-1) {$\CS\times\EV$};
         \node (b) at (0,1) {$\mathcal{B}$};
         \node (x) at (3,1) {$X$};
         \node (rn) at (6,1) {$\R^n$};
-        \node (id) at (3,-1) {$\sqcup_n C^n$};
-        \draw[->] (cs) -- node[below,sloped] {proj} ++ (id);
+        \node (id) at (3,-1) {$\mathcal{P}(I)$};
+        \draw[->] (cs) -- node[below,sloped] {$\bar{\pi}$} ++ (id);
         \draw[->] (x) -- node[above] {$\Theta$} ++ (rn);
         \draw[->] (x) -- node[right] {$\sigma$} ++ (id);
         \draw[->] (cs) -- node[above,sloped] {$\mu$} ++ (x);
@@ -3048,15 +3047,20 @@ This leads us to the following graph.
     \end{tikzpicture}
     \label{graph:cellular-identity-encode-decode-measure}
 \end{equation}
-
+where $\mathcal{P}(I)$ denotes the power set over the set of identifiers $I$.
 Within this framework, the actual biological reality $\mathcal{B}$ will not be utilized by itself
 and instead only the experimentally measured quantity $x\in X$ is used which is only realistic,
-considering that no measurement will ever be able to fully capture its whole extent.
-The maps $\mu:\CS\rightarrow X$ and $\sigma:X\rightarrow\sqcup_n C^n$ are encoder and decoder of the
-cellular identity and $\Theta:X\rightarrow\R^n$ is the previously mentioned readout.
+considering that no measurement will ever be able to fully capture the whole biological extent.
+The maps $\mu:\CS\times\EV\rightarrow X$ and $\sigma:X\rightarrow\sqcup_n C^n$ are encoder and
+decoder of the cellular identity and $\Theta:X\rightarrow\R^n$ is the previously mentioned readout.
+We should note that we cannot blindly assume that the identifiers produced by $\sigma$ match with
+the ones in the original state $(I_p,M)$ since $\sigma$ does not contain any information about the
+previously utilized identifiers.
+Therefore, the mapping denoted with $\bar{\pi}$ is not a simple projection but rather a projection
+combined with a reinterpretation (bijection) that makes the diagram commute.
 Figure~\ref{fig:theory-cell-lineage-segmentation} depicts the same idea, utilizing a more visual
 approach of the abstract mathematical variant of
-Graph~\eqref{graph:cellular-identity-encode-decode-measure}.
+Diagram~\eqref{graph:cellular-identity-encode-decode-measure}.
 
 \begin{figure}
     \centering
@@ -3075,8 +3079,8 @@ Graph~\eqref{graph:cellular-identity-encode-decode-measure}.
             \end{tabular}};
         \node (identity) at (6,-4)
             {\begin{tabular}{c}
-                \textbf{Cells}\\
-                \framebox(80,40){$(c_1,c_2,\dots)$}\\
+                \textbf{Identity}\\
+                \framebox(80,40){$\{\iota_1,\iota_2,\dots\}$}\\
                 \phantom{a}
             \end{tabular}};
         \node (enc) at (6,0)
@@ -3091,15 +3095,24 @@ Graph~\eqref{graph:cellular-identity-encode-decode-measure}.
                 \includegraphics[width=0.15\textwidth]{figures/abm-theory/encode-decode-readout.pdf}\\
                 \phantom{a}
             \end{tabular}};
-        \draw[-latex] (bio) --
-            node[midway,above,sloped] {measure}
-            node[midway,below,sloped] {\& compute} ++ (enc);
+        \draw[-latex] (bio) -- node[midway,above,sloped] {measure} ++ (enc);
         \draw[-latex] (model) -- node[midway,above,sloped] {encode} ++ (enc);
         \draw[-latex] ([yshift=1em]enc.south) -- node[right] {decode} ++ (identity);
         \draw[-latex] (model) -- node[midway,below] {proj} ++ (identity);
         \draw[-latex] (enc) -- node[above] {readout} ++ (readout);
     \end{tikzpicture}
     \caption[Relation of Model, Biological Reality, Encoding and Cellular Identity]{
+        Schematic visualization of cellular identity encoding and decoding, comparing model and
+        biological reality along a shared readout.
+        A cellular system (upper left) is transformed by experimental measurement into an
+        intermediate state (encoding,upper middle).
+        From there, we can compute the desired readout (upper right) or decode the intermediate
+        representation to obtain the states of various individual cells (lower middle).
+        Likewise, the \ac{cabm} (lower left) can be encoded within the intermediate representation
+        or directly mapped to the identity of the cells.
+    }
+    \label{fig:theory-cell-lineage-segmentation}
+\end{figure}
 
     }
     \todo[inline]{make this figure more clear: what is the purpose?}
@@ -3131,20 +3144,6 @@ Graph~\eqref{graph:cellular-identity-encode-decode-measure}.
     \item Design models with this in mind: not necessarily chase continuity or smoothness but be
         aware of the implications
     \item Think about if readouts depend on the chosen identity of the cell
-\begin{equation}
-    \begin{tikzpicture}[baseline=(current  bounding  box.center)]
-        \node (cs) at (0,-1) {$\CS$};
-        \node (b) at (0,1) {$\mathcal{B}$};
-        \node (x) at (3,1) {$X$};
-        \node (rn) at (6,1) {$\R^n$};
-        \node (id) at (3,-1) {$\pi_1(M)$};
-        \draw[->] (cs) -- node[below,sloped] {proj} ++ (id);
-        \draw[->] (x) -- node[above] {$\Theta$} ++ (rn);
-        \draw[->] (x) -- node[right] {$\sigma$} ++ (id);
-        \draw[->] (cs) -- node[above,sloped] {$\mu$} ++ (x);
-        \draw[->] (b) -- node[above,sloped] {measure} ++ (x);
-    \end{tikzpicture}
-\end{equation}
     \item Often the middle of this diagram is hidden and only $\mathcal{B}\rightarrow\R^n$ and
         $\CS\rightarrow\R^n$is investigates, leading to no individual cellular resolution
 \end{itemize}
