@@ -3020,27 +3020,27 @@ Therefore, we need to worry only about how to decode these cellular identities f
 biological reality.
 % We will utilize the notions established in the preceding sections to express this mathematically.
 To compare any state $(I_p,M)\in\CS$ with a snapshot $b\in\mathcal{B}$, we will utilize the encoding
-of identity which is an intermediate representation $x\in X$ from which we are able to reconstruct
+of identity which is an intermediate representation $y\in Y$ from which we are able to reconstruct
 the cellular identities.
 This leads us to the following graph
 \begin{equation}
     \begin{tikzpicture}[baseline=(current  bounding  box.center)]
         \node (cs) at (0,-1) {$\CS\times\EV$};
         \node (b) at (0,1) {$\mathcal{B}$};
-        \node (x) at (3,1) {$X$};
+        \node (y) at (3,1) {$Y$};
         \node (id) at (3,-1) {$\mathcal{P}(I)$};
         \draw[->] (cs) -- node[below,sloped] {$\bar{\pi}$} ++ (id);
-        \draw[->] (x) -- node[right] {$\sigma$} ++ (id);
-        \draw[->] (cs) -- node[above,sloped] {$\mu$} ++ (x);
-        \draw[->] (b) -- node[above,sloped] {measure} ++ (x);
+        \draw[->] (y) -- node[right] {$\sigma$} ++ (id);
+        \draw[->] (cs) -- node[above,sloped] {$\mu$} ++ (y);
+        \draw[->] (b) -- node[above,sloped] {measure} ++ (y);
     \end{tikzpicture}
     \label{graph:cellular-identity-encode-decode-measure}
 \end{equation}
 where $\mathcal{P}(I)$ denotes the power set over the set of identifiers $I$.
 Within this framework, the actual biological reality $\mathcal{B}$ will not be utilized by itself
-and instead only the experimentally measured quantity $x\in X$ is used which is only realistic,
+and instead only the experimentally measured quantity $y\in Y$ is used which is only realistic,
 considering that no measurement will ever be able to fully capture the whole biological extent.
-The maps $\mu:\CS\times\EV\rightarrow X$ and $\sigma:X\rightarrow\sqcup_n C^n$ are encoder and
+The maps $\mu:\CS\times\EV\rightarrow Y$ and $\sigma:Y\rightarrow\sqcup_n C^n$ are encoder and
 decoder of the cellular identity.
 We should note that we cannot blindly assume that the identifiers produced by $\sigma$ match with
 the ones in the original state $(I_p,M)$ since $\sigma$ does not contain any information about the
@@ -3101,12 +3101,12 @@ are produced by the decoder $\sigma$ can be mapped onto the living cells $(\cdot
 This is captured in the following definition.
 
 \begin{definition}[Encoding \& Decoding of Cellular Identity]
-    We call a continuous map $\mu:\CS\times\EV\rightarrow X$ and an \textbf{identity encoding} and
-    the map $\sigma:X\rightarrow\mathcal{P}(I)$ an \textbf{identity decoding} if for every
+    We call a continuous map $\mu:\CS\times\EV\rightarrow Y$ and an \textbf{identity encoding} and
+    the map $\sigma:Y\rightarrow\mathcal{P}(I)$ an \textbf{identity decoding} if for every
     $((I_p,M),e)\in\CS\times\EV$ there exists a bijection
-    $\alpha_x:\sigma(\mu((I_p,M),e))\rightarrow\rightarrow\pi_1(M)$ such that
+    $\alpha_y:\sigma(\mu((I_p,M),e))\rightarrow\rightarrow\pi_1(M)$ such that
     \begin{equation}
-        (\alpha_x\circ\sigma\circ\mu)(x) = \pi_1(M).
+        (\alpha_y\circ\sigma\circ\mu)(y) = \pi_1(M).
     \end{equation}
 \end{definition}
 
@@ -3124,7 +3124,7 @@ biological reality (upper left) is not merely a microscopic image but contains i
 every property such as every single molecule of the whole system.
 One could also make an effort to utilize the presented microscopic image (upper left) as an encoding
 itself.
-However, this would significantly complicate the encoding process $\mu:\CS\times\EV\rightarrow X$
+However, this would significantly complicate the encoding process $\mu:\CS\times\EV\rightarrow Y$
 when starting at the \ac{cabm} and is therefore not considered useful.
 
 On the other side, the \ac{cabm} can be used to generate a \ac{2d} snapshot from the individual
