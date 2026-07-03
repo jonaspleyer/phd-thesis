@@ -2889,6 +2889,7 @@ How can we utilize this knowledge to compare computational models with experimen
 \subsection{How to identify an individual Cell}
 \label{subsec:abm-theory-what-is-a-cell}
 \subsubsection{The Challenge of Imaging \& Tracking}
+\label{subsubsec:imaging-tracking}
 On the practical side, the process of identifying and tracking individual cells can be achieved in a
 variety of technologically intricate ways.
 Many methods rely on a combination of imaging techniques together with an \textit{In-Silico}
@@ -2999,48 +3000,35 @@ The preceding section has shown the diverse set of experimental techniques which
 distinguish individual cells from each other.
 Many of them rely on spatial information such as \ac{2d} or \ac{3d} imaging while others utilize
 purely intracellular properties.
-It has also highlighted many biological issues that prevent us from utilizing a single shared notion
-of what consitutes an individual cell.
-Instead, such a notion requires a particular choice which we denote as an "encoding" of the cellular
-identity and we require it to be experimentally measurable in order to be a useful choice.
+It has also highlighted many biological questions that prevent us from utilizing a single shared
+notion of what consitutes an individual cell.
+Instead, such a notion involves a particular choice which we call an "encoding" of the cellular
+identity.
+We require that it can be measured experimentally in order to be a useful definition of identity.
+In the following text, we aim to mathematically capture the variety of presented ideas under a
+shared umbrella.
 
-We are now going to investigate how the preceding section can be understood when aiming to estimate
-the parameters of a \ac{cabm}.
-To this end, we generally assume that parameters are individual, i.e. different on a per-cell level.
-While behaviour such as the type of growth (e.g. linear, exponential) may be shared among cells, the
-particular rate with which they grow may be unique to each cell.
-This concept can be generalized to other entities such as the \acp{grn} which is often modeled by
-\acp{ode}.
-We explicitly note that we are not only talking about cellular heterogeneity as a distribution of
-parameters which misses the points made in the previous section.
-This idea is about directly linking \textit{in-silico} agents $c_\iota$ with experimentally observed
-cells on a per-cell basis.
-It is the most general form of comparing individual-based \acp{cabm} with biological results and can
-be reduced to more common approaches such as the previously mentioned statistical heterogeneic
-(distribution of parameters) or simple bulk-based ones.
-
-The per-cell resolution is built into the \ac{cabm} by definition of the cellular space (see
+We begin by assuming that the full biological reality lives in an abstract and usually
+experimentally inaccessible space where $b\in\mathcal{B}$ symbolizes one particular snapshot of a
+full cellular system.
+Analogously to that is our \ac{cabm} which contains information of one snapshot as
+$((I_p,M),e)\in\CS\times\EV$.
+Here, the per-cell resolution is built into the \ac{cabm} by definition of the cellular space (see
 Definition~\ref{def:cellular-space}).
 Therefore, we need to worry only about how to decode these cellular identities from the experimental
-biological reality and how to obtain the desirable readout.
-We will utilize the notions established in the preceding sections.
-Withtin our theoretical considerations, the biological reality will be denoted by an entity
-$b\in\mathcal{B}$ which contains all biological information of the system at a single time point
-which does not necessarily need to be accessible via measurement.
-To compare any state $(I_p,M)\in\CS$ with a snapshot $b\in\mathcal{B}$, we will utilize an
-intermediate representation $x\in X$ from which we are able to reconstruct the cellular identities.
-We also require that the readout $\Theta$ of the system that we are interested in can be calculated
-from the same intermediate representation $x\in X$.
+biological reality.
+% We will utilize the notions established in the preceding sections to express this mathematically.
+To compare any state $(I_p,M)\in\CS$ with a snapshot $b\in\mathcal{B}$, we will utilize the encoding
+of identity which is an intermediate representation $x\in X$ from which we are able to reconstruct
+the cellular identities.
 This leads us to the following graph
 \begin{equation}
     \begin{tikzpicture}[baseline=(current  bounding  box.center)]
         \node (cs) at (0,-1) {$\CS\times\EV$};
         \node (b) at (0,1) {$\mathcal{B}$};
         \node (x) at (3,1) {$X$};
-        \node (rn) at (6,1) {$\R^n$};
         \node (id) at (3,-1) {$\mathcal{P}(I)$};
         \draw[->] (cs) -- node[below,sloped] {$\bar{\pi}$} ++ (id);
-        \draw[->] (x) -- node[above] {$\Theta$} ++ (rn);
         \draw[->] (x) -- node[right] {$\sigma$} ++ (id);
         \draw[->] (cs) -- node[above,sloped] {$\mu$} ++ (x);
         \draw[->] (b) -- node[above,sloped] {measure} ++ (x);
@@ -3052,15 +3040,14 @@ Within this framework, the actual biological reality $\mathcal{B}$ will not be u
 and instead only the experimentally measured quantity $x\in X$ is used which is only realistic,
 considering that no measurement will ever be able to fully capture the whole biological extent.
 The maps $\mu:\CS\times\EV\rightarrow X$ and $\sigma:X\rightarrow\sqcup_n C^n$ are encoder and
-decoder of the cellular identity and $\Theta:X\rightarrow\R^n$ is the previously mentioned readout.
+decoder of the cellular identity.
 We should note that we cannot blindly assume that the identifiers produced by $\sigma$ match with
 the ones in the original state $(I_p,M)$ since $\sigma$ does not contain any information about the
 previously utilized identifiers.
 Therefore, the mapping denoted with $\bar{\pi}$ is not a simple projection but rather a projection
 combined with a reinterpretation (bijection) that makes the diagram commute.
-Figure~\ref{fig:theory-cell-lineage-segmentation} depicts the same idea, utilizing a more visual
-approach of the abstract mathematical variant of
-Diagram~\eqref{graph:cellular-identity-encode-decode-measure}.
+Figure~\ref{fig:theory-cell-lineage-segmentation} depicts the same idea, utilizing a microscopic
+image from the Cellpose dataset~\cite{Stringer2020} as visual.
 
 \begin{figure}
     \centering
@@ -3089,35 +3076,25 @@ Diagram~\eqref{graph:cellular-identity-encode-decode-measure}.
                 \includegraphics[width=0.2\textwidth]{figures/abm-theory/encode-decode-masks.pdf}\\
                 \phantom{a}
             \end{tabular}};
-        \node (readout) at (11,0)
-            {\begin{tabular}{c}
-                \textbf{Readout}\\
-                \includegraphics[width=0.15\textwidth]{figures/abm-theory/encode-decode-readout.pdf}\\
-                \phantom{a}
-            \end{tabular}};
         \draw[-latex] (bio) -- node[midway,above,sloped] {measure} ++ (enc);
         \draw[-latex] (model) -- node[midway,above,sloped] {encode} ++ (enc);
         \draw[-latex] ([yshift=1em]enc.south) -- node[right] {decode} ++ (identity);
         \draw[-latex] (model) -- node[midway,below] {proj} ++ (identity);
-        \draw[-latex] (enc) -- node[above] {readout} ++ (readout);
     \end{tikzpicture}
     \caption[Relation of Model, Biological Reality, Encoding and Cellular Identity]{
         Schematic visualization of cellular identity encoding and decoding, comparing model and
         biological reality along a shared readout.
-        A cellular system (upper left) is transformed by experimental measurement into an
-        intermediate state (encoding,upper middle).
-        From there, we can compute the desired readout (upper right) or decode the intermediate
-        representation to obtain the states of various individual cells (lower middle).
+        A cellular system (upper left), represented by a microscopic image is transformed via
+        experimental measurement into an encoding (upper right), by segmenting the individual cells
+        (data from the Cellpose train dataset~\cite{Stringer2020}).
+        From there, we can decode the intermediate representation to obtain the identifiers (lower
+        right).
         Likewise, the \ac{cabm} (lower left) can be encoded within the intermediate representation
         or directly mapped to the identity of the cells.
     }
     \label{fig:theory-cell-lineage-segmentation}
 \end{figure}
 
-    }
-    \todo[inline]{make this figure more clear: what is the purpose?}
-    \label{fig:theory-cell-lineage-segmentation}
-\end{figure}
 
 \begin{itemize}
     \item Formalizations of preceding ideas
