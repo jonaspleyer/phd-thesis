@@ -3225,7 +3225,44 @@ Instead, any cellular identity would be given by certain topological properties 
 subsets, betti numbers, fundamental group, etc.).
 It remains an open question how this could be formalized rigorously.
 
-\pagebreak
+\subsection{Parameter Estimation Stuff}
+We are now going to investigate how the preceding ideas can be understood when aiming to estimate
+the parameters of a \ac{cabm}.
+To this end, we generally assume that parameters are individual, i.e. different on a per-cell level.
+While behaviour such as the type of growth (e.g. linear, exponential) may be shared among cells, the
+particular rate with which they grow may be unique to each cell.
+This concept can be generalized to other entities such as the reaction parameters of \acp{grn} which
+is often modeled by \acp{ode}.
+We explicitly note that we are not only talking about cellular heterogeneity as a distribution of
+parameters which misses a crucial point.
+Instead, this idea is about directly linking \textit{in-silico} agents $c_\iota$ with experimentally
+observed cells on a per-cell basis.
+It is the most general form of comparing individual-based \acp{cabm} with biological results and all
+other approaches such as the previously mentioned statistical heterogeneic (distribution of
+parameters) or simple bulk-based ones can be derived from it.
+
+Since the biological reality is only accessible via the measured encoding $y\in Y$, we base our
+analysis on this setup.
+Consider the case where we aim to compare a measured encoded state $y_b$ and one derived from the
+state of a \ac{cabm} $\mu(x)=y_c$.
+To do this, we define a metrix $d:Y\times Y\rightarrow\R_{\geq 0}$ which provides a measure for the
+discrepancy of the two encodings.
+We can assume that the parameters which govern the dynamics that lead to the state
+$x=\phi_t((\emptyset,M),e)$ can be split into ones that are unique to each cell $\{\vec{p}_\iota\}$
+where $\vec{p}_\iota\in U\subset\R^k$ and others $\vec{q}\in V\subset\R^l$, responsible for
+environmental and other processes.
+We can now interpret the quantity
+\begin{equation}
+    L(\{\vec{p}_\iota\},\vec{q}) = d(x_b,x_c(\{\vec{p}_\iota\},\vec{q}))
+\end{equation}
+as a map $L:U^n\times V\rightarrow\R$ where $U^n\times V\subset\R^{nk+l}$ and $n$ is the number of
+involved cells (counting all currently alive and previously alive ones).
+If we minimize $L$, we obtain the optimal parameters
+\begin{equation}
+    (\{\vec{p}_{\iota,\text{opt}}\},\vec{q}_\text{opt})=
+        \argmin_{\{\vec{p}_\iota\},\vec{q}} L(\{\vec{p}_\iota\},\vec{q})
+\end{equation}
+that allow the \ac{cabm} to match the experimental observation $x_b$ the closest.
 
 We now turn to investigate transitions between division and fusion events of the graph defined by
 Equation~\ref{eq:cell-lineage-graph-encoding}.
