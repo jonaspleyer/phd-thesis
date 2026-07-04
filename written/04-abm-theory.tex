@@ -3582,127 +3582,10 @@ distinct entities.
     \item If related, then only for stochastic \acp{abm}
 \end{itemize}
 
-%###################################################################################################
 \section{Applications}
 %---------------------------------------------------------------------------------------------------
-\subsection{Estimating Parameters of individual Rod-shaped bacteria}
-
 \subsection{Cell Competition Response to defective Hippo Pathway?}
 
-\subsubsection{Motivation}
-\textbf{List of problems}
-\begin{itemize}
-    \item varying number of vertices
-    \item cell division leads to varying number of variables as well
-    \item variable amount of datapoints is bad for optimization problems
-    \item do both metrics provide the same optimal parameters (same minimum, maybe approximately)
-    \item can we somehow reuse the position space metric for time-intervals of non-chaning topology?
-        to reduce computational demand
-    \item practical non-identifiability at division event in data; how can the position-space metric
-        still provide relevant information?
-\end{itemize}
-
-\subsubsection{Computational Model}
-\begin{itemize}
-    \item only rely on discretization (at most); less assumptions is better
-    \item
-\end{itemize}
-
-\subsubsection{Metrics: Position Space vs Image Space}
-\begin{itemize}
-    \item
-\end{itemize}
-
-\subsection*{Unsorted List of Ideas}
-\begin{itemize}
-    \item dynamical system factorizes through some subspace where we interchange the order and
-        total number of vertices; this exchange is problematic for numerical
-        implementations and only of theoretical nature
-\end{itemize}
-
-\subsubsection{Motivation}
-\begin{itemize}
-    \item mathematically motivate approach: compare simulation at points $\{t_i\}$ with data
-    \item this requires us to compare all variables (positions, extracellular nutrients etc.)
-    \item we need to be able to compare arbitrary states
-    \item discuss strategies
-        \begin{enumerate}
-            \item compare positions in state1 with positions in state2; this does not work for
-                celldivision
-            \item if one state has more cells than other, assign arbitrary high cost
-                function; this is
-                poblematic since data for division is often incorrect/high uncertainty
-            \item compare with cell masks and account for parental relationship; requires ancestor
-                graph, this brings us back to the uniqueness in our previous section
-        \end{enumerate}
-    \item should account for parental relationship
-    \item mathematically construct cost function
-    \item take into account temporal component; at division event no cost for parents; then modify
-        as difference to division event gets larger (this will yield a nice graph/figure)
-    \item We should be able to further extend this approach into a metric which is
-        measure-based instead of counting pixels.
-        Even a probability measure could work. (probability of cell $\iota$ to be at this
-        point, what about cell division?)
-\end{itemize}
-
-\subsubsection{Mathematical \& Computational Model}
-\begin{itemize}
-    \item Use contents from other paper
-    \item show that this does not really depend on the underlying dynamics but rather only on the
-        spatial representation
-    \item perform all analysis with "generalized model for elongated bacteria"
-    \item actually should also work for non-vertex approach (such as spline)
-\end{itemize}
-
-\subsubsection{Parameter Estimation: Defining a Cost Function}
-\textbf{Formalize the notion of the comparison metric $d(x,y)$}
-\begin{itemize}
-    \item Consider the space $X$ which contains cell masks encoded by colors (maybe even
-        3D possibly).
-    \item we want to assess if the constructed mapping $d:X\times X\rightarrow X, d(x,y)$
-        is a metric.
-        \begin{enumerate}
-            \item Distance to itself is zero: $d(x,x)=0$ \checkmark
-            \item Positivity: $x\neq y$ then $d(x,y)$ will only be zero if the parent
-                penalty $p$ is zero.
-                If we introduce a time-dependent (monotonous) parent penalty $p(\Delta
-                t)>0$ when $\Delta t>0$, we also retain this property.
-            \item Symmetry: \checkmark
-            \item Triangle inequality: This is true due to our individual treatment of
-                cells and accounting for indices $\iota$.
-                Suppose that we have $d(x,y) > d(x,z) + d(z,y)$ for a combination of $x,y,z$.
-                Then this means that there is at least one pixel where the color value
-                for $x,y$ are not matching but they are matching both for $x,z$ and $y,z$.
-                This is equivalent to the fact that the associated color value of $z$ is
-                the parent cell of $x$ and $y$ and cannot be true since the parent index
-                was removed.
-        \end{enumerate}
-    \item Therefore this is a true metric considering the restructions to $p(t)$ above.
-\end{itemize}
-
-\subsubsection{Relation to Identifiability Analysis}
-Parameter estimation usually uses weighted sum of residuals
-\begin{equation}
-    \chi^2_\text{res}(p) = \sum\limits_{k=1}^m\sum\limits_{l=1}^{d_k}\left(\frac{y_{kl}^D
-    - g_k(p,t_l)}{\sigma^D_{kl}}\right)
-\end{equation}
-where $\sigma_{kl}^D$ is the measurement error for datapoint $y_{kl}^D$ and time point $t_l$.
-The most common estimator is the maximum likelihood estimator
-\begin{equation}
-    \tilde{p} = \text{arg min}\left[\chi^2_\text{res}(p)\right].
-\end{equation}
-
-\begin{definition}[Structural Identifiability]
-    A model is \textit{structurally identifiable} if a unique parametrization exists for
-    any given model output.
-    A parameter $p_i$ is called \textit{globally structurally identifiable} if for every
-    parameter vector $\textbf{p}$, it holds
-    \begin{equation}
-        y(p)=y(p') \Rightarrow p_i=p_i'.
-    \end{equation}
-\end{definition}
-
-%---------------------------------------------------------------------------------------------------
 \subsection{TODO find one more example for parameter estimation here}
 \begin{itemize}
     \item \cite{Jin2022} 2 approaches: bottom-up and top-down, ("Studies of self-assembling systems
@@ -3720,7 +3603,6 @@ The most common estimator is the maximum likelihood estimator
 \end{itemize}
 
 %---------------------------------------------------------------------------------------------------
-\newpage
 \subsection{Coarse-graining of an off-lattice center-based model}
 \subsubsection{Motivation}
 This section formulates a generalized model for cellular dynamics, covering growth, division,
