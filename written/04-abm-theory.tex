@@ -3239,7 +3239,7 @@ mathematical model, as they currently do when interpreting the assignment of ide
 These considerations would only come into play in its interpretation.
 It remains an open question how this could be formalized rigorously.
 
-\subsection{Parameter Estimation Stuff}
+\subsection{Parameter Estimation via Encoding and Decoding}
 We are now going to investigate how the preceding ideas can be understood when aiming to estimate
 the parameters of a \ac{cabm}.
 To this end, we generally assume that parameters are individual, i.e. different on a per-cell level.
@@ -3290,6 +3290,8 @@ parameters $\{\vec{p}_\iota\},\vec{q}$ which we aim to optimize.
 
 This procedure closes the last missing loop and we are now ready to estimate the parameters of the
 given system.
+In addition, more complex schemes can build on the these theoretical methods which take into account
+temporal relations, multiple intermediate steps or explore different initialization strategies.
 Chapter~\ref{chapter:bacterial-rods} will provide extensive methods and a close discussion which
 utilizes precisely these conceptual foundations in order to estimate the parameters of a growing
 system of elongated bacteria.
