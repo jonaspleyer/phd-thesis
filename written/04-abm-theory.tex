@@ -3044,7 +3044,7 @@ This leads us to the following graph
     \end{tikzpicture}
     \label{graph:cellular-identity-encode-decode-measure}
 \end{equation}
-where $\mathcal{P}(I)$ denotes the power set over the set of identifiers $I$.
+where $\sqcup$ denotes the disjoint union as introduced before.
 Within this framework, the actual biological reality $\mathcal{B}$ will not be utilized by itself
 and instead only the experimentally measured quantity $y\in Y$ is used which is only realistic,
 considering that no measurement will ever be able to fully capture the whole biological extent.
@@ -3272,6 +3272,7 @@ which are not tied to a single cell governs all remaining behaviour.
 We can now interpret the quantity
 \begin{equation}
     L(\{\vec{p}_\iota\},\vec{q}) = d(x_b,x_c(\{\vec{p}_\iota\},\vec{q}))
+    \label{eq:encoding-comparison-metric}
 \end{equation}
 as a map $L:U^n\times V\rightarrow\R$ where $U^n\times V\subset\R^{nk+l}$ and $n$ is the number of
 involved cells (counting all currently alive and previously alive ones).
@@ -3288,8 +3289,21 @@ over the course of the chosen time interval $t$, we can construct the observable
 value $x_0$ from a given biological measurement $b_0$ and seed the remaining latent space with the
 parameters $\{\vec{p}_\iota\},\vec{q}$ which we aim to optimize.
 
+One could could be tempted to believe that equation~\eqref{eq:encoding-comparison-metric} can be
+factorized by splitting apart the metric into a sum over all cells.
+However, since the metric $d(\cdot,\cdot)$ takes values in the encoding space $Y$, this generally
+depends entirely on the particular encoding.
+In the particular case where the encoding is identical with the observable, i.e.
+$Y=\sqcup_nC_\text{obs}^n$ and $\sigma=\text{id}$ we can achieve this, thus leading to
+\begin{equation}
+    L=\sum\limits_i d(c_{i,b},c_{\iota_i,\text{obs}})
+\end{equation}
+where the individual terms are however still dependent on all parameters
+$\{\vec{p}_{\iota_i}\},\vec{q}$ due to interactions of the individual cells.
+
 This procedure closes the last missing loop and we are now ready to estimate the parameters of the
-given system.
+given system, perform identifiability~\cite{Raue2009} \& sensitivity~\cite{Saltelli2007} analyses
+and similar techniques.
 In addition, more complex schemes can build on the these theoretical methods which take into account
 temporal relations, multiple intermediate steps or explore different initialization strategies.
 Chapter~\ref{chapter:bacterial-rods} will provide extensive methods and a close discussion which
