@@ -2861,54 +2861,6 @@ $\sigma$ now implicitly depends on $\omega$.
 % TODO Do we want to talk about ergodicity still?
 
 \section{Cellular Identity Revisited}
-% \textbf{Why are we doing this? What is the purpose?}
-% \begin{itemize}
-%     \item Investigate how cells can be distinguished from each other:
-%     \begin{itemize}
-%         \item What constitutes a (new) cellular identity? (i.e. during division)
-%         \item how and when are these unique identifiers assigned in practice?
-%         \item how can we use this knowledge to compare experiment with model?
-%     \end{itemize}
-% \end{itemize}
-% 
-% - practical stuff
-% 
-% \begin{itemize}
-%     \item The separation from mother$\rightarrow2x$daughters depends on the particular encoding
-%     \item List example encodings: \ac{grn}, cellular envelope (cytokinetic abcission, merging of
-%         cell walls during fusion), cell cycle
-%     \item $\rightarrow$ therefore the notion depends on the utilized "encoding" (introduce notion
-%         here)
-%     \item pose challenge: how to do this practically?
-%     \item ask question: what does that mean for biology and our mathematical model?
-% \end{itemize}
-% 
-% \textbf{What are we doing?}
-% \begin{enumerate}
-%     \item we assume that cellular identity can be determined from experimental data $\mathcal{B}$
-%     \item cellular identity is intrinsic in \acp{cabm} $\CS\times\EV$ (by definition)
-%     \item $\rightarrow$ we need a shared intermediate layer $X$ (encoding) that can bridge this gap
-%     \item discuss graph in Equation~\eqref{graph:cellular-identity-encode-decode-measure}
-%     \item using the encoding $X$ in combination with temporal information will result in a
-%         topoligcal structure which should reduce to the cell lineage graph
-%     \item $\rightarrow$ Cellular Identity is encoded in $X$ which gives us cell lineage over time
-%     \item use "temporal identity encoding" as keyword
-% \end{enumerate}
-% 
-% \textbf{How can this be useful?}
-% \begin{enumerate}
-%     \item compare model with biology; use intermediate representation $X$
-%     \item estimating parameters of the model; define metric $d:X\times X\rightarrow\R_{\geq 0}$ and
-%         minimize; possibly with time as well
-%     \item $\rightarrow$ this reduces the problem to a classical optimization problem when parameters
-%         $p_\iota\in\R^k$: if we consider $M=\{c_\iota(p_\iota)\}$, then we can define
-%         $L(\{p_\iota\})=d(\mu((I_p,M),e),b)\in\R$ as the loss function
-%     \item if we find an optimum $\{c_{\iota,\text{opt}}\}$, then we can find the single-cell
-%         parameters for \textit{exactly} the cells $c_\iota$, not only for the distribution!
-% \end{enumerate}
-% 
-% \pagebreak
-% 
 One of the fundamental assumption of cellular biology in general and \acp{cabm} in particular is
 that cells are discrete entities which are the building blocks of life itself.
 Therefore, we must also assume that individual cells can be distinguished from each other by a
