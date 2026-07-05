@@ -3320,13 +3320,81 @@ Other tools may not share this core philosophy which should not mean that their 
 irrelevant.
 In order to gain a better understanding of the distinct choices that lead to the previously
 established notions, we will compare \acp{cabm} with a selection of other model choices such as
-\cap{ca}, \acp{ode}, \acp{pde}, classical molecular dynamics simulations and the fock-space.
-Due to the fact that \acp{ca} are often discussed in the same light as \acp{cabm}, we aim to
-particularly highlight key differences that show only very minor philosophical and practical
-overlaps.
+\acp{ca}, \acp{ode}, \acp{pde}, classical molecular dynamics simulations and the fock-space.
 
 \subsection{Distinction to \aclp{ca}}
 \label{subsubsection:abm-theory-distinction-to-cellular-automata}
+% \textbf{Show how relation between \acp{abm} dn \acp{ca} is displayed in literature}
+% \begin{itemize}
+%     \item \cite{Schaller2007} simply cite this to show that \acp{ca}$\subset$\acp{cabm}
+%     \item \cite{Clarke2013} regional sciences; basically same use-case for both models; notion of
+%         cell only refers to spatially discrete entity; not biological cell; no movement in
+%         particular
+%     \item \cite{Miller2007} social science; 
+%     \item \cite{Deutsch2021} \acp{ca} "fail to replicate key aspects of collective migration"; this
+%         paper aims to fix this shortcoming by introducing a lattice-based \ac{abm}
+% \end{itemize}
+Due to the fact that \acp{ca} are often treated as a subclass of \acp{cabm}~\cite{Schaller2007}, we
+aim to particularly highlight key differences that clearly showcase the fundamental differences
+between the two modeling approaches.
+\acp{abm} and \acp{ca} are employed across many fields such as regional~\cite{Clarke2013} and
+social~\cite{Miller2007} sciences.
+There, the concept of a "cell" does not relate to a discrete fundamental building block of
+biological life but rather to simply a spatially confined region.
+It is only when \acp{ca} are utilized in the context of biology, that the meaning of the word "cell"
+can become conflicting.
+For example, \citet{Deutsch2021} stated that \acp{ca} generally "fail to replicate key aspects of
+collective migration" but aimed to "repair" this observation by introducing a an on-lattice
+\ac{abm}.
+This clearly showcases that the word "cell" within \acl{ca} does not refer to the biological cell.
+However, it is still quite common for \acp{ca} to interpret a singular lattice site as one instance
+of a biological cellular entity~\cite{Alarcn2003}.
+These lattice points can be assigned simply binary $\{0,1\}$ values to indicate if the particular
+cell at this location is alive or dead or advanced formulations which often carry more complex
+information such as the particular type of the cell~\cite{PATEL2001} or other variants.
+Furthermore, the utilized discretization can also be abstracted from a simple lattice to more
+complex types such as a delaunay triangulation~\cite{Kansal2000}.
+We will therefore now take this same viewpoint, which we consider fundamentally inaccurate and aim
+to highlight some properties that indicate this underlying mismatch.
+
+\subsubsection{Elementary \acp{ca}}
+Elementary \acp{ca} represent the simplest form of \acp{ca}.
+They live on a \ac{1d} grid where each lattice point is either alive or dead.
+This can be easily expressed by a map $Q:\Z\rightarrow\{0,1\}$ which contains the values of all
+lattice points.
+Elementary \acp{ca} are uptdated with discrete time steps where any value $Q_i^{n+1}$ of time step
+$n+1$ depends on the values $Q_{i-1}^n,Q_i^n,Q_{i+1}^n$ which is the
+Moore-neighborhood~\cite{Moore1962} at time step $n$.
+Therefore, we can fully describe the update step $\varphi(Q^n_i)=Q^{n+1}_i$ by the transition rule
+$q(s_0,s_1,s_2)=a$ where $s_i\in\{0,1\}$.
+The map $q$ has $2^3=8$ possible discrete inputs (all possible combinations of the $s_i$) on which
+it needs to be defined to fully specify the \ac{ca}.
+This is captured in Table~\ref{table:wolfram-code} which assings one particular value $a_i$ for each
+combination of input values.
+
+\begin{table}
+    \centering
+    \begin{tabular}{ r c c c c c c c c }
+        Current State & $111$ & $110$ & $101$ & $100$ & $011$ & $010$ & $001$ & $000$\\
+        \midrule
+        New State & $a_8$ & $a_7$ & $a_6$ & $a_5$ & $a_4$ & $a_3$ & $a_2$ & $a_1$\\
+        % Reduced     & $a_8$ & $b$   & $a_6$ & $c$   & $b$   & $a_3$ & $c$   & $0$
+    \end{tabular}
+    \caption{
+        Elementary \acp{ca} can be characterized by their transition rules.
+        The binary number $a_8\dots a_1$ can be converted to a decimal, which is used to define the
+        rule number of the associated \ac{ca} (i.e. $01101110_2=110_d$).
+    }
+    \label{table:wolfram-code}
+\end{table}
+
+The total number of possible \acp{ca} which can be constructed by these rules is $2^8=256$, which
+contains all combinations of the $a_i$.
+To simplify the notation of these elementary \acp{ca}, the Wolfram Code
+(Figure~\ref{table:wolfram-code}) was proposed~\cite{Wolfram1994-yw} which converts the binary
+number $a_8 a_7 \dots a_1$ into a decimal number from $0$ to $255$.
+
+\pagebreak
 
 In the broader literate \acp{abm} are often treated within the same class as \acp{ca}.
 However this association is superficial and one of the only shared aspects is the discrete nature of
@@ -3358,23 +3426,6 @@ The particular reason for any one of them is not taken into account as this depe
 problem is being modeled.
 We explicitly exclude other processes such as stochastic effects and spatial movement
 (compare Table~\ref{tab:cellular-aspects}).
-
-\begin{figure}[H]
-    \centering
-    \begin{tabular}{ r c c c c c c c c }
-        Current State & $111$ & $110$ & $101$ & $100$ & $011$ & $010$ & $001$ & $000$\\
-        \midrule
-        New State & $a_8$ & $a_7$ & $a_6$ & $a_5$ & $a_4$ & $a_3$ & $a_2$ & $a_1$\\
-        % Reduced     & $a_8$ & $b$   & $a_6$ & $c$   & $b$   & $a_3$ & $c$   & $0$
-    \end{tabular}
-    \caption{
-        Elementary \acp{ca} can be characterized by their transition rules.
-        The binary number $a_8\dots a_1$ converted to decimal, results in the rule number of
-        the associated \ac{ca} (i.e. $01101110_2=110_d$).
-        There exist $256$ rules in total.
-    }
-    \label{fig:wolfram-code}
-\end{figure}
 
 \begin{theorem}[Most Elementary \aclp{ca} are not cell-based]
     Elementary \acp{ca} are characterized by their transition rules.
