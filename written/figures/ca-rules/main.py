@@ -173,4 +173,10 @@ if __name__ == "__main__":
     n_gridx = 100
     start = np.zeros(n_grid_x, dtype=int)
     start[1 * 30 : 1 * 60][::2] = 1
-    plot_rules(start, "alternating.pdf", layout=(3, 7), figsize=(24, 20))
+    plot_rules(
+        start,
+        "alternating.pdf",
+        layout=(4, 4),
+        figsize=(24, 10),
+        exclude=["032", "104", "160", "164", "232"],
+    )
