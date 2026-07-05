@@ -3447,12 +3447,35 @@ Section~\ref{supplement:additional-details-for-ca}).
 
 So far, we have not discussed as to what constitues the various rules, i.e. which biological
 processes lead to the exact form of the different rules.
-It is hard to imagine a simple multicellular system, which has almost no structure (i.e. only
-living/dead cells on a particular lattice grid) and grows into a complex formation other than the
-bulks displayed in Figure~\ref{fig:ca-filtered-single} (N,P).
+This might contain non-topological processes such as movement of cells or topological cellular
+processes such as division and death.
+Within the philosophy of \acp{cabm}, we look at systems so that each topological cellular process
+can be resolved.
+Therefore we may not assume that multiple topological cellular processes can occurr for the same
+cell $i$ from one particular state $Q^n_i$ to the next $Q^{n+1}_i$.
+
+Within these confinements it is hard to imagine a simple multicellular system, which has almost no
+structure (i.e. only living cells/unoccupied space on a particular lattice grid) and grows into a
+complex formation other than the bulks displayed in Figure~\ref{fig:ca-filtered-single} (N,P).
 Furthermore, these spatial patterns are not stable with respect to time which is clearly shown in
 rules (C,G,K,O) where any single cell alternates between the alive and dead state once it has been
 reached.
+
+Another fundamental problem arises if we look at particular examples of transitions within a given
+system.
+As per the definitions of \acp{cabm}, we are able to trace back the lineage of individual cells.
+However, for example rules 050, 122, 178 and 250, displayed in Figure~\ref{fig:ca-filtered-single}
+(C,G,K,O) all have transitions of the type $\dots010101010\dots\mapsto\dots101010101\dots$ where it
+is entirely unclear as to where the new cell of the new state came from.
+We note that due to the inherent symmetry of the problem in addition to the fact that only a single
+cell is inserted and all cells are spaced with exactly one unit of the discrete space apart from
+each other, it is unreasonable to find simple cellular processes that can explain these type of
+dynamics.
+
+Without entertaining too many of these thoughts, we believe that the case has been made that the
+individual updates of one state $Q^n$ to the next $Q^{n+1}$ of a \ac{ca} can not generally described
+by biologically reasonable individual cellular processes.
+
 
 \textbf{Key properties of \acp{ca}}
 \begin{itemize}
