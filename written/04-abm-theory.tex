@@ -3394,6 +3394,56 @@ To simplify the notation of these elementary \acp{ca}, the Wolfram Code
 (Figure~\ref{table:wolfram-code}) was proposed~\cite{Wolfram1994-yw} which converts the binary
 number $a_8 a_7 \dots a_1$ into a decimal number from $0$ to $255$.
 
+\textbf{Key properties of \acp{ca}}
+\begin{itemize}
+    \item lattice points are cells; that is different to \acp{cabm}; one lattice point can be alive
+        or dead; more advanced \acp{ca} $\rightarrow$ type of "density value" per lattice point
+    \item classification via "Wolfram Code" $\rightarrow$ 256 possible combinations
+    \item problem with rule $000\rightarrow 1$
+    \item we can make a few assumptions that allow us to quickly reduce the overall space of
+        \acp{ca}; i.e. general isotropy
+    \item also look at type of growth; now also consider larger neighbor regions in $d$-dim space;
+        \acp{ca} do not grow exponentially, logistically or anything like that
+    \item Display simulation of remaining \acp{ca} (one and two starting cells)
+\end{itemize}
+
+\subsubsection{Implementing Rule $110$ in an \acl{cabm}}
+
+\subsubsection{Other \acp{ca} \& Conclusion}
+\begin{itemize}
+    \item cellular potts (GGH)
+    \item \acp{ca} should not be confused with \acp{cabm}; they are a different class
+    \item \acp{ca} are generally speaking not particularly well-suited to describe biological
+        systems due to their simplicity
+\end{itemize}
+
+\subsection{\acsp{ode} \& \acsp{pde}}
+\begin{itemize}
+    \item \acp{ode} and \acp{pde} are often used within \acp{cabm}
+    \item as we will see later, sometimes \acp{cabm} can be reduced to an \ac{ode} or \ac{pde}
+        (see Section~\ref{subsection:coarse-graining-of-cbm-model})
+\end{itemize}
+
+\subsection{Molecular Dynamics \& Particle Simulations}
+\begin{itemize}
+    \item individuality of agents and many-body treatment can be comparable
+    \item no particular thought to the topological cellular processes; how do particles get
+        added/removed is often determined from outside or simply not discussed
+    \item many-body systems often no way of interacting with environment (i.e. with diffusing
+        molecules)
+    \item molecular dynamics assumes indistinguishability; this is contrary to \acp{cabm}
+    \item in general many-body sims are quite similar (maybe closest of all presented approaches)
+\end{itemize}
+
+\subsection{The Fock-Space}
+\begin{itemize}
+    \item linear space where each basis vector is a particular state that can be occupied with
+        certain probability; there is no analogous concept here
+    \item number of particles 
+    \item If related, then only for stochastic \acp{abm}
+    \item linear structure of base-states. There is no such structure in \acp{cabm}
+\end{itemize}
+
 \pagebreak
 
 In the broader literate \acp{abm} are often treated within the same class as \acp{ca}.
@@ -3455,6 +3505,8 @@ We explicitly exclude other processes such as stochastic effects and spatial mov
 
 \subsubsection{Scaling Behaviour of Elementary \aclp{ca}}
 
+von Neumann neighborhood~\cite{VonNeumann1966}
+
 \begin{figure}
 \begin{minipage}{0.5\textwidth}
         \begin{table}[H]
@@ -3484,11 +3536,6 @@ We explicitly exclude other processes such as stochastic effects and spatial mov
         \end{figure}
     \end{minipage}
 \end{figure}
-
-\begin{theorem}[]
-\end{theorem}
-\begin{proof}
-\end{proof}
 
 \subsubsection{Other \aclp{ca}}
 
@@ -3634,11 +3681,10 @@ distinct entities.
 \end{itemize}
 
 \section{Applications}
-%---------------------------------------------------------------------------------------------------
 \subsection{Cell Competition Response to defective Hippo Pathway?}
 
-%---------------------------------------------------------------------------------------------------
 \subsection{Coarse-graining of an off-lattice center-based model}
+\label{subsection:coarse-graining-of-cbm-model}
 \subsubsection{Motivation}
 This section formulates a generalized model for cellular dynamics, covering growth, division,
 intracellular \& extracellular reactions and mechanical properties.
