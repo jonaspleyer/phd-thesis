@@ -138,9 +138,12 @@ def plot_rules(start, savename, layout=(4, 4), figsize=(24, 14), exclude=[]):
     fig.tight_layout()
     fig.savefig(f"figures/ca-rules/{savename}", dpi=300)
 
-    print("Filtered Rules Single 1")
+    print("Filtered Rules:")
     for f in filtered_rules:
         print(generate_rule_name(f)[1])
+    print("Manually Excluded:")
+    for e in exclude:
+        print(e)
 
 
 if __name__ == "__main__":
