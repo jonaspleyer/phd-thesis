@@ -3358,6 +3358,7 @@ We will therefore now take this same viewpoint, which we consider fundamentally 
 to highlight some properties that indicate this underlying mismatch.
 
 \subsubsection{Elementary \acp{ca}}
+\label{subsection:elemntary-ca}
 Elementary \acp{ca} represent the simplest form of \acp{ca}.
 They live on a \ac{1d} grid where each lattice point is either alive or dead.
 This can be easily expressed by a map $Q:\Z\rightarrow\{0,1\}$ which contains the values of all
@@ -3391,8 +3392,67 @@ combination of input values.
 The total number of possible \acp{ca} which can be constructed by these rules is $2^8=256$, which
 contains all combinations of the $a_i$.
 To simplify the notation of these elementary \acp{ca}, the Wolfram Code
-(Figure~\ref{table:wolfram-code}) was proposed~\cite{Wolfram1994-yw} which converts the binary
+(Table~\ref{table:wolfram-code}) was proposed~\cite{Wolfram1994-yw} which converts the binary
 number $a_8 a_7 \dots a_1$ into a decimal number from $0$ to $255$.
+
+Within the theory of elementary \acp{ca}, the particular binary values $0,1$ assigned to each
+lattice grid bear no particular meaning.
+In contrast, as motivated before, we are now going to take the viewpoint that each lattice point
+represents a biological cell that is either alive $Q_i=1$ or dead $Q_i=0$ which leads to a natural
+asymmetry between the interpretation of these binary values.
+We can immediately see that by the principle of cellular continuity, the rule $000\mapsto 1$ can not
+be utilized since cells have to be created by other cells.
+Furthermore, we assume isotropy of the underlying space and therefore require $a_7=a_4$ and
+$a_5=a_2$, thereby reducing the overall number of combinations to $2^5=32$.
+Elementary \acp{ca} are often displayed by seeding the lattice $\Z$ with zeros, except for a single
+value that is initialized with $1$.
+\begin{figure}
+    \includegraphics[width=\textwidth]{figures/ca-rules/single1.pdf}
+    \caption[Elementary \acsp{ca} seeded with single cell]{
+        The figure shows the evolution of all \acp{ca} which are consistent with the biological
+        assumptions of cellular continuity, starting from a single living cell.
+        The following rules which immediately cease to exist are not displayed:
+        000, 004, 032, 036, 072, 076, 104, 108, 128, 132, 160, 164, 200, 204, 232, 236.
+        % Filtered rules: single1, double1, double1-close, alternating
+        %  S1  D1 D1C ALT
+        % 000 000 000 000
+        % 004 004 004 004
+        % 032 032 032
+        % 036 036 036 036
+        % 072 072 072 072
+        % 076 076 076 076
+        % 104 104 104
+        % 108 108 108 108
+        % 128 128 128 128
+        % 132 132 132 132
+        % 160 160 160
+        % 164 164 164
+        % 200 200 200 200
+        % 204 204 204 204
+        % 232 232 232
+        % 236 236 236 236
+    }
+    \label{fig:ca-filtered-single}
+\end{figure}
+
+To visualize the effect of elementary \acp{ca}, they are often displayed by seeding the initial
+state with a single living cell and then evolving it further in time.
+This is displayed in Figure~\ref{fig:ca-filtered-single} where the previously explained
+reductions have been applied and rules which immediately cease to exist have been filtered out.
+Apart from rules 222 and 254, every other displayed rule exhibits a form of spatial patterning.
+We can also see that many rules such as (A,E,I,M) produce identical results, which is surprisingly
+somewhat robust with respect to varying initial conditions.
+We discuss this in the supplementary material (see
+Section~\ref{supplement:additional-details-for-ca}).
+
+So far, we have not discussed as to what constitues the various rules, i.e. which biological
+processes lead to the exact form of the different rules.
+It is hard to imagine a simple multicellular system, which has almost no structure (i.e. only
+living/dead cells on a particular lattice grid) and grows into a complex formation other than the
+bulks displayed in Figure~\ref{fig:ca-filtered-single} (N,P).
+Furthermore, these spatial patterns are not stable with respect to time which is clearly shown in
+rules (C,G,K,O) where any single cell alternates between the alive and dead state once it has been
+reached.
 
 \textbf{Key properties of \acp{ca}}
 \begin{itemize}
