@@ -3522,9 +3522,9 @@ $n=1$.
         Moore               & $2$ & $1$ & $(2n+1)^2$\\
         von Neumann         & $2$ & $1$ & $2n(n+1)+1$\\
         Moore               & $d$ & $1$ & $(2n+1)^d$\\
-        von Neumann         & $d$ & $1$ & \textbf{todo}\\
+        von Neumann         & $d$ & $1$ & $D(d,n)$\\
         Moore               & $d$ & $k$ & $(2kn+1)^d$\\
-        von Neumann         & $d$ & $k$ & \textbf{todo}\\
+        von Neumann         & $d$ & $k$ & $D(d,kn)$\\
         \midrule
         Exponential         & -   & -   & $2^n$\\
         Logistisc           & -   & -   & $\frac{L}{1+\exp(-k(n-n_0))}$\\
@@ -3535,6 +3535,13 @@ $n=1$.
     }
     \label{tab:ca-growth-scaling}
 \end{table}
+
+The growth type of the Moore neighborhood can be calculated quite easily.
+In contrast, the von Neumann neighborhood has a more complex but still closed form expression
+\begin{equation}
+    D(d,n) = \sum\limits_{i=0}^n\binom{d}{i}\binom{n}{i}2^i
+\end{equation}
+which is given by the Delannoy numbers~\cite{Delannoy1895,Banderier2005,Zaitsev2017}.
 
 Figure~\ref{fig:ca-limited-growth} clearly highlights the differences between \acp{ca} and typical
 growth rates as may be expected in common cellular systems such as growing bacterial
