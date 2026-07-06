@@ -3488,18 +3488,6 @@ Consequently this means that any \ac{ca} which is seeded with a single cell and 
 finite Moore~\cite{Moore1962} or von Neumann~\cite{VonNeumann1966} neighborhood is limited in its
 growth by these conditions.
 
-Figure~\ref{fig:ca-limited-growth} shows growth curves of different \acp{ca} with the evolution rule
-that once a single neighbor is occupied, in the next step the cell in question will also be
-occupied.
-We assume that the upper bound is equal to $1$, meaning only a single cell can occupy a lattice
-point at any time.
-The figure compares the two types of neighborhoods (Moore/von Neumann) with variable size, which are
-identical in the \ac{1d} case, with exponential and logistic growth
-curves~\cite{Verhulst1838,McKendrick1912}.
-The analytical expressions of these scalings are provided in Table~\ref{tab:ca-growth-scaling}.
-The parameters of the logistic growth function are chosen such that the initial values align at
-$n=1$.
-
 \begin{figure}
     \centering
     \includegraphics[width=0.66\textwidth]{figures/ca-rules/scaling.pdf}
@@ -3511,6 +3499,18 @@ $n=1$.
     }
     \label{fig:ca-limited-growth}
 \end{figure}
+
+Figure~\ref{fig:ca-limited-growth} shows growth curves of different \acp{ca} with the evolution rule
+that once a single neighbor is occupied, in the next step the cell in question will also be
+occupied.
+We assume that the upper bound is equal to $1$, meaning only a single cell can occupy a lattice
+point at any time.
+The figure compares the two types of neighborhoods (Moore/von Neumann) with variable size, which are
+identical in the \ac{1d} case, with exponential and logistic growth
+curves~\cite{Verhulst1838,McKendrick1912}.
+The analytical expressions of these scalings are provided in Table~\ref{tab:ca-growth-scaling}.
+The parameters of the logistic growth function are chosen such that the initial values align at
+$n=1$.
 
 \begin{table}
     \centering
