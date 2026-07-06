@@ -3556,6 +3556,69 @@ cell at a particular grid point but are bound from above for the amount that the
 %     \item Display simulation of remaining \acp{ca} (one and two starting cells)
 % \end{itemize}
 
+\subsubsection{Implementing Rule 110 in an \acl{cabm}}
+One particular automaton that has attracted large interest is Rule 110 due to the fact that this
+particular type of \ac{ca} is Turing-complete~\cite{Cook2004}.
+We will now aim to implement this rule within a \ac{cabm} to show that \acp{cabm} can be turing
+complete.
+On the one hand, we need to be able to implement the update rule $110_2=01101110$ that determines
+the evolution of the system.
+On the other hand the proof by \citet{Cook2004} requires a particular setup where the
+background---sometimes called "ether"---is prepared in a particular manner.
+It consists of a 14-cell wide block 00010011011111 which repeats every 7 steps in the evolution of
+the \ac{ca}.
+The latter condition requires us to treat an infinite, yet countable, number of cell agents in our
+\ac{cabm} that all carry unique identifiers.
+Furthermore, we aim to implement the eovlution function of our \ac{cabm} using only death and binary
+division.
+
+We begin by investigating the update step $Q^n_i\mapsto Q^{n+1}_i$ of the lattice.
+Fortunately, the mapping $000\mapsto0$ is part of rule 110.
+Otherwise, our \ac{cabm} approach would not have worked from the beginning due to the cellular
+continuity requirement.
+When we further investigate the mappings of rule 110 presented in Table~\ref{tab:rule-110-mappings},
+we can notice that all mappings except for $101\mapsto1$ and $001\mapsto1$ can be explained by
+leaving the cell in question invariant or killing it without requiring any division events.
+We therefore now focus on the remaining two mappings.
+
+\begin{table}
+    \centering
+    \begin{tabular}{ r c c c c c c c c }
+        \toprule
+        Current State & $111$ & $110$ & $101$ & $100$ & $011$ & $010$ & $001$ & $000$\\
+        New State & $0$ & $1$ & $1$ & $0$ & $1$ & $1$ & $1$ & $0$\\
+        \bottomrule
+    \end{tabular}
+    \caption[Mappings of Rule 110]{
+        Mappings of states for rule 110.
+    }
+    \label{tab:rule-110-mappings}
+\end{table}
+
+At first we analyze $101\mapsto1$.
+Here, the cell left or right to the unoccupied spot needs to divide in order to fill the middle
+spot.
+Looking at the mapping with one additional cell on each side, we notice that $a101b\mapsto111$
+regardless of the values $a,b$.
+With this freedom in hand, we look at $001\mapsto1$ which is clearly not an isotropic rule, therby
+requiring special attention.
+We can again look at a larger chunk and again notice that $a001b\mapsto011$ regardless of the values
+of $a,b$.
+However in this secondary case, the cell of the state $001$ needs to divide such that one of its
+daughter cells occupies the slot left of its mother cell while the other takes the place of the
+mother cell.
+We can see that this behaviour can also be used in implementing the mapping $101\mapsto1$ where now
+the right cell divides with the same rules as above.
+Therefore we can define the \ac{cabm} via the criteria for division and death with their
+corresponding functions.
+
+Lastly we also need to specify the choice of how to assign identifiers to the individual cells.
+In order to avoid collisions of identifiers we utilize the space $\N\times\Z$ where the first
+component is simply the current iteration step of the \ac{ca} and the second component is the
+grid-point at which the cell was created.
+Since no two cells can occupie the same grid point, we are guaranteed that this is a valid
+identifiers assignment scheme.
+
 \subsubsection{Other \acp{ca} \& Conclusion}
 \begin{itemize}
     \item cellular potts (GGH)
