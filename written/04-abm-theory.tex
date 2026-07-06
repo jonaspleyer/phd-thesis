@@ -3613,11 +3613,120 @@ Therefore we can define the \ac{cabm} via the criteria for division and death wi
 corresponding functions.
 
 Lastly we also need to specify the choice of how to assign identifiers to the individual cells.
-In order to avoid collisions of identifiers we utilize the space $\N\times\Z$ where the first
+In order to avoid collisions of identifiers we utilize the space $I=\N\times\Z$ where the first
 component is simply the current iteration step of the \ac{ca} and the second component is the
 grid-point at which the cell was created.
 Since no two cells can occupie the same grid point, we are guaranteed that this is a valid
 identifiers assignment scheme.
+
+In order to the fully define the \ac{cabm}, we need to define the division and removal criteria and
+the division function $\gamma:C\rightarrow C\times C$.
+We will utilize a simplified notation where each cell is directly associated with the value $Q^n_i$
+at point $i$ at time $n$.
+Note that this is not necessarily identical to the cell with identifier $(n,i)$ since the value in
+question $Q^n_i$ can stem from a cell that has been constructed in a preceding step $\bar{n}\leq n$
+at the same position $i$.
+We define the cellular configuration space as $C=\Z^3$ where any cell stores its position together
+with the information if its neighbors are occupied or empty in order to be able to access these
+neighboring values for the division and death criteria.
+By storing the position $i$ in the cellular information itself instead of the identifier $\iota$, we
+achieve that the non-topological evolution function $\psi$ which should be understood as merely an
+auxiliary map does not depend on the identifiers, thereby satisfying
+Theorem~\ref{theorem:identifier-independent-dynamics}.
+Furthermore, we do not need an environment of our \ac{cabm}, therefore $\EV=\{\emptyset\}$ and we
+will omit it in the following notations entirely.
+The non-topological evolution function $\psi$ is now only responsible to fill these values via
+\begin{gather}
+    (\iota,c)\mapsto (\iota,(i,\mu(i-1,M),\mu(i+1,M))
+    \label{eq:ca-rule-110-psi-1}\\
+    \mu(k,M) = \#\{((n,l),c)\in M:l=k\}
+    \label{eq:ca-rule-110-psi-2}
+\end{gather}
+where the map $\mu$ is only responsible for checking if a cell at position $k$ is alive.
+We are therefore now able to simply access the values of each neighboring cell from within any cell
+$Q_i^n$ and will utilize this notation.
+
+\begin{definition}[Rule 110 as \ac{cabm}]
+    We begin by defining the death $\bar{\delta}$ and division $\bar{\gamma}$ criteria
+    \begin{align}
+        \bar{\delta}((i,Q^n_{i-1},Q_{i+1})) &= \begin{cases}
+            1   &Q^n_{i-1}+Q^n_{i+1}=2\\
+            0   &\text{\normalfont else}
+        \end{cases}
+        \label{eq:ca-rule-110-removal-criterion}\\
+        \bar{\gamma}((i,Q^n_{i-1},Q^n_{i+1})) &= \begin{cases}
+            1   &Q^n_{i-1}=0\\
+            0   &\text{\normalfont else}
+        \end{cases}
+        \label{eq:ca-rule-110-division-criterion}
+    \end{align}
+    where we implicitly use the fact that the cell in question has to be alive in order to be
+    considered for a removal or division event.
+    The division function $\gamma:C\rightarrow C\times C$ can be defined via
+    \begin{equation}
+        \gamma(i,Q^n_{i-1},Q^n_{i+1})=((i-1,0,1),(i,1,Q^n_{i+1}))
+    \end{equation}
+    where the two resulting cells will be placed at positions $i-1$ and $i$ respectively.
+    Note that the left-hand side neighbor of the first cell at position $i-1$ is initialized as $0$
+    by default.
+    This may in incorrect but will be updated immediately by the next application of the
+    non-topological evolution function $\psi_1$ defined in Equation \eqref{eq:ca-rule-110-psi-1} and
+    \eqref{eq:ca-rule-110-psi-2}.
+    We can now define the evolution function $\phi$ of the \ac{cabm} via
+    \begin{equation}
+        \phi = \bigcomp_{k=1}^t \psi_1\circ\varphi
+    \end{equation}
+    where $t$ is total amount of discrete steps.
+    The topological evolution function $\varphi$ checks the two criteria
+    \eqref{eq:ca-rule-110-removal-criterion} and \eqref{eq:ca-rule-110-division-criterion} and
+    applies the necessary topological cellular processes as needed.
+    \label{definition:cabm-rule-110}
+\end{definition}
+
+We note specifically that the two criteria are disjoint, meaning only one criterion can be active
+for any given cell.
+Furthermore, the division only occurrs when the left-hand neighboring grid point is unoccupied
+which means that no two cells will ever share the same position $i\in\Z$.
+Finally, Definition~\ref{definition:topological-cellular-process} permits infinite, countable
+combinations of such processes and more importantly this infinite concatenation is in fact
+well-defined.
+The following proposition finally proves that \ac{cabm}~\ref{definition:cabm-rule-110} correctly
+implements rule 110.
+
+\begin{proposition}
+    \ac{cabm}~\ref{definition:cabm-rule-110} implements rule 110.
+\end{proposition}
+\begin{proof}
+    To prove the theorem, we go through the distinct mappings of Table~\ref{tab:rule-110-mappings}
+    and show that the constructed \ac{cabm} leads to the same outputs as rule 110.
+
+    The first mapping of $a_8=111\mapsto0$ is contained in the removal criterion
+    \eqref{eq:ca-rule-110-removal-criterion}.
+    It is the only mapping that leads to the removal of a living cell.
+    The next mapping $a_7=110\mapsto1$ is not covered by any criterion and therefore does not alter
+    the cell which is alive in the middle of the input values.
+    The mappings $a_6=101\mapsto1$, $a_4=011\mapsto1$, $a_3=010\mapsto1$ and $a_2=001\mapsto1$ are
+    all
+    covered by the division criterion (Equation~\ref{eq:ca-rule-110-division-criterion}).
+    It states that any cell which has an empty grid point on its left-hand side will divide and thus
+    occupy its original spot and the empty spot left to it.
+    Therefore these mappings are all satisfied.
+    We are thus left to inspect $a_5=100\mapsto0$ and $a_1=000\mapsto0$.
+    These mappings only consider unoccupied grid points which are left untouched by the division
+    process since no cell is alive in any relevant space to fill them.
+\end{proof}
+
+This analysis shows that the \ac{cabm} of Definition~\ref{definition:cabm-rule-110} implements the
+correct rule set.
+Furthermore, our cellular space $\CS(C,I)$ permits arbitrary many cells and the chosen
+identification scheme $\iota=(n,i)$ permits the unique assignment of identifiers and is compatible
+with the chosen dynamics.
+We can therefore choose any initial state $Q_i\in\Z$ as the initial state of our \ac{cabm}.
+The evolution function $\phi$ uses almost only topological cellular processes where the
+non-topological evolution function $\psi$ merely acts as an auxiliary mapping to obtain information
+about neighboring cells.
+In total, we have thereby reconstructed rule 110 within \ac{cabm}~\ref{definition:cabm-rule-110}
+which is thus Turing-complete.
 
 \subsubsection{Other \acp{ca} \& Conclusion}
 \begin{itemize}
