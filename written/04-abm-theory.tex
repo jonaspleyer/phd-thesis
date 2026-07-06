@@ -3476,21 +3476,84 @@ Without entertaining too many of these thoughts, we believe that the case has be
 individual updates of one state $Q^n$ to the next $Q^{n+1}$ of a \ac{ca} can not generally described
 by biologically reasonable individual cellular processes.
 
+\subsubsection{Growth Properties of \acp{ca}}
+In addition to investigating the properties of the individual cells of \acp{ca}, we can also take a
+look at more macroscopic effects such as growth curves.
+In elementary \acp{ca}, we are confined by the fact that any grid point can only be occupied by a
+living cell or unoccupied.
+However, in general \acp{ca} often utilize formulations in which the value of one cell $Q^n_i$ can
+either be one variant of a family of cell types or even a cell density.
+In any case, the value of $Q^n_i$ is generally bound from above for physical reasons.
+Consequently this means that any \ac{ca} which is seeded with a single cell and utilizes either a
+finite Moore~\cite{Moore1962} or von Neumann~\cite{VonNeumann1966} neighborhood is limited in its
+growth by these conditions.
 
-\textbf{Key properties of \acp{ca}}
-\begin{itemize}
-    \item lattice points are cells; that is different to \acp{cabm}; one lattice point can be alive
-        or dead; more advanced \acp{ca} $\rightarrow$ type of "density value" per lattice point
-    \item classification via "Wolfram Code" $\rightarrow$ 256 possible combinations
-    \item problem with rule $000\rightarrow 1$
-    \item we can make a few assumptions that allow us to quickly reduce the overall space of
-        \acp{ca}; i.e. general isotropy
-    \item also look at type of growth; now also consider larger neighbor regions in $d$-dim space;
-        \acp{ca} do not grow exponentially, logistically or anything like that
-    \item Display simulation of remaining \acp{ca} (one and two starting cells)
-\end{itemize}
+Figure~\ref{fig:ca-limited-growth} shows growth curves of different \acp{ca} with the evolution rule
+that once a single neighbor is occupied, in the next step the cell in question will also be
+occupied.
+We assume that the upper bound is equal to $1$, meaning only a single cell can occupy a lattice
+point at any time.
+The figure compares the two types of neighborhoods (Moore/von Neumann) with variable size, which are
+identical in the \ac{1d} case, with exponential and logistic growth
+curves~\cite{Verhulst1838,McKendrick1912}.
+The analytical expressions of these scalings are provided in Table~\ref{tab:ca-growth-scaling}.
+The parameters of the logistic growth function are chosen such that the initial values align at
+$n=1$.
 
-\subsubsection{Implementing Rule $110$ in an \acl{cabm}}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.66\textwidth]{figures/ca-rules/scaling.pdf}
+    \caption[Comparison of \acsp{ca} with other growth types]{
+        Various growth curves of \acp{ca} seeded with a single living cell and differing
+        neighborhoods.
+        They are being compared to exponential growth with base $2$ and logistic growth with upper
+        limit $L=1000$ and growth factor $k=\log(2)$ and inflection point $n_0=\log(L-1)/k$.
+    }
+    \label{fig:ca-limited-growth}
+\end{figure}
+
+\begin{table}
+    \centering
+    \begin{tabular}{lccc}
+        Type & Dimension & Size & Scaling\\
+        \midrule
+        Moore/von Neumann   & $1$ & $1$ & $2n+1$\\
+        Moore               & $2$ & $1$ & $(2n+1)^2$\\
+        von Neumann         & $2$ & $1$ & $2n(n+1)+1$\\
+        Moore               & $d$ & $1$ & $(2n+1)^d$\\
+        von Neumann         & $d$ & $1$ & \textbf{todo}\\
+        Moore               & $d$ & $k$ & $(2kn+1)^d$\\
+        von Neumann         & $d$ & $k$ & \textbf{todo}\\
+        \midrule
+        Exponential         & -   & -   & $2^n$\\
+        Logistisc           & -   & -   & $\frac{L}{1+\exp(-k(n-n_0))}$\\
+        \bottomrule
+    \end{tabular}
+    \caption[Analytical Scalings of Figure~\ref{fig:ca-limited-growth}]{
+        Analytical expressions of the scalings visualizes in Figure~\ref{fig:ca-limited-growth}.
+    }
+    \label{tab:ca-growth-scaling}
+\end{table}
+
+Figure~\ref{fig:ca-limited-growth} clearly highlights the differences between \acp{ca} and typical
+growth rates as may be expected in common cellular systems such as growing bacterial
+colonies~\cite{Zwietering1990}.
+While these examples only cover the case where a single cell occupies one particular grid point,
+similar statements~\cite{Gravner1998} can be made for \acp{ca} which are able to carry more than one
+cell at a particular grid point but are bound from above for the amount that they can carry.
+
+% \textbf{Key properties of \acp{ca}}
+% \begin{itemize}
+%     \item lattice points are cells; that is different to \acp{cabm}; one lattice point can be alive
+%         or dead; more advanced \acp{ca} $\rightarrow$ type of "density value" per lattice point
+%     \item classification via "Wolfram Code" $\rightarrow$ 256 possible combinations
+%     \item problem with rule $000\rightarrow 1$
+%     \item we can make a few assumptions that allow us to quickly reduce the overall space of
+%         \acp{ca}; i.e. general isotropy
+%     \item also look at type of growth; now also consider larger neighbor regions in $d$-dim space;
+%         \acp{ca} do not grow exponentially, logistically or anything like that
+%     \item Display simulation of remaining \acp{ca} (one and two starting cells)
+% \end{itemize}
 
 \subsubsection{Other \acp{ca} \& Conclusion}
 \begin{itemize}
@@ -3589,36 +3652,6 @@ We explicitly exclude other processes such as stochastic effects and spatial mov
 \subsubsection{Scaling Behaviour of Elementary \aclp{ca}}
 
 von Neumann neighborhood~\cite{VonNeumann1966}
-
-\begin{figure}
-\begin{minipage}{0.5\textwidth}
-        \begin{table}[H]
-            \centering
-            \begin{tabular}{cccc}
-                Type & Dim & Step & Scaling\\
-                \midrule
-                Moore      & $1$ & $1$ & $2n+1$\\
-                Moore       & $2$ & $1$ & $(2n+1)^2$\\
-                v.Neumann      & $2$ & $1$ & $2n(n+1)+1$\\
-                Moore       & $d$ & $1$ & $(2n+1)^d$\\
-                v.Neumann      & $d$ & $1$ & \textbf{todo}\\
-                Moore       & $d$ & $k$ & $(2kn+1)^d$\\
-                v.Neumann      & $d$ & $k$ & \textbf{todo}
-            \end{tabular}
-            \caption{}
-            \label{tab:ca-scaling}
-        \end{table}
-    \end{minipage}%
-    \hspace{0.05\textwidth}%
-    \begin{minipage}{0.44\textwidth}
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=\textwidth]{figures/ca-rules/scaling.pdf}
-            \caption{TODO insert new image of various scalings; caption for image}
-            \label{fig:ca-scaling}
-        \end{figure}
-    \end{minipage}
-\end{figure}
 
 \subsubsection{Other \aclp{ca}}
 
