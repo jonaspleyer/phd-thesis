@@ -3974,20 +3974,20 @@ the differential equations exists on $I$.
 The system of equations is given by
 
 \begin{alignat}{5}
-    \partial_t{V_c} &= &&&&h_{g,c}(\textbf{v}_c, V_c)
+    \partial_t{V_c} &= &&&&h_{g,c}(\vec{v}_c, V_c)
     \label{eq:volumetric-growth}\\
-    \partial_t{\textbf{v}_c} &=  &-&
-    \textbf{T}_i\textbf{h}_x(\textbf{v}_c,\textbf{w}|_{\textbf{x}_c}) &+&
-    \textbf{h}_{i,c}(\textbf{v}_c, V_c)
+    \partial_t{\vec{v}_c} &=  &-&
+    \vec{T}_i\vec{h}_x(\vec{v}_c,\vec{w}|_{\vec{x}_c}) &+&
+    \vec{h}_{i,c}(\vec{v}_c, V_c)
     \label{eq:intracellular-reactions}\\
-    \partial_t{\textbf{w}} &= &\sum\limits_c \frac{V_c}{V_\EV}
-    &\textbf{T}_e\textbf{h}_x(\textbf{v}_c,\textbf{w})\delta(\textbf{x}-\textbf{x}_c) &+&
-    \textbf{h}_e(\textbf{w}) &+& \textbf{S}(\textbf{w})
+    \partial_t{\vec{w}} &= &\sum\limits_c \frac{V_c}{V_\EV}
+    &\vec{T}_e\vec{h}_x(\vec{v}_c,\vec{w})\delta(\vec{x}-\vec{x}_c) &+&
+    \vec{h}_e(\vec{w}) &+& \vec{S}(\vec{w})
     \label{eq:extracellular-reactions}\\
-    % \partial_t \textbf{x}_c &= &\sum\limits_{s\neq c}&\textbf{G}(c,s) + \textbf{G}_\EV(c)
+    % \partial_t \vec{x}_c &= &\sum\limits_{s\neq c}&\vec{G}(c,s) + \vec{G}_\EV(c)
     % \label{eq:equations-of-motion-1}\\
-    \partial^2_t\textbf{y}_c &= &\sum\limits_{s\neq c}& \textbf{F}_\CS(c,s) + \textbf{F}_\EV(c) +
-    \textbf{F}_c
+    \partial^2_t\vec{y}_c &= &\vec{F}_\EV(c)& +
+    \vec{F}_c + \sum\limits_{s\neq c}\vec{F}_\CS(c,s)
     \label{eq:equations-of-motion-2}\\
     &&&\gamma:\CS\rightarrow\CS\times\CS\\
     &&&\bar{\gamma}:\CS\rightarrow\{0,1\}\\
@@ -3995,54 +3995,48 @@ The system of equations is given by
 \end{alignat}
 \todo{Explain division functions}
 \todo{Insert death functions}
-Equation~\eqref{eq:volumetric-growth} defines the term $h_{g,c}(\textbf{v}_c, V_c)$ which
+Equation~\eqref{eq:volumetric-growth} defines the term $h_{g,c}(\vec{v}_c, V_c)$ which
 describes the rate of change of the volume of a single cell.
 This growth term is coupled to the presence of intracellular concentrations
-$\textbf{v}:I\rightarrow\R^n$.
+$\vec{v}:I\rightarrow\R^n$.
 Intracellular processes are expressed in equation~\eqref{eq:intracellular-reactions} via
-$\textbf{h}_i(\textbf{v}_c, V_c)$ which also encompassess any growth-related changes.
+$\vec{h}_i(\vec{v}_c, V_c)$ which also encompassess any growth-related changes.
 We also model the dynamics of extracellular concentrations
 (equation~\eqref{eq:extracellular-reactions})
-$\textbf{w}:I\times\mathcal{D}\rightarrow\R^m$ which are distributed over the domain
+$\vec{w}:I\times\mathcal{D}\rightarrow\R^m$ which are distributed over the domain
 $\mathcal{D}\subset\R^d$.
 The integers $n,m$ refer to the number of intracellular/extracellular components
 respectively while $d$ is the dimension of the physical environment (usually $d=2,3$).
 The extracellular concentrations are coupled to the individual agents via an exchange
-term $\textbf{h}_x(\textbf{v}_c,\textbf{w})$.
+term $\vec{h}_x(\vec{v}_c,\vec{w})$.
 We have introduced two auxiliary diagonal matrices $T_i\in\R^{n\times l}$ and
 $T_e\in\R^{m\times l}$ which enables us to utilize the same notion
-$\textbf{h}_x(\textbf{v}_c,\textbf{w})$ for the intracellular $\textbf{v}_c$ and
-extracellular $\textbf{w}$ derivative.
+$\vec{h}_x(\vec{v}_c,\vec{w})$ for the intracellular $\vec{v}_c$ and
+extracellular $\vec{w}$ derivative.
 This choice ensures that extracellular and intracellular concentrations remain comparable
 and tractable.
 Since we have chosen to model concentrations, the exchange term
-$\textbf{h}_x(\textbf{v}_c, \textbf{w})$ needs to be scaled with the ratio of cellular
+$\vec{h}_x(\vec{v}_c, \vec{w})$ needs to be scaled with the ratio of cellular
 volume $V_c$ to domain volume $V_\EV$ to correctly describe the total amount of exchanged resources.
-The term $\textbf{S}(\textbf{w})$ is supposed to model transport of the extracellular compounds and
-does not alter the total amount, i.e. $\int\textbf{S}(\textbf{w})\text{dV}=0$.
+The term $\vec{S}(\vec{w})$ is supposed to model transport of the extracellular compounds and
+does not alter the total amount, i.e. $\int\vec{S}(\vec{w})\text{dV}=0$.
 Table~\ref{table:overview-model-aspects} shows a summary of the model aspects that are treated with
 this framework.
 \begin{table}[H]
     \centering
     \renewcommand{\arraystretch}{1.2}
-    \begin{tabular}{lclll}
+    \begin{tabular}{clc}
         \toprule
-        Model Aspect & Equation & Input && Output\\
-        \midrule
-        Growth Model            & $h_{g,c}(\textbf{v}_c,V_c)$               &
-        $\R^n\times\R$    & $\rightarrow$ & $\R$\\
-        Intracellular Reactions & $\textbf{h}_i(\textbf{v}_c,V_c)$          &
-        $\R^n\times\R$    & $\rightarrow$ & $\R^n$\\
-        Exchange                & $\textbf{h}_x(\textbf{v}_c, \textbf{w})$  &
-        $\R^n\times\R^m$  & $\rightarrow$ & $\R^l$\\
-        Extracellular Reactions & $\textbf{h}_e(\textbf{w})$                & $\R^m$
-        & $\rightarrow$ & $\R^m$\\
-        Fluid Motion            & $\textbf{S}(\textbf{w})$                  & $\R^m$
-        & $\rightarrow$ & $\R^m$\\
-        Mechanics               & $\partial_t^2\textbf{x}_c$                & $\R$
-        & $\rightarrow$ & $\R^d$\\
-        Division                & $\bar{\gamma},\gamma(c)$                  & $\CS$
-        & $\rightarrow$ & $\CS\times\CS$\\
+        % Aspect & Equation & Input && Output\\
+        (C) & Growth Model              & $h_{g,c}(\vec{v}_c,V_c)$\\
+        (C) & Intracellular Reactions   & $\vec{h}_i(\vec{v}_c,V_c)$\\
+        (C) & Division                  & $\bar{\gamma},\gamma(c)$\\
+        (C) & Intrinsic Forces          & $\vec{F}_c$\\
+        (CC) & Interaction Forces       & $\vec{F}_\CS(c,s)$\\
+        (EC) & Environmental Forces     & $\vec{F}_\EV(c)$\\
+        (EC) & Exchange                 & $\vec{h}_x(\vec{v}_c, \vec{w})$\\
+        (E) & Extracellular Reactions   & $\vec{h}_e(\vec{w})$\\
+        (E) & Fluid Motion              & $\vec{S}(\vec{w})$\\
         \bottomrule
     \end{tabular}
     \caption[Dynamical Components of the center-based system]{Overview of terms
