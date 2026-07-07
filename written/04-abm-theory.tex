@@ -3832,31 +3832,58 @@ sometimes \acp{cabm} can be reduced to an \ac{ode} or \ac{pde} description under
 %         (see Section~\ref{subsection:coarse-graining-of-cbm-model})
 % \end{itemize}
 
-\textbf{Molecular Dynamics \& Particle Simulations}
-\begin{itemize}
-    \item this is quite similar (maybe closest)
-    \item no indistinguishability assumption possible
-    \item insertion and removal of particles only via particles themselves not by external processes
-    \item individuality of agents and many-body treatment can be comparable
-    \item no particular thought to the topological cellular processes; how do particles get
-        added/removed is often determined from outside or simply not discussed
-    \item many-body systems often no way of interacting with environment (i.e. with diffusing
-        molecules)
-    \item molecular dynamics assumes indistinguishability; this is contrary to \acp{cabm}
-    \item in general many-body sims are quite similar (maybe closest of all presented approaches)
-\end{itemize}
+A distinct class of modeling techniques are the various tools surrounding particle simulations.
+While some particle methods can be used to solve \acp{pde}~\cite{Monaghan1992,Monaghan2005}, most of
+them deal with questions such as molecular dynamics~\cite{Allen1989} or more generally many-body
+systems for rigid~\cite{Baraff1994} and soft~\cite{Terzopoulos1987} objects.
+The applications of such systems are manifold, ranging from astrophysics~\cite{Springel2005},
+materials science~\cite{Cundall1979} to video games~\cite{Mller2007}.
+These models are arguably closest to our understanding of \acp{cabm} since they are able to treat a
+variable amount of individual entities.
+These systems usually do not consider any form of biological topological processes such as mitosis
+but it seems straightforward to be able to implement them within this framework.
+One notable difference of any particle simulation or many-body system to \acp{cabm} is that they are
+inherently spatial, i.e. every object has to be present at some spatial point within the given
+simulation space.
+This is generally different to \acp{cabm} (see Example~\ref{example:theory-simple-abm}) which need
+not to satisfy this assumption, although many \acp{abmf} inherently assume a form of spatial
+component.
 
-\textbf{The Fock-Space}
-\begin{itemize}
-    \item If related, then only for stochastic \acp{abm}
-    \item linear space where each basis vector is a particular state that can be occupied with
-        certain probability; there is no analogous concept here
-    \item number of particles 
-    \item If related, then only for stochastic \acp{abm}
-    \item linear structure of base-states. There is no such structure in \acp{cabm}
-\end{itemize}
+Another theoretical construct which is capable of treating a variable number of particles is the
+Fock-space~\cite{Fock1932}.
+It is the underlying structure of almost any \ac{qft} where fields are operators on the state space
+that can be used to calculate the number density of the specific particle types.
+However, the broad philosophical foundations of \ac{qft} and \acp{cabm} are fundamentally distinct.
+The concept of a measurement and the resulting collapse of the wave-function from the quantum world
+has no analogon in the biological reality.
+Furthermore, the particles of any \ac{qft} can not be traced through time and space and no unique
+identifiers can therefore be assigned to any entity since no particular entity except the fields
+themselves persist through time.
+We therefore do not see the Fock-space to be a fitting candidate to describe individual cellular
+systems.
 
-\pagebreak
+% \textbf{Molecular Dynamics \& Particle Simulations}
+% \begin{itemize}
+%     \item this is quite similar (maybe closest)
+%     \item no indistinguishability assumption possible
+%     \item insertion and removal of particles only via particles themselves not by external processes
+%     \item individuality of agents and many-body treatment can be comparable
+%     \item no particular thought to the topological cellular processes; how do particles get
+%         added/removed is often determined from outside or simply not discussed
+%     \item many-body systems often no way of interacting with environment (i.e. with diffusing
+%         molecules)
+%     \item molecular dynamics assumes indistinguishability; this is contrary to \acp{cabm}
+%     \item in general many-body sims are quite similar (maybe closest of all presented approaches)
+% \end{itemize}
+%
+% \textbf{The Fock-Space}
+% \begin{itemize}
+%     \item If related, then only for stochastic \acp{abm}
+%     \item linear space where each basis vector is a particular state that can be occupied with
+%         certain probability; there is no analogous concept here
+%     \item number of particles fluctuates
+%     \item no clear interpretation of what constitutes a "measurement" in biology
+% \end{itemize}
 
 \section{Applications}
 \subsection{Cell Competition Response to defective Hippo Pathway?}
