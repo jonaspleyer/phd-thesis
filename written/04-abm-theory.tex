@@ -3736,12 +3736,69 @@ In total, we have thereby reconstructed rule 110 within \ac{cabm}~\ref{definitio
 which is thus Turing-complete.
 
 \subsubsection{Other \acp{ca} \& Conclusion}
-\begin{itemize}
-    \item cellular potts (GGH)
-    \item \acp{ca} should not be confused with \acp{cabm}; they are a different class
-    \item \acp{ca} are generally speaking not particularly well-suited to describe biological
-        systems due to their simplicity
-\end{itemize}
+The previous text has focussed on elementary \acp{ca} which are only one particular subclass of
+\acp{ca}.
+Looking at this idea in a broader context, there are many related modeling approaches that utilize a
+discrete spatial subdivision.
+For instance, the \acl{cpm} is a generalized version of the Ising model~\cite{Ising1925} where the
+former generally considers more than just two states compared to the Ising model which only consists
+of spin up/down.
+The values at each lattice point of the \ac{cpm} are identifiers of cells and any contiguous of the
+same label is identified as one cell.
+Therefore cells are not confined to exactly one lattice point anymore but instead span over multiple
+grid point simultaneously.
+The dynamics of these models are governed by a Hamiltonian energy functional which include
+effects such as cell-type-specific adhesion and volume/area constraints.
+Various \acp{cabmf}~\cite{Tanaka2015,Swat2012} utilize \acp{cpm} to model cellular agents.
+
+A lattice-gas \acl{ca} is related concept, often used to simulate moving and colliding particles and
+applied in studies surrounding fluid dynamics~\cite{Hardy1973} but have also been used in biological
+contexts~\cite{Deutsch2005}.
+This variant of \acp{ca} often utilizes other grid-forms such as hexagonal grids of voronoi
+tessalations~\cite{Voronoi1908}.\\
+Voronoi tessalations have been utilized in other studies to describe the physical shape of cultured
+monolayer cells such as epithelial cells~\cite{Honda1978}.
+They therefore serve as the basis for many \acp{cabm} such as vertex
+models~\cite{Barton2017,Merks2011,Cooper2020}.
+Lattice boltzmann methods~\cite{Chen1998} are another extension to lattice-gas \acp{ca}, assigning
+continuous real values to lattice points instead of binary ones.
+They can be seen as direct step between lattice-gas \acp{ca} and \acp{pde} (see below) and are often
+utilized to study fluid dynamics~\cite{}.
+However, modeling frameworks such as \citet{Tanaka2015} utilize the lattice-boltzmann method as a
+solving technique.
+Finally, while not directly related to cellular studies, neural \acp{ca} have been studied in an
+effort to explain robustness of pattern formation~\cite{Mordvintsev2020}.
+
+The preceding text has highlighted some key differences between the fundamental concepts of \acp{ca}
+and \acp{cabm}.
+The word "cell" in \acp{ca} should therefore not be confused with biological cells and may only be
+used synonymously in special cases where justified.
+It should rather be interpreted as a spatially confined region which holds a collection of
+properties.
+\acp{ca} should be seen as a modeling tool that can be used within \acp{cabm} to model various
+aspects of cellular or environmental behaviour such as fluid mechanics or intracellular dynamics.
+As we have seen previously, simplistic \acp{ca} such as elementary \acp{ca} exhibit significant
+problems in studying biological systems on the level of individual cells.
+While the usage of \acp{ca} can be justified for specialized cases, we see the most promising
+general model formulation in \acp{cpm} which clearly distinguish between individual cells and allow
+for their proper resolution together with any topological cellular processes.
+
+% \begin{itemize}
+%     \item cellular potts \cite{Graner1992}
+%     \item lattice-gas \acp{ca}
+%     \item lattice boltzmann methods \cite{Chen1998}; mostly used in fluid simulations; some
+%         simulations tools also use it i.e. LBIBCell \cite{Tanaka2015}
+%     \item static voronoi tessalations sometimes used \cite{Honda1978}; when tessalation is not
+%         static, we move to vertex-based models and off-lattice models
+%     \item Neural \acp{ca} \cite{Mordvintsev2020}
+% \end{itemize}
+%
+% \textbf{Conclusion}
+% \begin{itemize}
+%     \item \acp{ca} should not be confused with \acp{cabm}; they are a different class
+%     \item \acp{ca} are generally speaking not particularly well-suited to describe biological
+%         systems due to their simplicity
+% \end{itemize}
 
 \subsection{\acsp{ode} \& \acsp{pde}}
 \begin{itemize}
