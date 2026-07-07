@@ -8,8 +8,9 @@
 \chapter*{Supplement}
 \addcontentsline{toc}{chapter}{Supplement}
 
-\section{Additional Details to elementary \acsp{ca}}
+\section{Additional Details to elementary \aclp{ca}}
 \label{supplement:additional-details-for-ca}
+\subsection{Extended Results of Elementary \aclp{ca}}
 Subsection~\ref{subsection:elemntary-ca} discussed the relation of \acp{ca} to \acp{cabm} in which
 Figure~\ref{fig:ca-filtered-single} showed results of various \acp{ca} which were obtained by
 applying the respective rules to the same initial condition of only seeding with a single living
@@ -58,6 +59,120 @@ The results presented in Figures~\ref{fig:ca-filtered-double1}, \ref{fig:ca-filt
 with only a single living cell (see Figure~\ref{fig:ca-filtered-single}).
 Therefore they underline the previously made claim that the formation of these patterns are somewhat
 robust with respect to the initial conditions.
+
+\subsection{The "Game of Life" is not cell-based}
+
+Game of Life \cite{games1970fantastic}
+
+\begin{example}[Game of Life]
+    \label{example:game-of-life}
+    Conway's Game of Life is perhaps the most popular example for a cellular automaton.
+    It is deterministic and acts on a infinite grid $\mathbb{Z}^2$ by assigning one of two states
+    (alive or dead) to each grid-point
+    \begin{equation}
+        L:\mathbb{Z}^2\rightarrow\{0,1\}
+    \end{equation}
+    where we prefer the short-hand notation $L(i,j)=L_{ij}$ or $L^n_{ij}$ where $n$ is the temporal
+    index.
+    This means a single state is described by a mapping $L:\mathbb{Z}^2\rightarrow\{0,1\}$ and the
+    evolution function of this dynamical system acts on the space of these maps
+    $X=\{L:\mathbb{Z}^2\rightarrow\{0,1\}\}$
+    \begin{equation}
+        \phi:U\subset(\mathbb{N}\times X) \rightarrow X
+    \end{equation}
+    where we identified $(\mathbb{N},+)$ as the monoid of the dynamical system.
+    Let $\eta_{ij}\subset\mathbb{Z}^2$ be the set of spatial indices which are direct neighbors of
+    $(i,j)$ ie. $\eta_{ij}=\{(k,l)\in\mathbb{Z}^2 \text{ where } |k-i|<2, |l-j|<2 \text{ and }
+    (k,l)\neq(i,j)\}$.
+    The game consists of three rules:
+    \begin{enumerate}
+        \item Any live cell with fewer than two live neighbors dies, as if by underpopulation.
+        \item Any live cell with two or three live neighbors lives on to the next generation.
+        \item Any live cell with more than three live neighbors dies, as if by overpopulation.
+        \item Any dead cell with exactly three live neighbors becomes a live cell, as if by
+            reproduction.
+    \end{enumerate}
+    Together with the sum of all neighboring cells $S_{ij}=\sum\limits_{\iota\in\eta_{ij}}L^n_\iota$
+    we can write these as
+    \begin{equation}
+        \phi_1(L_{ij}^n) = L_{ij}^{n+1} =
+        \begin{cases}
+            0 &L^n_{ij}=1 \text{ and } S_{ij}<2\\
+            1 &L^n_{ij}=1 \text{ and } S_{ij}=2,3\\
+            0 &L^n_{ij}=1 \text{ and } S_{ij}>3\\
+            1 &L^n_{ij}=0 \text{ and } S_{ij}=3\\
+            0 &\text{else}
+        \end{cases}
+    \end{equation}
+    which fully specifies the dynamical system when applying iteratively
+    $\phi_m=\phi_1\circ\dots\circ\phi_1$.
+\end{example}
+
+When we compare the above rules with definitions~\ref{def:cellular-state}
+and~\ref{def:cellular-space}, we immediately see that the cellular identity is not preserved for the
+4th rule.
+This \ac{ca} assumes that a new cell is created from 3 neighboring cells which is contrary to the
+division process of cells.
+We set out to formualte the Game of Life within the framework of cellular \acp{abm}.
+To circumvent this problem, we could assume that simply one of the present cells divides and is
+chosen randomly with even probability.
+In order to formalize such a system we would require to introduce the notion of a
+Stochastic Dynamical System.
+But this raises the problem that the second cell of this division process would have to also be
+inserted somewhere in the \ac{ca}.
+Asked in more general terms: Given an arbitrary state $L^n_{ij}$:
+Is it possible to describe a single transition $L^n_{ij}\rightarrow L^{n+1}_{ij}$ by a combination
+of finitely many cellular division and death processes?
+In general: No.
+This is made clear by considering the example of Figure~\ref{fig:conway-non-abm-transition}.
+The transition shown cannot be described by any combination of division and death under the
+consideration that cell-death can only act on currently alive cells.
+In principle, this conundrum could be lifted when performing the division and death process in
+different steps but this would change the outcome and behaviour of the system.
+Similarly, other \acp{ca} such as the Cellular Potts Model~\cite{Graner1992} or Rule
+184~\cite{Krug1988} cannot
+directly be translated into an \ac{cabm}.
+This shows that even the fundamental choices in the design of \acp{cabm} already present interesting
+restrictions and \acp{ca} should in general not be treated as special cases of \acp{cabm} but as
+distinct entities.
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \draw (0,0) -- (3,0);
+        \draw (0,0) -- (0,3);
+        \draw (3,0) -- (3,3);
+        \draw (0,3) -- (3,3);
+        \draw (1,0) -- (1,3);
+        \draw (2,0) -- (2,3);
+        \draw (0,1) -- (3,1);
+        \draw (0,2) -- (3,2);
+        \node at (2.5,0.5) {1};
+        \node at (0.5,2.5) {1};
+        \node at (1.5,2.5) {1};
+        \draw[->] (3.5,1.5) -- (4.5,1.5);
+        \draw (0+5,0) -- (3+5,0);
+        \draw (0+5,0) -- (0+5,3);
+        \draw (3+5,0) -- (3+5,3);
+        \draw (0+5,3) -- (3+5,3);
+        \draw (1+5,0) -- (1+5,3);
+        \draw (2+5,0) -- (2+5,3);
+        \draw (0+5,1) -- (3+5,1);
+        \draw (0+5,2) -- (3+5,2);
+        \node at (1.5+5,1.5) {1};
+    \end{tikzpicture}
+    \caption{
+        This transition in Conways Game of Life cannot be described by any combination of
+        cell-division and death.
+        The cell in the middle which is being created by rule 4 is new and must thus be created by
+        the division mechanism in our \ac{abm}.
+        If any of the initial cells divide, we obtain 2 new cells which need to placed.
+        Since cell-death can only affect currently existing cells, this is contradictory to the
+        final state which only contains a single cell.
+    }
+    \label{fig:conway-non-abm-transition}
+\end{figure}
+
 
 \pagebreak
 \section{Reflecting on the Significance of this Work}
