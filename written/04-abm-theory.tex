@@ -3805,11 +3805,32 @@ for their proper resolution together with any topological cellular processes.
 % \end{itemize}
 
 \subsection{\acsp{ode}, \acsp{pde} \& Particle Methods}
-\begin{itemize}
-    \item \acp{ode} and \acp{pde} are often used within \acp{cabm}
-    \item as we will see later, sometimes \acp{cabm} can be reduced to an \ac{ode} or \ac{pde}
-        (see Section~\ref{subsection:coarse-graining-of-cbm-model})
-\end{itemize}
+While \acp{ca} are most often compared to \acp{abm}, modeling techniques such as \acp{ode} and
+\acp{pde} are frequently applied to described biological systems.
+\acp{ode} have been used extensively across almost all subdisciplines of biology, ranging from
+population-dynamics~\cite{Lotka1925,VOLTERRA1926} to describing pathways of a
+cell~\cite{Swameye2003}.
+They therefore find widespread usage in describing intracellular processes of individual agents
+in most \acp{cabmf}.
+However, their mathematical form only permits a fixed number of components which does not permit us
+to describe a variable amount of individual cellular agents.
+\acp{pde} extend the concept of \acp{ode} to the spatial domain and have been used to study pattern
+formation~\cite{Turing1952,Gierer1972,Meinhardt2008}.
+However, they also do not permit us to distinguish between individual cellular agents but can arise
+as a coarse-grained effect of multicellular behaviour~\cite{Erban2004}.
+Similary to \acp{ode}, they often serve as components of a \ac{cabm}, e.g. to describe fluid
+mechanics~\cite{Navier1827,Stokes1845}.
+Similarly to \acp{ode}, \acp{pde} are not naturally capable of describing individual varying numbers
+of cellular agents and are therefore not directly suitable to describe multicellular systems with
+cellular resolution.
+However, as we will see later (see Subsection~\ref{subsection:coarse-graining-of-cbm-model}),
+sometimes \acp{cabm} can be reduced to an \ac{ode} or \ac{pde} description under certain conditions.
+
+% \begin{itemize}
+%     \item \acp{ode} and \acp{pde} are often used within \acp{cabm}
+%     \item as we will see later, sometimes \acp{cabm} can be reduced to an \ac{ode} or \ac{pde}
+%         (see Section~\ref{subsection:coarse-graining-of-cbm-model})
+% \end{itemize}
 
 \textbf{Molecular Dynamics \& Particle Simulations}
 \begin{itemize}
