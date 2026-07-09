@@ -3900,27 +3900,29 @@ systems.
 \section{Applications}
 \subsection{Coarse-graining of an off-lattice center-based model}
 \label{subsection:coarse-graining-of-cbm-model}
-\subsubsection{Motivation}
-This section formulates a generalized model for cellular dynamics, covering growth, division,
+This section establishes a generalized model for cellular dynamics, covering growth, division,
 intracellular \& extracellular reactions and mechanical properties.
-We assume that each cell is represented by a center-based, off-lattice point
-$\textbf{x}_c\in\R^d$ and interacts in a
-point-wise manner with the external environment.
-This approach is general enough to cover a wide range of cellular systems while also providing the
-necessary assumptions to derive meaningful results.
-We model the system over the course of a time interval $I\subset\R$.
-Within the model every alive cell $c\in\CS$ is described by an individual set of
+We assume that the spatial information (i.e. position) of every cell is given by a single point
+$\vec{x}_c\in\R^d$ so that it interacts with its environment at this particular point.
+These propertiesare often described as center-based (referring to the singular point
+$\vec{x}_c\in\R^d$) and off-lattice which refers to the fact that the physical space is continuous.
+Within the model every alive cell $c_\iota\in M$ is described by an individual set of
 equations for volume $V_c$, intracellular reactions $\textbf{v}_c$ and mechanics $\textbf{x}_c$.
-These equations can be subject to heterogeneity and are thus not assumed to be identical in their
-most generalized version.
+These parameters governing the individual equations of cells can be subject to heterogeneity and are
+thus not assumed to be identical in their most generalized version.
 
-\textbf{List of modeling tools using the notation from below}
-\begin{itemize}
-    \item PhysiCell \cite{Ghaffarizadeh2018}
-    \item BSim \cite{Gorochowski2012,Matyjaszkiewicz2017}
-    \item typically assume spherical model for interaction of cells; however can be generalized
-        to other forms (volume term is probably a little more complex then)
-\end{itemize}
+The present model is general enough in its assumption such that a large variety of cellular systems
+can be studied but also restrictive enough in its mathematical form to be analyzed analytically.
+\todo[inline]{find more models that fit here}
+Various modeling frameworks such as PhysiCell~\cite{Ghaffarizadeh2018}, Yalla~\cite{Germann2019} or
+BSim~\cite{Gorochowski2012,Matyjaszkiewicz2017} build on this particular model, although often with
+specific extensions for their use-cases.
+While most models assume spherically-shaped cells that model steric repulsion and attraction via
+physical forces, additional effects such as cell polarity~\cite{Szab2006} can be included as well.
+
+We provide a concise mathematical form of the general class of these models.
+The goal of this section is to analyze this model under various assumptions and to derive (often
+coarse-grained) results from it.
 
 % \begin{table}[H]
 %     \newcounter{aspect3}
