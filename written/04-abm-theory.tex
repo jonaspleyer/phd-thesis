@@ -3897,8 +3897,7 @@ systems.
 %     \item no clear interpretation of what constitutes a "measurement" in biology
 % \end{itemize}
 
-\section{Applications}
-\subsection{Coarse-graining of an off-lattice center-based model}
+\section{Coarse-graining of an off-lattice center-based model}
 \label{subsection:coarse-graining-of-cbm-model}
 This section establishes a generalized model for cellular dynamics, covering growth, division,
 intracellular \& extracellular reactions and mechanical properties.
@@ -3963,7 +3962,7 @@ coarse-grained) results from it.
 %     }
 % \end{table}
 
-\subsubsection{Model Aspects}
+\subsection{Model Aspects}
 
 \todo[inline]{check this section for notations of "domain". We will change that into "environment"
     but when integrating over the "environment" we probably want to distinguish between
@@ -4046,7 +4045,7 @@ this framework.
     \label{table:overview-model-aspects}
 \end{table}
 
-\subsubsection{Case 1: Full Reduction}
+\subsection{Case 1: Full Reduction}
 We consider the case with no cellular growth $h_{g,c}=0$, and aim to exclude any spatial
 dependence by integrating over the domain $\EV$.
 Furthermore, we assume that the dimensionality of intra- and extracellular reactions is
@@ -4126,7 +4125,7 @@ the integral
 
 as an operator acting on this space.
 
-\subsubsection{Case 2: With Exchange}
+\subsection{Case 2: With Exchange}
 \textbf{TODO from here on the text has to adapted to the new expectation value formalism!}
 We follow all steps identically to the previous case, but do not assume that the exchange
 between intra- and extracellular compounds is fast resulting in
@@ -4164,7 +4163,7 @@ $q=N_\CS\text{E}(V_c/V_\EV)$, we obtain the system
 where the two equations are implicitly coupled due to the dependence of
 $\bar{\textbf{h}}_{i/e}$ on $\textbf{u}_{0/1}$.
 
-\subsubsection{Case 3: With Growth}
+\subsection{Case 3: With Growth}
 Now we will additionally consider the case where growth is introduced into the system via
 equation~\eqref{eq:volumetric-growth}.
 Growth of individual cells will lead to their division which can be defined by a division
@@ -4191,7 +4190,7 @@ In addition we again assume fast exchange and obtain the equations
 \end{align}
 %
 %
-\subsubsection{Case 4: Something Else}
+\subsection{Case 4: Something Else}
 Although the equations governing the \ac{abm} cannot be derived directly from a higher
 conceptual viewpoint, we are still able to motivate them and explain their individual components.
 To this end, we consider the total energy stored in the system to be constant.
@@ -4366,7 +4365,7 @@ By splitting up all terms with respect to species, we arrive at our final equati
     \dot{I}(x) &= &b&\sum\limits_{c_A}\frac{V_{c_A}}{V_D}\delta(x-x_{c_A}) &+& D_I \Delta I(x).
 \end{alignat}
 
-\subsubsection{Case 6: Constant Enthalpy}
+\subsection{Case 6: Constant Enthalpy}
 \begin{itemize}
     \item postulate that enthalpy should be constant
     \item show how the coupling of intracellular with extracellular components leads to the
@@ -4400,7 +4399,7 @@ Take derivative
 %
 %
 
-\subsubsection{Idea: Include volumetric Change of domain}
+\subsection{Idea: Include volumetric Change of domain}
 \begin{itemize}
     \item the volume of the domain $V_D$ is effectively shrinking when more cells are present since
         they occupy space in which no extracellular nutrients can be
@@ -4416,7 +4415,7 @@ Take derivative
 
 %---------------------------------------------------------------------------------------------------
 \newpage
-\subsection{The Fractal Structure in Branching Patterns of \textit{Bacillus Subtilis}}
+\section{The Fractal Structure in Branching Patterns of \textit{Bacillus Subtilis}}
 We set out to derive a set of equations to describe a simple bacterial system which grows
 spatially by taking up nutrients.
 
@@ -4564,9 +4563,9 @@ Combine multiple cells into one circle \cite{Graham1998}
         as a differential equation, explore this
 \end{enumerate}
 
-\subsection{Cell Competition Response to defective Hippo Pathway?}
+\section{Cell Competition Response to defective Hippo Pathway?}
 
-\subsection{Continuum Models of Bacteria}
+\section{Continuum Models of Bacteria}
 
 \begin{itemize}
     \item \cite{Volfson2008} TODO; continuum model, equations of nematodynamics \cite{Doi1988-ad}
