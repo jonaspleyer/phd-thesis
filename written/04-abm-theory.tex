@@ -4023,19 +4023,11 @@ information of every individual cell is given by a point $\vec{x}_\iota$.
 Although this assumption is often used synonymously with the notion that cells are modeled as
 spherical objects, other shapes such as ellipsoids could be used.
 
-\todo[inline]{check this section for notations of "domain". We will change that into "environment"
-    but when integrating over the "environment" we probably want to distinguish between
-    the full environment that also contains extracellular compounds and the physical size only
-}
-
 The first equation \eqref{eq:volumetric-growth} describes the change of volume of a cell.
 It is real-valued and depends on the cells intracellular compounds $\vec{v}_\iota(t)\in\R^n$ and
 its current volume $V_\iota$.
 The variable $\vec{v}_\iota$ describes density values of the intracellular compounds and
 $\vec{w}(t,\vec{y})\in\R^n$ the extracellular compounds.
-
-\todo{Explain division functions}
-\todo{Insert death functions}
 
 Equation~\eqref{eq:volumetric-growth} defines the term $h_{g,c}(\vec{v}_\iota, V_\iota)$ which
 describes the rate of change of the volume of a single cell.
@@ -4109,6 +4101,11 @@ Chapter~\ref{chapter:overaching-aspects-elongated-bacteria}, further discussed i
 theoretical sections and now reestablished within this particular model.
 
 \subsection{Case 1: Full Reduction}
+\todo[inline]{check this section for notations of "domain". We will change that into "environment"
+    but when integrating over the "environment" we probably want to distinguish between
+    the full environment that also contains extracellular compounds and the physical size only
+}
+
 We consider the case with no cellular growth $h_{g,c}=0$, and aim to exclude any spatial
 dependence by integrating over the domain $\EV$.
 Furthermore, we assume that the dimensionality of intra- and extracellular reactions is
