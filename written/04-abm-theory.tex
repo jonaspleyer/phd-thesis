@@ -3911,17 +3911,19 @@ systems.
 This section establishes a generalized model for cellular dynamics, covering growth, division,
 intracellular \& extracellular reactions and mechanical properties.
 We assume that the spatial information (i.e. position) of every cell is given by a single point
-$\vec{x}_c\in\R^d$ so that it interacts with its environment at this particular point.
+$\vec{x}_\iota\in\R^d$ so that it interacts with its environment at this particular point.
 These propertiesare often described as center-based (referring to the singular point
-$\vec{x}_c\in\R^d$) and off-lattice which refers to the fact that the physical space is continuous.
+$\vec{x}_\iota\in\R^d$) and off-lattice which refers to the fact that the physical space is
+continuous.
 Within the model every alive cell $c_\iota\in M$ is described by an individual set of
-equations for volume $V_c$, intracellular reactions $\textbf{v}_c$ and mechanics $\textbf{x}_c$.
+equations for volume $V_\iota$, intracellular reactions $\textbf{v}_\iota$ and mechanics
+$\textbf{x}_\iota$.
 These parameters governing the individual equations of cells can be subject to heterogeneity and are
 thus not assumed to be identical in their most generalized version.
 
 The present model is general enough in its assumption such that a large variety of cellular systems
 can be studied but also restrictive enough in its mathematical form to be analyzed analytically.
-\todo[inline]{find more models that fit here}
+% \todo[inline]{find more models that fit here}
 Various modeling frameworks such as PhysiCell~\cite{Ghaffarizadeh2018}, Yalla~\cite{Germann2019} or
 BSim~\cite{Gorochowski2012,Matyjaszkiewicz2017} build on this particular model, although often with
 specific extensions for their use-cases.
