@@ -3974,64 +3974,109 @@ coarse-grained) results from it.
 % \end{table}
 
 \subsection{Model Aspects}
+We will now estalish the underlying mathematical model and motivate the particular choices.
+As often done in Physics, we loosen the rigor of our mathematical notation and assume
+differentiability and the existance of solutions as given.
+As we will see, the dynamics during an time interval without any topological cellular processes is
+determined by the solution of the presented differential equations.
+Therefore, the existance of solutions to these equations can be directly linked back to standard
+mathematical principles~\cite{Polyanin2001,Polyanin2017}.
 
-\todo[inline]{check this section for notations of "domain". We will change that into "environment"
-    but when integrating over the "environment" we probably want to distinguish between
-    the full environment that
-also contains extracellular compounds and the physical size only}
+Any quantity that is specific to a particular cell $c_\iota$ will be indexed with the corresponding
+cellular identifier $\iota$ which is present during the lifetime of the cell (see
+Definition~\ref{definition:cellular-lifetime}).
+The non-topological dynamics of our \ac{cabm} are determined by the presented differential equations
+while the topological cellular processes only encompass division and removal which are triggered by
+their respective criteria (see Definitions~\ref{definition:cell-division-criterion} and
+\ref{definition:cell-removal-criterion}) as described in
+Definition~\ref{definition:criterion-determined-topological-processes}.
 
-Quantities which are specific to a particular cell $c\in\CS$ are indexed with said cell accordingly.
-We will assume that all functions are sufficiently differentiable and that a solution to
-the differential equations exists on $I$.
+We will now first present the model in its full mathematical form and then carefully explain the
+individual constituents.
+The model is formulated in an abstractly so that researchers can flexibly adapt or omit individual
+components.
 The system of equations is given by
 
 \begin{alignat}{5}
-    \partial_t{V_c} &= &&&&h_{g,c}(\vec{v}_c, V_c)
+    \partial_t{V_\iota} &= &&&&h_{g,\iota}(\vec{v}_\iota, V_\iota)
     \label{eq:volumetric-growth}\\
-    \partial_t{\vec{v}_c} &=  &-&
-    \vec{T}_i\vec{h}_x(\vec{v}_c,\vec{w}|_{\vec{x}_c}) &+&
-    \vec{h}_{i,c}(\vec{v}_c, V_c)
+    \partial_t{\vec{v}_\iota} &=  &-&
+    \vec{h}_\iota(\vec{v}_\iota,\vec{w}|_{\vec{x}_\iota}) &+&
+    \vec{h}_{i,\iota}(\vec{v}_\iota, V_\iota)
     \label{eq:intracellular-reactions}\\
-    \partial_t{\vec{w}} &= &\sum\limits_c \frac{V_c}{V_\EV}
-    &\vec{T}_e\vec{h}_x(\vec{v}_c,\vec{w})\delta(\vec{x}-\vec{x}_c) &+&
+    \partial_t{\vec{w}} &= &\sum\limits_\iota V_\iota
+    &\vec{h}_\iota(\vec{v}_\iota,\vec{w})\delta(\vec{x}-\vec{x}_\iota) &+&
     \vec{h}_e(\vec{w}) &+& \vec{S}(\vec{w})
     \label{eq:extracellular-reactions}\\
-    % \partial_t \vec{x}_c &= &\sum\limits_{s\neq c}&\vec{G}(c,s) + \vec{G}_\EV(c)
+    % \partial_t \vec{x}_\iota &= &\sum\limits_{s\neq c}&\vec{G}(c,s) + \vec{G}_\EV(c)
     % \label{eq:equations-of-motion-1}\\
-    \partial^2_t\vec{y}_c &= &\vec{F}_\EV(c)& +
-    \vec{F}_c + \sum\limits_{s\neq c}\vec{F}_\CS(c,s)
+    \partial^2_t\vec{y}_\iota &= &\vec{F}_\EV(c_\iota)& +
+    \vec{F}_\iota + \sum\limits_{\kappa\neq \iota}\vec{F}_\CS(c_\iota,c_\kappa)
     \label{eq:equations-of-motion-2}\\
     &&&\gamma:\CS\rightarrow\CS\times\CS\\
     &&&\bar{\gamma}:\CS\rightarrow\{0,1\}\\
     &&&\bar{\delta}:\CS\rightarrow\{0,1\}
 \end{alignat}
+
+where as motivated earlier, we have utilized a center-based description, i.e. the positional
+information of every individual cell is given by a point $\vec{x}_\iota$.
+Although this assumption is often used synonymously with the notion that cells are modeled as
+spherical objects, other shapes such as ellipsoids could be used.
+
+\todo[inline]{check this section for notations of "domain". We will change that into "environment"
+    but when integrating over the "environment" we probably want to distinguish between
+    the full environment that also contains extracellular compounds and the physical size only
+}
+
+The first equation \eqref{eq:volumetric-growth} describes the change of volume of a cell.
+It is real-valued and depends on the cells intracellular compounds $\vec{v}_\iota(t)\in\R^n$ and
+its current volume $V_\iota$.
+The variable $\vec{v}_\iota$ describes density values of the intracellular compounds and
+$\vec{w}(t,\vec{y})\in\R^n$ the extracellular compounds.
+
 \todo{Explain division functions}
 \todo{Insert death functions}
-Equation~\eqref{eq:volumetric-growth} defines the term $h_{g,c}(\vec{v}_c, V_c)$ which
+
+Equation~\eqref{eq:volumetric-growth} defines the term $h_{g,c}(\vec{v}_\iota, V_\iota)$ which
 describes the rate of change of the volume of a single cell.
-This growth term is coupled to the presence of intracellular concentrations
-$\vec{v}:I\rightarrow\R^n$.
+This growth term is coupled to the presence of intracellular concentrations $\vec{v}\in\R^n$.
 Intracellular processes are expressed in equation~\eqref{eq:intracellular-reactions} via
-$\vec{h}_i(\vec{v}_c, V_c)$ which also encompassess any growth-related changes.
+$\vec{h}_i(\vec{v}_\iota, V_\iota)\in\R^n$ which also encompassess any growth-related changes.
 We also model the dynamics of extracellular concentrations
-(equation~\eqref{eq:extracellular-reactions})
-$\vec{w}:I\times\mathcal{D}\rightarrow\R^m$ which are distributed over the domain
-$\mathcal{D}\subset\R^d$.
-The integers $n,m$ refer to the number of intracellular/extracellular components
-respectively while $d$ is the dimension of the physical environment (usually $d=2,3$).
-The extracellular concentrations are coupled to the individual agents via an exchange
-term $\vec{h}_x(\vec{v}_c,\vec{w})$.
-We have introduced two auxiliary diagonal matrices $T_i\in\R^{n\times l}$ and
-$T_e\in\R^{m\times l}$ which enables us to utilize the same notion
-$\vec{h}_x(\vec{v}_c,\vec{w})$ for the intracellular $\vec{v}_c$ and
-extracellular $\vec{w}$ derivative.
-This choice ensures that extracellular and intracellular concentrations remain comparable
-and tractable.
-Since we have chosen to model concentrations, the exchange term
-$\vec{h}_x(\vec{v}_c, \vec{w})$ needs to be scaled with the ratio of cellular
-volume $V_c$ to domain volume $V_\EV$ to correctly describe the total amount of exchanged resources.
-The term $\vec{S}(\vec{w})$ is supposed to model transport of the extracellular compounds and
-does not alter the total amount, i.e. $\int\vec{S}(\vec{w})\text{dV}=0$.
+(equation~\eqref{eq:extracellular-reactions}) $\vec{w}(t,\vec{y})\in\R^n$ which are distributed over
+the spatial extent of the environment.
+While some components of $\vec{v}_\iota,\vec{w}$ may be confined exclusively within or outside of
+cells, we utitlize a shared notation where purely intracellular compounds should be set identically
+to zero in the extracellular regime and vice versa.
+This allows us to keep the required notation to a minimum.
+The rate at which compounds are exchanged between the intra- and extracellular space is given by
+the term $\vec{h}_\iota$ on the intracellular level in Equation~\eqref{eq:intracellular-reactions}.
+For the extracellular change it is additionally multiplied by the cellular volume $V_\iota$ and acts
+at the position $\vec{x}_\iota$ which is formulated by the delta distribution $\delta(x-x_\iota)$ in
+Equation~\eqref{eq:extracellular-reactions}.
+In addition, we permit purely extracellular reactions which are modeled by $\vec{h}_e(\vec{w})$,
+often simply the degradation of proteins.
+The term $\vec{S}(\vec{w})$ is models transport of the extracellular compounds and does not alter
+the total amount in the space, i.e. $\int\vec{S}(\vec{w})\text{dV}=0$.
+
+In addition to growth and reactions, this model also covers division and removal (death) of cells.
+As we have explained earlier (see Subsection~\ref{subsec:theory-formalizing-cellular-reproduction}),
+we generally assume that processes which act during the death of cells, such as secretion of
+intracellular compounds, have to be covered by the non-topological dynamics, i.e. differential
+equations.
+The same argument also holds for the division function $\gamma$ and its criterion $\bar{\gamma}$.
+
+The last component of our model are the force-based spatial dynamics of the positions of cells
+$\vec{y}_\iota$.
+They follow a standard 2nd order differential equation \eqref{eq:equations-of-motion-2}, i.e.
+Newtons's equations of motion and are affected by three distinct force contributions.
+The term $\vec{F}_\EV(c_\iota)$ models external forces such as fluidic dynamics or gravity on the
+cells.
+Meanwhile, the term $\vec{F}_\iota$ describes purely intracellular forces which is only
+relevant to cells that consist of more than just a simple spherical shape with center point.
+And finally, the term $\vec{F}_\CS(c_\iota,c_{\bar{\iota}})$ accounts for cell-cell forces such as
+steric repulsion and long-range attraction.
+
 Table~\ref{table:overview-model-aspects} shows a summary of the model aspects that are treated with
 this framework.
 \begin{table}[H]
