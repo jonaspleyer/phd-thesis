@@ -4001,11 +4001,11 @@ The system of equations is given by
     \partial_t{V_\iota} &= &&&&h_{g,\iota}(\vec{v}_\iota, V_\iota)
     \label{eq:volumetric-growth}\\
     \partial_t{\vec{v}_\iota} &=  &-&
-    \vec{h}_\iota(\vec{v}_\iota,\vec{w}|_{\vec{x}_\iota}) &+&
+    \vec{h}_{x,\iota}(\vec{v}_\iota,\vec{w}|_{\vec{x}_\iota}) &+&
     \vec{h}_{i,\iota}(\vec{v}_\iota, V_\iota)
     \label{eq:intracellular-reactions}\\
     \partial_t{\vec{w}} &= &\sum\limits_\iota V_\iota
-    &\vec{h}_\iota(\vec{v}_\iota,\vec{w})\delta(\vec{x}-\vec{x}_\iota) &+&
+    &\vec{h}_{x,\iota}(\vec{v}_\iota,\vec{w})\delta(\vec{x}-\vec{x}_\iota) &+&
     \vec{h}_e(\vec{w}) &+& \vec{S}(\vec{w})
     \label{eq:extracellular-reactions}\\
     % \partial_t \vec{x}_\iota &= &\sum\limits_{s\neq c}&\vec{G}(c,s) + \vec{G}_\EV(c)
@@ -4050,7 +4050,8 @@ cells, we utitlize a shared notation where purely intracellular compounds should
 to zero in the extracellular regime and vice versa.
 This allows us to keep the required notation to a minimum.
 The rate at which compounds are exchanged between the intra- and extracellular space is given by
-the term $\vec{h}_\iota$ on the intracellular level in Equation~\eqref{eq:intracellular-reactions}.
+the term $\vec{h}_{x,\iota}$ on the intracellular level in
+Equation~\eqref{eq:intracellular-reactions}.
 For the extracellular change it is additionally multiplied by the cellular volume $V_\iota$ and acts
 at the position $\vec{x}_\iota$ which is formulated by the delta distribution $\delta(x-x_\iota)$ in
 Equation~\eqref{eq:extracellular-reactions}.
@@ -4077,21 +4078,19 @@ relevant to cells that consist of more than just a simple spherical shape with c
 And finally, the term $\vec{F}_\CS(c_\iota,c_{\bar{\iota}})$ accounts for cell-cell forces such as
 steric repulsion and long-range attraction.
 
-Table~\ref{table:overview-model-aspects} shows a summary of the model aspects that are treated with
-this framework.
-\begin{table}[H]
+\begin{table}
     \centering
     \renewcommand{\arraystretch}{1.2}
     \begin{tabular}{clc}
         \toprule
         % Aspect & Equation & Input && Output\\
-        (C) & Growth Model              & $h_{g,c}(\vec{v}_c,V_c)$\\
-        (C) & Intracellular Reactions   & $\vec{h}_i(\vec{v}_c,V_c)$\\
-        (C) & Division                  & $\bar{\gamma},\gamma(c)$\\
-        (C) & Intrinsic Forces          & $\vec{F}_c$\\
-        (CC) & Interaction Forces       & $\vec{F}_\CS(c,s)$\\
-        (EC) & Environmental Forces     & $\vec{F}_\EV(c)$\\
-        (EC) & Exchange                 & $\vec{h}_x(\vec{v}_c, \vec{w})$\\
+        (C) & Growth Model              & $h_{g,\iota}(\vec{v}_\iota,V_\iota)$\\
+        (C) & Intracellular Reactions   & $\vec{h}_i(\vec{v}_\iota,V_\iota)$\\
+        (C) & Division                  & $\bar{\gamma},\gamma(c_\iota)$\\
+        (C) & Intrinsic Forces          & $\vec{F}_\iota$\\
+        (CC) & Interaction Forces       & $\vec{F}_\CS(c_\iota,c_{\bar{\iota}})$\\
+        (EC) & Environmental Forces     & $\vec{F}_\EV(c_\iota)$\\
+        (EC) & Exchange                 & $\vec{h}_x(\vec{v}_\iota, \vec{w}|_{y_\iota})$\\
         (E) & Extracellular Reactions   & $\vec{h}_e(\vec{w})$\\
         (E) & Fluid Motion              & $\vec{S}(\vec{w})$\\
         \bottomrule
@@ -4100,6 +4099,14 @@ this framework.
     contributing to the dynamics of the system.}
     \label{table:overview-model-aspects}
 \end{table}
+
+Table~\ref{table:overview-model-aspects} shows a summary of the model aspects that are treated with
+this framework.
+The various aspects of the model have been grouped to clearly attribute processes to the four
+categories of (C) cellular, (CC) cell-cell, (EC) environment-cell and (E) environmental processes.
+These categories have been establishes in
+Chapter~\ref{chapter:overaching-aspects-elongated-bacteria}, further discussed in the preceding
+theoretical sections and now reestablished within this particular model.
 
 \subsection{Case 1: Full Reduction}
 We consider the case with no cellular growth $h_{g,c}=0$, and aim to exclude any spatial
