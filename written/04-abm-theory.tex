@@ -4242,15 +4242,15 @@ It represents the expectation value of this family of functions $\vec{h}_{i,\iot
 We follow all steps identically to the previous case, but do not assume that the exchange
 between intra- and extracellular compounds is fast resulting in
 \begin{alignat}{3}
-    \partial_t\bar{\textbf{v}}_c &= &- &\textbf{A}\left(\bar{\textbf{v}}_c -
-    \frac{V_c}{V_\EV}\bar{\textbf{w}}\right) + \bar{\textbf{h}}_{i,c}(\bar{\textbf{v}}_c)\\
-    \partial_t\bar{\textbf{w}} &= &\sum\limits_c&\textbf{A}\left(\bar{\textbf{v}}_c -
-    \frac{V_c}{V_\EV}\bar{\textbf{w}}\right) + \bar{\textbf{h}}_e(\bar{\textbf{w}}).
+    \partial_t\bar{\textbf{v}}_\iota &= &- &\textbf{A}\left(\bar{\textbf{v}}_c -
+    V_\iota\bar{\textbf{w}}\right) + \bar{\textbf{h}}_{i,\iota}(\bar{\textbf{v}}_c)\\
+    \partial_t\bar{\textbf{w}} &= &\sum\limits_\iota&\textbf{A}\left(\bar{\textbf{v}}_\iota -
+    V_\iota\bar{\textbf{w}}\right) + \bar{\textbf{h}}_e(\bar{\textbf{w}}).
 \end{alignat}
 We can see that in the case where nothing is exchanged $A=0$, the equations decouple.
 Again utilizing the expectation value $\text{E}$, we can reformulate the equations and obtain
 \begin{alignat}{5}
-    \partial_t\text{E}(\bar{\textbf{v}}_c) &=
+    \partial_t\text{E}(\bar{\textbf{v}}_\iota) &=
     &-& \textbf{A}\left(\text{E}(\bar{\textbf{v}}_c) -
     \text{E}\left(\frac{V_c}{V_\EV}\right)\bar{\textbf{w}}\right)
     &+& \text{E}\left(\bar{\textbf{h}}_{i,c}(\bar{\textbf{v}}_c)\right)\\
@@ -4266,7 +4266,7 @@ With the transformations
 \end{align}
 and the substitutions
 $\bar{\textbf{h}}_i=\text{E}(\bar{\textbf{h}}_{i,c}(\bar{\textbf{w}}))$ and
-$q=N_\CS\text{E}(V_c/V_\EV)$, we obtain the system
+$q=N_c\text{E}(V_c/V_\EV)$, we obtain the system
 \begin{alignat}{3}
     \partial_t\bar{\textbf{u}}_0 &= \bar{\textbf{h}}_i &-q& \bar{\textbf{h}}_e
     -(1+q)\textbf{A}\bar{\textbf{u}}_0 \\
@@ -4295,7 +4295,7 @@ In addition we again assume fast exchange and obtain the equations
     \partial_t{\textbf{v}_c} &=  -
     \textbf{T}_i\textbf{h}_x(\textbf{v}_c,\textbf{w}|_{\textbf{x}_c}) +
     \textbf{h}_{i,c}(\textbf{v}_c, V_c)\\
-    \partial_t{\textbf{w}} &= \sum\limits_c \frac{V_c}{V_\EV}
+    \partial_t{\textbf{w}} &= \sum\limits_\iota \frac{V_c}{V_\EV}
     \textbf{T}_e\textbf{h}_x(\textbf{v}_c,\textbf{w})\delta(\textbf{x}-\textbf{x}_c) +
     \textbf{h}_e(\textbf{w})\\
     \partial^2_t\textbf{x}_c &= \sum\limits_{s\neq c} \textbf{F}_\CS(c,s) + \textbf{F}_\EV(c)
@@ -4316,8 +4316,8 @@ By integrating over the respective volumes and summing over all cellular agents,
 obtain the total amount of energy.
 \begin{alignat}{5}
     \text{const}
-    &=\int\limits_{V_D} R_e(x) \text{dVol} &+ \sum\limits_c\int\limits_{V_c}&R_{i,c}\text{dVol}\\
-    &=\int\limits_{V_D} R_e(x) \text{dVol} &+ \sum\limits_c&R_{i,c}V_c
+    &=\int\limits_{V_D} R_e(x) \text{dVol} &+ \sum\limits_\iota\int\limits_{V_c}&R_{i,c}\text{dVol}\\
+    &=\int\limits_{V_D} R_e(x) \text{dVol} &+ \sum\limits_\iota&R_{i,c}V_c
     \label{eq:supplement-abm-derivation-enthalpy-const}
 \end{alignat}
 We treat intracellular concentrations of nutrients $R_{i,c}$ as spatially homogenous
