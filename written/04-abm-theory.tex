@@ -449,7 +449,7 @@ another $(J_p,N)$ by events such as cell division or death.
 
 We first investigate different biological processes that correspond to distinct ways in which the
 cardinality of the cellular state can be altered by a single division or death event.
-These will shape the following definitions and guide the overall throught processes behind them.
+These will shape the following definitions and guide the overall thought processes behind them.
 
 \subsection{A Primer on Cellular Reproduction, Death \& Fusion}
 \label{subsec:a-primer-on-cellular-processes}
@@ -602,7 +602,7 @@ of the sperm and egg into a single-celled zygote~\cite{Cobb2012,Neaves2017,Prima
 Fusion can also be observed in the formation of skeletal muscle fibers which was initially believed
 to be an artifact of lab-grown cells but was later replicated \textit{in Vivo}~\cite{Mintz1967}.
 Using the \textit{Drosophila} model organism, it could be shown that myoblast fusion is asymmetrical
-and occurs between distinct classess of cells where one cell acts as a "Founder cell"
+and occurs between distinct classes of cells where one cell acts as a "Founder cell"
 while the remaining partners mainly contribute bulk mass~\cite{Bate1990,Bour2000}.
 Another example is the mammalian placenta whose outer tissue layer consists of
 syncytiotrophoblasts with multiple nuclei~\cite{Midgley1963,Omata2013,Huppertz2011}.
@@ -622,12 +622,12 @@ various cleanup processes such as the digestion of pathogens or the removal of c
 residue~\cite{Metchnikoff1892,Rather1970}.
 These white blood cells can aggregate around a common target, adhere to each other and finally merge
 fuse with each other simultaneously~\cite{Vignery2005,Helming2008}.
-Similarly, the repair of muscle fibers occurs via a pool of stem cells called "Sattelite Cells"
+Similarly, the repair of muscle fibers occurs via a pool of stem cells called "Satellite Cells"
 which can be recruited over a very narrow time interval in large quantities~\cite{Abmayr2012}.
 This shows that Figure~\ref{fig:theory-cell-fusion} (A) and (B) need to be extended to capture
 more than two input cells.
 
-Fused cells can be multi-nucleated as in the case of Osteaclasts~\cite{Kölliker1873} who
+Fused cells can be multi-nucleated as in the case of Osteoclasts~\cite{Kölliker1873} who
 terminate their cell cycle, not engaging in any division processes anymore.
 However other multi-nucleated cells such as Hepatocytes, that were also formed by fusion,
 are able to repurpose their nuclei within the new daughter cells when undergoing cell
@@ -635,7 +635,7 @@ division~\cite{Duncan2010}.
 Instead of retaining multiple nuclei, they can also combine within the cell during the fusion
 process which was shown to occur spontaneously between cells of the same type but different strains
 in mouse cancer cells~\cite{Barski1960,Barski1961} and even between different species such as human
-HeLa and mouse Ehrlich assites cells~\cite{Harris1965}.
+HeLa and mouse Ehrlich ascites cells~\cite{Harris1965}.
 It was also shown that fully-differentiated mouse tail-tip fibroblasts can be reprogrammed by fusing
 them with an embryonic stem cell~\cite{Takahashi2006} after which the cells are able to undergo
 stable mitosis again indefinitely.
@@ -979,7 +979,7 @@ Definition~\ref{definition:cell-removal} is general enough that it covers not on
 also general permanent removal.
 We therefore only need to include a method for insertion.
 This type of insertion should be viewed as cells who are entering the observed subslice by methods
-such as their own movement or due to explicit experimental intervenience.
+such as their own movement or due to explicit experimental intervention.
 We therefore treat cell insertion as a process that is not inherent to the biological reality but
 rather external and therefore also not triggered by the biological constituents of the system.
 Definition~\ref{definition:cell-insertion} formalizes these principles.
@@ -1242,7 +1242,7 @@ until reaching $2p$ thus leading to a cycle.
 
 We will now continue to inspect the \ac{abm} numerically.
 Figure~\ref{fig:theory-simple-abm-analysis} shows various readouts of initializing the \ac{abm}
-with a single cell of capactiy $c\in[1,1000]\subset\mathbb{N}$ and running to completion.
+with a single cell of capacity $c\in[1,1000]\subset\mathbb{N}$ and running to completion.
 Subfigure (A) shows that the number of iterations that it takes for the \ac{abm} to complete,
 increases logarithmically.
 When inverting this relation, we can infer that the capacity of the initial cell increases
@@ -1320,7 +1320,7 @@ simply require that they are well-defined.
     The edges are defined by the topological cellular processes $\Phi_j$ and their genus
     $p\in\{1,\dots,4\}$ (see Definition~\ref{definition:topological-cellular-process})
     Let $J_i$ be the involved identifiers of the process and $K_j$ the newly inserted ones.
-    We require that $J_j\cap J_k=\emptyset$ for every $j\neq k$, meaning each cell is only invovled
+    We require that $J_j\cap J_k=\emptyset$ for every $j\neq k$, meaning each cell is only involved
     in a single cellular process.
     Then the labelled, directed edges created by one topological cellular process are defined by
     $E_j=\{(\iota_1,\iota_2,p):\iota_1\in J_j,\iota_2\in K_j\}$.
@@ -1413,7 +1413,7 @@ The result will be a tree with one parent node and two daughter nodes as present
 Figure~\ref{fig:cell-lineage-misleading-graphs} (A).
 The individual cells are denoted by a value $q=0,1$ symbolizing if these cells are still alive or
 have been removed either due to a consuming division operation $s=0$ or due to cell removal.
-Here it is unknown which of the two division events has occured before the others.
+Here it is unknown which of the two division events has occurred before the others.
 However this example still would lead to two possible scenarios of dynamics which are correct since
 in both cases the mother cell is not consumed $s=1$.
 
@@ -1624,7 +1624,7 @@ This space carries all currently alive cells as well as all cellular identifiers
 within our model previously.
 We have also defined how topological cellular processes can be applied to this space and therefore
 change the overall cellular configuration.
-In order to esure that individual topological cellular processes can be resolved, we aim to provide
+In order to ensure that individual topological cellular processes can be resolved, we aim to provide
 a richer structure to the evolution function $\phi$.
 In particular, we will distinguish topological and non-topological evolution functions which either
 modify the topology of the cellular state or leave it intact, thus merely acting on the values of
@@ -1923,7 +1923,7 @@ Now that we have introduced the dynamics of a \ac{cabm}, we can also define the 
     \label{definition:cellular-lifetime}
 \end{definition}
 
-In almost all practial examples, $\mu$ will be given by the Lebesgue measure.
+In almost all practical examples, $\mu$ will be given by the Lebesgue measure.
 The following proposition will show that the life-span is a contiguous set of elements.
 We can therefore interpret the lifetime as the length of this set.
 
@@ -1956,7 +1956,7 @@ The unique identifiers $\iota\in I$ are essential in allowing us to distinguish 
 biological cells from each other.
 On one hand, specifically engineered systems or phenomenological models which utilize parental
 relationships to other cells require information about these identifiers.
-However, on the other hand, every naturally-ocurring cellular system can be broken down into smaller
+However, on the other hand, every naturally-occurring cellular system can be broken down into smaller
 sub-molecular constituents where the notion of unique identifiers can not be justified anymore.
 This justifies the inherent assumption that the particular form of identifiers is not canonical but
 rather a choice of the underlying simulation framework and not part of the biological model.
@@ -1966,7 +1966,7 @@ We will now present various strategies of how identifiers can be defined and uti
 topological cellular processes.
 In practice, the particular choice of identifiers will have a significant impact on the
 computational efficiency of our numerical solvers since every calculation that involves a cellular
-agent will necessarily also involve its assigned identifer.
+agent will necessarily also involve its assigned identifier.
 We will therefore discuss advantages and shortcomings with this point of view.
 
 The first question that one might ask is if the notion of identifiers can be circumvented by a
@@ -2102,7 +2102,7 @@ The downsides of this approach are that it requires a spatial subdivision of the
 discussed earlier.
 Furthermore, the particular identifiers $\iota=(l,n)$ do not contain any information about the cell
 lineage or their relation to other identifiers.
-Note that the $K_l$ are often chosen convex, connected and pariwise disjoint but in principle they
+Note that the $K_l$ are often chosen convex, connected and pairwise disjoint but in principle they
 can overlap as long as $\mu$ can be constructed as above.
 When choosing $K$ as the covering of itself, this approach trivially reduces to a global counter
 as given by Example~\ref{example:unique-identifiers-1-global-counter}.
@@ -2116,7 +2116,7 @@ However, using floating-point numbers as identifiers is fundamentally flawed sin
 special values~\cite{IEEE754-1985,IEEE754-2008} such as negative zero $-0$ and Not-a-Number
 $\texttt{NaN}$ which violate mathematical reflexivity $\texttt{NaN}\neq\texttt{NaN}$
 \cite{Goldberg1991}.
-Furthermore, floating point operations are only approximatively associative.
+Furthermore, floating point operations are only approximately associative.
 In essence, these types are built for numerical approximation instead of classification which make
 them unsuitable as identifiers.
 
@@ -2221,7 +2221,7 @@ $\tilde{J}$.
 This may be necessary in situations where one index sets such as $\Z$ (see
 Example~\ref{example:unique-identifiers-1-global-counter}) is countable while another
 such as $\R$ (see Example~\ref{example:unique-identifiers-3-spatial-subdivisions}) is not but
-identifiers can still be mapped from one to another for any subsets of identical cardinatlity.
+identifiers can still be mapped from one to another for any subsets of identical cardinality.
 
 Our goal is to utilize the various criteria to define when topological cellular processes are
 invoked.
@@ -2319,7 +2319,7 @@ Our goal is to utilize the criteria of the respective topological cellular proce
 which particular process is performed at which time point.
 To do this, we must first analyze the dynamics over some time $s$ and evaluate the criteria during
 this time interval.
-We gather this information and then determine how to construct the topologival evolution function
+We gather this information and then determine how to construct the topological evolution function
 $\varphi_{i+1}$ and after which time interval $t_{i+1}$ it will be executed.
 In this way, we are able to construct the evolution function $\phi$ step by step.
 
@@ -2453,7 +2453,7 @@ reordering bijection $\beta$.
         K_j &= I_p^j\cup\pi_1(M^j)\backslash\left(I_p^{j-1}\cup\pi_1(M^{j-1})\right)
     \end{align}
     for all $j\geq 1$ and $(I^0_p,M^0)=(I_p,M)$.
-    Here, the concatenation ranges over all topological cellular processes ocurring before $\Phi_j$.
+    Here, the concatenation ranges over all topological cellular processes occurring before $\Phi_j$.
     By definition $K_j\cap K_i=\emptyset$ for $i\neq j$.
 
     Suppose now that $x_n=\sigma\cdot y_n$.
@@ -2480,7 +2480,7 @@ reordering bijection $\beta$.
         \end{cases}
     \end{equation}
     where the cases cover the entire domain spanned by the newly inserted identifiers $O_l$ and the
-    previously existing ones $\tilde{I}_p\cup\pi_1(\tilde{M})$ which are also all pariwise disjoint
+    previously existing ones $\tilde{I}_p\cup\pi_1(\tilde{M})$ which are also all pairwise disjoint
     by definition.
 
     This means that the total effect of the topological evolution function $\varphi_{n+1}$ is given
@@ -2642,7 +2642,7 @@ Using Markov chain models, \citet{Colquhoun1981} were able to show directly that
 converges to an almost deterministic one for the large number of $10^5-10^6$ ion channels of a
 single cell.
 Continuing at the intracellular level, \citet{McAdams1997} predicted that gene expression also
-ocurrs stochastically due to stochastic effects on the molecular scale.
+occurs stochastically due to stochastic effects on the molecular scale.
 These ideas were later experimentally proven by \citet{Elowitz2002}, who were also able to
 distinguish between the intrinsic noise of the transcription and translation processes and extrinsic
 factors such as number of ribosomes or cell size.
@@ -2657,7 +2657,7 @@ transition such as division, death or fusion.
 
 Beginning with binary division, molecules within a single mother cell will be partitioned
 approximately equally between the two daughter cells.
-However, for molecules with low copy number this can underly significant stochastic
+However, for molecules with low copy number this can underlie significant stochastic
 fluctuations~\cite{Huh2010} which can therefore account for variation in their abundance within
 cells as opposed to genetic diversity.
 Another example for a stochastic effect during the division process is the positioning of the
@@ -2696,7 +2696,7 @@ This process is only survived by $<1\%$ of cells~\cite{BastidaRuiz2016,Hass2021,
 means that highly prolific cancerous cells that are able to invade the tissue are a mere result of
 low probability in large quantities.
 
-As we have seen in the previous results, stochastic phenomena ocurr at all types of dynamics that we
+As we have seen in the previous results, stochastic phenomena occur at all types of dynamics that we
 have so far defined.
 Systems such as pure brownian motion can be mapped to a fully deterministic many-particle system of
 colliding objects~\cite{Einstein1905,vonSmoluchowski1906}, thus allowing us to perfectly trace the
@@ -2964,7 +2964,7 @@ One such method is the Genome Editing of Synthetic Target Arrays for Lineage Tra
 It functions by providing cells with a genomic "scratchpad", named barcode, which is constantly cut
 and repaired, resulting in small defects called indels which are permanent and inherited by their
 daughter cells.
-The method was initially demonstrated on a whole zebrafish embyro.
+The method was initially demonstrated on a whole zebrafish embryo.
 Successive work improved on this method by allowing researchers to obtain the information stored in
 the barcode via single-molecule \ac{rna} fluorescence hybridization (smFISH)~\cite{Frieda2016}.
 Another approach utilized single-cell \ac{rna} sequencing (scGESTALT) and was able to not only
@@ -2973,7 +2973,7 @@ types~\cite{Raj2018}.
 However these methods are subject to Homoplasy where after continuous modifications of the \ac{dna}
 two otherwise completely unrelated cells are suddenly identified as cousins
 \cite{SalvadorMartnez2019,Jones2020}.
-Furthermore, due to the stochastic nature of intercisions and repairs, the contained information of
+Furthermore, due to the stochastic nature of incisions and repairs, the contained information of
 parental relationship is erased as time continues.
 
 In more recent years, other methods have built on the same idea but who insert \ac{dna}
@@ -2993,7 +2993,7 @@ with their internal states, given by their \acp{grn}.
 In another example, the midbody, which is a "singular organelle, formed between daughter cells
 during cytokinesis"~\cite{Kuo2011} has been shown to be inherited asymmetrically by only one
 daughter cell.
-While we have previously established the concept of asymmtric cell division via the $s=1$ mode of
+While we have previously established the concept of asymmetric cell division via the $s=1$ mode of
 our division (see Definition~\ref{definition:cell-division-single}), this poses the question if such
 a process falls within these bounds and if not, when the lives of the daughters begin during the
 process of inheritance~\cite{Chen2013}.
@@ -3015,7 +3015,7 @@ distinguish individual cells from each other.
 Many of them rely on spatial information such as \ac{2d} or \ac{3d} imaging while others utilize
 purely intracellular properties.
 It has also highlighted many biological questions that prevent us from utilizing a single shared
-notion of what consitutes an individual cell.
+notion of what constitutes an individual cell.
 Instead, such a notion involves a particular choice which we call an "encoding" of the cellular
 identity.
 We require that it can be measured experimentally in order to be a useful definition of identity.
@@ -3140,7 +3140,7 @@ decoder $\alpha$ exists and is exact (although dependent on the particular state
 This is a strong assumption as we have explained earlier (see
 Subsection~\ref{subsubsec:imaging-tracking}, see Cell Tracking).
 Furthermore, this definition does not take into account the temporal evolution of the \ac{cabm}
-which will further introduce additional complexity or any uncertaints that might be introduced
+which will further introduce additional complexity or any uncertainty that might be introduced
 when applying the encoder and decoder iteratively.
 
 When interpreting Figure~\ref{fig:theory-cell-lineage-segmentation} in light of this definition, the
@@ -3174,7 +3174,7 @@ However, one downside of this representation is that it hides information such a
 division events or during which time point a cell is alive.
 This information can be added when displaying the cell lineage as done in
 Figure~\ref{fig:theory-simple-abm-analysis} (D) where horizontal lines indicate discrete iteration
-steps of the system that now enable us to see when the division process ocurrs and when a particular
+steps of the system that now enable us to see when the division process occurs and when a particular
 cell is alive.
 But even this representation can be further enriched, as done in
 Figure~\ref{fig:theory-cell-lineage-as-manifold}.
@@ -3265,7 +3265,7 @@ parameters which misses a crucial point.
 Instead, this idea is about directly linking \textit{in-silico} agents $c_\iota$ with experimentally
 observed cells on a per-cell basis.
 It is the most general form of comparing individual-based \acp{cabm} with biological results and all
-other approaches such as the previously mentioned statistical heterogeneic (distribution of
+other approaches such as the previously mentioned statistical heterogeneity (distribution of
 parameters) or simple bulk-based ones can be derived from it.
 
 Since the biological reality is only accessible via the measured encoding $y\in Y$, we base our
@@ -3376,14 +3376,14 @@ Elementary \acp{ca} represent the simplest form of \acp{ca}.
 They live on a \ac{1d} grid where each lattice point is either alive or dead.
 This can be easily expressed by a map $Q:\Z\rightarrow\{0,1\}$ which contains the values of all
 lattice points.
-Elementary \acp{ca} are uptdated with discrete time steps where any value $Q_i^{n+1}$ of time step
+Elementary \acp{ca} are updated with discrete time steps where any value $Q_i^{n+1}$ of time step
 $n+1$ depends on the values $Q_{i-1}^n,Q_i^n,Q_{i+1}^n$ which is the
 Moore-neighborhood~\cite{Moore1962} at time step $n$.
 Therefore, we can fully describe the update step $\varphi(Q^n_i)=Q^{n+1}_i$ by the transition rule
 $q(s_0,s_1,s_2)=a$ where $s_i\in\{0,1\}$.
 The map $q$ has $2^3=8$ possible discrete inputs (all possible combinations of the $s_i$) on which
 it needs to be defined to fully specify the \ac{ca}.
-This is captured in Table~\ref{table:wolfram-code} which assings one particular value $a_i$ for each
+This is captured in Table~\ref{table:wolfram-code} which assigns one particular value $a_i$ for each
 combination of input values.
 
 \begin{table}
@@ -3460,13 +3460,13 @@ somewhat robust with respect to varying initial conditions.
 We discuss this in the supplementary material (see
 Section~\ref{supplement:ca-elementary}).
 
-So far, we have not discussed as to what constitues the various rules, i.e. which biological
+So far, we have not discussed as to what constitutes the various rules, i.e. which biological
 processes lead to the exact form of the different rules.
 This might contain non-topological processes such as movement of cells or topological cellular
 processes such as division and death.
 Within the philosophy of \acp{cabm}, we look at systems so that each topological cellular process
 can be resolved.
-Therefore we may not assume that multiple topological cellular processes can occurr for the same
+Therefore we may not assume that multiple topological cellular processes can occur for the same
 cell $i$ from one particular state $Q^n_i$ to the next $Q^{n+1}_i$.
 
 Within these confinements it is hard to imagine a simple multicellular system, which has almost no
@@ -3484,7 +3484,7 @@ is entirely unclear as to where the additional cell of the $n+1$ state came from
 The problem is inherently symmetric but would require a non-obvious asymmetry within the individual
 agents, e.g. two rules where the first moves all cells one unit to the left and another which lets
 the cell on the right divide into two new daughter cells.
-Another explanation using toplogical cellular processes would be that every cell divides into two
+Another explanation using topological cellular processes would be that every cell divides into two
 daughter cells that are placed on the left and right side of the previously occupied lattice point.
 However, this will lead to a situation in which multiple cells occupy the same lattice point which
 is contrary to the idea that a single lattice point is identical to a biological cell.
@@ -3598,7 +3598,7 @@ It consists of a 14-cell wide block 00010011011111 which repeats every 7 steps i
 the \ac{ca}.
 The latter condition requires us to treat an infinite, yet countable, number of cell agents in our
 \ac{cabm} that all carry unique identifiers.
-Furthermore, we aim to implement the eovlution function of our \ac{cabm} using only death and binary
+Furthermore, we aim to implement the evolution function of our \ac{cabm} using only death and binary
 division.
 
 We begin by investigating the update step $Q^n_i\mapsto Q^{n+1}_i$ of the lattice.
@@ -3629,7 +3629,7 @@ Here, the cell left or right to the unoccupied spot needs to divide in order to 
 spot.
 Looking at the mapping with one additional cell on each side, we notice that $a101b\mapsto111$
 regardless of the values $a,b$.
-With this freedom in hand, we look at $001\mapsto1$ which is clearly not an isotropic rule, therby
+With this freedom in hand, we look at $001\mapsto1$ which is clearly not an isotropic rule, thereby
 requiring special attention.
 We can again look at a larger chunk and again notice that $a001b\mapsto011$ regardless of the values
 of $a,b$.
@@ -3645,7 +3645,7 @@ Lastly we also need to specify the choice of how to assign identifiers to the in
 In order to avoid collisions of identifiers we utilize the space $I=\N\times\Z$ where the first
 component is simply the current iteration step of the \ac{ca} and the second component is the
 grid-point at which the cell was created.
-Since no two cells can occupie the same grid point, we are guaranteed that this is a valid
+Since no two cells can occupy the same grid point, we are guaranteed that this is a valid
 identifiers assignment scheme.
 
 In order to the fully define the \ac{cabm}, we need to define the division and removal criteria and
@@ -3714,7 +3714,7 @@ $Q_i^n$ and will utilize this notation.
 
 We note specifically that the two criteria are disjoint, meaning only one criterion can be active
 for any given cell.
-Furthermore, the division only occurrs when the left-hand neighboring grid point is unoccupied
+Furthermore, the division only occurs when the left-hand neighboring grid point is unoccupied
 which means that no two cells will ever share the same position $i\in\Z$.
 Finally, Definition~\ref{definition:topological-cellular-process} permits infinite, countable
 combinations of such processes and more importantly this infinite concatenation is in fact
@@ -3762,7 +3762,7 @@ The previous text has focussed on elementary \acp{ca} which are only one particu
 \acp{ca}.
 Arguably the most famous \ac{ca} is Conway's "Game of Life"~\cite{Gardner1969} which we discuss in
 the supplementary material~\ref{supplement:ca-conway}.
-It also exhibits problems when interpreting indidivual grid points as singular biological cells.
+It also exhibits problems when interpreting individual grid points as singular biological cells.
 
 However, we can look at the ideas behind \acp{ca} in a broader context, where there exist many
 related modeling approaches that utilize a discrete spatial subdivision.
@@ -3781,8 +3781,8 @@ A lattice-gas \acl{ca} is related concept, often used to simulate moving and col
 applied in studies surrounding fluid dynamics~\cite{Hardy1973} but have also been used in biological
 contexts~\cite{Deutsch2005}.
 This variant of \acp{ca} often utilizes other grid-forms such as hexagonal grids of voronoi
-tessalations~\cite{Voronoi1908}.\\
-Voronoi tessalations have been utilized in other studies to describe the physical shape of cultured
+tessellations~\cite{Voronoi1908}.\\
+Voronoi tessellations have been utilized in other studies to describe the physical shape of cultured
 monolayer cells such as epithelial cells~\cite{Honda1978}.
 They therefore serve as the basis for many \acp{cabm} such as vertex
 models~\cite{Barton2017,Merks2011,Cooper2020}.
@@ -3814,7 +3814,7 @@ for their proper resolution together with any topological cellular processes.
 %     \item lattice-gas \acp{ca}
 %     \item lattice boltzmann methods \cite{Chen1998}; mostly used in fluid simulations; some
 %         simulations tools also use it i.e. LBIBCell \cite{Tanaka2015}
-%     \item static voronoi tessalations sometimes used \cite{Honda1978}; when tessalation is not
+%     \item static voronoi tessellations sometimes used \cite{Honda1978}; when tessellation is not
 %         static, we move to vertex-based models and off-lattice models
 %     \item Neural \acp{ca} \cite{Mordvintsev2020}
 % \end{itemize}
@@ -3840,7 +3840,7 @@ to describe a variable amount of individual cellular agents.
 formation~\cite{Turing1952,Gierer1972,Meinhardt2008}.
 However, they also do not permit us to distinguish between individual cellular agents but can arise
 as a coarse-grained effect of multicellular behaviour~\cite{Erban2004}.
-Similary to \acp{ode}, they often serve as components of a \ac{cabm}, e.g. to describe fluid
+Similarly to \acp{ode}, they often serve as components of a \ac{cabm}, e.g. to describe fluid
 mechanics~\cite{Navier1827,Stokes1845}.
 Similarly to \acp{ode}, \acp{pde} are not naturally capable of describing individual varying numbers
 of cellular agents and are therefore not directly suitable to describe multicellular systems with
@@ -3877,7 +3877,7 @@ It is the underlying structure of almost any \ac{qft} where fields are operators
 that can be used to calculate the number density of the specific particle types.
 However, the broad philosophical foundations of \ac{qft} and \acp{cabm} are fundamentally distinct.
 The concept of a measurement and the resulting collapse of the wave-function from the quantum world
-has no analogon in the biological reality.
+has no analogue in the biological reality.
 Furthermore, the particles of any \ac{qft} can not be traced through time and space and no unique
 identifiers can therefore be assigned to any entity since no particular entity except the fields
 themselves persist through time.
@@ -3975,12 +3975,12 @@ coarse-grained) results from it.
 % \end{table}
 
 \subsection{Model Aspects}
-We will now estalish the underlying mathematical model and motivate the particular choices.
+We will now establish the underlying mathematical model and motivate the particular choices.
 As often done in Physics, we loosen the rigor of our mathematical notation and assume
-differentiability and the existance of solutions as given.
+differentiability and the existence of solutions as given.
 As we will see, the dynamics during an time interval without any topological cellular processes is
 determined by the solution of the presented differential equations.
-Therefore, the existance of solutions to these equations can be directly linked back to standard
+Therefore, the existence of solutions to these equations can be directly linked back to standard
 mathematical principles~\cite{Polyanin2001,Polyanin2017}.
 
 Any quantity that is specific to a particular cell $c_\iota$ will be indexed with the corresponding
@@ -4035,12 +4035,12 @@ Equation~\eqref{eq:volumetric-growth} defines the term $h_{g,c}(\vec{v}_\iota, V
 describes the rate of change of the volume of a single cell.
 This growth term is coupled to the presence of intracellular concentrations $\vec{v}\in\R^n$.
 Intracellular processes are expressed in equation~\eqref{eq:intracellular-reactions} via
-$\vec{h}_i(\vec{v}_\iota, V_\iota)\in\R^n$ which also encompassess any growth-related changes.
+$\vec{h}_i(\vec{v}_\iota, V_\iota)\in\R^n$ which also encompasses any growth-related changes.
 We also model the dynamics of extracellular concentrations
 (equation~\eqref{eq:extracellular-reactions}) $\vec{w}(t,\vec{y})\in\R^n$ which are distributed over
 the spatial extent of the environment.
 While some components of $\vec{v}_\iota,\vec{w}$ may be confined exclusively within or outside of
-cells, we utitlize a shared notation where purely intracellular compounds should be set identically
+cells, we utilize a shared notation where purely intracellular compounds should be set identically
 to zero in the extracellular regime and vice versa.
 This allows us to keep the required notation to a minimum.
 The rate at which compounds are exchanged between the intra- and extracellular space is given by
@@ -4155,7 +4155,7 @@ In this case we perform arguably the most aggressive simplification of the prese
 We consider the case with no cellular growth $h_{g,c}=0$ which could be satisfied when inspecting
 the dynamics of the model on very short time-scales where the overall growth can be neglected.
 Our goal is to derive a simplified system for a spatially homogeneous case in which transport of
-extracellular compounds is infinitely fast which justifies the homogeneization of the system.
+extracellular compounds is infinitely fast which justifies the homogenization of the system.
 In addition, we assume that the exchange between intra- and extracellular compounds is given by a
 fast linear term $\vec{h}_x\sim(\vec{v}_\iota - \vec{w})$ compared to the dynamics of the
 remaining processes.
@@ -4215,7 +4215,7 @@ stochastically independent:
 We have used the expectation value to factorize the first term and $V_c=N_c\text{E}(V_\iota)$
 with $\textbf{h}_i=\text{E}(\textbf{h}_{i,\iota})$ to simplify notation.
 Using this concise notation, the final step shows that our equations reduce to a set of \acp{ode}.
-The value $V_c$ is the number of bacteria multiplied by the exptected bacterial volume which can be
+The value $V_c$ is the number of bacteria multiplied by the expected bacterial volume which can be
 interpreted as a good approximation of the total bacterial volume.
 
 We can also reinterpret the sum in
@@ -4320,7 +4320,7 @@ obtain the total amount of energy.
     &=\int\limits_{V_D} R_e(x) \text{dVol} &+ \sum\limits_\iota&R_{i,c}V_c
     \label{eq:supplement-abm-derivation-enthalpy-const}
 \end{alignat}
-We treat intracellular concentrations of nutrients $R_{i,c}$ as spatially homogenous
+We treat intracellular concentrations of nutrients $R_{i,c}$ as spatially homogeneous
 within each cell.
 The resulting quantity can also be interpreted as the thermodynamic Enthalpy of the system.
 It is usually defined as the product of pressure and volume but can expressed in terms of
@@ -4369,7 +4369,7 @@ extracellular nutrients $R_e$ leads to
     \label{eq:supplement-abm-derivation-reactions-fin-2}
 \end{alignat}
 For the diffusive term $D\Delta R_e$, we assume Neumann boundary conditions such that no
-extracellular nutrients $R_e$ are lost or gai.e., via this process.
+extracellular nutrients $R_e$ are lost or gained, i.e., via this process.
 \begin{equation}
     \int\limits_D \Delta R_e(x) \text{dVol} = \int\limits_{\partial D} \nabla
     R_e(x)\text{d\textbf{A}}= 0
@@ -4440,7 +4440,7 @@ These can be viewed as the extracellular dynamics surrounding the nutrient resou
 and intracellular dynamics increasing the volume $V_c$.
 We assume that the spatial distribution of $R_e$ is governed by a diffusion process with
 Neumann boundary conditions such that no additional nutrients are introduced and no nutrients lost.
-In particular, any diffusion effects vanishe in the integral
+In particular, any diffusion effects vanish in the integral
 \begin{equation}
     \int\limits_D\Delta R_e(x)\text{dVol} = \int\limits_{\partial D}\nabla
     R_e(x)\text{d\textbf{A}} = 0
@@ -4456,7 +4456,7 @@ where $D_R$ is the diffusion constant of the nutrients $R_e$.
 So far, we have treated all cells equally but the system which we aim to describe
 consists of two distinct species $A/B$ which behave differently.
 We can express this variation by introducing differing growth terms $u_c$ depending on the species.
-This splits apart the sum, raning over cells $c_A$ and $c_B$.
+This splits apart the sum, ranging over cells $c_A$ and $c_B$.
 Another mechanism of this system is the inhibition of growth mediated by an external
 inhibitor $I$ which is produced by species $A$.
 We assume that the release of inhibitor molecules can be neglected for the assumptions
@@ -4515,7 +4515,7 @@ Take derivative
 \begin{itemize}
     \item the volume of the domain $V_D$ is effectively shrinking when more cells are present since
         they occupy space in which no extracellular nutrients can be
-    \item we can account for this in vaious ways:
+    \item we can account for this in various ways:
     \item idea 1: just use some form of reduced overall volume $\tilde{V}_D=V_D-\sum_c V_c$; then
         use this new volume in places where the old volume was.
         The dynamics are thus given by the dynamics of the agents
@@ -4619,7 +4619,7 @@ Combine multiple cells into one circle \cite{Graham1998}
     \caption[Evaluations of the fractal dimension for a bacterial branching system]{
         (A-F) Calculation steps for determining the fractal dimension for varying number of voxels
         $N_v\in\{666,80,42,29,22,17\}$ for $D=80\SI{80}{\second^2\per\micro\metre^2}$.
-        (G) Double-logarithmic plot of number of occupied voxels againts their size.
+        (G) Double-logarithmic plot of number of occupied voxels against their size.
         The linear slope determines the fractal dimension of the structure.
         (H) Fractal dimension as a function of the diffusion constant of the nutrients.
         (I) Temporal evolution of fractal dimension.
