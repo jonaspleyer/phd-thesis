@@ -4061,17 +4061,6 @@ intracellular compounds, have to be covered by the non-topological dynamics, i.e
 equations.
 The same argument also holds for the division function $\gamma$ and its criterion $\bar{\gamma}$.
 
-The last component of our model are the force-based spatial dynamics of the positions of cells
-$\vec{y}_\iota$.
-They follow a standard 2nd order differential equation \eqref{eq:equations-of-motion-2}, i.e.
-Newtons's equations of motion and are affected by three distinct force contributions.
-The term $\vec{F}_\EV(c_\iota)$ models external forces such as fluidic dynamics or gravity on the
-cells.
-Meanwhile, the term $\vec{F}_\iota$ describes purely intracellular forces which is only
-relevant to cells that consist of more than just a simple spherical shape with center point.
-And finally, the term $\vec{F}_\CS(c_\iota,c_{\bar{\iota}})$ accounts for cell-cell forces such as
-steric repulsion and long-range attraction.
-
 \begin{table}
     \centering
     \renewcommand{\arraystretch}{1.2}
@@ -4090,10 +4079,22 @@ steric repulsion and long-range attraction.
         (E) & Fluid Motion              & $\vec{S}(\vec{w})$\\
         \bottomrule
     \end{tabular}
-    \caption[Dynamical Components of the center-based system]{Overview of terms
-    contributing to the dynamics of the system.}
+    \caption[Components of the center-based system]{
+        Aspects of the generalized center-based \ac{cabm} grouped by the type of process.
+    }
     \label{table:overview-model-aspects}
 \end{table}
+
+The last component of our model are the force-based spatial dynamics of the positions of cells
+$\vec{y}_\iota$.
+They follow a standard 2nd order differential equation \eqref{eq:equations-of-motion-2}, i.e.
+Newtons's equations of motion and are affected by three distinct force contributions.
+The term $\vec{F}_\EV(c_\iota)$ models external forces such as fluidic dynamics or gravity on the
+cells.
+Meanwhile, the term $\vec{F}_\iota$ describes purely intracellular forces which is only
+relevant to cells that consist of more than just a simple spherical shape with center point.
+And finally, the term $\vec{F}_\CS(c_\iota,c_{\bar{\iota}})$ accounts for cell-cell forces such as
+steric repulsion and long-range attraction.
 
 Table~\ref{table:overview-model-aspects} shows a summary of the model aspects that are treated with
 this framework.
