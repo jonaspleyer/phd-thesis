@@ -4143,6 +4143,8 @@ presented model, we do not require that this particular interpretation is assume
     \label{fig:separation-of-distributions}
 \end{figure}
 
+\todo[inline]{Note that the model can be extended to the stochastic case straight forwardly}
+
 In the following text, we will utilize various assumptions about \ac{cabm} that allow us to derive
 various simplifications.
 These are often coarse-grained versions of a more fine-grained \ac{cabm} and will therefore result
@@ -4157,6 +4159,11 @@ extracellular compounds is infinitely fast which justifies the homogeneization o
 In addition, we assume that the exchange between intra- and extracellular compounds is given by a
 fast linear term $\vec{h}_x~(\vec{v}_\iota - \vec{w})$ compared to the dynamics of the
 remaining processes.
+\todo[inline]{
+    purely intracellular compounds do not exchange fast. They simply do not exchange at all!
+    We cannot therefore equate them with their extracellular variants.
+    We need to split the formalism right here!
+}
 The linear form is typical for a diffusive exchange of compounds~\cite{Kedem1958}.
 This allows us to write $\vec{v}_c=\vec{w}|_{\vec{x}_c}$ which considerably simplifies
 Equation~\eqref{eq:extracellular-reactions} leaving us with
