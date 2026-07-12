@@ -4158,43 +4158,43 @@ We consider the case with no cellular growth $h_{g,c}=0$, and aim to exclude any
 dependence by integrating over the domain $\EV$.
 Furthermore, we assume that the dimensionality of intra- and extracellular reactions is
 identical $n=m$ and that the exchange term is given by a fast linear term
-$\textbf{h}_x~(\textbf{v}_c - \textbf{w})$.
-These choices reduce the auxiliary matrices to $\textbf{T}_i=\textbf{T}_e=\mathbb{1}$.
+$\vec{h}_x~(\vec{v}_c - \vec{w})$.
+These choices reduce the auxiliary matrices to $\vec{T}_i=\vec{T}_e=\mathbb{1}$.
 Under the assumption that the exchange is fast compared the remaining processes, we can
-assume that $\textbf{v}_c=\textbf{w}|_{\textbf{x}_c}$.
+assume that $\vec{v}_c=\vec{w}|_{\vec{x}_c}$.
 This considerably simplifies our system of equations leaving us with
 \begin{equation}
-    \partial_t\textbf{w} = \sum\limits_c
-    h_{i,c}(\textbf{w}|_{\textbf{x}_c})\frac{V_c}{V_\EV}\delta(\textbf{x}-\textbf{x}_c) +
-    \textbf{h}_e(\textbf{w}) + \textbf{S}(\textbf{w}).
+    \partial_t\vec{w} = \sum\limits_c
+    h_{i,c}(\vec{w}|_{\vec{x}_c})\frac{V_c}{V_\EV}\delta(\vec{x}-\vec{x}_c) +
+    \vec{h}_e(\vec{w}) + \vec{S}(\vec{w}).
 \end{equation}
 We integrate over the domain $\EV$ and obtain use the total amount of extracellular
-compounds $\bar{\textbf{w}}:I\rightarrow\R^n$ instead of the previously used
-concentrations $\textbf{w}$ to reformulate the resulting equation.
+compounds $\bar{\vec{w}}:I\rightarrow\R^n$ instead of the previously used
+concentrations $\vec{w}$ to reformulate the resulting equation.
 Carrying out these steps leads to
 \begin{alignat}{7}
-    \partial_t\bar{\textbf{w}} &=
+    \partial_t\bar{\vec{w}} &=
     &\int\limits_\EV\sum\limits_c&
-    \textbf{h}_{i,c}(\textbf{w})\frac{V_c}{V_\EV}\delta(\textbf{x} - \textbf{x}_c)\text{dV}
-    &+& \bar{\textbf{h}}_e(\bar{\textbf{w}})
-    &+& \int\limits_\EV\textbf{S}(\textbf{w})\text{dV}\\
-    &= &\sum\limits_c& V_c\textbf{h}_{i,c}(\bar{\textbf{w}}) &+&
-    \bar{\textbf{h}}_e(\bar{\textbf{w}})
+    \vec{h}_{i,c}(\vec{w})\frac{V_c}{V_\EV}\delta(\vec{x} - \vec{x}_c)\text{dV}
+    &+& \bar{\vec{h}}_e(\bar{\vec{w}})
+    &+& \int\limits_\EV\vec{S}(\vec{w})\text{dV}\\
+    &= &\sum\limits_c& V_c\vec{h}_{i,c}(\bar{\vec{w}}) &+&
+    \bar{\vec{h}}_e(\bar{\vec{w}})
     \label{eq:pool-model-case1-coarse-grained-result}
 \end{alignat}
 which is the direct combination of intra- and extracellular reactions.
 Note that the final integral vanishes due to our assumptions that
-$\textbf{S}(\textbf{w})$ only describes transport terms, leaving the total amount invariant.
+$\vec{S}(\vec{w})$ only describes transport terms, leaving the total amount invariant.
 The first term can be understood in terms of an expectation value $\text{E}(X_c)=\sum_c
 X_c / N_\CS$ of a product of two distributions over living cells $c\in\CS$ which we will
 use to rewrite equation~\eqref{eq:pool-model-case1-coarse-grained-result}.
 In the general case where the distributions $V_c/V_\EV$ and
-$\bar{\textbf{h}}_{i,c}(\bar{\textbf{w}})$ are not independent, we obtain
+$\bar{\vec{h}}_{i,c}(\bar{\vec{w}})$ are not independent, we obtain
 \begin{equation}
-    \partial_t\bar{\textbf{w}} =
-    N_\CS\text{E}\left(V_c\right)\text{E}(\textbf{h}_{i,c}({\bar{\textbf{w}}}))
-    + N_\CS\text{Cov}\left(V_c,\textbf{h}_{i,c}({\bar{\textbf{w}}})\right)
-    + \bar{\textbf{h}}_e(\bar{\textbf{w}})
+    \partial_t\bar{\vec{w}} =
+    N_\CS\text{E}\left(V_c\right)\text{E}(\vec{h}_{i,c}({\bar{\vec{w}}}))
+    + N_\CS\text{Cov}\left(V_c,\vec{h}_{i,c}({\bar{\vec{w}}})\right)
+    + \bar{\vec{h}}_e(\bar{\vec{w}})
 \end{equation}
 
 which can be further reduced, assuming that the distribution of volumes $V_c$ and
