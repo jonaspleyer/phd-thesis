@@ -4104,6 +4104,50 @@ These categories have been establishes in
 Chapter~\ref{chapter:overaching-aspects-elongated-bacteria}, further discussed in the preceding
 theoretical sections and now reestablished within this particular model.
 
+We can also link this generalized model to our previous discussions, surrounding the question of
+cellular identity (see Section~\ref{sec:cellular-identity-revisited}).
+The identity is determined by the division criterion $\bar{\gamma}$ and removal criterion
+$\bar{\delta}$.
+This \ac{cabm} utilizes a point-wise interaction between cells and their environment, represented by
+the delta distributions in Equation~\ref{eq:extracellular-reactions}.
+Consider the case where one cell is modeled as a spatially distributed entity.
+In this case, the delta distribution is replaced by a general density function $\rho_\iota(\vec{x})$
+with $\in\rho_\iota\text{d}\vec{x}=1$.
+During the division process the density function transitions from a single peak to a bimodal
+distribution---one for each cell---which ultimately separate enough such that they can be viewed as
+individual entities.
+The precise condition for the level of their separation could then be understood in terms of Morse
+theory as explained earlier.
+
+When two cells divide, this density function could be given by a multimodal distribution exhibiting
+two peaks---one for each cell---which ultimately separate enough such that a certain condition (e.g.
+defined by Morse theory) considers them as spatially separated.
+Figure~\ref{fig:separation-of-distributions} displays this idea.
+Note that the density profiles need not necessarily be the mass-densities of the cell(s) but could
+also indicate a profile of \ac{grn} activity or, more generally, intracellular activity.
+We still want to highlight that while the presented interpretation is an obvious extension of the
+presented model, we do not require that this particular interpretation is assumed.
+
+\begin{figure}
+    \centering
+    \includestandalone{figures/abm-theory/topological-division-figure}
+    \caption[Spatial separation of dividing Cells]{
+        Schematic example of how cellular identity can be determined by measuring the level of
+        separation of the density profiles of a dividing mother cell.
+        (A) A mother cell which is beginning the process of division.
+        (B) The moment at which the division criterion is active is determined by a density measure.
+        This can be understood in terms of Morse theory.
+        (C) The cells have separated and are viewed as distinct entities.
+        These density profiles could also an expression 
+    }
+    \label{fig:separation-of-distributions}
+\end{figure}
+
+In the following text, we will utilize various assumptions about \ac{cabm} that allow us to derive
+various simplifications.
+These are often coarse-grained versions of a more fine-grained \ac{cabm} and will therefore result
+in \acp{ode} and \acp{pde}.
+
 \subsection{Case 1: Full Reduction}
 \todo[inline]{check this section for notations of "domain". We will change that into "environment"
     but when integrating over the "environment" we probably want to distinguish between
