@@ -28,7 +28,7 @@ still confused. But on a higher level.}
         the existing tools? (This will probably only be "A" language and not "the" (single)
         language)
     \item Can \acp{cabm} be considered something more fundamental than theories on larger scales
-        (i.e. \acp{pde} or \acp{ca})? $\rightarrow$ make example with coarse-graining
+        (i.e., \acp{pde} or \acp{ca})? $\rightarrow$ make example with coarse-graining
 \end{itemize}
 
 \textbf{Strategy}
@@ -57,7 +57,7 @@ still confused. But on a higher level.}
 \textbf{Basic Assumptions}
 \begin{itemize}
     \item We are on the mesoscopic scale: we can "dip" inside the cellular structure if needed but
-        we are also interested in larger scales, i.e. self-organization
+        we are also interested in larger scales, i.e., self-organization
     \item our description is almost always "effective" rather than "fundamental"
     \item individual behaviour of cells leads to collective phenomena
     \item cells are the fundamental building block of nature
@@ -177,11 +177,11 @@ Such a comparison will in practice always require a notion of distance as a metr
 in the space of our observable quantity.
 We set out to link experimental cell states to states produced by our model but assume that the
 chosen metric only involves physical cellular properties such as the position of the cell or some
-form of readout e.g. by tagging with \ac{gfp}~\cite{Chalfie1994}.
+form of readout, e.g., by tagging with \ac{gfp}~\cite{Chalfie1994}.
 In general, we cannot assume that the model output and experimental results will match identically,
 but rather be within some given margin of error.
 We now consider the case where two cells $c_{m,1},c_{m,2}$ in the model output are approximately
-equally close to the experimental state of a particular cell $c_e$ under this chosen metric, i.e.
+equally close to the experimental state of a particular cell $c_e$ under this chosen metric, i.e.,
 $d(c_{m,1},c_e)\approx d(c_{m,2},c_e)$.
 Without any additional input, we cannot tell if $c_{m,1}$ or $c_{m,2}$ of the model output
 corresponds to $c_e$ within the experiment.
@@ -344,7 +344,7 @@ configurations.
 We will therefore call this set the \textit{Cellular Configuration Space}.
 It can describe properties such as the position of the cell, intracellular nutrient density or state
 of the cell cycle.
-For this particular example, the space would consist of a component for the position, i.e.
+For this particular example, the space would consist of a component for the position, i.e.,
 $\vec{x}\in\R^3$, nutrient density $\rho\in\R_{\geq 0}$ and cycle state which can be simplified for
 an eukaryotic cell via $s\in\{1,2,3\}$ denoting resting, interphase and division phase
 respectively~\cite{Alberts2018}.
@@ -354,12 +354,12 @@ $C=\R^3\times\R_{\geq 0}\times\{1,2,3\}$.
 We supply this configuration space with an index set $I$ that holds all possible values of unique
 identifiers which are assignable to cells.
 We also keep a record of all identifiers that have already been used and store it in $I_p$.
-Whenever a new cell is inserted, i.e. due to cell division, a corresponding new identifier $\iota$
+Whenever a new cell is inserted, i.e., due to cell division, a corresponding new identifier $\iota$
 is picked which is neither assigned to any currently living cell nor contained in $I_p$ and assigned
 to this new cell.
 Therefore, formally any cell is a tuple $(\iota,c)\in I\times C$ which we write as
 $(\iota,c)=c_\iota$.
-Furthermore, whenever a cell is removed, i.e. due to cell death, its identifier $\iota$ is stored
+Furthermore, whenever a cell is removed, i.e., due to cell death, its identifier $\iota$ is stored
 within $I_p$ which ensures that this cell is not assigned again to another cell.
 This means that each cell $c\in C$ defined by its properties in the configuration space $C$ will
 have a unique identifier $\iota\in I$ assigned to it.
@@ -573,7 +573,7 @@ compensate the loss of density~\cite{Fan2008}.
 While mechanisms such as autophagy usually suppress apoptosis~\cite{Marshall2018,Boya2005}, an
 extreme form of autophagy can trigger a type of cell death called autosis~\cite{Liu2013}.
 These processes need to be accounted for in the dynamics of the respective system.
-We are now again only interested in the instantaneous time point at which the cellular entity, i.e.
+We are now again only interested in the instantaneous time point at which the cellular entity, i.e.,
 agent is removed.
 Figure~\ref{fig:theory-cell-death} shows the underwhelming process on a single cell that ceases to
 exist.
@@ -611,7 +611,7 @@ a human gene but rather of a virus whose genetic code is now being
 repurposed~\cite{Mi2000,Dupressoir2009}.
 
 The listed examples show in great detail that the underlying complexity warrants that the resulting
-cell can both be treated as a new cell (e.g. fertilization) or as an existing cell (e.g.
+cell can both be treated as a new cell (e.g., fertilization) or as an existing cell (e.g.,
 \textit{myoblast} fusion).
 Fusing two cells can therefore be viewed as either removing all involved cells and inserting a
 completely new one or removing all apart from one cell and adjusting the state of the remaining one.
@@ -787,12 +787,12 @@ able to utilize it by applying $\tilde{\gamma}$ within the respective simulation
             \end{equation}
             where the new cells $c_{\iota_j}=c^j$ match the output of $\gamma(c_\iota)_1$.
         \item (Update)
-            If the mother cell is not removed, i.e. $s=1$, we require
-            $N\ni c_\iota=c^1$, i.e. the mother cell identified by identifier $\iota$ is updated
+            If the mother cell is not removed, i.e., $s=1$, we require
+            $N\ni c_\iota=c^1$, i.e., the mother cell identified by identifier $\iota$ is updated
             with the value of the first component of $\gamma(c_\iota)_1$.
             Notice that this assignment of a new value does not change the identifier $\iota$ of the
             mother cell.
-        \item (Tracking) We carry forward all old identifiers and the removed one, i.e.
+        \item (Tracking) We carry forward all old identifiers and the removed one, i.e.,
             $J_p=I_p\cup\{\iota\}$ for the consuming mode $s=0$ or otherwise $J_p=I_p$.
         \item (Uniqueness) New cells have new identifiers:
             $\iota_{1+s},\dots,\iota_n\notin J_p\cup\pi_1(M)$.
@@ -860,7 +860,7 @@ While cells interact with their environment and other cells at any given moment,
 division is purely determined by their internal state as in the previously discussed example of
 the end of cytokinesis~\cite{Gershony2014}.
 This allows us to define a division criterion $\bar{\gamma}:C\rightarrow\{0,1\}$ which can be
-evaluated for any state of the cell and will determine if the cell should divide, i.e.
+evaluated for any state of the cell and will determine if the cell should divide, i.e.,
 $\bar{\gamma}(c)=1$ or not $\bar{\gamma}(c)=0$.
 
 \begin{definition}[Cell Division Criterion]
@@ -995,7 +995,7 @@ Definition~\ref{definition:cell-insertion} formalizes these principles.
     \label{definition:cell-insertion}
 \end{definition}
 
-In order to distinguish cellular processes which lead to changes in the identifiers, i.e. division,
+In order to distinguish cellular processes which lead to changes in the identifiers, i.e., division,
 removal, fusion or insertion, we introduce an umbrella term for them.
 
 \begin{definition}[Topological Cellular Processes]
@@ -1051,7 +1051,7 @@ to and not their values.
     $I_p\cup\pi_1(M)$ within the system which is used by the other operators for assigning new
     identifiers to the inserted cells.
     We can restrict ourselves to two operators $\Phi_{j_0}$ and $\Phi_{j_1}$.
-    In any case, i.e. Division/Fusion/Insertion at least one cell will be removed or inserted into
+    In any case, i.e., Division/Fusion/Insertion at least one cell will be removed or inserted into
     the cellular state.
     This means a change to the total collection of identifiers within the system.
     With $\Phi_{j_0}(I_p,M)=(I_p^0,M^0)$, we can see that the new identifiers $I_p^0\cup\pi_1(M^0)$
@@ -1337,7 +1337,7 @@ simply require that they are well-defined.
     The definition of $G(I_p,M,\varphi)=(V,E)$ already satisfies the requirements for a graph
     structure.
     We observe that the set $E_j$ for every topological cellular process has either at most one
-    starting vertex or exactly one final vertex, i.e. $\#J_j\leq1$ or $\#K_j=1$.
+    starting vertex or exactly one final vertex, i.e., $\#J_j\leq1$ or $\#K_j=1$.
     In the case where $\Phi_j$ contains no fusion functions, we have $\#J_j=1$ and the edges point
     to only newly inserted identifiers.
     This means that any existing vertex can not be pointed at and therefore the graph $G$ reduces to
@@ -1386,19 +1386,19 @@ with a tree that holds the identifier of this particular leaf as its root.
 
 The previous observations have been independent of the division and fusion mode, which could in
 principle vary between different division events.
-However, the biologically most relevant division types are the cases of binary consuming (e.g.
-mitosis) and binary progenitive (e.g. budding) division type.
+However, the biologically most relevant division types are the cases of binary consuming (e.g.,
+mitosis) and binary progenitive (e.g., budding) division type.
 A slight generalization of this observation is the assumption that the division function is of
 $k$-ary nature, meaning it always produces $k$ daughter cells.
 Corollary~\ref{corollary:k-ary-division} captures this reality.
 
 \begin{corollary}[$k$-ary and Binary Cell Division]
     Arbitrary applications of topological cellular processes $\Phi_j$ without fusion functions where
-    the division function $\gamma$ is of $k$-ary nature, i.e.
+    the division function $\gamma$ is of $k$-ary nature, i.e.,
     $\gamma:C\rightarrow C^k\subset\cup_{n\in\mathbb{N}}C^n$ lead to a $k$-ary tree for division
     mode $s=0$ and a $k-1$-ary tree for division mode $s=1$ in the cell lineage of
     theorem~\ref{theorem:cell-lineage}.
-    The most common biological reality is the binary case with mode $s=0$, i.e. replacement of the
+    The most common biological reality is the binary case with mode $s=0$, i.e., replacement of the
     mother cell such as mitosis.
     \label{corollary:k-ary-division}
 \end{corollary}
@@ -1423,7 +1423,7 @@ Consider the graph presented in Figure~\ref{fig:cell-lineage-misleading-graphs} 
 cell has been removed.
 From this graph we have at two possible biologically valid variants: The mother cell can divide via
 a consuming mode $s=0$, thus producing two daughter cells, or it can produce two daughter cells via
-non-consuming mode $s=1$ and be removed afterwards, i.e. due to cell death.
+non-consuming mode $s=1$ and be removed afterwards, i.e., due to cell death.
 This shows that the cell lineage alone is in general not able to recover the precise temporal order
 and type of topological cellular processes.
 It should therefore only be interpreted as an observable of the underlying dynamics of the \ac{abm}.
@@ -1448,7 +1448,7 @@ It should therefore only be interpreted as an observable of the underlying dynam
     \caption[Two modes of Cell Division]{
         (A) A mother cell dividing via $s=1$ (non-consuming) mode producing two daughter cells.
         (B) A mother cell which has produced two daughter cells and is not alive anymore.
-        This graph can arise from a $s=0$ division or two $s=1$ division followed by a removal (i.e.
+        This graph can arise from a $s=0$ division or two $s=1$ division followed by a removal (i.e.,
         via cell death).
     }
     \label{fig:cell-lineage-misleading-graphs}
@@ -1659,7 +1659,7 @@ process $\Phi_j$ will not be affected by another topological cellular process su
 $\Phi_j$ within the same topological evolution function.
 
 In principle, the quantities such as division functions and identifiers will depend on the
-particular process $\Phi_j$ and therefore depend on $i$, i.e.
+particular process $\Phi_j$ and therefore depend on $i$, i.e.,
 $\Phi_j((I_p,M)=\Upsilon(\gamma_i,\iota_i,(I_p,M))$.
 In practice, the division functions are almost always identical across the dynamics of the system,
 depending only on the cellular properties $c\in C$ and the identifiers are provided by criteria such
@@ -1852,7 +1852,7 @@ systems.
     proves $\phi_0(x)=x$.
     Otherwise the topological evolution function $\bar{\varphi}_1$ is evaluated even before the
     first non-trivial non-topological evolution function $\psi_{t_1}$ which will lead to a mismatch
-    for equation~\eqref{eq:dynamical-system-evolution-function-1}, i.e.
+    for equation~\eqref{eq:dynamical-system-evolution-function-1}, i.e.,
     $\phi_0(x)=\bar{\varphi}_1(x)\neq x$.
     Next, we aim to prove equation~\eqref{eq:dynamical-system-evolution-function-2}.
     Let $s_1,s_2\in L(x,e)$.
@@ -1977,7 +1977,7 @@ $x=(c_1,\dots,c_n)\in C^n$.
 Let us now assume that a particular cell at position $j$ is removed by the corresponding topological
 cellular process.
 The question is now how to modify the vector $x$ going forward.
-If we simply omit the $j$th element, i.e. $x\mapsto y=(c_1,\dots,c_{j-1},c_{j+1},\dots,c_n)$, we are
+If we simply omit the $j$th element, i.e., $x\mapsto y=(c_1,\dots,c_{j-1},c_{j+1},\dots,c_n)$, we are
 left with a problem.
 If we want to trace any cell $j+k$ (with $k\geq0$) before and after the topological cellular
 process, we need to account for the change of index when removing $j$.
@@ -2109,7 +2109,7 @@ as given by Example~\ref{example:unique-identifiers-1-global-counter}.
 
 One could also envision an approach where instead of utilizing a subdivision $K_l$ of the space, we
 take the position of any cell $x\in\R^d$ together with the time of insertion $t$ directly as the
-new unique identifier, i.e. $\bar{\iota}=(t,x)$.
+new unique identifier, i.e., $\bar{\iota}=(t,x)$.
 In theory this could be a valid approach if the underlying model can guarantee that no two cells can
 occupy the same position $x$ at the same time $t$.
 However, using floating-point numbers as identifiers is fundamentally flawed since these introduce
@@ -2331,7 +2331,7 @@ Given an initial state $x_0\in U$, we define
 iteratively.
 Given such an initial state $x_i=((I_{p,i},M_i),e_i)$ and some time interval $s\in T$, we can evolve
 this state by applying $\psi$ to it without adding or removing any cells.
-Therefore, every cell can be treated as depending on the relative time value of this interval, i.e.
+Therefore, every cell can be treated as depending on the relative time value of this interval, i.e.,
 $h\mapsto c_\iota(h)$.
 To determine the effect of the criteria, we define the set
 \begin{align}
@@ -2347,7 +2347,7 @@ Our goal is to utilize this set to determine two things: The time interval $t_{i
 next topological cellular process will be executed.
 And the order of the topological cellular processes.
 If one particular identifier is involved in multiple criteria, we also need to resolve this such
-that every identifiers is involved in only exactly one criterion, i.e. $J_j\cap J_i=\emptyset$ for
+that every identifiers is involved in only exactly one criterion, i.e., $J_j\cap J_i=\emptyset$ for
 $i\neq j$.
 In order to formalize this, we introduce a new map
 \begin{equation}
@@ -2364,7 +2364,7 @@ Therefore, given the topological evolution functions defined by
     \label{eq:resolver-property-2}
 \end{align}
 we can find a bijection $\beta$ such that $\Phi_{i,j}$ and $\bar{\Phi}_{i,\beta(j)}$ are identical
-up to the action of $\sigma$ on the involved identifiers, i.e.
+up to the action of $\sigma$ on the involved identifiers, i.e.,
 $\bar{J}_{\beta(j)}=\sigma(J_j)$ where $J_j$ and $\bar{J}_{\beta(j)}$ are the sets of involved
 identifiers for $\Phi_{i,j}$ and $\bar{\Phi}_{i,\beta(j)}$ respectively.
 
@@ -2467,7 +2467,7 @@ reordering bijection $\beta$.
     The sets of involved identifiers $J_j=\sigma(\tilde{J}_j)$ can be mapped onto each other.
     Together with the definition of the resolver $\mu$, we know that every topological cellular
     process $\Phi_j$ has a corresponding process $\tilde{\Phi}_l$ such that there is an isomorphism
-    $\alpha_{j,l}:K_j\rightarrow O_l$ and where the corresponding values of cells match, i.e.
+    $\alpha_{j,l}:K_j\rightarrow O_l$ and where the corresponding values of cells match, i.e.,
     $M^j\ni(\iota,c_1)$ and $(\alpha_{j,l}(\iota),c_2)\in\tilde{M}^l$ such that $c_1=c_2$.
     With this bijection $\alpha_{j,l}$, we can extend $\sigma_n$ successively to the pairwise
     disjoint sets $K_j$ and $O_l$ and will cover all newly inserted identifiers with this approach.
@@ -2494,7 +2494,7 @@ Determine the next time step $t_i$ and the corresponding topological evolution f
 If we study \acp{cabm} in a theoretical fashion, we are not particularly interested in the order of
 the individual topological cellular processes $\Phi_{i,j}$ within a single topological evolution
 function $\varphi_i$ (see Theorem~\ref{theorem:identifier-independent-dynamics}).
-Furthermore, any overlaps of these criteria, e.g. a division criterion and a removal criterion
+Furthermore, any overlaps of these criteria, e.g., a division criterion and a removal criterion
 triggering at exactly the same time points, would strongly indicate at a soundness issue of the
 underlying model and we therefore assume that this situation does not manifest.
 To formalize this, we inspect the individual cells $c_{\iota_i}(t)$ over the course of the time
@@ -2546,7 +2546,7 @@ steps.
 \begin{example}[Resolver Example 2 - Discrete time Steps]
     For every $x_i$, we define $s=t_i=\Delta t\in T$ as the temporal step size which we assume to be
     the smallest possible increment that is conceivable within this model.
-    If we again assume that the criteria do not overlap, i.e.
+    If we again assume that the criteria do not overlap, i.e.,
     equation~\eqref{eq:criteria-no-overlaps} holds, at the time point $t_{i-1}+\Delta t$ we will
     have at most one topological cellular process for every cell $c_\iota$.
     This can be directly utilized as before to construct $\varphi_i$.
@@ -2668,7 +2668,7 @@ positioning~\cite{Pecreaux2006,Grill2001}.
 Apoptosis is another fundamental topological cellular process which can have stochastic elements to
 it.
 \citet{Paek2016} utilized genetically identical colon cancer cells which were exposed to
-chemotherapy and and found that given the same drug dose, cellular fate (i.e. death) varied,
+chemotherapy and and found that given the same drug dose, cellular fate (i.e., death) varied,
 depending on the damage level which their \ac{dna} sustained during treatment.
 This stochastic variation determines the relative abundance of pro-death and anti-death proteins and
 therefore directly predicts apoptotic probability.
@@ -2706,7 +2706,7 @@ arguable lower number of parameters.
 Furthermore, as can be seen from the brownian motion example, deterministic versions would require
 an extremely large number of initial values which are practically not measurable.
 Finally, the utilized scales (physical size and duration) can play an important role in determining
-if a stochastic component can be reduced, i.e. by using a description on averages of this quantity.
+if a stochastic component can be reduced, i.e., by using a description on averages of this quantity.
 It is therefore necessary and useful to treat every topological and non-topological cellular process
 as one that is able to contain stochastic elements.
 
@@ -2846,7 +2846,7 @@ From this observation, we directly see that a valid cellular state is maintained
 that every change in the currently alive cells is only the result of a topological cellular process.
 Furthermore this means that all results from the previous section naturally generalize to a
 stochastic version when fixing the noise realization $\omega$ and consequently, the derived
-properties are of stochastic nature, i.e. depend on $\omega$.
+properties are of stochastic nature, i.e., depend on $\omega$.
 This includes results such as the cell lineage (Theorem~\ref{theorem:cell-lineage} and
 Lemma~\ref{lemma:cell-lineage-for-cabms}), the lifetime of a cell
 (Definition~\ref{definition:cellular-lifetime}) and even the relation of stochastic \acp{cabm} to
@@ -2858,13 +2858,13 @@ Here, we need to investigate how the various criteria for division, removal, fus
 should be adjusted in the stochastic case and if such an approach is even feasible.
 When the criteria are not inherently stochastic, as discussed earlier, we can naturally generalize
 Theorem~\ref{theorem:identifier-independent-dynamics} for fixed $\omega$.
-Therefore we now consider the case there the criteria are also of stochastic nature, i.e. directly
+Therefore we now consider the case there the criteria are also of stochastic nature, i.e., directly
 depend on the noise realization $\omega$.
 This carries forward to the previously defined set $Q(s,x_i,\omega)$ which is then mapped to a time
 value and topological evolution function by the resolver $\mu$ as described in
 Definition~\ref{definition:criterion-determined-topological-processes}.
 Although the set $Q(s,x_i,\omega)$ does already depend on $\omega$, we can further also allow $\mu$
-to depend on it as well, i.e. $\mu:\mathcal{Q}\times\Omega\rightarrow T\times\mathcal{P}$.
+to depend on it as well, i.e., $\mu:\mathcal{Q}\times\Omega\rightarrow T\times\mathcal{P}$.
 Under all these considerations, the previously established proofs and ideas carry through when
 initially fixing $\omega\in\Omega$ and we can obtain the same result as
 Theorem~\ref{theorem:identifier-independent-dynamics} in the stochastic case where the bijection
@@ -3160,7 +3160,7 @@ This encoding can then be used to calculated observables such as size and midpoi
 depending on what is used within $C_\text{obs}$.
 The unique set of colors describes the distinct cellular entities.
 Although the presented encoding of Figure~\ref{fig:theory-cell-lineage-segmentation} (upper right)
-only relies on the physical shape of the cells, this could be enriched by more information, e.g.
+only relies on the physical shape of the cells, this could be enriched by more information, e.g.,
 \ac{gfp}-tagged readouts of intracellular properties unique to the individual cells.
 
 \subsection{Interpretation of the Temporal Identity Encoding}
@@ -3221,7 +3221,7 @@ It is then the task of the segmentation tool (see Subsection~\ref{subsubsec:imag
 segment these regions into the individual cells.
 But we can also extend the definition of $\rho:\R^d\rightarrow[0,1]$ to a general density measure
 which could measure properties such as mass density obtained via quantitative phase
-imaging~\cite{BARER1952,DAVIES1952} or \ac{gfp} density (i.e. via confocal microscopy).
+imaging~\cite{BARER1952,DAVIES1952} or \ac{gfp} density (i.e., via confocal microscopy).
 In this case, the individual cells could be thought of as basins within the landscape defined by
 $\rho$.
 Therefore, the cellular identity is encoded in the density $\rho$ itself and the decoder map
@@ -3244,7 +3244,7 @@ topological space is determined by the underlying dynamics of the \ac{cabm}.
 If we could find a formulation that leverages these concepts but remains sufficiently useful in
 describing biological reality, we would not have to deal with the tedious questions of unique
 identifiers and the question of what constitutes a cellular identity.
-Instead, any cellular identity would be given by certain topological properties (i.e. connected
+Instead, any cellular identity would be given by certain topological properties (i.e., connected
 subsets, betti numbers, fundamental group, etc.).
 Furthermore, the notion of "observable" and "latent" variables would not alter the underlying
 mathematical model, as they currently do when interpreting the assignment of identifiers within a
@@ -3255,8 +3255,8 @@ It remains an open question how this could be formalized rigorously.
 \subsection{Parameter Estimation via Encoding and Decoding}
 We are now going to investigate how the preceding ideas can be understood when aiming to estimate
 the parameters of a \ac{cabm}.
-To this end, we generally assume that parameters are individual, i.e. different on a per-cell level.
-While behaviour such as the type of growth (e.g. linear, exponential) may be shared among cells, the
+To this end, we generally assume that parameters are individual, i.e., different on a per-cell level.
+While behaviour such as the type of growth (e.g., linear, exponential) may be shared among cells, the
 particular rate with which they grow may be unique to each cell.
 This concept can be generalized to other entities such as the reaction parameters of \acp{grn} which
 is often modeled by \acp{ode}.
@@ -3306,7 +3306,7 @@ One could could be tempted to believe that equation~\eqref{eq:encoding-compariso
 factorized by splitting apart the metric into a sum over all cells.
 However, since the metric $d(\cdot,\cdot)$ takes values in the encoding space $Y$, this generally
 depends entirely on the particular encoding.
-In the particular case where the encoding is identical with the observable, i.e.
+In the particular case where the encoding is identical with the observable, i.e.,
 $Y=\sqcup_nC_\text{obs}^n$ and $\sigma=\text{id}$ we can achieve this, thus leading to
 \begin{equation}
     L=\sum\limits_i d(c_{i,b},c_{\iota_i,\text{obs}})
@@ -3398,7 +3398,7 @@ combination of input values.
     \caption{
         Elementary \acp{ca} can be characterized by their transition rules.
         The binary number $a_8\dots a_1$ can be converted to a decimal, which is used to define the
-        rule number of the associated \ac{ca} (i.e. $01101110_2=110_d$).
+        rule number of the associated \ac{ca} (i.e., $01101110_2=110_d$).
     }
     \label{table:wolfram-code}
 \end{table}
@@ -3460,7 +3460,7 @@ somewhat robust with respect to varying initial conditions.
 We discuss this in the supplementary material (see
 Section~\ref{supplement:ca-elementary}).
 
-So far, we have not discussed as to what constitutes the various rules, i.e. which biological
+So far, we have not discussed as to what constitutes the various rules, i.e., which biological
 processes lead to the exact form of the different rules.
 This might contain non-topological processes such as movement of cells or topological cellular
 processes such as division and death.
@@ -3470,7 +3470,7 @@ Therefore we may not assume that multiple topological cellular processes can occ
 cell $i$ from one particular state $Q^n_i$ to the next $Q^{n+1}_i$.
 
 Within these confinements it is hard to imagine a simple multicellular system, which has almost no
-structure (i.e. only living cells/unoccupied space on a particular lattice grid) and grows into a
+structure (i.e., only living cells/unoccupied space on a particular lattice grid) and grows into a
 complex formation other than the bulks displayed in Figure~\ref{fig:ca-filtered-single} (N,P).
 Furthermore, these spatial patterns are not stable with respect to time which is clearly shown in
 rules (C,G,K,O) where any single cell alternates between the alive and dead state once it has been
@@ -3482,7 +3482,7 @@ However, for example rules 050, 122, 178 and 250, displayed in Figure~\ref{fig:c
 (C,G,K,O) all have transitions of the type $\dots010101010\dots\mapsto\dots101010101\dots$ where it
 is entirely unclear as to where the additional cell of the $n+1$ state came from.
 The problem is inherently symmetric but would require a non-obvious asymmetry within the individual
-agents, e.g. two rules where the first moves all cells one unit to the left and another which lets
+agents, e.g., two rules where the first moves all cells one unit to the left and another which lets
 the cell on the right divide into two new daughter cells.
 Another explanation using topological cellular processes would be that every cell divides into two
 daughter cells that are placed on the left and right side of the previously occupied lattice point.
@@ -3579,7 +3579,7 @@ cell at a particular grid point but are bound from above for the amount that the
 %     \item classification via "Wolfram Code" $\rightarrow$ 256 possible combinations
 %     \item problem with rule $000\rightarrow 1$
 %     \item we can make a few assumptions that allow us to quickly reduce the overall space of
-%         \acp{ca}; i.e. general isotropy
+%         \acp{ca}; i.e., general isotropy
 %     \item also look at type of growth; now also consider larger neighbor regions in $d$-dim space;
 %         \acp{ca} do not grow exponentially, logistically or anything like that
 %     \item Display simulation of remaining \acp{ca} (one and two starting cells)
@@ -3813,7 +3813,7 @@ for their proper resolution together with any topological cellular processes.
 %     \item cellular potts \cite{Graner1992}
 %     \item lattice-gas \acp{ca}
 %     \item lattice boltzmann methods \cite{Chen1998}; mostly used in fluid simulations; some
-%         simulations tools also use it i.e. LBIBCell \cite{Tanaka2015}
+%         simulations tools also use it, i.e., LBIBCell \cite{Tanaka2015}
 %     \item static voronoi tessellations sometimes used \cite{Honda1978}; when tessellation is not
 %         static, we move to vertex-based models and off-lattice models
 %     \item Neural \acp{ca} \cite{Mordvintsev2020}
@@ -3840,7 +3840,7 @@ to describe a variable amount of individual cellular agents.
 formation~\cite{Turing1952,Gierer1972,Meinhardt2008}.
 However, they also do not permit us to distinguish between individual cellular agents but can arise
 as a coarse-grained effect of multicellular behaviour~\cite{Erban2004}.
-Similarly to \acp{ode}, they often serve as components of a \ac{cabm}, e.g. to describe fluid
+Similarly to \acp{ode}, they often serve as components of a \ac{cabm}, e.g., to describe fluid
 mechanics~\cite{Navier1827,Stokes1845}.
 Similarly to \acp{ode}, \acp{pde} are not naturally capable of describing individual varying numbers
 of cellular agents and are therefore not directly suitable to describe multicellular systems with
@@ -3865,7 +3865,7 @@ variable amount of individual entities.
 These systems usually do not consider any form of biological topological processes such as mitosis
 but it seems straightforward to be able to implement them within this framework.
 One notable difference of any particle simulation or many-body system to \acp{cabm} is that they are
-inherently spatial, i.e. every object has to be present at some spatial point within the given
+inherently spatial, i.e., every object has to be present at some spatial point within the given
 simulation space.
 This is generally different to \acp{cabm} (see Example~\ref{example:theory-simple-abm}) which need
 not to satisfy this assumption, although many \acp{abmf} inherently assume a form of spatial
@@ -3892,7 +3892,7 @@ systems.
 %     \item individuality of agents and many-body treatment can be comparable
 %     \item no particular thought to the topological cellular processes; how do particles get
 %         added/removed is often determined from outside or simply not discussed
-%     \item many-body systems often no way of interacting with environment (i.e. with diffusing
+%     \item many-body systems often no way of interacting with environment (i.e., with diffusing
 %         molecules)
 %     \item molecular dynamics assumes indistinguishability; this is contrary to \acp{cabm}
 %     \item in general many-body sims are quite similar (maybe closest of all presented approaches)
@@ -3911,7 +3911,7 @@ systems.
 \label{subsection:coarse-graining-of-cbm-model}
 This section establishes a generalized model for cellular dynamics, covering growth, division,
 intracellular \& extracellular reactions and mechanical properties.
-We assume that the spatial information (i.e. position) of every cell is given by a single point
+We assume that the spatial information (i.e., position) of every cell is given by a single point
 $\vec{x}_\iota\in\R^d$ so that it interacts with its environment at this particular point.
 These propertiesare often described as center-based (referring to the singular point
 $\vec{x}_\iota\in\R^d$) and off-lattice which refers to the fact that the physical space is
@@ -4019,7 +4019,7 @@ The system of equations is given by
     &&&\bar{\delta}:\CS\rightarrow\{0,1\}
 \end{alignat}
 
-where as motivated earlier, we have utilized a center-based description, i.e. the positional
+where as motivated earlier, we have utilized a center-based description, i.e., the positional
 information of every individual cell is given by a point $\vec{x}_\iota\in D\subset\R^d$ where $D$
 describes the spatial extent of our model and $d$ is the physical dimensionality.
 Although this assumption is often used synonymously with the notion that cells are modeled as
@@ -4052,12 +4052,12 @@ Equation~\eqref{eq:extracellular-reactions}.
 In addition, we permit purely extracellular reactions which are modeled by $\vec{h}_e(\vec{w})$,
 often simply the degradation of proteins.
 The term $\vec{S}(\vec{w})$ is models transport of the extracellular compounds and does not alter
-the total amount in the space, i.e. $\int\vec{S}(\vec{w})\text{dV}=0$.
+the total amount in the space, i.e., $\int\vec{S}(\vec{w})\text{dV}=0$.
 
 In addition to growth and reactions, this model also covers division and removal (death) of cells.
 As we have explained earlier (see Subsection~\ref{subsec:theory-formalizing-cellular-reproduction}),
 we generally assume that processes which act during the death of cells, such as secretion of
-intracellular compounds, have to be covered by the non-topological dynamics, i.e. differential
+intracellular compounds, have to be covered by the non-topological dynamics, i.e., differential
 equations.
 The same argument also holds for the division function $\gamma$ and its criterion $\bar{\gamma}$.
 
@@ -4087,7 +4087,7 @@ The same argument also holds for the division function $\gamma$ and its criterio
 
 The last component of our model are the force-based spatial dynamics of the positions of cells
 $\vec{y}_\iota$.
-They follow a standard 2nd order differential equation \eqref{eq:equations-of-motion-2}, i.e.
+They follow a standard 2nd order differential equation \eqref{eq:equations-of-motion-2}, i.e.,
 Newtons's equations of motion and are affected by three distinct force contributions.
 The term $\vec{F}_\EV(c_\iota)$ models external forces such as fluidic dynamics or gravity on the
 cells.
@@ -4120,7 +4120,7 @@ The precise condition for the level of their separation could then be understood
 theory as explained earlier.
 
 When two cells divide, this density function could be given by a multimodal distribution exhibiting
-two peaks---one for each cell---which ultimately separate enough such that a certain condition (e.g.
+two peaks---one for each cell---which ultimately separate enough such that a certain condition (e.g.,
 defined by Morse theory) considers them as spatially separated.
 Figure~\ref{fig:separation-of-distributions} displays this idea.
 Note that the density profiles need not necessarily be the mass-densities of the cell(s) but could
@@ -4309,7 +4309,7 @@ To this end, we consider the total energy stored in the system to be constant.
 It is made up of the environment's energy and the energy stored within the cells, either
 in the form of intracellular nutrients or converted into biomass.
 This means that no additional nutrients are added and the existing energy is only
-converted internally (i.e. from diffusive nutrients into cellular mass).
+converted internally (i.e., from diffusive nutrients into cellular mass).
 We denote the density of extracellular nutrients with $R_e$ and the intracellular
 nutrients of species $A/B$ with $R_{i,c_{A/B}}$ respectively.
 By integrating over the respective volumes and summing over all cellular agents, we
@@ -4378,7 +4378,7 @@ It should be noted in particular that the terms
 \ref{eq:supplement-abm-derivation-reactions-fin-2} are maintained within each individual
 cell, not just on a global level.
 Thus the system now consists of $1+N_A+N_B$ equations in total where $N_{A/B}$ are the
-number of cells of species $A/B$ which changes (i.e. increases) over the course of the simulation.
+number of cells of species $A/B$ which changes (i.e., increases) over the course of the simulation.
 We denote this fact and in general cell-specific properties with indices $c$ or $c_{A/B}$
 if species-specific properties are at play.
 In addition, we pick a growth model depending on the species $A/B$ of our cell
