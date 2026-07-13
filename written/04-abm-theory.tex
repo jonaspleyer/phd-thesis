@@ -4159,25 +4159,25 @@ extracellular compounds is infinitely fast which justifies the homogenization of
 In addition, we assume that the exchange between intra- and extracellular compounds is given by a
 fast linear term $\vec{h}_x\sim(\vec{v}_\iota - \vec{w})$ compared to the dynamics of the
 remaining processes.
-\todo[inline]{
-    purely intracellular compounds do not exchange fast. They simply do not exchange at all!
-    We cannot therefore equate them with their extracellular variants.
-    We need to split the formalism right here!
-}
 The linear form is typical for a diffusive exchange of compounds~\cite{Kedem1958}.
-This allows us to write $\vec{v}_c=\vec{w}|_{\vec{x}_c}$ which considerably simplifies
-Equation~\eqref{eq:extracellular-reactions} leaving us with
+Note that this assumption assumes that every compound of each cell can be shared with the
+surrounding environment which is a strong assumption and only true for a subset of simplified models
+which only contain shared compounds that can be found both intracellularly and extracellulary.
+Nevertheless, such simplified models do exist which makes this case relevant.
+
+The preceding assumptions allow us to write $\vec{v}_c=\vec{w}|_{\vec{x}_c}$ which considerably
+simplifies Equation~\eqref{eq:extracellular-reactions} leaving us with
 \begin{equation}
     \partial_t\vec{w} = \sum\limits_\iota
     \vec{h}_{i,\iota}(\vec{w}|_{\vec{x}_c})V_\iota\delta(\vec{x}-\vec{x}_c) +
-    \vec{h}_e(\vec{w}) + \vec{S}(\vec{w})
+    \vec{h}_e(\vec{w}) + \vec{S}(\vec{w}).
     \label{eq:case1-ecr-simplified}
 \end{equation}
-which therefore models the values of intracellular concentrations directly as the values of
+This allows us to model the values of intracellular concentrations directly as the values of
 extracellular concentrations at the positions of the cells $\vec{x}_\iota$.
 To homogenize the system, we integrate over the space $D$, denoting spatially integrated quantities
-such as the extracellular compounds via $\bar{\vec{w}}(t)=\int\vec{w}(t,\vec{x})\text{d}V$.
-Using this notation, we can rewrite the Equation~\eqref{eq:case1-ecr-simplified} leading to
+such as the extracellular compounds with $\bar{\vec{w}}(t)=\int\vec{w}(t,\vec{x})\text{d}V$.
+Using this notation, we can rewrite the Equation~\eqref{eq:case1-ecr-simplified} as
 \begin{alignat}{7}
     \partial_t\bar{\vec{w}} &=
     &\int\limits_\EV\sum\limits_\iota&
