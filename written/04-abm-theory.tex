@@ -4230,14 +4230,24 @@ In addition, the homogeneity assumption can also be applied to equation
 \eqref{eq:case1-compound-conservation} which means that $\vec{v}_1=\vec{v}_2=\vec{v}_3$ and
 therefore does not contain any additional information compared to equation
 \eqref{eq:case1-volume-conservation}.
+In particular, these conditions mean that the total cellular volume $V_c$ is continuous across
+division events $\gamma$.
 
-Equations \eqref{eq:case1-ecr-coarse-grained-1} and \eqref{eq:case1-ecr-coarse-grained-2} can also
-be viewed in terms of an expectation value $\text{E}(X_\iota)=\sum_\iota X_\iota/N_c$ ranging over
-all alive cells $N_c$.
+So far we have not dealt with the question how division and removal (death) events play into the
+derived equations.
+Clearly, any single topological cellular process leads to a change in the sum $\sum_\iota$ and
+therefore to a change of the overall number of cells $N_c$.
+It is an open question if we can incorporate $\gamma$ and $\delta$ into the system of differential
+equations such that the homogeneized system can be modeled purely by an \ac{ode}, i.e. without
+requiring any interrupts of the temporal evolution due to topological transitions.
+
+In a different view, equations \eqref{eq:case1-ecr-coarse-grained-1} and
+\eqref{eq:case1-ecr-coarse-grained-2} can also be understood in terms of an expectation value
+$\text{E}(X_\iota)=\sum_\iota X_\iota/N_c$ ranging over all alive cells $N_c$.
 The first term of equation \eqref{eq:case1-ecr-coarse-grained-2} becomes a product of two
 distributions.
 In the general case where the distributions $V_\iota$ and
-$\bar{\vec{h}}_{i,\iota}(\bar{\vec{w}})$ are not independent, we obtain
+$\bar{\vec{h}}_{i,\iota}(\bar{\vec{w}},V_\iota)$ are not independent, we obtain
 \begin{align}
     \partial_t V_c &= N_c\text{E}(h_{g,\iota}(\bar{\vec{w}},V_\iota))\\
     % \partial_t\vec{v} &= -f(\bar{\vec{w}},V_c)\\
@@ -4247,10 +4257,13 @@ $\bar{\vec{h}}_{i,\iota}(\bar{\vec{w}})$ are not independent, we obtain
 \end{align}
 where we have used the relation $\text{E}(V_\iota)=N_c^{-1}\sum_\iota V_\iota=N_c^{-1}V_c$.
 
-These results show how the dynamics of macroscopic, measurable quantities like the total cellular
-volume $V_c$ and the spatially homogeneized compound density $\vec{w}$ can be expressed in terms
-of the dynamics of individual cells.
-It also shows that these dynamics are driven by the mean of any cellularly distributed properties.
+While any further simplifications require more assumptions about the structure of the underlying
+cellular processes, the obtained results already exhibit interesting properties.
+They show in particular how the dynamics of macroscopic, measurable quantities like the total
+cellular volume $V_c$ and the spatially homogeneized compound density $\vec{w}$ can be expressed in
+terms of the dynamics of individual cells.
+The mean, when interpreted as an expectation value, arises naturally in the description of this
+homogeneized system.
 However, we do not expect that this observation will hold generally.
 
 \subsection{Case 2: With Exchange}
