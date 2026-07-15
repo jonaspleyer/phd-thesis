@@ -3999,19 +3999,19 @@ components.
 The system of equations is given by
 
 \begin{alignat}{5}
-    \partial_t{V_\iota} &= &&&&h_{g,\iota}(\vec{v}_\iota, V_\iota)
+    \partial_t{V_\iota} &= &&&&G_\iota(\vec{r}_\iota, V_\iota)
     \label{eq:volumetric-growth}\\
-    \partial_t{\vec{v}_\iota} &=  &-&
-    \vec{h}_{x,\iota}(\vec{v}_\iota,\vec{w}|_{\vec{x}_\iota}) &+&
-    \vec{h}_{i,\iota}(\vec{v}_\iota, V_\iota)
+    \partial_t{\vec{r}_\iota} &=  &-&
+    \vec{L}_\iota(\vec{r}_\iota,\vec{r}_e|_{\vec{x}_\iota}) &+&
+    \vec{W}_\iota(\vec{r}_\iota, V_\iota)
     \label{eq:intracellular-reactions}\\
-    \partial_t{\vec{w}} &= &\sum\limits_\iota V_\iota
-    &\vec{h}_{x,\iota}(\vec{v}_\iota,\vec{w})\delta(\vec{x}-\vec{x}_\iota) &+&
-    \vec{h}_e(\vec{w}) &+& \vec{S}(\vec{w})
+    \partial_t{\vec{r}_e} &= &\sum\limits_\iota V_\iota
+        &\vec{L}_\iota(\vec{r}_\iota,\vec{r}_e)\delta(\vec{x}-\vec{x}_\iota) &+&
+        \vec{R}_e(\vec{r}_e) &+& \vec{S}(\vec{r}_e)
     \label{eq:extracellular-reactions}\\
     % \partial_t \vec{x}_\iota &= &\sum\limits_{s\neq c}&\vec{G}(c,s) + \vec{G}_\EV(c)
     % \label{eq:equations-of-motion-1}\\
-    \partial^2_t\vec{y}_\iota &= &\vec{F}_\EV(c_\iota)& +
+    \partial^2_t\vec{x}_\iota &= &\vec{F}_\EV(c_\iota)& +
     \vec{F}_\iota + \sum\limits_{\kappa\neq \iota}\vec{F}_\CS(c_\iota,c_\kappa)
     \label{eq:equations-of-motion-2}\\
     &&&\gamma:\CS\rightarrow\CS\times\CS\\
@@ -4026,33 +4026,33 @@ Although this assumption is often used synonymously with the notion that cells a
 spherical objects, other shapes such as ellipsoids could be used.
 
 The first equation \eqref{eq:volumetric-growth} describes the change of volume of a cell.
-It is real-valued and depends on the cells intracellular compounds $\vec{v}_\iota(t)\in\R^n$ and
+It is real-valued and depends on the cells intracellular compounds $\vec{r}_\iota(t)\in\R^n$ and
 its current volume $V_\iota$.
-The variable $\vec{v}_\iota$ describes density values of the intracellular compounds and
-$\vec{w}(t,\vec{y})\in\R^n$ the extracellular compounds.
+The variable $\vec{r}_\iota(t)$ describes density values of the intracellular compounds and
+$\vec{r}_e(t,\vec{y})\in\R^n$ the extracellular compounds.
 
-Equation~\eqref{eq:volumetric-growth} defines the term $h_{g,c}(\vec{v}_\iota, V_\iota)$ which
+Equation~\eqref{eq:volumetric-growth} defines the term $G_\iota(\vec{r}_\iota, V_\iota)$ which
 describes the rate of change of the volume of a single cell.
-This growth term is coupled to the presence of intracellular concentrations $\vec{v}\in\R^n$.
+This growth term is coupled to the presence of intracellular concentrations $\vec{r}\in\R^n$.
 Intracellular processes are expressed in equation~\eqref{eq:intracellular-reactions} via
-$\vec{h}_i(\vec{v}_\iota, V_\iota)\in\R^n$ which also encompasses any growth-related changes.
+$\vec{W}_\iota(\vec{r}_\iota, V_\iota)\in\R^n$ which also encompasses any growth-related changes.
 We also model the dynamics of extracellular concentrations
-(equation~\eqref{eq:extracellular-reactions}) $\vec{w}(t,\vec{y})\in\R^n$ which are distributed over
+(equation~\eqref{eq:extracellular-reactions}) $\vec{r}_e(t,\vec{y})\in\R^n$ which are distributed over
 the spatial extent of the environment.
-While some components of $\vec{v}_\iota,\vec{w}$ may be confined exclusively within or outside of
+While some components of $\vec{r}_\iota,\vec{r}_e$ may be confined exclusively within or outside of
 cells, we utilize a shared notation where purely intracellular compounds should be set identically
 to zero in the extracellular regime and vice versa.
 This allows us to keep the required notation to a minimum.
 The rate at which compounds are exchanged between the intra- and extracellular space is given by
-the term $\vec{h}_{x,\iota}$ on the intracellular level in
+the term $\vec{L}_\iota$ on the intracellular level in
 Equation~\eqref{eq:intracellular-reactions}.
 For the extracellular change it is additionally multiplied by the cellular volume $V_\iota$ and acts
 at the position $\vec{x}_\iota$ which is formulated by the delta distribution $\delta(x-x_\iota)$ in
 Equation~\eqref{eq:extracellular-reactions}.
-In addition, we permit purely extracellular reactions which are modeled by $\vec{h}_e(\vec{w})$,
+In addition, we permit purely extracellular reactions which are modeled by $\vec{R}_e(\vec{r}_e)$,
 often simply the degradation of proteins.
-The term $\vec{S}(\vec{w})$ is models transport of the extracellular compounds and does not alter
-the total amount in the space, i.e., $\int\vec{S}(\vec{w})\text{dV}=0$.
+The term $\vec{S}(\vec{r}_e)$ is models transport of the extracellular compounds and does not alter
+the total amount in the space, i.e., $\int\vec{S}(\vec{r}_e)\text{dV}=0$.
 
 In addition to growth and reactions, this model also covers division and removal (death) of cells.
 As we have explained earlier (see Subsection~\ref{subsec:theory-formalizing-cellular-reproduction}),
@@ -4067,16 +4067,16 @@ The same argument also holds for the division function $\gamma$ and its criterio
     \begin{tabular}{clc}
         \toprule
         % Aspect & Equation & Input && Output\\
-        (C) & Growth Model              & $h_{g,\iota}(\vec{v}_\iota,V_\iota)$\\
-        (C) & Intracellular Reactions   & $\vec{h}_i(\vec{v}_\iota,V_\iota)$\\
+        (C) & Growth Model              & $G_\iota(\vec{r}_\iota,V_\iota)$\\
+        (C) & Intracellular Reactions   & $\vec{W}_\iota(\vec{r}_\iota,V_\iota)$\\
         (C) & Division                  & $\bar{\gamma},\gamma(c_\iota)$\\
         (C) & Removal (Death)           & $\bar{\delta}$\\
         (C) & Intrinsic Forces          & $\vec{F}_\iota$\\
         (CC) & Interaction Forces       & $\vec{F}_\CS(c_\iota,c_{\bar{\iota}})$\\
         (EC) & Environmental Forces     & $\vec{F}_\EV(c_\iota)$\\
-        (EC) & Exchange                 & $\vec{h}_x(\vec{v}_\iota, \vec{w}|_{y_\iota})$\\
-        (E) & Extracellular Reactions   & $\vec{h}_e(\vec{w})$\\
-        (E) & Fluid Motion              & $\vec{S}(\vec{w})$\\
+        (EC) & Exchange                 & $\vec{L}_\iota(\vec{r}_\iota, \vec{r}_e|_{x_\iota})$\\
+        (E) & Extracellular Reactions   & $\vec{R}_e(\vec{r}_e)$\\
+        (E) & Fluid Motion              & $\vec{S}(\vec{r}_e)$\\
         \bottomrule
     \end{tabular}
     \caption[Components of the center-based system]{
@@ -4112,15 +4112,15 @@ This \ac{cabm} utilizes a point-wise interaction between cells and their environ
 the delta distributions in Equation~\ref{eq:extracellular-reactions}.
 Consider the case where one cell is modeled as a spatially distributed entity.
 In this case, the delta distribution is replaced by a general density function $\rho_\iota(\vec{x})$
-with $\in\rho_\iota\text{d}\vec{x}=1$.
+with $\int\rho_\iota\text{d}\vec{x}=1$.
 During the division process the density function transitions from a single peak to a bimodal
-distribution---one for each cell---which ultimately separate enough such that they can be viewed as
+distribution (one per cell) which ultimately separate enough such that they can be viewed as
 individual entities.
 The precise condition for the level of their separation could then be understood in terms of Morse
 theory as explained earlier.
 
 When two cells divide, this density function could be given by a multimodal distribution exhibiting
-two peaks---one for each cell---which ultimately separate enough such that a certain condition (e.g.,
+two peaks, one for each cell, which ultimately separate enough such that a certain condition (e.g.,
 defined by Morse theory) considers them as spatially separated.
 Figure~\ref{fig:separation-of-distributions} displays this idea.
 Note that the density profiles need not necessarily be the mass-densities of the cell(s) but could
@@ -4156,7 +4156,7 @@ Our goal is to derive a simplified, spatially homogeneous version, which is just
 assumptions that the transport of extracellular compounds and exchange of intra- and extracellular
 compounds is infinitely fast.
 To this end, we assume that the exchange between intra- and extracellular compounds is given by a
-fast linear term $\vec{h}_{x,\iota}\sim(\vec{v}_\iota - \vec{w})$ compared to the dynamics of the
+fast linear term $\vec{L}_\iota\sim(\vec{r}_\iota - \vec{r}_e)$ compared to the dynamics of the
 remaining processes.
 The linear form is typical for a diffusive exchange of compounds~\cite{Kedem1958}.
 Note that this assumption assumes that every compound of each cell can be shared with the
@@ -4170,67 +4170,66 @@ the cells and thereby need not model the dynamics of the individual positions of
 determined by Equation~\eqref{eq:equations-of-motion-2}.
 
 Due to the rapid exchange of compounds between cells and their environment, we can write
-$\vec{v}_\iota=\vec{w}|_{\vec{x}_\iota}$ and therefore combine equations
+$\vec{r}_\iota=\vec{r}_e|_{\vec{x}_\iota}$ and therefore combine equations
 \eqref{eq:intracellular-reactions} and \eqref{eq:extracellular-reactions} as
 \begin{equation}
-    \partial_t\vec{w}
-        =\sum\limits_\iota V_\iota h_{i,\iota}(\vec{w}|_{\vec{x}_\iota},V_\iota)
+    \partial_t\vec{r}_e
+        =\sum\limits_\iota V_\iota \vec{W}_\iota(\vec{r}_e|_{\vec{x}_\iota},V_\iota)
             \delta(\vec{x}-\vec{x}_\iota)
-            +\vec{h}_e + \vec{S}(\vec{w}).
+            +\vec{R}_e + \vec{S}(\vec{r}_e).
 \end{equation}
 This allows us to model the values of intracellular concentrations directly as the values of
 extracellular concentrations at the positions of the cells $\vec{x}_\iota$.
 More generally speaking, we can reduce the representation of any singular cell to a
-combination of cellular volume and intracellular compounds $c_\iota=(V_\iota,\vec{v}_\iota)$.
+combination of cellular volume and intracellular compounds $c_\iota=(V_\iota,\vec{r}_\iota)$.
 During any division process, determined by $\bar{\gamma}$ and $\gamma$, we need to ensure that the
 total cellular volume and total amount of compounds is conserved.
-The latter is the product of cellular volume $V_\iota$ and compound density $\vec{v}_\iota$.
-By denoting $\gamma((V_1,\vec{v}_1))=((V_2,\vec{v}_2),(V_3,\vec{v}_3))$, these conditions are
+The latter is the product of cellular volume $V_\iota$ and compound density $\vec{r}_\iota$.
+By denoting $\gamma((V_1,\vec{r}_1))=((V_2,\vec{r}_2),(V_3,\vec{r}_3))$, these conditions are
 \begin{align}
     V_1 &= V_2 + V_3
     \label{eq:case1-volume-conservation}\\
-    \vec{v}_1V_1 &= \vec{v}_2V_2 + \vec{v}_3V_3
+    \vec{r}_1V_1 &= \vec{r}_2V_2 + \vec{r}_3V_3
     \label{eq:case1-compound-conservation}
 \end{align}
 which exhibit similarities to mass and momentum conservation of classical mechanics.
 
 Next, we introduce the total cellular volume $V_c=\sum_\iota V_\iota$ and the spatially homogeneous
-extracellular compounds $\bar{\vec{w}}=V_D^{-1}\int_D\vec{w}(\vec{x})\text{d}V$ with which we
+extracellular compounds $\bar{\vec{r}}_e=V_D^{-1}\int_D\vec{r}_e(\vec{x})\text{d}V$ with which we
 can rewrite equations \eqref{eq:volumetric-growth} and \eqref{eq:extracellular-reactions} as
 \begin{alignat}{3}
     \partial_tV_c&=\sum\limits_\iota\partial_t V_\iota
-        &=& \sum\limits_\iota h_{g,\iota}(\vec{w}|_{\vec{x}_\iota},V_\iota)\\
-    % \partial_t\vec{v}&=\sum\limits_\iota\partial_t\vec{v}_\iota
-    %     &=& \sum\limits_\iota\vec{h}_{i,\iota}(\vec{w},V_\iota)\\
-    \partial_t\bar{\vec{w}}&=\frac{1}{V_D}\int\limits_D\partial_t\vec{w}
+        &=& \sum\limits_\iota G_\iota(\vec{r}_e|_{\vec{x}_\iota},V_\iota)\\
+    % \partial_t\vec{r}&=\sum\limits_\iota\partial_t\vec{r}_\iota
+    %     &=& \sum\limits_\iota\vec{W}_\iota(\vec{r}_e,V_\iota)\\
+    \partial_t\bar{\vec{r}}_e&=\frac{1}{V_D}\int\limits_D\partial_t\vec{r}_e
         &=& \frac{1}{V_D}\sum\limits_\iota\int\limits_D V_\iota
-            \vec{h}_{i,\iota}(\vec{w}|_{\vec{x}_\iota},V_\iota)\delta(\vec{x}-\vec{x}_\iota)
-            + \vec{h}_e(\vec{w})\text{d}V.
+            \vec{W}_\iota(\vec{r}_e|_{\vec{x}_\iota},V_\iota)\delta(\vec{x}-\vec{x}_\iota)
+            + \vec{R}_e(\vec{r}_e)\text{d}V.
 \end{alignat}
-Note that the integral $\int\vec{S}(\vec{w})\text{d}V$ vanishes due to our assumptions that
-$\vec{S}(\vec{w})$ only describes spatial transport terms, leaving the total amount invariant.
-To homogenize the system, we average $\vec{w}$ over the space $D$, denoting spatially averaged
+Note that the integral $\int\vec{S}(\vec{r}_e)\text{d}V$ vanishes due to our assumptions that
+$\vec{S}(\vec{r}_e)$ only describes spatial transport terms, leaving the total amount invariant.
+To homogenize the system, we average $\vec{r}_e$ over the space $D$, denoting spatially averaged
 quantities such as the extracellular compounds with
-$\bar{\vec{w}}(t)=V_D^{-1}\int_D\vec{w}\text{d}V$.
-In our final step, we assume that the spatially averaged extracellular compounds $\bar{\vec{w}}$ can
-be used in place of $\vec{w}$ and thus $\vec{w}|_{\vec{x}_\iota}=\bar{\vec{w}}$ which means
+$\bar{\vec{r}}_e(t)=V_D^{-1}\int_D\vec{r}_e\text{d}V$.
+In our final step, we assume that the spatially averaged extracellular compounds $\bar{\vec{r}}_e$ can
+be used in place of $\vec{r}_e$ and thus $\vec{r}_e|_{\vec{x}_\iota}=\bar{\vec{r}}_e$ which means
 \begin{align}
-    \partial_tV_c &= \sum\limits_\iota h_{g,\iota}(\bar{\vec{w}},V_\iota)
+    \partial_tV_c &= \sum\limits_\iota G_\iota(\bar{\vec{r}}_e,V_\iota)
     \label{eq:case1-ecr-coarse-grained-1}\\
-    % \partial_t\vec{v} &= -\sum\limits_\iota\vec{h}_{i,\iota}(\bar{\vec{w}},V_\iota)\\
-    \partial_t\bar{\vec{w}} &= \frac{1}{V_D}\sum\limits_\iota V_\iota
-        \vec{h}_{i,\iota}(\bar{\vec{w}},V_\iota)
-        +\bar{\vec{h}}_e(\bar{\vec{w}})
+    % \partial_t\vec{r} &= -\sum\limits_\iota\vec{W}_\iota(\bar{\vec{r}}_e,V_\iota)\\
+    \partial_t\bar{\vec{r}}_e &= \frac{1}{V_D}\sum\limits_\iota V_\iota
+        \vec{W}_\iota(\bar{\vec{r}}_e,V_\iota)
+        +\bar{\vec{h}}_e(\bar{\vec{r}}_e)
     \label{eq:case1-ecr-coarse-grained-2}
 \end{align}
 by our homogeneity assumption.
 We have thus derived a system of coupled \acp{ode} which contains $n+1$ components; 1 for the total
 cellular volume and $n$ for the various compounds.
 In addition, the homogeneity assumption can also be applied to equation
-\eqref{eq:case1-compound-conservation} which means that $\vec{v}_1=\vec{v}_2=\vec{v}_3$ and
-therefore does not contain any additional information compared to equation
-\eqref{eq:case1-volume-conservation}.
-In particular, these conditions mean that the total cellular volume $V_c$ is continuous across
+\eqref{eq:case1-compound-conservation} which means that $\vec{r}_1=\vec{r}_2=\vec{r}_3$ and
+is therefore identical to equation \eqref{eq:case1-volume-conservation}.
+In particular, these conditions mean that the total cellular volume $V_c$ remains unchanged across
 division events $\gamma$.
 
 So far we have not dealt with the question how division and removal (death) events play into the
@@ -4247,21 +4246,23 @@ $\text{E}(X_\iota)=\sum_\iota X_\iota/N_c$ ranging over all alive cells $N_c$.
 The first term of equation \eqref{eq:case1-ecr-coarse-grained-2} becomes a product of two
 distributions.
 In the general case where the distributions $V_\iota$ and
-$\bar{\vec{h}}_{i,\iota}(\bar{\vec{w}},V_\iota)$ are not independent, we obtain
+$\bar{\vec{h}}_{i,\iota}(\bar{\vec{r}}_e,V_\iota)$ are not independent, we obtain
 \begin{align}
-    \partial_t V_c &= N_c\text{E}(h_{g,\iota}(\bar{\vec{w}},V_\iota))\\
-    % \partial_t\vec{v} &= -f(\bar{\vec{w}},V_c)\\
-    \partial_t\bar{\vec{w}} &= \frac{V_c}{V_D} \text{E}(h_{i,\iota}(\bar{\vec{w}},V_\iota))
-        + \text{Cov}(V_\iota,h_{i,\iota}(\bar{\vec{w}},V_\iota))
-        + \bar{\vec{h}}_e(\bar{\vec{w}})
+    \partial_t V_c &= N_c\text{E}(G_\iota(\bar{\vec{r}}_e,V_\iota))
+    \label{eq:case1-ev-volume}\\
+    % \partial_t\vec{r} &= -f(\bar{\vec{r}}_e,V_c)\\
+    \partial_t\bar{\vec{r}}_e &= \frac{V_c}{V_D} \text{E}(\vec{W}_\iota(\bar{\vec{r}}_e,V_\iota))
+        + \text{Cov}(V_\iota,\vec{W}_\iota(\bar{\vec{r}}_e,V_\iota))
+        + \bar{\vec{h}}_e(\bar{\vec{r}}_e)
+    \label{eq:case1-ev-reactions}
 \end{align}
 where we have used the relation $\text{E}(V_\iota)=N_c^{-1}\sum_\iota V_\iota=N_c^{-1}V_c$.
 
 While any further simplifications require more assumptions about the structure of the underlying
 cellular processes, the obtained results already exhibit interesting properties.
 They show in particular how the dynamics of macroscopic, measurable quantities like the total
-cellular volume $V_c$ and the spatially homogeneized compound density $\vec{w}$ can be expressed in
-terms of the dynamics of individual cells.
+cellular volume $V_c$ and the spatially homogeneized compound density $\vec{r}_e$ can be expressed
+in terms of the dynamics of individual cells.
 The mean, when interpreted as an expectation value, arises naturally in the description of this
 homogeneized system.
 However, we do not expect that this observation will hold generally.
