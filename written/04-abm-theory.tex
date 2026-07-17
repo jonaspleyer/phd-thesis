@@ -4311,6 +4311,25 @@ and \eqref{eq:case1-ev-reactions} to
         + \text{Cov}(\vec{W}_{k,\iota}(\bar{\vec{r}}_e),V_\iota^{k+1})\right]
         + \bar{\vec{h}}_e(\bar{\vec{r}}_e)\\
 \end{align}
+
+In addition, we aim to incorporate division $\gamma$ and removal, i.e. death, processes
+$\bar{\delta}$ to obtain a purely \ac{ode}-based description as motivated earlier.
+
+\subsubsection{Incorporating Division and Removal into the \acsp{ode}}
+
+
+We will now assume that the removal criterion is triggered when the cellular volume $V_\iota=0$,
+therefore
+\begin{equation}
+    \bar{\delta}((V_\iota,\vec{r}_\iota))=\begin{cases}
+        1 &\text{if } V_\iota=0\\
+        0 &\text{else }
+    \end{cases}
+\end{equation}
+which means that the removal of any single cell does not alter the overall cellular volume $V_c$ and
+any decrease that has taken place due to apoptosis was already accounted for in the \acp{ode}
+\eqref{eq:case1-ev-volume} \& \eqref{eq:case1-ev-reactions}.
+
 %
 %
 \subsection{Case 4: Something Else}
