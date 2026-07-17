@@ -4267,68 +4267,49 @@ The mean, when interpreted as an expectation value, arises naturally in the desc
 homogeneized system.
 However, we do not expect that this observation will hold generally.
 
-\subsection{Case 2: With Exchange}
-\textbf{TODO from here on the text has to adapted to the new expectation value formalism!}
-We follow all steps identically to the previous case, but do not assume that the exchange
-between intra- and extracellular compounds is fast resulting in
-\begin{alignat}{3}
-    \partial_t\bar{\textbf{v}}_\iota &= &- &\textbf{A}\left(\bar{\textbf{v}}_c -
-    V_\iota\bar{\textbf{w}}\right) + \bar{\textbf{h}}_{i,\iota}(\bar{\textbf{v}}_c)\\
-    \partial_t\bar{\textbf{w}} &= &\sum\limits_\iota&\textbf{A}\left(\bar{\textbf{v}}_\iota -
-    V_\iota\bar{\textbf{w}}\right) + \bar{\textbf{h}}_e(\bar{\textbf{w}}).
-\end{alignat}
-We can see that in the case where nothing is exchanged $A=0$, the equations decouple.
-Again utilizing the expectation value $\text{E}$, we can reformulate the equations and obtain
-\begin{alignat}{5}
-    \partial_t\text{E}(\bar{\textbf{v}}_\iota) &=
-    &-& \textbf{A}\left(\text{E}(\bar{\textbf{v}}_c) -
-    \text{E}\left(\frac{V_c}{V_\EV}\right)\bar{\textbf{w}}\right)
-    &+& \text{E}\left(\bar{\textbf{h}}_{i,c}(\bar{\textbf{v}}_c)\right)\\
-    \partial_t\bar{\textbf{w}} &=
-    &&\textbf{A}\left(\text{E}(\bar{\textbf{v}}_c) -
-    \text{E}\left(\frac{V_c}{V_\EV}\right)\bar{\textbf{w}}\right)
-    &+& \bar{\textbf{h}}_e(\bar{\textbf{w}}).
-\end{alignat}
-With the transformations
-\begin{align}
-    \bar{\textbf{u}}_0 &= \text{E}(\bar{\textbf{v}}_c) - q\bar{\textbf{w}}\\
-    \bar{\textbf{u}}_1 &= \text{E}(\bar{\textbf{v}}_c) + \bar{\textbf{w}}
-\end{align}
-and the substitutions
-$\bar{\textbf{h}}_i=\text{E}(\bar{\textbf{h}}_{i,c}(\bar{\textbf{w}}))$ and
-$q=N_c\text{E}(V_c/V_\EV)$, we obtain the system
-\begin{alignat}{3}
-    \partial_t\bar{\textbf{u}}_0 &= \bar{\textbf{h}}_i &-q& \bar{\textbf{h}}_e
-    -(1+q)\textbf{A}\bar{\textbf{u}}_0 \\
-    \partial_t\bar{\textbf{u}}_1 &= \bar{\textbf{h}}_i &+& \bar{\textbf{h}}_e
-\end{alignat}
-where the two equations are implicitly coupled due to the dependence of
-$\bar{\textbf{h}}_{i/e}$ on $\textbf{u}_{0/1}$.
+\subsubsection{Further Simplifications}
+The preceding assumptions alone do not directly allow us to further reduce the model.
+When inspecting equations \eqref{eq:case1-ev-volume} and \eqref{eq:case1-ev-reactions}, we would
+like to further expand the terms which utilize the expectation value.
+In this way we hope to find a description of the system which can be described by the expectation
+values of cellular distributions and their covariances which are therefore accessible
+experimentally.
 
-\subsection{Case 3: With Growth}
-Now we will additionally consider the case where growth is introduced into the system via
-equation~\eqref{eq:volumetric-growth}.
-Growth of individual cells will lead to their division which can be defined by a division
-function $\gamma:\CS\rightarrow\CS\times\CS$ and is executed when the division criterion
-(see definition~\ref{definition:cell-division-criterion}) is satisfied $\bar{\gamma}(c)=1$.
-This means that the sum over all cells $\sum_c$ depends on the current number of living
-cells which is now a variable quantity.
-Therefore, we introduce a new variable $V=\text{E}(V_c)=\sum_cV_c$.
-We assume that any division event $\gamma(c)=(c_1,c_2)$ will lead to no loss or gain in
-total volume $V_c=V_{c_1}+V_{c_2}$.
-Therefore the dynamics of $N$ do not depend on $\gamma$ and $\bar{\gamma}$ but only on $h_{g,c}$.
-We denote $\sum_c h_{g,c}=H_g$ and again do not consider any spatial distribution effects
-or movement by the cells.
-In addition we again assume fast exchange and obtain the equations
+To this end, we make a generalized assumption about the \acp{rhs} of equations
+\eqref{eq:case1-ev-volume} and \eqref{eq:case1-ev-reactions} by representing the terms $G_\iota$ and
+$\vec{W}_\iota$ by polynomials
 \begin{align}
-    \partial_tV &= H_g(\textbf{w},V)\\
-    \partial_t{\textbf{v}_c} &=  -
-    \textbf{T}_i\textbf{h}_x(\textbf{v}_c,\textbf{w}|_{\textbf{x}_c}) +
-    \textbf{h}_{i,c}(\textbf{v}_c, V_c)\\
-    \partial_t{\textbf{w}} &= \sum\limits_\iota \frac{V_c}{V_\EV}
-    \textbf{T}_e\textbf{h}_x(\textbf{v}_c,\textbf{w})\delta(\textbf{x}-\textbf{x}_c) +
-    \textbf{h}_e(\textbf{w})\\
-    \partial^2_t\textbf{x}_c &= \sum\limits_{s\neq c} \textbf{F}_\CS(c,s) + \textbf{F}_\EV(c)
+    G_\iota(\bar{\vec{r}}_e,V_\iota) &=
+        \sum\limits_{k=0}^{n_g}G_{k,\iota}(\bar{\vec{r}}_e)V_\iota^k
+    \label{eq:case1-growth-taylor}\\
+    \vec{W}_\iota(\bar{\vec{r}}_e,V_\iota) &=
+        \sum\limits_{k=0}^{n_i}\vec{W}_{k,\iota}(\bar{\vec{r}}_e)V_\iota^k
+    \label{eq:case1-reactions-taylor}
+\end{align}
+which are able to capture a variety of conditions.
+For instance, the case where $G_{k,\iota}=0$ for $k\neq 1$, would yield exponential growth of the
+cellular volume $V_\iota$ where the growth rate is $G_{1,\iota}(\bar{\vec{r}})$.
+Similarly, the case of $G_{k,\iota}=0$ for $k\neq 0$ will result in linear growth.
+Other forms such as logistic growth on the intracellular level can also be realized by choosing
+$G_{1,\iota}=-G_{2,\iota}$ and $G_{k,\iota}=0$ for every $k\neq1,2$.
+From a mathematical viewpoint, we can understand the presented sums as possibly truncated versions
+of the taylor expansion of $G_\iota$ and $\vec{W}_\iota$ which should give a good approximation for
+sufficiently large exponents $n_g,n_i$.
+
+Using equations \eqref{eq:case1-growth-taylor} and \eqref{eq:case1-reactions-taylor}, we can apply
+the expectation value to these terms and thus simplify equations \eqref{eq:case1-ev-volume}
+and \eqref{eq:case1-ev-reactions} to
+\begin{align}
+    \partial_t V_c &= N_c\sum\limits_{k=0}^{n_g}
+        \text{E}(G_{k,\iota}(\bar{\vec{r}}_e)\text{E}(V_\iota))
+        + \text{Cov}(G_{k,\iota}(\bar{\vec{r}}_e),V_\iota)\\
+    \partial_t\bar{\vec{r}}_e &=
+        \sum\limits_k^{n_i}N_c\text{E}(V_\iota\vec{W}_{k,\iota}(\bar{\vec{r}}_e)V_\iota^k)
+        + \bar{\vec{h}}_e(\bar{\vec{r}}_e)\\
+    &= N_c\sum\limits_k^{n_i}\left[
+        \text{E}(\vec{W}_{k,\iota}(\bar{\vec{r}}_e))\text{E}(V_\iota^{k+1})
+        + \text{Cov}(\vec{W}_{k,\iota}(\bar{\vec{r}}_e),V_\iota^{k+1})\right]
+        + \bar{\vec{h}}_e(\bar{\vec{r}}_e)\\
 \end{align}
 %
 %
