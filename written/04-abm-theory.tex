@@ -4314,11 +4314,27 @@ and \eqref{eq:case1-ev-reactions} to
         + \text{Cov}[\vec{W}_{k,\iota}(\bar{\vec{r}}_e),V_\iota^{k+1}]\right]
         + \bar{\vec{h}}_e(\bar{\vec{r}}_e)
 \end{align}
+which uses higher moments of $V_\iota$.
+It is not straight-forward to compute $\text{E}[V_\iota^k]$ without assuming a particular form for
+$V_\iota$.
+\citet{Cal2025} constructed a generalized mathematical framework that deals with this question.
+They were able to capture various cell-size-control models such as sizer, timer and
+adder~\cite{Amir2014Adder} and have verified their results using \ac{ecoli} under optimal growth
+conditions in a mother machine~\cite{Tanouchi2017}.
+
+% In order to illustrate the differences with respect to the dynamics of various volume distributions,
+% we choose a uniform distribution which could be the result of linear growth and an exponential
+% distribution which could approximate exponential growth.
+% In the first case where $V_\iota\sim\mathcal{U}(a,b)$, we have
+% \begin{equation}
+%     \text{E}[V_\iota^k] = \frac{b^{k+1}-a^{k+1}}{(k+1)(b-a)}
+% \end{equation}
+% where $b,a$ are the upper and lower bounds of the distribution respectively.
+
+\subsubsection{Incorporating Division and Removal into the \acsp{ode}}
 
 In addition, we aim to incorporate division $\gamma$ and removal, i.e. death, processes
 $\bar{\delta}$ to obtain a purely \ac{ode}-based description as motivated earlier.
-
-\subsubsection{Incorporating Division and Removal into the \acsp{ode}}
 
 
 We will now assume that the removal criterion is triggered when the cellular volume $V_\iota=0$,
