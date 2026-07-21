@@ -4286,7 +4286,7 @@ $\vec{W}_\iota$ by polynomials
         \sum\limits_{n=0}^{n_g}\frac{1}{n!}G_{n,\iota}(\bar{\vec{r}}_e)V_\iota^n
     \label{eq:case1-growth-taylor}\\
     \vec{W}_\iota(\bar{\vec{r}}_e,V_\iota) &=
-        \sum\limits_{n=0}^{n_i}\frac{1}{n!}\vec{W}_{n,\iota}(\bar{\vec{r}}_e)V_\iota^n
+        \sum\limits_{n=0}^{n_w}\frac{1}{n!}\vec{W}_{n,\iota}(\bar{\vec{r}}_e)V_\iota^n
     \label{eq:case1-reactions-taylor}
 \end{align}
 which are able to capture a variety of conditions.
@@ -4297,7 +4297,7 @@ Other forms such as logistic growth on the intracellular level can also be reali
 $G_{1,\iota}=-G_{2,\iota}$ and $G_{n,\iota}=0$ for every $n\neq1,2$.
 From a mathematical viewpoint, we can understand the presented sums as possibly truncated versions
 of the taylor expansion of $G_\iota$ and $\vec{W}_\iota$ which should give a good approximation for
-sufficiently large exponents $n_g,n_i$.
+sufficiently large exponents $n_g,n_w$.
 
 Using equations \eqref{eq:case1-growth-taylor} and \eqref{eq:case1-reactions-taylor}, we can apply
 the expectation value to these terms and thus simplify equations \eqref{eq:case1-ev-volume}
@@ -4306,10 +4306,10 @@ and \eqref{eq:case1-ev-reactions} to
     \partial_t V_c &= N_c\sum\limits_{n=0}^{n_g}\frac{1}{n!}
         \text{E}[G_{n,\iota}(\bar{\vec{r}}_e)]\text{E}[V_\iota]
         + \text{Cov}[G_{n,\iota}(\bar{\vec{r}}_e),V_\iota]\\
-    \partial_t\bar{\vec{r}}_e &= N_c\sum\limits_n^{n_i}\frac{1}{n!}
+    \partial_t\bar{\vec{r}}_e &= N_c\sum\limits_{n=0}^{n_w}\frac{1}{n!}
         \text{E}[V_\iota\vec{W}_{n,\iota}(\bar{\vec{r}}_e)V_\iota^n]
         + \bar{\vec{h}}_e(\bar{\vec{r}}_e)\\
-    &= N_c\sum\limits_n^{n_i}\frac{1}{n!}\left\{
+    &= N_c\sum\limits_{n=0}^{n_w}\frac{1}{n!}\left\{
         \text{E}[\vec{W}_{n,\iota}(\bar{\vec{r}}_e)]\text{E}[V_\iota^{n+1}]
         + \text{Cov}[\vec{W}_{n,\iota}(\bar{\vec{r}}_e),V_\iota^{n+1}]\right\}
         + \bar{\vec{h}}_e(\bar{\vec{r}}_e)
