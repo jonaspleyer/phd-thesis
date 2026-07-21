@@ -4283,18 +4283,18 @@ To this end, we make a generalized assumption about the \acp{rhs} of equations
 $\vec{W}_\iota$ by polynomials
 \begin{align}
     G_\iota(\bar{\vec{r}}_e,V_\iota) &=
-        \sum\limits_{k=0}^{n_g}G_{k,\iota}(\bar{\vec{r}}_e)V_\iota^k
+        \sum\limits_{n=0}^{n_g}\frac{1}{n!}G_{n,\iota}(\bar{\vec{r}}_e)V_\iota^n
     \label{eq:case1-growth-taylor}\\
     \vec{W}_\iota(\bar{\vec{r}}_e,V_\iota) &=
-        \sum\limits_{k=0}^{n_i}\vec{W}_{k,\iota}(\bar{\vec{r}}_e)V_\iota^k
+        \sum\limits_{n=0}^{n_i}\frac{1}{n!}\vec{W}_{n,\iota}(\bar{\vec{r}}_e)V_\iota^n
     \label{eq:case1-reactions-taylor}
 \end{align}
 which are able to capture a variety of conditions.
-For instance, the case where $G_{k,\iota}=0$ for $k\neq 1$, would yield exponential growth of the
+For instance, the case where $G_{n,\iota}=0$ for $n\neq 1$, would yield exponential growth of the
 cellular volume $V_\iota$ where the growth rate is $G_{1,\iota}(\bar{\vec{r}})$.
-Similarly, the case of $G_{k,\iota}=0$ for $k\neq 0$ will result in linear growth.
+Similarly, the case of $G_{n,\iota}=0$ for $n\neq 0$ will result in linear growth.
 Other forms such as logistic growth on the intracellular level can also be realized by choosing
-$G_{1,\iota}=-G_{2,\iota}$ and $G_{k,\iota}=0$ for every $k\neq1,2$.
+$G_{1,\iota}=-G_{2,\iota}$ and $G_{n,\iota}=0$ for every $n\neq1,2$.
 From a mathematical viewpoint, we can understand the presented sums as possibly truncated versions
 of the taylor expansion of $G_\iota$ and $\vec{W}_\iota$ which should give a good approximation for
 sufficiently large exponents $n_g,n_i$.
@@ -4303,19 +4303,19 @@ Using equations \eqref{eq:case1-growth-taylor} and \eqref{eq:case1-reactions-tay
 the expectation value to these terms and thus simplify equations \eqref{eq:case1-ev-volume}
 and \eqref{eq:case1-ev-reactions} to
 \begin{align}
-    \partial_t V_c &= N_c\sum\limits_{k=0}^{n_g}
-        \text{E}[G_{k,\iota}(\bar{\vec{r}}_e)\text{E}[V_\iota]]
-        + \text{Cov}[G_{k,\iota}(\bar{\vec{r}}_e),V_\iota]\\
-    \partial_t\bar{\vec{r}}_e &=
-        \sum\limits_k^{n_i}N_c\text{E}[V_\iota\vec{W}_{k,\iota}(\bar{\vec{r}}_e)V_\iota^k]
+    \partial_t V_c &= N_c\sum\limits_{n=0}^{n_g}\frac{1}{n!}
+        \text{E}[G_{n,\iota}(\bar{\vec{r}}_e)]\text{E}[V_\iota]
+        + \text{Cov}[G_{n,\iota}(\bar{\vec{r}}_e),V_\iota]\\
+    \partial_t\bar{\vec{r}}_e &= N_c\sum\limits_n^{n_i}\frac{1}{n!}
+        \text{E}[V_\iota\vec{W}_{n,\iota}(\bar{\vec{r}}_e)V_\iota^n]
         + \bar{\vec{h}}_e(\bar{\vec{r}}_e)\\
-    &= N_c\sum\limits_k^{n_i}\left[
-        \text{E}[\vec{W}_{k,\iota}(\bar{\vec{r}}_e)]\text{E}[V_\iota^{k+1}]
-        + \text{Cov}[\vec{W}_{k,\iota}(\bar{\vec{r}}_e),V_\iota^{k+1}]\right]
+    &= N_c\sum\limits_n^{n_i}\frac{1}{n!}\left\{
+        \text{E}[\vec{W}_{n,\iota}(\bar{\vec{r}}_e)]\text{E}[V_\iota^{n+1}]
+        + \text{Cov}[\vec{W}_{n,\iota}(\bar{\vec{r}}_e),V_\iota^{n+1}]\right\}
         + \bar{\vec{h}}_e(\bar{\vec{r}}_e)
 \end{align}
 which uses higher moments of $V_\iota$.
-It is not straight-forward to compute $\text{E}[V_\iota^k]$ without assuming a particular form for
+It is not straight-forward to compute $\text{E}[V_\iota^n]$ without assuming a particular form for
 $V_\iota$.
 \citet{Cal2025} constructed a generalized mathematical framework that deals with this question.
 They were able to capture various cell-size-control models such as sizer, timer and
