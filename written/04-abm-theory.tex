@@ -4221,8 +4221,8 @@ be used in place of $\vec{r}_e$ and thus $\vec{r}_e|_{\vec{x}_\iota}=\bar{\vec{r
     \partial_tV_c &= \sum\limits_\iota G_\iota(\bar{\vec{r}}_e,V_\iota)
     \label{eq:case1-ecr-coarse-grained-1}\\
     % \partial_t\vec{r} &= -\sum\limits_\iota\vec{W}_\iota(\bar{\vec{r}}_e,V_\iota)\\
-    \partial_t\bar{\vec{r}}_e &= \frac{1}{V_D}\sum\limits_\iota V_\iota
-        \vec{W}_\iota(\bar{\vec{r}}_e,V_\iota)
+    \partial_t\bar{\vec{r}}_e &= \frac{1}{V_D}\sum\limits_\iota
+        \vec{W}_\iota(\bar{\vec{r}}_e,V_\iota)V_\iota
         +\bar{\vec{h}}_e(\bar{\vec{r}}_e)
     \label{eq:case1-ecr-coarse-grained-2}
 \end{align}
@@ -4255,12 +4255,12 @@ $\bar{\vec{h}}_{i,\iota}(\bar{\vec{r}}_e,V_\iota)$ are not independent, we obtai
     \label{eq:case1-ev-volume}\\
     % \partial_t\vec{r} &= -f(\bar{\vec{r}}_e,V_c)\\
     \partial_t\bar{\vec{r}}_e
-        &= \frac{1}{V_D} \text{E}[\vec{W}_\iota(\bar{\vec{r}}_e,V_\iota)V_\iota]
-        &+& \bar{\vec{h}}_e(\bar{\vec{r}}_e)\\
-        &= \frac{V_c}{V_D}\text{E}[\vec{W}_\iota(\bar{\vec{r}}_e,V_\iota)]
-        + \text{Cov}[V_\iota,\vec{W}_\iota(\bar{\vec{r}}_e,V_\iota)]
+        &= \frac{N_c}{V_D} \text{E}[\vec{W}_\iota(\bar{\vec{r}}_e,V_\iota)V_\iota]
         &+& \bar{\vec{h}}_e(\bar{\vec{r}}_e)
-    \label{eq:case1-ev-reactions}
+    \label{eq:case1-ev-reactions}\\
+        &= \frac{N_c}{V_D}\text{E}[\vec{W}_\iota(\bar{\vec{r}}_e,V_\iota)]\text{E}[V_\iota]
+        + \frac{1}{V_D}\text{Cov}[\vec{W}_\iota(\bar{\vec{r}}_e,V_\iota),V_\iota]
+        &+& \bar{\vec{h}}_e(\bar{\vec{r}}_e)
 \end{alignat}
 where we have used the relation $\text{E}[V_\iota]=N_c^{-1}\sum_\iota V_\iota=N_c^{-1}V_c$.
 
@@ -4313,10 +4313,10 @@ and \eqref{eq:case1-ev-reactions} to
         \text{E}[G_{n,\iota}(\bar{\vec{r}}_e)]\text{E}[V_\iota^n]
         + \text{Cov}[G_{n,\iota}(\bar{\vec{r}}_e),V_\iota^n]\Big)\\
     \partial_t\bar{\vec{r}}_e
-    &= \frac{V_c}{V_D}\sum\limits_{n=0}^{n_w}\frac{1}{n!}
-        \text{E}[V_\iota\vec{W}_{n,\iota}(\bar{\vec{r}}_e)V_\iota^n]
+    &= \frac{N_c}{V_D}\sum\limits_{n=0}^{n_w}\frac{1}{n!}
+        \text{E}[\vec{W}_{n,\iota}(\bar{\vec{r}}_e)V_\iota^{n+1}]
         &+& \bar{\vec{h}}_e(\bar{\vec{r}}_e)\\
-    &= \frac{V_c}{V_D}\sum\limits_{n=0}^{n_w}\frac{1}{n!}\Big(
+    &= \frac{N_c}{V_D}\sum\limits_{n=0}^{n_w}\frac{1}{n!}\Big(
         \text{E}[\vec{W}_{n,\iota}(\bar{\vec{r}}_e)]\text{E}[V_\iota^{n+1}]
         + \text{Cov}[\vec{W}_{n,\iota}(\bar{\vec{r}}_e),V_\iota^{n+1}]\Big)
         &+& \bar{\vec{h}}_e(\bar{\vec{r}}_e)
