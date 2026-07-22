@@ -4330,6 +4330,116 @@ They were able to capture various cell-size-control models such as sizer, timer 
 adder~\cite{Amir2014Adder} and have verified their results using \ac{ecoli} under optimal growth
 conditions in a mother machine~\cite{Tanouchi2017}.
 
+We can adapt their approach in a simplified manner.
+To this end, we assume that $G_\iota$ is determined by effects which can be modeled by a first order
+approximation, capable of describing cellular exponential growth and other effects.
+We can thus write
+\begin{equation}
+    G_\iota(\bar{\vec{r}}_e,V_\iota) = G_{1,\iota}(\bar{\vec{r}}_e)V_\iota
+\end{equation}
+for the growth dynamics.
+In addition, we assume a shifted exponential distribution of $V_\iota$ with probability density
+distribution $\rho(V)=\lambda\exp(-\lambda(V-V_d))$ where $V_d$ represents the minimal volume that
+any cell can hold (often directly after division).
+The parameters $\lambda,V_d\in\R$ are fixed, which implicitly assumes that the distribution of
+$V_\iota$ is identical at all time steps.
+This fits to the setting of \citet{Cal2025} where the mother machine provides the necessary
+environmental conditions for continuous growth as was shown by \citet{IyerBiswas2014}.
+However, the assumption that the distribution of volumes remains largely identical throughout the
+analyzed time interval has also been indicated by \citet{Campos2014} who studied \ac{ecoli} and
+\ac{ccaulobacter}.
+
+We can calculate the moments of the shifted exponential distribution of cell volumes $V_\iota$
+\begin{align}
+    \text{E}[V_\iota^n] &= \sum\limits_{k=0}^n\binom{n}{k} V_d^{n-k}\frac{k!}{\lambda^k}
+        = \sum\limits_{k=0}^n \frac{n!}{\lambda^k(n-k)!} V_d^{n-k}\\
+    \text{E}[V_\iota] &= V_d + \frac{1}{\lambda}\\
+    \text{E}[V_\iota^2] &= V_d^2 + \frac{2V_d}{\lambda} + \frac{2}{\lambda^2}
+\end{align}
+and plug these results into equations \eqref{eq:case1-growth-taylor} and
+\eqref{eq:case1-reactions-taylor} which results in
+\begin{alignat}{7}
+    \partial_t V_c
+    &= &N_c&\sum\limits_{n=0}^{n_g}\Bigg\{\sum\limits_{k=0}^n
+        &V_d^{n-k}\frac{\text{E}[G_{n,\iota}(\bar{\vec{r}}_e)]}{\lambda^k(n-k)!}&
+        &+ \frac{1}{n!}&\text{Cov}(\dots)\Bigg\}\\
+    \partial_t\bar{\vec{r}}_e
+    &= &\frac{N_c}{V_D}&\sum\limits_{n=0}^{n_w}\Bigg\{\sum\limits_{k=0}^{n+1}
+        &V_d^{n-k+1}\frac{\text{E}[\vec{W}_{n,\iota}(\bar{\vec{r}}_e)]}{\lambda^k(n-k+1)!}&
+        &+ \frac{1}{n!}&\text{Cov}(\dots)\Bigg\}
+        + \bar{\vec{h}}_e(\bar{\vec{r}}_e).
+\end{alignat}
+Here we opted to omit the arguments of the covariance which remain identical to the previous
+equations.
+Using the knowledge about the distribution of $V_\iota$, we can express $N_c$ as
+\begin{equation}
+    N_c = \frac{\sum_\iota V_\iota}{\text{E}[V_\iota]} = \frac{V_c}{V_d+\frac{1}{\lambda}}
+\end{equation}
+which further simplifies our expressions by eliminating $N_c$ completely in favor of other
+properties that are either known by the distribution or a state variable $V_c$.
+Therefore, we obtain
+\begin{equation}
+    \frac{\partial_t V_c}{V_c}
+    = \frac{1}{V_d+\frac{1}{\lambda}}\sum\limits_{n=0}^{n_g}\Bigg\{\sum\limits_{k=0}^n
+            V_d^{n-k}\frac{\text{E}[G_{n,\iota}(\bar{\vec{r}}_e)]}{\lambda^k(n-k)!}
+            + \frac{1}{n!}\text{Cov}(\dots)\Bigg\}
+\end{equation}
+which we can integrate since the \ac{rhs} does not involve any terms of $V_c$.
+We obtain
+\begin{equation}
+    V_c = V_0\exp\left[
+        \frac{1}{V_d+\frac{1}{\lambda}}\sum\limits_{n=0}^{n_g}\Bigg\{\sum\limits_{k=0}^n
+            \int\limits_0^t
+                V_d^{n-k}\frac{\text{E}[G_{n,\iota}(\bar{\vec{r}}_e)]}{\lambda^k(n-k)!}
+                + \frac{1}{n!}\text{Cov}(\dots)
+            \text{d}t\Bigg\}
+        \right]
+\end{equation}
+where $V_0=V_c(t=0)$ is the initial volume of the cells and by convention the starting time point is
+$t=0$.
+The equation goveryning the dynamics of $\bar{\vec{r}}_e$ remains unchanged except for its
+prefactor.
+
+\textbf{to discuss}
+\begin{itemize}
+    \item $V_0=0$ means no $V_c=0$. Therefore we need initial cells
+    \item Exponential comes out seemingly by accident; but it has to do with the sum and the
+        expectation value; exponential growth at the heart of cellular systems
+\end{itemize}
+
+\begin{itemize}
+    \item Discuss why we think that $\text{Cov}(\dots)=0$ might make sense; any functional
+        dependence on $V_\iota$ should be treated within the taylor expansion; therefore no
+        correlation
+    \item Present equations which result from that
+\end{itemize}
+
+\begin{alignat}{3}
+    \partial_t V_c
+    &= &\frac{V_c}{V_D+\frac{1}{\lambda}}&\sum\limits_{n=0}^{n_g}\Bigg\{\sum\limits_{k=0}^n
+        V_d^{n-k}\frac{\text{E}[G_{n,\iota}(\bar{\vec{r}}_e)]}{\lambda^k(n-k)!}\Bigg\}\\
+    \partial_t\bar{\vec{r}}_e
+    &= &\frac{V_c}{V_D(V_d+\frac{1}{\lambda})}&\sum\limits_{n=0}^{n_w}\Bigg\{\sum\limits_{k=0}^{n+1}
+        V_d^{n-k+1}\frac{\text{E}[\vec{W}_{n,\iota}(\bar{\vec{r}}_e)]}{\lambda^k(n-k+1)!}\Bigg\}
+        + \bar{\vec{h}}_e(\bar{\vec{r}}_e).
+\end{alignat}
+
+\begin{itemize}
+    \item how can we fit cell death (removal) into these \acp{ode}?
+    \item division is already covered
+    \item show how one particular example can be treated with these calculations
+\end{itemize}
+
+
+\textbf{general remarks}\\
+The various model reduction steps aim to derive results which hold across many organisms.
+However, the question if distribution of cell sizes follows a shifted exponential distribution and
+if the truncated approximations of equations \eqref{eq:case1-growth-taylor} and
+\eqref{eq:case1-reactions-taylor} are valid, need to be carefully verified for the particular system
+at hand.
+
+\todo[inline]{maybe insert uniform distribution and normal distr. examples here}
+
 % In order to illustrate the differences with respect to the dynamics of various volume distributions,
 % we choose a uniform distribution which could be the result of linear growth and an exponential
 % distribution which could approximate exponential growth.
@@ -4340,10 +4450,10 @@ conditions in a mother machine~\cite{Tanouchi2017}.
 % where $b,a$ are the upper and lower bounds of the distribution respectively.
 
 \subsubsection{Incorporating Division and Removal into the \acsp{ode}}
-
-In addition, we aim to incorporate division $\gamma$ and removal, i.e. death, processes
-$\bar{\delta}$ to obtain a purely \ac{ode}-based description as motivated earlier.
-
+So far we have only dealt with the dynamics which define $\psi_t$ of our \ac{cabm}.
+However, in order to completely simplify the system into a purely \ac{ode}-based description, we
+need to deal with the question how to incorporate the topological cellular processes (division
+$\gamma$ \& removal $\bar{\delta}$) into the \acp{ode}.
 
 We will now assume that the removal criterion is triggered when the cellular volume $V_\iota=0$,
 therefore
